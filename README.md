@@ -1,6 +1,6 @@
 # 📱 Bingo – HandCrafts Marketplace (Flutter App)
-Slogan: Handmade, Heartmade
-Mission: Empowering artisans. Celebrating craftsmanship. Connecting cultures.
+**Slogan:** Handmade, Heartmade
+**Mission:** Empowering artisans. Celebrating craftsmanship. Connecting cultures.
 # 📦 Overview
 Bingo is Egypt’s first digital village artisan marketplace. This Flutter app connects talented artisans with passionate buyers looking for unique, handcrafted treasures. From jewelry and home décor to personalized gifts and artisanal fashion, Bingo empowers creators and delights shoppers through a curated, community-driven mobile experience.
 # 🧭 Table of Contents
