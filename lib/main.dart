@@ -1,32 +1,46 @@
-import 'dart:async';
-
-import 'package:bingo/config/theme_app.dart';
-import 'package:bingo/core/bloc_observer/bloc_observer.dart';
+import 'package:bingo/Alshimaa.dart';
+import 'package:bingo/mahmoud.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() async {
-  runZonedGuarded(() async {
-    Bloc.observer = MyGlobalObserver();
-
-    runApp(const MyApp());
-  }, (e, s) {});
+void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: appTheme,
-      home: Scaffold(body: Center(child: Text("data"))),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Builder(
+            builder: (context) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => WidgetMahmoud()),
+                    );
+                  },
+                  child: Text('Mahmoud'),
+                ),
+                SizedBox(height: 12),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CustomeWidgets()),
+                    );
+                  },
+                  child: Text('Al shimaa'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

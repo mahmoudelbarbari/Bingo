@@ -20,29 +20,12 @@ final appTheme = ThemeData(
     iconTheme: IconThemeData(color: secondaryColor),
     centerTitle: true,
   ),
-  brightness: Brightness.light,
   primaryColor: primaryColor,
   colorScheme: const ColorScheme.light(primary: primaryColor),
   progressIndicatorTheme: const ProgressIndicatorThemeData(color: primaryColor),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: primaryColor,
     foregroundColor: secondaryColor,
-  ),
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: OutlinedButton.styleFrom(
-      side: const BorderSide(color: primaryColor),
-      foregroundColor: primaryColor,
-    ),
-  ),
-  textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: primaryColor),
-    bodyMedium: TextStyle(color: secondaryColor),
-    bodySmall: TextStyle(color: Colors.white),
-    titleLarge: TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-      fontSize: 22,
-    ),
   ),
   inputDecorationTheme: InputDecorationTheme(
     fillColor: authTextFromFieldFillColor.withOpacity(.3),
