@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: appThemne,
+      theme: appTheme,
       home: Scaffold(
         body: Center(
           child: Builder(
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => WidgetMahmoud()),
                     );
                   },
-                  child: Text('Mahmoud'),
+                  child: Text('Mahmoud', style: TextStyle(color: Colors.black)),
                 ),
                 SizedBox(height: 12),
                 ElevatedButton(
@@ -36,7 +36,10 @@ class MyApp extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => CustomeWidgets()),
                     );
                   },
-                  child: Text('Al shimaa'),
+                  child: Text(
+                    'Al shimaa',
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ],
             ),
