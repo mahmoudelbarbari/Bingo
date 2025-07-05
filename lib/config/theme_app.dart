@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final ThemeData appThemne = ThemeData(
+final ThemeData appTheme = ThemeData(
   colorScheme: const ColorScheme(
     primary: Color(0xFFAF1239),
     primaryContainer: Color(0xFFD44A64),
@@ -21,8 +21,10 @@ final ThemeData appThemne = ThemeData(
     foregroundColor: Colors.white,
     elevation: 0,
   ),
+// Add any additional theme properties here if needed, e.g.:
+// progressIndicatorTheme: const ProgressIndicatorThemeData(color: Color(0xFFAF1239)),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFFAF1239),
+    backgroundColor: Color.fromRGBO(175, 18, 57, 1),
     foregroundColor: Colors.white,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
@@ -41,6 +43,7 @@ final ThemeData appThemne = ThemeData(
       textStyle: const TextStyle(fontSize: 16),
     ),
   ),
+  
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Colors.white,
@@ -61,4 +64,5 @@ final ThemeData appThemne = ThemeData(
     headlineLarge: TextStyle(color: Color(0xFFAF1239)),
     bodyMedium: TextStyle(color: Colors.black87),
   ),
+
 );
