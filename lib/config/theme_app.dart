@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 final ThemeData appThemne = ThemeData(
+  fontFamily: 'SFProText',
   colorScheme: const ColorScheme(
     primary: Color(0xFFAF1239),
     primaryContainer: Color(0xFFD44A64),
@@ -46,19 +47,25 @@ final ThemeData appThemne = ThemeData(
     fillColor: Colors.white,
     errorMaxLines: 2,
     errorStyle: const TextStyle(color: Color(0xFFB00020)),
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
+
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(16.0),
+      borderSide: const BorderSide(color: Color(0xFFAF1239), width: 2),
+    ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: BorderRadius.circular(16.0),
       borderSide: const BorderSide(color: Color(0xFFB00020)),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: BorderRadius.circular(16.0),
       borderSide: const BorderSide(color: Color(0xFFB00020), width: 2),
     ),
-    // Custom error background
+    floatingLabelStyle: TextStyle(color: Colors.black),
   ),
   textTheme: const TextTheme(
     headlineLarge: TextStyle(color: Color(0xFFAF1239)),
     bodyMedium: TextStyle(color: Colors.black87),
+    bodySmall: TextStyle(color: Color(0xFF808080)),
   ),
 );
