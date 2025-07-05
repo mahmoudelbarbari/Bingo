@@ -1,4 +1,5 @@
 import 'package:bingo/Alshimaa.dart';
+import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/mahmoud.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: appThemne,
       home: Scaffold(
         body: Center(
           child: Builder(
