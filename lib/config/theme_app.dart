@@ -20,13 +20,19 @@ final appTheme = ThemeData(
     iconTheme: IconThemeData(color: secondaryColor),
     centerTitle: true,
   ),
+  
   primaryColor: primaryColor,
-  colorScheme: const ColorScheme.light(primary: primaryColor),
+  
+  colorScheme: const ColorScheme.light(
+    primary: primaryColor,
+    secondary: secondaryColor),
+ 
   progressIndicatorTheme: const ProgressIndicatorThemeData(color: primaryColor),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: primaryColor,
     foregroundColor: secondaryColor,
   ),
+  
   inputDecorationTheme: InputDecorationTheme(
     fillColor: authTextFromFieldFillColor.withOpacity(.3),
     filled: true,
@@ -58,4 +64,5 @@ final appTheme = ThemeData(
       borderRadius: BorderRadius.circular(12),
     ),
   ),
+
 );
