@@ -16,6 +16,14 @@ class $AssetsImagesGen {
   AssetGenImage get bingoLogo =>
       const AssetGenImage('assets/images/bingo-logo.jpg');
 
+  /// File path: assets/images/bingo-logo1.png
+  AssetGenImage get bingoLogo1 =>
+      const AssetGenImage('assets/images/bingo-logo1.png');
+
+  /// File path: assets/images/buyer_img.png
+  AssetGenImage get buyerImg =>
+      const AssetGenImage('assets/images/buyer_img.png');
+
   /// File path: assets/images/free-plan-img.png
   AssetGenImage get freePlanImg =>
       const AssetGenImage('assets/images/free-plan-img.png');
@@ -23,6 +31,58 @@ class $AssetsImagesGen {
   /// File path: assets/images/grey-delete-icon.png
   AssetGenImage get greyDeleteIcon =>
       const AssetGenImage('assets/images/grey-delete-icon.png');
+
+  /// File path: assets/images/onboadring 8.png
+  AssetGenImage get onboadring8 =>
+      const AssetGenImage('assets/images/onboadring 8.png');
+
+  /// File path: assets/images/onboadring10.png
+  AssetGenImage get onboadring10 =>
+      const AssetGenImage('assets/images/onboadring10.png');
+
+  /// File path: assets/images/onboadring11.png
+  AssetGenImage get onboadring11 =>
+      const AssetGenImage('assets/images/onboadring11.png');
+
+  /// File path: assets/images/onboadring12.png
+  AssetGenImage get onboadring12 =>
+      const AssetGenImage('assets/images/onboadring12.png');
+
+  /// File path: assets/images/onboadring2.png
+  AssetGenImage get onboadring2 =>
+      const AssetGenImage('assets/images/onboadring2.png');
+
+  /// File path: assets/images/onboadring3.png
+  AssetGenImage get onboadring3 =>
+      const AssetGenImage('assets/images/onboadring3.png');
+
+  /// File path: assets/images/onboadring4.png
+  AssetGenImage get onboadring4 =>
+      const AssetGenImage('assets/images/onboadring4.png');
+
+  /// File path: assets/images/onboadring5.png
+  AssetGenImage get onboadring5 =>
+      const AssetGenImage('assets/images/onboadring5.png');
+
+  /// File path: assets/images/onboadring6.png
+  AssetGenImage get onboadring6 =>
+      const AssetGenImage('assets/images/onboadring6.png');
+
+  /// File path: assets/images/onboadring7.png
+  AssetGenImage get onboadring7 =>
+      const AssetGenImage('assets/images/onboadring7.png');
+
+  /// File path: assets/images/onboadring9.png
+  AssetGenImage get onboadring9 =>
+      const AssetGenImage('assets/images/onboadring9.png');
+
+  /// File path: assets/images/onboarding1.png
+  AssetGenImage get onboarding1 =>
+      const AssetGenImage('assets/images/onboarding1.png');
+
+  /// File path: assets/images/post img.png
+  AssetGenImage get postImg =>
+      const AssetGenImage('assets/images/post img.png');
 
   /// File path: assets/images/prem-plan-img.png
   AssetGenImage get premPlanImg =>
@@ -36,14 +96,34 @@ class $AssetsImagesGen {
   AssetGenImage get redDeleteIcon =>
       const AssetGenImage('assets/images/red-delete-icon.png');
 
+  /// File path: assets/images/seller_img.png
+  AssetGenImage get sellerImg =>
+      const AssetGenImage('assets/images/seller_img.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     bingoLogo,
+    bingoLogo1,
+    buyerImg,
     freePlanImg,
     greyDeleteIcon,
+    onboadring8,
+    onboadring10,
+    onboadring11,
+    onboadring12,
+    onboadring2,
+    onboadring3,
+    onboadring4,
+    onboadring5,
+    onboadring6,
+    onboadring7,
+    onboadring9,
+    onboarding1,
+    postImg,
     premPlanImg,
     proPlanImg,
     redDeleteIcon,
+    sellerImg,
   ];
 }
 
