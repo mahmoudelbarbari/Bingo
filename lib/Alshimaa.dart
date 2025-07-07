@@ -1,5 +1,8 @@
+import 'package:bingo/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
+
+import 'core/util/size_config.dart';
 
 class CustomeWidgets extends StatefulWidget {
   const CustomeWidgets({super.key});
@@ -54,8 +57,11 @@ class _CustomeWidgetsState extends State<CustomeWidgets> {
             TextFieldForSearch(),
             SizedBox(height: 12),
             SwitchWidget(title: "Personalization Avilable"),
-            SizedBox(height: 12,),
-            UploadFilesInsWidget(title: "For your Selfie with ID:", firstText:"Face and ID must be clear.")
+            SizedBox(height: 12),
+            UploadFilesInsWidget(
+              title: "For your Selfie with ID:",
+              firstText: "Face and ID must be clear.",
+            ),
           ],
         ),
       ),
@@ -185,12 +191,13 @@ class ElevatedButtonWidget extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Container(
       width: double.infinity,
       margin: EdgeInsets.all(9),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 16),
+          padding: EdgeInsets.symmetric(vertical: 8.h),
           backgroundColor: isColored
               ? Theme.of(context).colorScheme.primary
               : Colors.grey.withOpacity(.7),
@@ -250,6 +257,7 @@ class DividerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -260,7 +268,7 @@ class DividerWidget extends StatelessWidget {
           ),
         ),
         Text(
-          "  Or  ",
+          "  ${loc.or}  ",
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
@@ -484,7 +492,7 @@ class _SwitchWidgetState extends State<SwitchWidget> {
 class UploadFilesInsWidget extends StatelessWidget {
   String title;
   String firstText;
-   UploadFilesInsWidget({required this.title,required this.firstText});
+  UploadFilesInsWidget({required this.title, required this.firstText});
 
   @override
   Widget build(BuildContext context) {
@@ -493,21 +501,43 @@ class UploadFilesInsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
+          Text(
+            title,
+            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("- $firstText",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold, color: const Color(0xFF777777) ),),
-           ),
-           Padding(
+            child: Text(
+              "- $firstText",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF777777),
+              ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("- Accepted formats: JPG, PNG,PDF| Max size: 2MB.",style: 
-            TextStyle(fontSize:15,fontWeight: FontWeight.bold, color: const Color(0xFF777777) ),),
-           ),
-           Padding(
+            child: Text(
+              "- Accepted formats: JPG, PNG,PDF| Max size: 2MB.",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF777777),
+              ),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("- No glare, reflections, or cropped edges.",
-            style: TextStyle(fontSize:15,fontWeight: FontWeight.bold, color: const Color(0xFF777777)),),
-           ),
+            child: Text(
+              "- No glare, reflections, or cropped edges.",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF777777),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/widgets/dot_progress_bar_widget.dart';
 import '../../../../core/widgets/progress_button.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class OnboardingScreen1 extends StatefulWidget {
   final int step;
@@ -24,6 +25,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     double progress = (widget.step + 1) / 1.50;
     const sizeBox = SizedBox(height: 30);
     return Scaffold(
@@ -62,10 +64,10 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
             Padding(
               padding: const EdgeInsets.only(top: 24),
               child: OnboardingWelcomeTextWidget(
-                headerText1: 'Handmade \t',
-                headerText2: 'with Love',
-                desc1: 'Discover talented makers creating unique',
-                desc2: 'handmade treasures!',
+                headerText1: '${loc.handMade} \t',
+                headerText2: loc.withLove,
+                desc1: loc.discoverTalentedMakersCreatingUnique,
+                desc2: loc.handmadeTreasures,
               ),
             ),
             Expanded(

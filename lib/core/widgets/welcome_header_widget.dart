@@ -19,7 +19,8 @@ class WelcomeHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(imageURL, width: 82, height: 82),
+        SizedBox(height: 10),
+        Image.asset(imageURL),
         SizedBox(height: 10),
         RichText(
           text: TextSpan(

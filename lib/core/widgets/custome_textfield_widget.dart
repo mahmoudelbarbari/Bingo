@@ -9,6 +9,7 @@ class CustomeTextfieldWidget extends StatefulWidget {
   final bool isobscureText;
   final TextInputType? textInputType;
   final String? labelText;
+  final bool isRTL;
 
   const CustomeTextfieldWidget({
     super.key,
@@ -20,6 +21,7 @@ class CustomeTextfieldWidget extends StatefulWidget {
     this.isobscureText = false,
     this.textInputType,
     this.labelText,
+    required this.isRTL,
   });
 
   @override
@@ -54,6 +56,7 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
       keyboardType: widget.textInputType,
       obscureText: widget.isobscureText,
       style: const TextStyle(fontSize: 20),
+      textAlign: widget.isRTL ? TextAlign.right : TextAlign.left,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: IconTheme(

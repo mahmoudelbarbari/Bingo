@@ -12,6 +12,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Apple-Logo.png
+  AssetGenImage get appleLogo =>
+      const AssetGenImage('assets/images/Apple-Logo.png');
+
   /// File path: assets/images/bingo-logo.jpg
   AssetGenImage get bingoLogo =>
       const AssetGenImage('assets/images/bingo-logo.jpg');
@@ -24,13 +28,25 @@ class $AssetsImagesGen {
   AssetGenImage get buyerImg =>
       const AssetGenImage('assets/images/buyer_img.png');
 
+  /// File path: assets/images/facebook-logo.png
+  AssetGenImage get facebookLogo =>
+      const AssetGenImage('assets/images/facebook-logo.png');
+
   /// File path: assets/images/free-plan-img.png
   AssetGenImage get freePlanImg =>
       const AssetGenImage('assets/images/free-plan-img.png');
 
+  /// File path: assets/images/google-logo.webp
+  AssetGenImage get googleLogo =>
+      const AssetGenImage('assets/images/google-logo.webp');
+
   /// File path: assets/images/grey-delete-icon.png
   AssetGenImage get greyDeleteIcon =>
       const AssetGenImage('assets/images/grey-delete-icon.png');
+
+  /// File path: assets/images/lockIcon.png
+  AssetGenImage get lockIcon =>
+      const AssetGenImage('assets/images/lockIcon.png');
 
   /// File path: assets/images/onboadring 8.png
   AssetGenImage get onboadring8 =>
@@ -102,11 +118,15 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    appleLogo,
     bingoLogo,
     bingoLogo1,
     buyerImg,
+    facebookLogo,
     freePlanImg,
+    googleLogo,
     greyDeleteIcon,
+    lockIcon,
     onboadring8,
     onboadring10,
     onboadring11,

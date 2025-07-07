@@ -4,6 +4,7 @@ import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/widgets/dot_progress_bar_widget.dart';
 import '../../../../core/widgets/progress_button.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class OnboardingScreen2 extends StatefulWidget {
   final int step;
@@ -17,6 +18,7 @@ class OnboardingScreen2 extends StatefulWidget {
 class _OnboardingScreen2State extends State<OnboardingScreen2> {
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     double progress = (widget.step + 1) / 4.2;
     const sizeBox = SizedBox(height: 30);
     return Scaffold(
@@ -40,10 +42,10 @@ class _OnboardingScreen2State extends State<OnboardingScreen2> {
           Padding(
             padding: const EdgeInsets.only(top: 24),
             child: OnboardingWelcomeTextWidget(
-              headerText1: 'Sell \t',
-              headerText2: 'handmade Products',
-              desc1: 'showcase you skills, connect with buyers, and',
-              desc2: 'turn passion into business.',
+              headerText1: '${loc.sell} \t',
+              headerText2: loc.handmadeProducts,
+              desc1: loc.showcaseYourSkillsConnectWithBuyersAnd,
+              desc2: loc.turnPassionIntoBusiness,
             ),
           ),
           Expanded(
@@ -56,13 +58,7 @@ class _OnboardingScreen2State extends State<OnboardingScreen2> {
                   ProgressButton(
                     progress: progress,
                     onPressed: () {
-                      if (widget.step < 2) {
-                        Navigator.pushReplacementNamed(context, '/onboarding3');
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Final step reached!")),
-                        );
-                      }
+                      Navigator.pushReplacementNamed(context, '/onboarding3');
                     },
                   ),
                 ],

@@ -17,6 +17,18 @@ class Validators {
     return null;
   }
 
+  static String? password(String? value, {String? message}) {
+    if (value == null || value.trim().isEmpty) {
+      return message ?? 'Email is required';
+    }
+    final passwordRegex = RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9.]+');
+    if (!passwordRegex.hasMatch(value.trim())) {
+      return message ??
+          'Please enter a valid password....\nYour password must be at least 8 characters long,\nattached with lowercase and uppercase letters';
+    }
+    return null;
+  }
+
   static String? minLength(String? value, int min, {String? message}) {
     if (value == null || value.length < min) {
       return message ?? 'Minimum $min characters required';

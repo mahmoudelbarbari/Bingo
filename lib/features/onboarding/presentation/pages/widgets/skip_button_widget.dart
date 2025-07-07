@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../l10n/app_localizations.dart';
+
 class SkipButtonWidget extends StatefulWidget {
   const SkipButtonWidget({super.key});
 
@@ -10,9 +12,12 @@ class SkipButtonWidget extends StatefulWidget {
 class _SkipButtonWidgetState extends State<SkipButtonWidget> {
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return TextButton(
-      onPressed: () {},
-      child: Container(alignment: Alignment.centerRight, child: Text('Skip')),
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, '/loginScreen');
+      },
+      child: Container(alignment: Alignment.centerRight, child: Text(loc.skip)),
     );
   }
 }

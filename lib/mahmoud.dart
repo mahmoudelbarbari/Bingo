@@ -1,6 +1,5 @@
 import 'package:bingo/core/widgets/custome_dropdown_widget.dart';
 import 'package:bingo/core/widgets/custome_outlined_btn_widget.dart';
-import 'package:bingo/core/widgets/custome_textfield_widget.dart';
 import 'package:bingo/core/widgets/customer_info_card_widget.dart';
 import 'package:bingo/core/widgets/file_upload_progress_card_widget.dart';
 import 'package:bingo/core/widgets/icon_list_tile_group_widget.dart';
@@ -86,11 +85,11 @@ class _WidgetMahmoudState extends State<WidgetMahmoud> {
             planPrice: 'EGP 0/month',
             planDesc: 'Free Plan with standard features',
           ),
-          CustomeTextfieldWidget(
-            controller: text,
-            prefixIcon: Icon(Icons.account_balance),
-            labelText: "Your password",
-          ),
+          // CustomeTextfieldWidget(
+          //   controller: text,
+          //   prefixIcon: Icon(Icons.account_balance),
+          //   labelText: "Your password",
+          // ),
           FileUploadProgressCard(
             fileName: 'Front.pdf',
             fileSize: '200 KB',

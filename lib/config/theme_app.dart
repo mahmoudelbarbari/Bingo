@@ -46,11 +46,15 @@ final ThemeData appTheme = ThemeData(
 
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: Colors.white,
+    fillColor: MaterialStateColor.resolveWith((states) {
+      if (states.contains(MaterialState.error)) {
+        return Color(0xFFFDF5F5); // your error color
+      }
+      return Colors.grey.shade200;
+    }),
     errorMaxLines: 2,
     errorStyle: const TextStyle(color: Color(0xFFB00020)),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
-
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.0),
       borderSide: const BorderSide(color: Color(0xFFAF1239), width: 2),
@@ -68,6 +72,7 @@ final ThemeData appTheme = ThemeData(
   textTheme: const TextTheme(
     headlineLarge: TextStyle(color: Color(0xFFAF1239)),
     bodyMedium: TextStyle(color: Colors.black87),
+    bodyLarge: TextStyle(color: Color(0xFF808080)),
     bodySmall: TextStyle(color: Color(0xFF808080)),
   ),
 );
