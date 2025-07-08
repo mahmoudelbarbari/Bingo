@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bingo/l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'core/localization/localization_controller.dart';
@@ -10,13 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'config/injection_container.dart' as di;
 import 'core/bloc_observer/bloc_observer.dart';
-import 'features/login/presentation/cubit/login_cubit.dart';
+import 'features/auth/login/presentation/login/cubit/login_cubit.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
   di.init();
   runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-
     Bloc.observer = MyGlobalObserver();
 
     runApp(const MyApp());

@@ -1,10 +1,10 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/util/validators.dart';
-import '../../../../../core/widgets/custome_textfield_widget.dart';
-import '../../../../../gen/assets.gen.dart';
-import '../../../../../l10n/app_localizations.dart';
+import '../../../../../../../core/util/validators.dart';
+import '../../../../../../../core/widgets/custome_textfield_widget.dart';
+import '../../../../../../../gen/assets.gen.dart';
+import '../../../../../../../l10n/app_localizations.dart';
 
 class LoginForm extends StatefulWidget {
   final TextEditingController emailController;

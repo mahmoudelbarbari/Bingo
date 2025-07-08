@@ -6,7 +6,9 @@ abstract class RemoteLoginDatasource {
 }
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
-  final Dio _dio = Dio(BaseOptions(baseUrl: 'https://reqres.in/api/'));
+  final Dio _dio;
+
+  RemoteLoginDatasourceImpl(this._dio);
 
   @override
   Future<LoginBaseResponse> remoteLoginUser(

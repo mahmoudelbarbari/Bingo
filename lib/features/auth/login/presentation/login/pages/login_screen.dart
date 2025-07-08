@@ -1,15 +1,15 @@
 import 'package:bingo/Alshimaa.dart';
-import 'package:bingo/features/login/presentation/cubit/login_cubit.dart';
-import 'package:bingo/features/login/presentation/cubit/login_state.dart';
-import 'package:bingo/features/login/presentation/pages/widgets/login_form.dart';
-import 'package:bingo/features/login/presentation/pages/widgets/social_icon_button_widget.dart';
+import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
+import 'package:bingo/features/auth/login/presentation/login/cubit/login_state.dart';
+import 'package:bingo/features/auth/login/presentation/login/pages/widgets/login_form.dart';
+import 'package:bingo/features/auth/login/presentation/login/pages/widgets/social_icon_button_widget.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/widgets/custom_alert_dialog.dart';
-import '../../../../core/widgets/welcome_header_widget.dart';
-import '../../../../l10n/app_localizations.dart';
+import '../../../../../../core/widgets/custom_alert_dialog.dart';
+import '../../../../../../core/widgets/welcome_header_widget.dart';
+import '../../../../../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

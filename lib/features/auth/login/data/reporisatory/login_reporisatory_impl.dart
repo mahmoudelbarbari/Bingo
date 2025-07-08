@@ -1,6 +1,6 @@
-import 'package:bingo/features/login/data/datasources/login_remote_datasource.dart';
-import 'package:bingo/features/login/domain/entities/login_entities.dart';
-import 'package:bingo/features/login/domain/repositories/login_repository.dart';
+import 'package:bingo/features/auth/login/data/datasources/login_remote_datasource.dart';
+import 'package:bingo/features/auth/login/domain/entities/login_entities.dart';
+import 'package:bingo/features/auth/login/domain/repositories/login_repository.dart';
 
 class LoginReporisatoryImpl implements LoginRepository {
   late RemoteLoginDatasource remoteLoginDatasource;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/util/size_config.dart';
-import '../../../../../gen/assets.gen.dart';
+import '../../../../../../../core/util/size_config.dart';
+import '../../../../../../../gen/assets.gen.dart';
 
 class SocialIconButton extends StatelessWidget {
   const SocialIconButton({super.key});

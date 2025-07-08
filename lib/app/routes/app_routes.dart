@@ -1,4 +1,4 @@
-import 'package:bingo/features/login/presentation/pages/login_screen.dart';
+import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen1.dart';

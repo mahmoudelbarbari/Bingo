@@ -1,4 +1,4 @@
-import 'package:bingo/features/login/domain/entities/login_entities.dart';
+import 'package:bingo/features/auth/login/domain/entities/login_entities.dart';
 
 class LoginModel extends LoginEntities {
   LoginModel({required super.email, required super.password});
