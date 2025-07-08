@@ -10,6 +10,8 @@ class CustomeTextfieldWidget extends StatefulWidget {
   final TextInputType? textInputType;
   final String? labelText;
   final bool isRTL;
+  final bool hasError;
+  final bool isSuccess;
 
   const CustomeTextfieldWidget({
     super.key,
@@ -22,6 +24,8 @@ class CustomeTextfieldWidget extends StatefulWidget {
     this.textInputType,
     this.labelText,
     required this.isRTL,
+    this.hasError = false,
+    this.isSuccess = false,
   });
 
   @override
@@ -58,6 +62,11 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
       style: const TextStyle(fontSize: 20),
       textAlign: widget.isRTL ? TextAlign.right : TextAlign.left,
       decoration: InputDecoration(
+        fillColor: widget.hasError
+            ? Color(0xFFFDF5F5)
+            : widget.isSuccess
+            ? Color(0xFFF3FDF7)
+            : Colors.white,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: IconTheme(
           data: IconThemeData(
@@ -74,7 +83,6 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
         suffixIcon: widget.suffixIcon,
         hintStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
         filled: true,
-        fillColor: Theme.of(context).inputDecorationTheme.fillColor,
         errorStyle: Theme.of(context).inputDecorationTheme.errorStyle,
         border: Theme.of(context).inputDecorationTheme.border,
         enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,

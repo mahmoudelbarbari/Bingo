@@ -123,38 +123,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           text: loc.login,
                           isColored: isButtonEnabled,
+                          isEnabled: isButtonEnabled,
                         ),
                         DividerWidget(),
                         sizeBox,
-                        Row(
-                          spacing: 12,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SocialIconButton(
-                              onPressed: () {},
-                              icon: Image.asset(
-                                width: 40,
-                                Assets.images.googleLogo.path,
-                              ),
-                              bgColor: Color(0xFFFBE9E7),
-                            ),
-                            SocialIconButton(
-                              onPressed: () {},
-                              icon: Image.asset(
-                                width: 50,
-                                Assets.images.appleLogo.path,
-                              ),
-                              bgColor: Color(0xFFF0F0F0),
-                            ),
-                            SocialIconButton(
-                              onPressed: () {},
-                              icon: Image.asset(
-                                width: 50,
-                                Assets.images.facebookLogo.path,
-                              ),
-                              bgColor: Color(0xFFE8F0FE),
-                            ),
-                          ],
+                        SocialIconButton(),
+                        sizeBox,
+                        TextButtonWidget(
+                          fun: () {},
+                          text1: loc.dontHaveAnAccount,
+                          text2: loc.signUp,
                         ),
                       ],
                     ),

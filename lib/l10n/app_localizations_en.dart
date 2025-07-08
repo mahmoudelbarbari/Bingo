@@ -73,4 +73,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get readMe => 'Read More';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get dontHaveAnAccount => 'Don\'t have an account ?';
+
+  @override
+  String get signUp => 'Sign Up';
 }

@@ -184,10 +184,12 @@ class ElevatedButtonWidget extends StatelessWidget {
   VoidCallback fun;
   String text;
   bool isColored;
+  final bool isEnabled;
   ElevatedButtonWidget({
     required this.fun,
     required this.text,
     required this.isColored,
+    this.isEnabled = true,
   });
   @override
   Widget build(BuildContext context) {
@@ -205,7 +207,7 @@ class ElevatedButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        onPressed: fun,
+        onPressed: isEnabled ? fun : null,
         child: Text(text, style: TextStyle(fontSize: 20, color: Colors.white)),
       ),
     );

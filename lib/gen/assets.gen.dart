@@ -16,6 +16,10 @@ class $AssetsImagesGen {
   AssetGenImage get appleLogo =>
       const AssetGenImage('assets/images/Apple-Logo.png');
 
+  /// File path: assets/images/No connection.png
+  AssetGenImage get noConnection =>
+      const AssetGenImage('assets/images/No connection.png');
+
   /// File path: assets/images/bingo-logo.jpg
   AssetGenImage get bingoLogo =>
       const AssetGenImage('assets/images/bingo-logo.jpg');
@@ -119,6 +123,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     appleLogo,
+    noConnection,
     bingoLogo,
     bingoLogo1,
     buyerImg,

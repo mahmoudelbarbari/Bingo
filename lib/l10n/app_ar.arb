@@ -22,5 +22,10 @@
     "forgotPassword": "هل نسيت كلمة المرور؟",
     "rememberMe": "تذكرني",
     "or": "أو",
-    "readMe": "اقرأ المزيد"
+    "readMe": "اقرأ المزيد",
+    "ok": "حسناً",
+    "success": "نجاح",
+    "error": "خطأ",
+    "dontHaveAnAccount": "ليس لديك حساب ؟",
+    "signUp": "إنشاء حساب"
 }

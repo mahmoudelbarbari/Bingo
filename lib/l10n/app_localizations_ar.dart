@@ -73,4 +73,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get readMe => 'اقرأ المزيد';
+
+  @override
+  String get ok => 'حسناً';
+
+  @override
+  String get success => 'نجاح';
+
+  @override
+  String get error => 'خطأ';
+
+  @override
+  String get dontHaveAnAccount => 'ليس لديك حساب ؟';
+
+  @override
+  String get signUp => 'إنشاء حساب';
 }

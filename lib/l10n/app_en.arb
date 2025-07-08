@@ -21,5 +21,10 @@
     "forgotPassword": "Forgot Password ?",
     "remmberMe": "Remember Me",
     "or": "Or",
-    "readMe": "Read More"
+    "readMe": "Read More",
+    "ok": "OK",
+    "success": "Success",
+    "error": "Error",
+    "dontHaveAnAccount": "Don't have an account ?",
+    "signUp": "Sign Up"
 }

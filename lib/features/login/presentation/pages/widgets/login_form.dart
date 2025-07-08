@@ -25,6 +25,13 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   bool _isChecked = true;
   bool passwordVisible = false;
+
+  bool emailHasError = false;
+  bool emailIsValid = false;
+
+  bool passHasError = false;
+  bool passIsValid = false;
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -34,9 +41,18 @@ class _LoginFormState extends State<LoginForm> {
         CustomeTextfieldWidget(
           controller: widget.emailController,
           prefixIcon: Icon(Icons.email),
-          formFieldValidator: Validators.email,
+          formFieldValidator: (value) {
+            final error = Validators.email(value);
+            setState(() {
+              emailHasError = error != null;
+              emailIsValid = error == null && value!.isNotEmpty;
+            });
+            return error;
+          },
           labelText: loc.yourEmail,
           isRTL: widget.isArabic,
+          hasError: emailHasError,
+          isSuccess: emailIsValid,
         ),
 
         SizedBox(height: 20.h),
@@ -46,7 +62,14 @@ class _LoginFormState extends State<LoginForm> {
           prefixIcon: Image.asset(Assets.images.lockIcon.path),
           labelText: loc.yourPassword,
           isobscureText: passwordVisible,
-          formFieldValidator: Validators.password,
+          formFieldValidator: (v) {
+            final error = Validators.password(v);
+            setState(() {
+              passHasError = error != null;
+              passIsValid = error == null && v!.isNotEmpty;
+            });
+            return error;
+          },
           suffixIcon: IconButton(
             onPressed: () {
               setState(() {
@@ -57,6 +80,8 @@ class _LoginFormState extends State<LoginForm> {
               passwordVisible ? Icons.visibility_off : Icons.visibility,
             ),
           ),
+          hasError: passHasError,
+          isSuccess: passIsValid,
         ),
 
         Padding(

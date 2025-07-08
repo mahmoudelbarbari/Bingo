@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../../gen/assets.gen.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String message;
@@ -12,18 +14,19 @@ class CustomAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final imageAsset = isSuccess
         ? 'assets/images/success.png'
-        : 'assets/images/error.png';
+        : Assets.images.noConnection.path;
 
-    final titleText = isSuccess ? 'Success' : 'Error';
+    final titleText = isSuccess ? loc.success : loc.error;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: Row(
+      title: Column(
         children: [
-          Image.asset(imageAsset, width: 40, height: 40),
-          const SizedBox(width: 10),
+          Image.asset(imageAsset),
+          const SizedBox(height: 10),
           Text(
             titleText,
             style: TextStyle(color: isSuccess ? Colors.green : Colors.red),
@@ -33,7 +36,7 @@ class CustomAlertDialog extends StatelessWidget {
       content: Text(message, style: const TextStyle(fontSize: 16)),
       actions: [
         TextButton(
-          child: const Text("OK"),
+          child: Text(loc.ok),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],
