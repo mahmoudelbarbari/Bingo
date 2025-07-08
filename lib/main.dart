@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,11 +17,10 @@ void main() async {
 
   await dotenv.load(fileName: ".env");
   di.init();
-  runZonedGuarded(() async {
-    Bloc.observer = MyGlobalObserver();
+  Bloc.observer = MyGlobalObserver();
 
-    runApp(const MyApp());
-  }, (e, s) {});
+  runApp(const MyApp());
+  (e, s) {};
 }
 
 class MyApp extends StatelessWidget {
