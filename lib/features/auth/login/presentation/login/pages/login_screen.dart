@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           imageURL: Assets.images.bingoLogo1.path,
                           headerText1: '${loc.greateToSeeYouHere} ',
                           headerText2: '${loc.back} !',
-                          icon: Icons.abc_outlined,
+                          icon: Icons.handshake_rounded,
                           headerSubText: loc.justLogInAndHavefun,
                         ),
                         sizeBox,

@@ -27,5 +27,7 @@
     "success": "نجاح",
     "error": "خطأ",
     "dontHaveAnAccount": "ليس لديك حساب ؟",
-    "signUp": "إنشاء حساب"
+    "signUp": "إنشاء حساب",
+    "send": "إرسال",
+    "dontWorryWellHelpYouResetIt": "لا تقلق! سنساعدك في إعادة تعيينه"
 }

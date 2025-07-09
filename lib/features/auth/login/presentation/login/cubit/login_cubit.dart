@@ -16,14 +16,14 @@ class LoginCubit extends Cubit<LoginState> {
     String password,
     BuildContext context,
   ) async {
-    final remoteLoginUsecase = LoginUsecase(sl());
+    loginUsecase = sl();
 
     try {
       emit(LoginLoadingState());
       handlerRequestApi(
         context: context,
         body: () async {
-          final loggedin = await remoteLoginUsecase.call(email, password);
+          final loggedin = await loginUsecase.call(email, password);
           if (loggedin.status) {
             return emit(LoginSuccessState("Welcome back $email"));
           } else {

@@ -88,4 +88,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signUp => 'إنشاء حساب';
+
+  @override
+  String get send => 'إرسال';
+
+  @override
+  String get dontWorryWellHelpYouResetIt => 'لا تقلق! سنساعدك في إعادة تعيينه';
 }

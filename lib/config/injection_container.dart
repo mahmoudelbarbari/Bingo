@@ -8,6 +8,10 @@ import 'package:get_it/get_it.dart';
 
 import '../core/localization/localization_controller.dart';
 import '../core/network/dio_provider.dart';
+import '../features/auth/login/domain/usecases/reset_password_usecase.dart';
+import '../features/auth/login/domain/usecases/sent_otp_usecase.dart';
+import '../features/auth/login/domain/usecases/verify_otp_usecase.dart';
+import '../features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -32,8 +36,19 @@ void init() {
   );
   // repo
   sl.registerLazySingleton<LoginRepository>(() => LoginReporisatoryImpl(sl()));
-  //usecase
+
+  // login usecase
   sl.registerLazySingleton<LoginUsecase>(() => LoginUsecase(sl()));
-  //login cubit
+  // reset password usecase
+  sl.registerLazySingleton<ResetPasswordUsecase>(
+    () => ResetPasswordUsecase(sl()),
+  );
+  // send otp usecase
+  sl.registerLazySingleton<SentOtpUsecase>(() => SentOtpUsecase(sl()));
+  // verify otp usecase
+  sl.registerLazySingleton<VerifyOtpUsecase>(() => VerifyOtpUsecase(sl()));
+
+  //login cubit && reset_pass and sendverify__OTP cubit
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit());
+  sl.registerLazySingleton<ForgotPasswordCubit>(() => ForgotPasswordCubit());
 }

@@ -11,4 +11,19 @@ class LoginReporisatoryImpl implements LoginRepository {
   Future<LoginBaseResponse> remoteLogin(String email, String password) async {
     return await remoteLoginDatasource.remoteLoginUser(email, password);
   }
+
+  @override
+  Future<void> resetPassword(Pattern email, String newPassword) async {
+    return await remoteLoginDatasource.resetPassword(email, newPassword);
+  }
+
+  @override
+  Future<void> sendOTP(String email) async {
+    return await remoteLoginDatasource.sendOTP(email);
+  }
+
+  @override
+  Future<void> verifyOtp(String email, String otp) async {
+    return await remoteLoginDatasource.verifyOtp(email, otp);
+  }
 }

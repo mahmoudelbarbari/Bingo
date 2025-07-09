@@ -88,4 +88,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signUp => 'Sign Up';
+
+  @override
+  String get send => 'Send';
+
+  @override
+  String get dontWorryWellHelpYouResetIt => 'don\'t worry! We\'ll help you reset it';
 }

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class WelcomeHeaderWidget extends StatelessWidget {
   final String imageURL;
   final String headerText1;
-  final String headerText2;
+  final String? headerText2;
   final String headerSubText;
-  final IconData icon;
+  final IconData? icon;
   const WelcomeHeaderWidget({
     super.key,
     required this.imageURL,
     required this.headerText1,
-    required this.headerText2,
+    this.headerText2,
     required this.headerSubText,
-    required this.icon,
+    this.icon,
   });
 
   @override

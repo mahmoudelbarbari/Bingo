@@ -26,5 +26,7 @@
     "success": "Success",
     "error": "Error",
     "dontHaveAnAccount": "Don't have an account ?",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "send": "Send",
+    "dontWorryWellHelpYouResetIt": "don't worry! We'll help you reset it"
 }

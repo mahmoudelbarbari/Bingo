@@ -3,6 +3,9 @@ import 'package:dio/dio.dart';
 
 abstract class RemoteLoginDatasource {
   Future<LoginBaseResponse> remoteLoginUser(String email, String password);
+  Future<void> resetPassword(Pattern email, String newPassword);
+  Future<void> sendOTP(String email);
+  Future<void> verifyOtp(String email, String otp);
 }
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
@@ -44,5 +47,23 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
     } catch (e) {
       return LoginBaseResponse(status: false, message: 'Unexpected error: $e');
     }
+  }
+
+  @override
+  Future<void> resetPassword(Pattern email, String newPassword) async {
+    await _dio.post(
+      'reset-password-user',
+      data: {'email': email, 'new_password': newPassword},
+    );
+  }
+
+  @override
+  Future<void> sendOTP(String email) async {
+    await _dio.post('send-otp', data: {'email': email});
+  }
+
+  @override
+  Future<void> verifyOtp(String email, String otp) async {
+    await _dio.post('verify-user', data: {'email': email, 'otp': otp});
   }
 }
