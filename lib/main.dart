@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bingo/Alshimaa.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,7 @@ import 'config/injection_container.dart' as di;
 import 'core/bloc_observer/bloc_observer.dart';
 import 'features/login/presentation/cubit/login_cubit.dart';
 
-void main() async {
+void main() {
   di.init();
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         theme: appTheme,
-        initialRoute: '/',
+        initialRoute: '/loginScreen',
         routes: appRoutes,
         builder: (context, child) {
           final locale = Localizations.localeOf(context);

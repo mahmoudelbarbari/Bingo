@@ -1,4 +1,7 @@
 import 'package:bingo/Alshimaa.dart';
+import 'package:bingo/core/widgets/custom_divider_widget.dart';
+import 'package:bingo/core/widgets/custom_elevated_button.dart';
+import 'package:bingo/core/widgets/custom_text_button.dart';
 import 'package:bingo/features/login/presentation/cubit/login_cubit.dart';
 import 'package:bingo/features/login/presentation/cubit/login_state.dart';
 import 'package:bingo/features/login/presentation/pages/widgets/login_form.dart';
@@ -102,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icons.abc_outlined,
                           headerSubText: loc.justLogInAndHavefun,
                         ),
-                        sizeBox,
+                     sizeBox,
                         LoginForm(
                           emailController: controllerEmail,
                           passwordController: controllerPassword,
@@ -130,7 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         SocialIconButton(),
                         sizeBox,
                         TextButtonWidget(
-                          fun: () {},
+                          fun: () {
+                            Navigator.pushNamed(context, '/register');
+                          },
                           text1: loc.dontHaveAnAccount,
                           text2: loc.signUp,
                         ),

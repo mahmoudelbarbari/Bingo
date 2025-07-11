@@ -245,17 +245,95 @@ abstract class AppLocalizations {
   /// **'Error'**
   String get error;
 
+  /// No description provided for @requiredField.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get requiredField;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords don\'t match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @invalidPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters long and include uppercase, lowercase letters, and numbers.'**
+  String get invalidPassword;
+
   /// No description provided for @dontHaveAnAccount.
   ///
   /// In en, this message translates to:
   /// **'Don\'t have an account ?'**
   String get dontHaveAnAccount;
 
+  /// No description provided for @letsGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s get started!'**
+  String get letsGetStarted;
+
+  /// No description provided for @createAnAccountToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an account to continue'**
+  String get createAnAccountToContinue;
+
   /// No description provided for @signUp.
   ///
   /// In en, this message translates to:
   /// **'Sign Up'**
   String get signUp;
+
+  /// No description provided for @userName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Name'**
+  String get userName;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get confirmPassword;
+
+  /// No description provided for @reply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get reply;
+
+  /// No description provided for @loveIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Love it'**
+  String get loveIt;
+
+  /// No description provided for @comment.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment'**
+  String get comment;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @acceptanceFormate.
+  ///
+  /// In en, this message translates to:
+  /// **'- Accepted formats: JPG, PNG,PDF| Max size: 2MB.'**
+  String get acceptanceFormate;
+
+  /// No description provided for @photo_requirements.
+  ///
+  /// In en, this message translates to:
+  /// **'- No glare, reflections, or cropped edges.'**
+  String get photo_requirements;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

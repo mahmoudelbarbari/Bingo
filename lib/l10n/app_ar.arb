@@ -26,6 +26,19 @@
     "ok": "حسناً",
     "success": "نجاح",
     "error": "خطأ",
+    "requiredField":"هذا الحقل مطلوب",
+    "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
+    "invalidPassword": "كلمة المرور غير صالحة. يجب أن تحتوي على 8 أحرف على الأقل، وتضم حروفًا كبيرة وصغيرة وأرقامًا.",
     "dontHaveAnAccount": "ليس لديك حساب ؟",
-    "signUp": "إنشاء حساب"
+    "letsGetStarted": "ابدأ!",
+     "createAnAccountToContinue": "أنشئ حسابًا للمتابعة",
+    "signUp": "إنشاء حساب",
+    "userName": "اسمك",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "reply":"رد",
+    "loveIt":"أحببته",
+    "comment":"تعليق",
+    "search":"ابحث",
+    "acceptanceFormate":"- الصيغ المسموح بها: JPG، PNG، PDF | أقصى حجم للملف: 2 ميجابايت",
+    "photo_requirements": "- يجب أن تكون الصورة بدون سطوع زائد أو انعكاسات أو حواف مقطوعة."
 }

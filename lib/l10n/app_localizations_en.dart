@@ -84,8 +84,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error';
 
   @override
+  String get requiredField => 'This field is required';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords don\'t match';
+
+  @override
+  String get invalidPassword => 'Password must be at least 8 characters long and include uppercase, lowercase letters, and numbers.';
+
+  @override
   String get dontHaveAnAccount => 'Don\'t have an account ?';
 
   @override
+  String get letsGetStarted => 'Let\'s get started!';
+
+  @override
+  String get createAnAccountToContinue => 'Create an account to continue';
+
+  @override
   String get signUp => 'Sign Up';
+
+  @override
+  String get userName => 'Your Name';
+
+  @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
+  String get reply => 'Reply';
+
+  @override
+  String get loveIt => 'Love it';
+
+  @override
+  String get comment => 'Comment';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get acceptanceFormate => '- Accepted formats: JPG, PNG,PDF| Max size: 2MB.';
+
+  @override
+  String get photo_requirements => '- No glare, reflections, or cropped edges.';
 }

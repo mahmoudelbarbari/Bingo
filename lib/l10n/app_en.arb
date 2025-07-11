@@ -25,6 +25,19 @@
     "ok": "OK",
     "success": "Success",
     "error": "Error",
+    "requiredField":"This field is required",
+    "passwordsDoNotMatch": "Passwords don't match",
+    "invalidPassword": "Password must be at least 8 characters long and include uppercase, lowercase letters, and numbers.",
     "dontHaveAnAccount": "Don't have an account ?",
-    "signUp": "Sign Up"
+    "letsGetStarted": "Let's get started!",
+    "createAnAccountToContinue": "Create an account to continue",
+    "signUp": "Sign Up",
+    "userName": "Your Name",
+"confirmPassword": "Confirm password",
+    "reply":"Reply",
+    "loveIt":"Love it",
+    "comment":"Comment",
+    "search":"Search",
+    "acceptanceFormate":"- Accepted formats: JPG, PNG,PDF| Max size: 2MB.",
+    "photo_requirements":"- No glare, reflections, or cropped edges."
 }

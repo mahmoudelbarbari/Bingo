@@ -84,8 +84,47 @@ class AppLocalizationsAr extends AppLocalizations {
   String get error => 'خطأ';
 
   @override
+  String get requiredField => 'هذا الحقل مطلوب';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get invalidPassword => 'كلمة المرور غير صالحة. يجب أن تحتوي على 8 أحرف على الأقل، وتضم حروفًا كبيرة وصغيرة وأرقامًا.';
+
+  @override
   String get dontHaveAnAccount => 'ليس لديك حساب ؟';
 
   @override
+  String get letsGetStarted => 'ابدأ!';
+
+  @override
+  String get createAnAccountToContinue => 'أنشئ حسابًا للمتابعة';
+
+  @override
   String get signUp => 'إنشاء حساب';
+
+  @override
+  String get userName => 'اسمك';
+
+  @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
+  String get reply => 'رد';
+
+  @override
+  String get loveIt => 'أحببته';
+
+  @override
+  String get comment => 'تعليق';
+
+  @override
+  String get search => 'ابحث';
+
+  @override
+  String get acceptanceFormate => '- الصيغ المسموح بها: JPG، PNG، PDF | أقصى حجم للملف: 2 ميجابايت';
+
+  @override
+  String get photo_requirements => '- يجب أن تكون الصورة بدون سطوع زائد أو انعكاسات أو حواف مقطوعة.';
 }
