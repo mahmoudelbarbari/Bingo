@@ -17,7 +17,8 @@ final ThemeData appTheme = ThemeData(
     brightness: Brightness.light,
   ),
   appBarTheme: const AppBarTheme(
-    backgroundColor: Color(0xFFAF1239),
+    iconTheme: IconThemeData(color: Colors.black),
+    // backgroundColor: Color(0xFFAF1239),
     foregroundColor: Colors.white,
     elevation: 0,
   ),

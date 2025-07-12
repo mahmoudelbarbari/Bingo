@@ -90,6 +90,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
 
   @override
+  String get confirmPassword => 'تأكيد كلمة المرور';
+
+  @override
   String get invalidPassword => 'كلمة المرور غير صالحة. يجب أن تحتوي على 8 أحرف على الأقل، وتضم حروفًا كبيرة وصغيرة وأرقامًا.';
 
   @override
@@ -105,10 +108,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signUp => 'إنشاء حساب';
 
   @override
+  String get send => 'ارسال';
+
+  @override
   String get userName => 'اسمك';
 
   @override
-  String get confirmPassword => 'تأكيد كلمة المرور';
+  String get dontWorryWellHelpYouResetIt => 'لا تقلق، سنساعدك في إعادة تعيينها.';
 
   @override
   String get reply => 'رد';

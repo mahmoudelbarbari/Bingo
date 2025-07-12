@@ -1,6 +1,6 @@
-import 'dart:async';
-import 'package:bingo/Alshimaa.dart';
+import 'package:bingo/features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
 import 'package:bingo/l10n/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'core/localization/localization_controller.dart';
@@ -11,17 +11,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'config/injection_container.dart' as di;
 import 'core/bloc_observer/bloc_observer.dart';
-import 'features/login/presentation/cubit/login_cubit.dart';
+import 'features/auth/login/presentation/login/cubit/login_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
   di.init();
-  runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyGlobalObserver();
 
-    Bloc.observer = MyGlobalObserver();
-
-    runApp(const MyApp());
-  }, (e, s) {});
+  runApp(const MyApp());
+  (e, s) {};
 }
 
 class MyApp extends StatelessWidget {
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => di.sl<LoginCubit>()),
+        BlocProvider(create: (_) => di.sl<ForgotPasswordCubit>()),
         Provider<LocalizationController>(
           create: (_) => di.sl<LocalizationController>(),
         ),

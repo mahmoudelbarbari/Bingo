@@ -1,7 +1,6 @@
-import 'package:bingo/Alshimaa.dart';
-import 'package:bingo/features/login/presentation/pages/login_screen.dart';
+import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
+import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
-import 'package:bingo/features/register/presentation/pages/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen1.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen2.dart';

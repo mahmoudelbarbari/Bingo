@@ -257,6 +257,12 @@ abstract class AppLocalizations {
   /// **'Passwords don\'t match'**
   String get passwordsDoNotMatch;
 
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get confirmPassword;
+
   /// No description provided for @invalidPassword.
   ///
   /// In en, this message translates to:
@@ -287,17 +293,23 @@ abstract class AppLocalizations {
   /// **'Sign Up'**
   String get signUp;
 
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
+
   /// No description provided for @userName.
   ///
   /// In en, this message translates to:
   /// **'Your Name'**
   String get userName;
 
-  /// No description provided for @confirmPassword.
+  /// No description provided for @dontWorryWellHelpYouResetIt.
   ///
   /// In en, this message translates to:
-  /// **'Confirm password'**
-  String get confirmPassword;
+  /// **'Don\'t worry, we\'ll help you reset it.'**
+  String get dontWorryWellHelpYouResetIt;
 
   /// No description provided for @reply.
   ///

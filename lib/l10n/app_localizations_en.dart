@@ -90,6 +90,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordsDoNotMatch => 'Passwords don\'t match';
 
   @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
   String get invalidPassword => 'Password must be at least 8 characters long and include uppercase, lowercase letters, and numbers.';
 
   @override
@@ -105,10 +108,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signUp => 'Sign Up';
 
   @override
+  String get send => 'Send';
+
+  @override
   String get userName => 'Your Name';
 
   @override
-  String get confirmPassword => 'Confirm password';
+  String get dontWorryWellHelpYouResetIt => 'Don\'t worry, we\'ll help you reset it.';
 
   @override
   String get reply => 'Reply';
