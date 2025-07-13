@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TextFieldForInstructions extends StatelessWidget {
-  String title;
-  String hintText;
+  final String title;
+  final String hintText;
   TextFieldForInstructions({required this.title, required this.hintText});
   @override
   Widget build(BuildContext context) {

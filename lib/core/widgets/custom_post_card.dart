@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
 class PostCardWidget extends StatelessWidget {
-  String name;
-  String profileImgPath;
-  String time;
-  String postDes;
-  String? postImagePath;
-  VoidCallback lovefun, commentFun;
+  final String name;
+  final String profileImgPath;
+  final String time;
+  final String postDes;
+  final String? postImagePath;
+  final VoidCallback lovefun, commentFun;
 
   PostCardWidget({
     required this.name,
@@ -22,7 +22,7 @@ class PostCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc=AppLocalizations.of(context);
+    final loc = AppLocalizations.of(context);
     return Card(
       margin: EdgeInsets.all(25),
       elevation: 6,

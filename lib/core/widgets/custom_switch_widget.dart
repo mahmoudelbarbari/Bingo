@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SwitchWidget extends StatefulWidget {
   String title;
   bool switchValue = true;
@@ -8,6 +9,7 @@ class SwitchWidget extends StatefulWidget {
   @override
   State<SwitchWidget> createState() => _SwitchWidgetState();
 }
+
 class _SwitchWidgetState extends State<SwitchWidget> {
   @override
   Widget build(BuildContext context) {

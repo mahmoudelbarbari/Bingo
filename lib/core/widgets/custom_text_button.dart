@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TextButtonWidget extends StatelessWidget {
-  String text1;
-  String text2;
-  VoidCallback fun;
-  
+  final String text1;
+  final String text2;
+  final VoidCallback fun;
+
   TextButtonWidget({
     required this.fun,
     required this.text1,
@@ -40,4 +40,3 @@ class TextButtonWidget extends StatelessWidget {
     );
   }
 }
-

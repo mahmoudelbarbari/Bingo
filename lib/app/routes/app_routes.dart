@@ -1,4 +1,5 @@
 import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
+import 'package:bingo/features/auth/login/presentation/reset_password/reset_password_screen.dart';
 import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,5 +13,6 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/onboarding2': (context) => const OnboardingScreen2(step: 1),
   '/onboarding3': (context) => const OnboardingScreen3(step: 2),
   '/loginScreen': (context) => const LoginScreen(),
+  '/resetPassword': (context) => const ResetPasswordScreen(),
   '/register': (context) => const RegisterScreen(),
 };

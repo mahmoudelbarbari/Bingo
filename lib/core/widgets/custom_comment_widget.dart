@@ -2,10 +2,10 @@ import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CommentsWidget extends StatelessWidget {
-  String name;
-  String comment;
-  String imgPath;
-  String time;
+  final String name;
+  final String comment;
+  final String imgPath;
+  final String time;
 
   CommentsWidget({
     required this.time,
@@ -16,7 +16,7 @@ class CommentsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context)!;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

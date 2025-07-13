@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 class UserType extends StatelessWidget {
-  String text;
-  String imgPath;
+  final String text;
+  final String imgPath;
   UserType({required this.text, required this.imgPath});
 
   @override

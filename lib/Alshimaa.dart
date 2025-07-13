@@ -8,11 +8,7 @@ import 'package:bingo/core/widgets/custom_textfield_for_instructions.dart';
 import 'package:bingo/core/widgets/custom_textfield_for_search.dart';
 import 'package:bingo/core/widgets/custom_upload_ins_widget.dart';
 import 'package:bingo/core/widgets/custom_user_type.dart';
-import 'package:bingo/l10n/app_localizations.dart' show AppLocalizations;
 import 'package:flutter/material.dart';
-import 'package:readmore/readmore.dart';
-
-import 'core/util/size_config.dart';
 
 class CustomeWidgets extends StatefulWidget {
   const CustomeWidgets({super.key});

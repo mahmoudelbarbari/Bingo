@@ -1,10 +1,6 @@
-import 'package:bingo/Alshimaa.dart';
 import 'package:bingo/core/widgets/custom_divider_widget.dart';
 import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/core/widgets/custom_text_button.dart';
-import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
-import 'package:bingo/features/auth/login/presentation/login/cubit/login_state.dart';
-import 'package:bingo/features/auth/login/presentation/login/pages/widgets/login_form.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_state.dart';
 import 'package:bingo/features/auth/login/presentation/login/pages/widgets/login_form.dart';
@@ -108,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icons.handshake_rounded,
                           headerSubText: loc.justLogInAndHavefun,
                         ),
-                     sizeBox,
+                        sizeBox,
                         LoginForm(
                           emailController: controllerEmail,
                           passwordController: controllerPassword,
