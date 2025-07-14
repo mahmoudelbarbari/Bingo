@@ -1,9 +1,7 @@
-import 'package:bingo/features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
+import 'package:bingo/app/di/provider_setup.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-import 'core/localization/localization_controller.dart';
 import 'package:bingo/app/routes/app_routes.dart';
 import 'package:bingo/config/theme_app.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'config/injection_container.dart' as di;
 import 'core/bloc_observer/bloc_observer.dart';
-import 'features/auth/login/presentation/login/cubit/login_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,13 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => di.sl<LoginCubit>()),
-        BlocProvider(create: (_) => di.sl<ForgotPasswordCubit>()),
-        Provider<LocalizationController>(
-          create: (_) => di.sl<LocalizationController>(),
-        ),
-      ],
+      providers: AppProviders.getAll(),
       child: GetMaterialApp(
         title: 'Bingo',
         debugShowCheckedModeBanner: false,
