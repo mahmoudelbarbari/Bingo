@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 abstract class RemoteLoginDatasource {
   Future<LoginBaseResponse> remoteLoginUser(String email, String password);
-  Future<void> resetPassword(Pattern email, String newPassword);
+  Future<void> resetPassword(String email, String newPassword);
   Future<void> sendOTP(String email);
   Future<void> verifyOtp(String email, String otp);
 }
@@ -50,7 +50,7 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
   }
 
   @override
-  Future<void> resetPassword(Pattern email, String newPassword) async {
+  Future<void> resetPassword(String email, String newPassword) async {
     await _dio.post(
       'reset-password-user',
       data: {'email': email, 'new_password': newPassword},

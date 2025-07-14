@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'custome_snackbar_color.dart';
+
 final ThemeData appTheme = ThemeData(
+  snackBarTheme: SnackBarThemeData(
+    behavior: SnackBarBehavior.floating,
+    elevation: 6,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(12)),
+    ),
+  ),
+  extensions: <ThemeExtension<dynamic>>[
+    const SnackBarColors(
+      success: Color(0xFF4CAF50), // green
+      error: Color(0xFFF44336),
+    ),
+  ],
   colorScheme: const ColorScheme(
     primary: Color(0xFFAF1239),
     primaryContainer: Color(0xFFD44A64),

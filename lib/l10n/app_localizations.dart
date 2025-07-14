@@ -346,6 +346,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'- No glare, reflections, or cropped edges.'**
   String get photo_requirements;
+
+  /// No description provided for @pleaseEnterTheCodeThatWasSentToYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the code that was sent to your email'**
+  String get pleaseEnterTheCodeThatWasSentToYourEmail;
+
+  /// No description provided for @verificationCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification Code'**
+  String get verificationCode;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend Code'**
+  String get resendCode;
+
+  /// No description provided for @createNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Create New Password'**
+  String get createNewPassword;
+
+  /// No description provided for @enterYourNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your new password'**
+  String get enterYourNewPassword;
+
+  /// No description provided for @passwordCreatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Password created successfully'**
+  String get passwordCreatedSuccessfully;
+
+  /// No description provided for @verifyYourAccountAndStartSelling.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your account and start selling'**
+  String get verifyYourAccountAndStartSelling;
+
+  /// No description provided for @forASecureMarketPlaceWeRequireNationalIdentityVerfication.
+  ///
+  /// In en, this message translates to:
+  /// **'For a secure market place, we require national identity verification.'**
+  String get forASecureMarketPlaceWeRequireNationalIdentityVerfication;
+
+  /// No description provided for @verifyNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Now'**
+  String get verifyNow;
+
+  /// No description provided for @thisInfoIsUsedForIdentityVerficationOnlyAndWillBeKeptSecureByBingo.
+  ///
+  /// In en, this message translates to:
+  /// **'This info is used for identity verification only and will be kept secure by Bingo.'**
+  String get thisInfoIsUsedForIdentityVerficationOnlyAndWillBeKeptSecureByBingo;
+
+  /// No description provided for @needHelpContactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help ? Contact support'**
+  String get needHelpContactSupport;
+
+  /// No description provided for @ensureTheEntireIDIsVisibleAndInFocus.
+  ///
+  /// In en, this message translates to:
+  /// **'Ensure the entire ID is visible and in focus.'**
+  String get ensureTheEntireIDIsVisibleAndInFocus;
+
+  /// No description provided for @forIDUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'For ID upload'**
+  String get forIDUpload;
+
+  /// No description provided for @acceptedFormatsJPGPNGPDFMaxSize2MB.
+  ///
+  /// In en, this message translates to:
+  /// **'Accepted formats: JPG, PNG, PDF | Max size: 2MB.'**
+  String get acceptedFormatsJPGPNGPDFMaxSize2MB;
+
+  /// No description provided for @noGlareReflectionsOrCroppedEdges.
+  ///
+  /// In en, this message translates to:
+  /// **'No glare, reflections, or cropped edges.'**
+  String get noGlareReflectionsOrCroppedEdges;
+
+  /// No description provided for @uploadProofOfIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload proof of identity'**
+  String get uploadProofOfIdentity;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

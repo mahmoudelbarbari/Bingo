@@ -1,11 +1,16 @@
 import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
-import 'package:bingo/features/auth/login/presentation/reset_password/reset_password_screen.dart';
+import 'package:bingo/features/auth/login/presentation/otp_verification/otp_verification_screen.dart';
+import 'package:bingo/features/auth/login/presentation/create_new_password/create_new_pass_screen.dart';
 import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
+import 'package:bingo/features/seller_onboarding/presentation/pages/file_upload_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen1.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen2.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen3.dart';
+
+import '../../features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
+import '../../features/seller_onboarding/presentation/pages/seller_onboarding_screen.dart';
 
 final Map<String, WidgetBuilder> appRoutes = {
   '/': (context) => const WelcomeSplashScreen(),
@@ -13,6 +18,10 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/onboarding2': (context) => const OnboardingScreen2(step: 1),
   '/onboarding3': (context) => const OnboardingScreen3(step: 2),
   '/loginScreen': (context) => const LoginScreen(),
-  '/resetPassword': (context) => const ResetPasswordScreen(),
+  '/forgetPassword': (context) => const ForgetPassScreen(),
+  '/createPassword': (context) => const CreateNewPasswordScreen(),
   '/register': (context) => const RegisterScreen(),
+  '/otpVerify': (context) => const OtpVerificationScreen(),
+  '/sellerOnboarding': (context) => const SellerOnboardingScreen(),
+  '/fileUploadScreen': (context) => const FileUploadSection(),
 };

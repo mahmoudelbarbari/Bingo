@@ -116,6 +116,10 @@ class $AssetsImagesGen {
   AssetGenImage get redDeleteIcon =>
       const AssetGenImage('assets/images/red-delete-icon.png');
 
+  /// File path: assets/images/seller onboarding welcome image.png
+  AssetGenImage get sellerOnboardingWelcomeImage =>
+      const AssetGenImage('assets/images/seller onboarding welcome image.png');
+
   /// File path: assets/images/seller_img.png
   AssetGenImage get sellerImg =>
       const AssetGenImage('assets/images/seller_img.png');
@@ -148,6 +152,7 @@ class $AssetsImagesGen {
     premPlanImg,
     proPlanImg,
     redDeleteIcon,
+    sellerOnboardingWelcomeImage,
     sellerImg,
   ];
 }
@@ -155,7 +160,11 @@ class $AssetsImagesGen {
 class Assets {
   const Assets._();
 
+  static const String aEnv = '.env';
   static const $AssetsImagesGen images = $AssetsImagesGen();
+
+  /// List of all assets
+  static List<String> get values => [aEnv];
 }
 
 class AssetGenImage {

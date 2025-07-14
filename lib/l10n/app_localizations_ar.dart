@@ -133,4 +133,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get photo_requirements => '- يجب أن تكون الصورة بدون سطوع زائد أو انعكاسات أو حواف مقطوعة.';
+
+  @override
+  String get pleaseEnterTheCodeThatWasSentToYourEmail => 'الرجاء إدخال الرمز الذي تم إرساله إلى بريدك الإلكتروني';
+
+  @override
+  String get verificationCode => 'رمز التحقق';
+
+  @override
+  String get resendCode => 'إعادة إرسال الرمز';
+
+  @override
+  String get createNewPassword => 'إنشاء كلمة مرور جديدة';
+
+  @override
+  String get enterYourNewPassword => 'أدخل كلمة المرور الجديدة';
+
+  @override
+  String get passwordCreatedSuccessfully => 'تم إنشاء كلمة المرور بنجاح';
+
+  @override
+  String get verifyYourAccountAndStartSelling => 'تحقق من حسابك وابدأ البيع';
+
+  @override
+  String get forASecureMarketPlaceWeRequireNationalIdentityVerfication => 'لضمان سوق آمن، نطلب التحقق من الهوية الوطنية.';
+
+  @override
+  String get verifyNow => 'تحقق الآن';
+
+  @override
+  String get thisInfoIsUsedForIdentityVerficationOnlyAndWillBeKeptSecureByBingo => 'هذه المعلومات تستخدم فقط للتحقق من الهوية وستظل آمنة لدى بينغو.';
+
+  @override
+  String get needHelpContactSupport => 'تحتاج مساعدة ؟ اتصل بالدعم';
+
+  @override
+  String get ensureTheEntireIDIsVisibleAndInFocus => 'تأكد من أن الهوية كاملة وواضحة.';
+
+  @override
+  String get forIDUpload => 'لتحميل الهوية';
+
+  @override
+  String get acceptedFormatsJPGPNGPDFMaxSize2MB => 'الصيغ المقبولة: JPG، PNG، PDF | الحد الأقصى للحجم: 2 ميجابايت.';
+
+  @override
+  String get noGlareReflectionsOrCroppedEdges => 'لا يوجد سطوع زائد، أو انعكاسات، أو حواف مقطوعة.';
+
+  @override
+  String get uploadProofOfIdentity => 'تحميل إثبات الهوية';
 }

@@ -8,6 +8,7 @@ class UploadFilesInsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -32,7 +33,7 @@ class UploadFilesInsWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               AppLocalizations.of(context)?.acceptanceFormate ??
-                  "- Accepted formats: JPG, PNG, PDF | Max size: 2MB.",
+                  "- ${loc.acceptedFormatsJPGPNGPDFMaxSize2MB}",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class UploadFilesInsWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               AppLocalizations.of(context)?.photo_requirements ??
-                  "- No glare, reflections, or cropped edges.",
+                  "- ${loc.noGlareReflectionsOrCroppedEdges}",
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,

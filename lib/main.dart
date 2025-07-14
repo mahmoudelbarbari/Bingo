@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         theme: appTheme,
-        initialRoute: '/loginScreen',
+        initialRoute: '/',
         routes: appRoutes,
         builder: (context, child) {
           final locale = Localizations.localeOf(context);

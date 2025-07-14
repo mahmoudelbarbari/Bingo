@@ -13,7 +13,7 @@ class LoginReporisatoryImpl implements LoginRepository {
   }
 
   @override
-  Future<void> resetPassword(Pattern email, String newPassword) async {
+  Future<void> resetPassword(String email, String newPassword) async {
     return await remoteLoginDatasource.resetPassword(email, newPassword);
   }
 

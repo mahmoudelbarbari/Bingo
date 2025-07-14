@@ -39,11 +39,11 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 
-  Future<void> resetPassword(String newPassword) async {
+  Future<void> resetPassword(String email, String newPassword) async {
     emit(ForgotPasswordLoading());
     try {
       resetPasswordUseCase = sl();
-      await resetPasswordUseCase.call(email!, newPassword);
+      await resetPasswordUseCase.call(email, newPassword);
       emit(ForgotPasswordSuccess());
     } catch (e) {
       emit(ForgotPasswordError(e.toString()));

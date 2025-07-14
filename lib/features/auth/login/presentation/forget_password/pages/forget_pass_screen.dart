@@ -7,7 +7,6 @@ import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/widgets/custom_alert_dialog.dart';
 import '../../../../../../core/widgets/dismiss_keyboared_scroll_view.dart';
 import '../../../../../../l10n/app_localizations.dart';
 import '../cubit/forget_pass_cubit.dart';
@@ -53,26 +52,23 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        appBar: AppBar(automaticallyImplyLeading: true),
         body: BlocProvider(
           create: (context) => ForgotPasswordCubit(),
           child: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
             listener: (context, state) {
-              if (state is ForgotPasswordSuccess) {
-                showDialog(
-                  context: context,
-                  builder: (context) => CustomAlertDialog(
-                    message: 'OTP is going to be generate',
-                    isSuccess: true,
-                  ),
-                );
-              }
               if (state is ForgotPasswordError) {
-                showDialog(
-                  context: context,
-                  builder: (context) => CustomAlertDialog(
-                    message: state.message,
-                    isSuccess: false,
-                  ),
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => CustomAlertDialog(
+                //     message: state.message,
+                //     isSuccess: false,
+                //   ),
+                // );
+                Navigator.pushNamed(
+                  context,
+                  '/otpVerify',
+                  arguments: controllerEmail.text.trim(),
                 );
               }
             },
@@ -80,34 +76,41 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
               return Form(
                 key: _keyform,
                 child: DismissKeyboardScrollView(
-                  child: Column(
-                    children: [
-                      WelcomeHeaderWidget(
-                        imageURL: Assets.images.bingoLogo1.path,
-                        headerText1: loc.forgotPassword,
-                        headerSubText: loc.dontWorryWellHelpYouResetIt,
-                      ),
-                      SizedBox(height: 24.h),
-                      CustomeTextfieldWidget(
-                        controller: controllerEmail,
-                        prefixIcon: Icon(Icons.email),
-                        isRTL: isArabic,
-                        formFieldValidator: Validators.email,
-                      ),
-                      SizedBox(height: 24.h),
-                      ElevatedButtonWidget(
-                        fun: () {
-                          if (_keyform.currentState!.validate()) {
-                            context.read<ForgotPasswordCubit>().resetPassword(
-                              controllerEmail.text.trim(),
-                            );
-                          }
-                        },
-                        text: loc.send,
-                        isColored: isButtonEnabled,
-                        isEnabled: isButtonEnabled,
-                      ),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 15.h,
+                      horizontal: 15.w,
+                    ),
+                    child: Column(
+                      children: [
+                        WelcomeHeaderWidget(
+                          imageURL: Assets.images.bingoLogo1.path,
+                          headerText1: loc.forgotPassword,
+                          headerSubText: loc.dontWorryWellHelpYouResetIt,
+                        ),
+                        SizedBox(height: 24.h),
+                        CustomeTextfieldWidget(
+                          controller: controllerEmail,
+                          labelText: loc.yourEmail,
+                          prefixIcon: Icon(Icons.email),
+                          isRTL: isArabic,
+                          formFieldValidator: Validators.email,
+                        ),
+                        SizedBox(height: 24.h),
+                        ElevatedButtonWidget(
+                          fun: () {
+                            if (_keyform.currentState!.validate()) {
+                              context.read<ForgotPasswordCubit>().sendOtp(
+                                controllerEmail.text.trim(),
+                              );
+                            }
+                          },
+                          text: loc.send,
+                          isColored: isButtonEnabled,
+                          isEnabled: isButtonEnabled,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

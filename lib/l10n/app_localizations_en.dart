@@ -133,4 +133,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get photo_requirements => '- No glare, reflections, or cropped edges.';
+
+  @override
+  String get pleaseEnterTheCodeThatWasSentToYourEmail => 'Please enter the code that was sent to your email';
+
+  @override
+  String get verificationCode => 'Verification Code';
+
+  @override
+  String get resendCode => 'Resend Code';
+
+  @override
+  String get createNewPassword => 'Create New Password';
+
+  @override
+  String get enterYourNewPassword => 'Enter your new password';
+
+  @override
+  String get passwordCreatedSuccessfully => 'Password created successfully';
+
+  @override
+  String get verifyYourAccountAndStartSelling => 'Verify your account and start selling';
+
+  @override
+  String get forASecureMarketPlaceWeRequireNationalIdentityVerfication => 'For a secure market place, we require national identity verification.';
+
+  @override
+  String get verifyNow => 'Verify Now';
+
+  @override
+  String get thisInfoIsUsedForIdentityVerficationOnlyAndWillBeKeptSecureByBingo => 'This info is used for identity verification only and will be kept secure by Bingo.';
+
+  @override
+  String get needHelpContactSupport => 'Need help ? Contact support';
+
+  @override
+  String get ensureTheEntireIDIsVisibleAndInFocus => 'Ensure the entire ID is visible and in focus.';
+
+  @override
+  String get forIDUpload => 'For ID upload';
+
+  @override
+  String get acceptedFormatsJPGPNGPDFMaxSize2MB => 'Accepted formats: JPG, PNG, PDF | Max size: 2MB.';
+
+  @override
+  String get noGlareReflectionsOrCroppedEdges => 'No glare, reflections, or cropped edges.';
+
+  @override
+  String get uploadProofOfIdentity => 'Upload proof of identity';
 }

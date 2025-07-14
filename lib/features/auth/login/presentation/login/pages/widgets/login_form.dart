@@ -112,7 +112,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/resetPassword');
+                  Navigator.pushNamed(context, '/forgetPassword');
                 },
                 child: Text(
                   loc.forgotPassword,
