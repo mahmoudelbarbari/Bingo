@@ -35,6 +35,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/cart.png
   AssetGenImage get cart => const AssetGenImage('assets/images/cart.png');
 
+  /// File path: assets/images/chat.png
+  AssetGenImage get chat => const AssetGenImage('assets/images/chat.png');
+
   /// File path: assets/images/facebook-logo.png
   AssetGenImage get facebookLogo =>
       const AssetGenImage('assets/images/facebook-logo.png');
@@ -60,6 +63,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/lockIcon.png
   AssetGenImage get lockIcon =>
       const AssetGenImage('assets/images/lockIcon.png');
+
+  /// File path: assets/images/notification.png
+  AssetGenImage get notification =>
+      const AssetGenImage('assets/images/notification.png');
 
   /// File path: assets/images/onboadring 8.png
   AssetGenImage get onboadring8 =>
@@ -144,6 +151,7 @@ class $AssetsImagesGen {
     bingoLogo1,
     buyerImg,
     cart,
+    chat,
     facebookLogo,
     freePlanImg,
     globe,
@@ -151,6 +159,7 @@ class $AssetsImagesGen {
     greyDeleteIcon,
     home,
     lockIcon,
+    notification,
     onboadring8,
     onboadring10,
     onboadring11,

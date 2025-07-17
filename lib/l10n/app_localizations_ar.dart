@@ -181,4 +181,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get uploadProofOfIdentity => 'تحميل إثبات الهوية';
+
+  @override
+  String get createYourDreamsWithJoy => 'اصنع أحلامك بفرح';
+
+  @override
+  String get turnYourPassionIntoProfit => '! حوّل شغفك إلى ربح';
 }

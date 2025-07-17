@@ -181,4 +181,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get uploadProofOfIdentity => 'Upload proof of identity';
+
+  @override
+  String get createYourDreamsWithJoy => 'Create your dreams with joy';
+
+  @override
+  String get turnYourPassionIntoProfit => 'Turn your passion into profit !';
 }

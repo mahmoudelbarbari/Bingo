@@ -2,7 +2,9 @@
 
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
+import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
+import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 import '../add_product_screen.dart';
@@ -39,10 +41,56 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomeAppBarWidget(
+        centerTitle: false,
+        leading: Padding(
+          padding: EdgeInsetsDirectional.only(start: 12.w),
+          child: CircleAvatar(
+            child: ImageIcon(AssetImage(Assets.images.profile.path)),
+          ),
+        ),
+        actions: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.w),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: InkWell(
+              onTap: () {},
+              child: ImageIcon(AssetImage(Assets.images.notification.path)),
+            ),
+          ),
+          SizedBox(width: 7.w),
+        ],
+      ),
       resizeToAvoidBottomInset: false,
       body: _pages[_currentIndex],
-      bottomNavigationBar: SafeArea(
-        top: false,
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 7.w),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(15),
+            topLeft: Radius.circular(15),
+          ),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
         child: BottomAppBar(
           shape: const CircularNotchedRectangle(),
           notchMargin: 8.0,

@@ -442,6 +442,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Upload proof of identity'**
   String get uploadProofOfIdentity;
+
+  /// No description provided for @createYourDreamsWithJoy.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your dreams with joy'**
+  String get createYourDreamsWithJoy;
+
+  /// No description provided for @turnYourPassionIntoProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn your passion into profit !'**
+  String get turnYourPassionIntoProfit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
