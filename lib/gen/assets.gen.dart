@@ -32,6 +32,9 @@ class $AssetsImagesGen {
   AssetGenImage get buyerImg =>
       const AssetGenImage('assets/images/buyer_img.png');
 
+  /// File path: assets/images/cart.png
+  AssetGenImage get cart => const AssetGenImage('assets/images/cart.png');
+
   /// File path: assets/images/facebook-logo.png
   AssetGenImage get facebookLogo =>
       const AssetGenImage('assets/images/facebook-logo.png');
@@ -40,6 +43,9 @@ class $AssetsImagesGen {
   AssetGenImage get freePlanImg =>
       const AssetGenImage('assets/images/free-plan-img.png');
 
+  /// File path: assets/images/globe.png
+  AssetGenImage get globe => const AssetGenImage('assets/images/globe.png');
+
   /// File path: assets/images/google-logo.webp
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/images/google-logo.webp');
@@ -47,6 +53,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/grey-delete-icon.png
   AssetGenImage get greyDeleteIcon =>
       const AssetGenImage('assets/images/grey-delete-icon.png');
+
+  /// File path: assets/images/home.png
+  AssetGenImage get home => const AssetGenImage('assets/images/home.png');
 
   /// File path: assets/images/lockIcon.png
   AssetGenImage get lockIcon =>
@@ -112,6 +121,9 @@ class $AssetsImagesGen {
   AssetGenImage get proPlanImg =>
       const AssetGenImage('assets/images/pro-plan-img.png');
 
+  /// File path: assets/images/profile.png
+  AssetGenImage get profile => const AssetGenImage('assets/images/profile.png');
+
   /// File path: assets/images/red-delete-icon.png
   AssetGenImage get redDeleteIcon =>
       const AssetGenImage('assets/images/red-delete-icon.png');
@@ -131,10 +143,13 @@ class $AssetsImagesGen {
     bingoLogo,
     bingoLogo1,
     buyerImg,
+    cart,
     facebookLogo,
     freePlanImg,
+    globe,
     googleLogo,
     greyDeleteIcon,
+    home,
     lockIcon,
     onboadring8,
     onboadring10,
@@ -151,6 +166,7 @@ class $AssetsImagesGen {
     postImg,
     premPlanImg,
     proPlanImg,
+    profile,
     redDeleteIcon,
     sellerOnboardingWelcomeImage,
     sellerImg,

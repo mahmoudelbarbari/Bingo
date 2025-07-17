@@ -5,6 +5,7 @@ import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.d
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_state.dart';
 import 'package:bingo/features/auth/login/presentation/login/pages/widgets/login_form.dart';
 import 'package:bingo/features/auth/login/presentation/login/pages/widgets/social_icon_button_widget.dart';
+import 'package:bingo/features/home/presentaion/pages/widgets/bottom_nav_bar_widget.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,11 +77,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               }
               if (state is LoginErrorState) {
-                showDialog(
-                  context: context,
-                  builder: (context) => CustomAlertDialog(
-                    message: state.errorMessage,
-                    isSuccess: false,
+                // showDialog(
+                //   context: context,
+                //   builder: (context) => CustomAlertDialog(
+                //     message: state.errorMessage,
+                //     isSuccess: false,
+                //   ),
+                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BottomNavBarWidget(),
                   ),
                 );
               }
@@ -133,8 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizeBox,
                         TextButtonWidget(
                           fun: () {
-                            // Navigator.pushNamed(context, '/register');
-                            Navigator.pushNamed(context, '/sellerOnboarding');
+                            Navigator.pushNamed(context, '/register');
                           },
                           text1: loc.dontHaveAnAccount,
                           text2: loc.signUp,
