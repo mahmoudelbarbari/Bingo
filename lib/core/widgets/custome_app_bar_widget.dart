@@ -31,13 +31,12 @@ class CustomeAppBarWidget extends PreferredSize {
         title: Text(
           'Welcome $title,',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: appTheme.textTheme.headlineLarge!.fontSize,
+            fontSize: lightTheme.textTheme.headlineLarge!.fontSize,
           ),
         ),
         subtitle: Text(
           loc.createYourDreamsWithJoy,
-          style: appTheme.textTheme.bodySmall,
+          style: lightTheme.textTheme.bodySmall,
         ),
       ),
       automaticallyImplyLeading: hideBackButton,

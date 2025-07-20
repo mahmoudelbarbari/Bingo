@@ -187,4 +187,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get turnYourPassionIntoProfit => 'Turn your passion into profit !';
+
+  @override
+  String get myAccount => 'My Account';
+
+  @override
+  String get productsList => 'Products List';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get payment => 'Payment';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get getHelp => 'Get Help';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get english => 'English';
 }

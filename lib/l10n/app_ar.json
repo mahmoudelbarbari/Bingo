@@ -60,5 +60,16 @@
   "noGlareReflectionsOrCroppedEdges": "لا يوجد سطوع زائد، أو انعكاسات، أو حواف مقطوعة.",
   "uploadProofOfIdentity": "تحميل إثبات الهوية",
   "createYourDreamsWithJoy": "اصنع أحلامك بفرح",
-  "turnYourPassionIntoProfit": "! حوّل شغفك إلى ربح"
+  "turnYourPassionIntoProfit": "! حوّل شغفك إلى ربح",
+  "productsListings": "قائمة المنتجات",
+  "address": "العنوان",
+  "payment": "الدفع",
+  "language": "اللغة",
+  "darkMode": "الوضع المظلم",
+  "getHelp": "احصل على مساعدة",
+  "deleteAccount": "حذف الحساب",
+  "logout": "تسجيل الخروج",
+  "settings": "الإعدادات",
+  "arabic": "العربية",
+  "english": "الإنجليزية"
 }

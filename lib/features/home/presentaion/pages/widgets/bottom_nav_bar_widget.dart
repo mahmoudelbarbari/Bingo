@@ -3,10 +3,15 @@
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
+import 'package:bingo/features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
+import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
+import 'package:bingo/features/profile/presentation/pages/profile_screen.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
 import '../add_product_screen.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
@@ -21,10 +26,10 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    // CommunityPage(),
+    LoginScreen(),
     Container(), // Placeholder for Add button
-    // OrdersPage(),
-    // ProfilePage(),
+    ForgetPassScreen(),
+    BlocProvider(create: (_) => UserCubit(), child: const ProfileScreen()),
   ];
 
   void _onTap(int index) {
@@ -54,7 +59,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.w),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
@@ -75,13 +79,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       resizeToAvoidBottomInset: false,
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
-        padding: EdgeInsets.symmetric(horizontal: 7.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(15),
-            topLeft: Radius.circular(15),
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
           ),
-          color: Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -112,7 +114,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _onTap(2),
         shape: CircleBorder(),
-        backgroundColor: appTheme.primaryColor,
+        backgroundColor: lightTheme.primaryColor,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -128,12 +130,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: isActive ? appTheme.primaryColor : Colors.grey),
+            Icon(icon, color: isActive ? lightTheme.primaryColor : Colors.grey),
             Text(
               label,
               style: TextStyle(
                 fontSize: 12,
-                color: isActive ? appTheme.primaryColor : Colors.grey,
+                color: isActive ? lightTheme.primaryColor : Colors.grey,
               ),
             ),
           ],

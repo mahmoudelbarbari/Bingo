@@ -107,8 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         WelcomeHeaderWidget(
                           imageURL: Assets.images.bingoLogo1.path,
                           headerText1: '${loc.greateToSeeYouHere} ',
-                          headerText2: '${loc.back} !',
-                          icon: Icons.handshake_rounded,
+                          headerText2: '${loc.back} !👋',
                           headerSubText: loc.justLogInAndHavefun,
                         ),
                         sizeBox,

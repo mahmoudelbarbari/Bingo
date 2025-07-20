@@ -1,18 +1,26 @@
+import 'package:bingo/core/localization/language_preference.dart';
+import 'package:bingo/config/theme_preference.dart';
 import 'package:bingo/features/auth/login/data/datasources/login_remote_datasource.dart';
 import 'package:bingo/features/auth/login/data/reporisatory/login_reporisatory_impl.dart';
 import 'package:bingo/features/auth/login/domain/repositories/login_repository.dart';
 import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
+import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
+import 'package:bingo/features/profile/data/repo/user_repo_impl.dart';
+import 'package:bingo/features/profile/domain/repo/user_repo.dart';
+import 'package:bingo/features/profile/domain/usecases/get_current_user_usecase.dart';
+import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
+import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../core/localization/localization_controller.dart';
 import '../core/network/dio_provider.dart';
 import '../features/auth/login/domain/usecases/reset_password_usecase.dart';
 import '../features/auth/login/domain/usecases/sent_otp_usecase.dart';
 import '../features/auth/login/domain/usecases/verify_otp_usecase.dart';
 import '../features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
+import '../features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import '../features/seller_onboarding/data/repository/seller_upload_repo_impl.dart';
 import '../features/seller_onboarding/domain/repositories/upload_file_repository.dart';
 import '../features/seller_onboarding/domain/usecase/seller_upload_doc_usecase.dart';
@@ -20,13 +28,16 @@ import '../features/seller_onboarding/presentation/cubit/file_upload_cubit.dart'
 
 final sl = GetIt.instance;
 
-void init() {
+void init() async {
   //lazy singleton will call the object when needed ONLY, the singleton when the app launched it will
 
-  // localization
-  sl.registerLazySingleton<LocalizationController>(
-    () => LocalizationController(),
-  );
+  // localization preference and cubit
+  sl.registerLazySingleton(() => LanguagePreference());
+  sl.registerFactory(() => LanguageCubit(sl()));
+
+  // dark & light theme
+  sl.registerLazySingleton(() => ThemePreference());
+  sl.registerFactory(() => ThemeCubit(sl()));
 
   // core
   sl.registerLazySingleton<Dio>(() => createDio());
@@ -74,4 +85,18 @@ void init() {
   );
   // file upload cubit
   sl.registerLazySingleton<FileUploadCubit>(() => FileUploadCubit(sl()));
+
+  //-----------------------------------------------------------------------------------------
+  // Profile feature (injection).
+  //-----------------------------------------------------------------------------------------
+  //profile datasource
+  sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl(sl()));
+  //repo
+  sl.registerLazySingleton<UserRepo>(() => UserRepoImpl());
+  // profile usecase
+  sl.registerLazySingleton<GetCurrentUserUsecase>(
+    () => GetCurrentUserUsecase(sl()),
+  );
+  // profile cubit
+  sl.registerLazySingleton<UserCubit>(() => UserCubit());
 }

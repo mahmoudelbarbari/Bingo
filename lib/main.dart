@@ -1,4 +1,6 @@
 import 'package:bingo/app/di/provider_setup.dart';
+import 'package:bingo/features/profile/presentation/cubit/language_cubit/language_cubit.dart';
+import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -28,26 +30,38 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: AppProviders.getAll(),
-      child: GetMaterialApp(
-        title: 'Bingo',
-        debugShowCheckedModeBanner: false,
-        supportedLocales: const [Locale('en'), Locale('ar')],
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        theme: appTheme,
-        initialRoute: '/',
-        routes: appRoutes,
-        builder: (context, child) {
-          final locale = Localizations.localeOf(context);
-          return Directionality(
-            textDirection: locale.languageCode == 'ar'
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            child: child!,
+      child: BlocBuilder<LanguageCubit, Locale>(
+        builder: (context, locale) {
+          return BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, themeMode) {
+              return GetMaterialApp(
+                title: 'Bingo',
+                key: ValueKey(locale.languageCode),
+                debugShowCheckedModeBanner: false,
+                locale: locale,
+                supportedLocales: const [Locale('en'), Locale('ar')],
+                localizationsDelegates: [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                theme: lightTheme,
+                darkTheme: darkTheme,
+                themeMode: themeMode,
+                initialRoute: '/',
+                routes: appRoutes,
+                builder: (context, child) {
+                  final locale = Localizations.localeOf(context);
+                  return Directionality(
+                    textDirection: locale.languageCode == 'ar'
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    child: child!,
+                  );
+                },
+              );
+            },
           );
         },
       ),

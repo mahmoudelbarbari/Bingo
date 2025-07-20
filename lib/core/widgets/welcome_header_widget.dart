@@ -25,7 +25,7 @@ class WelcomeHeaderWidget extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: headerText1,
-            style: TextStyle(fontSize: 24, color: Colors.black),
+            style: Theme.of(context).textTheme.titleLarge,
             children: [
               TextSpan(
                 text: headerText2,

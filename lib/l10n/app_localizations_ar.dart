@@ -187,4 +187,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get turnYourPassionIntoProfit => '! حوّل شغفك إلى ربح';
+
+  @override
+  String get myAccount => 'My Account';
+
+  @override
+  String get productsList => 'Products List';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get payment => 'الدفع';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get darkMode => 'الوضع المظلم';
+
+  @override
+  String get getHelp => 'احصل على مساعدة';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get english => 'الإنجليزية';
 }

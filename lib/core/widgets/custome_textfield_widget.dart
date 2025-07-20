@@ -66,12 +66,12 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
             ? Color(0xFFFDF5F5)
             : widget.isSuccess
             ? Color(0xFFF3FDF7)
-            : Colors.white,
+            : null,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: IconTheme(
           data: IconThemeData(
             color: isFocused
-                ? Colors.black
+                ? Theme.of(context).focusColor
                 : const Color.fromARGB(255, 199, 199, 199),
           ),
           child: widget.prefixIcon,

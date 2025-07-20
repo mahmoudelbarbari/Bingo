@@ -59,5 +59,17 @@
   "noGlareReflectionsOrCroppedEdges": "No glare, reflections, or cropped edges.",
   "uploadProofOfIdentity": "Upload proof of identity",
   "createYourDreamsWithJoy": "Create your dreams with joy",
-  "turnYourPassionIntoProfit": "Turn your passion into profit !"
+  "turnYourPassionIntoProfit": "Turn your passion into profit !",
+  "myAccount": "My Account",
+  "productsList": "Products List",
+  "address": "Address",
+  "payment": "Payment",
+  "language": "Language",
+  "darkMode": "Dark Mode",
+  "getHelp": "Get Help",
+  "deleteAccount": "Delete Account",
+  "logout": "Logout",
+  "settings": "Settings",
+  "arabic": "Arabic",
+  "english": "English"
 }

@@ -4,15 +4,24 @@ class RoundedListItem {
   final IconData icon;
   final String title;
   final VoidCallback? onTap;
-
-  RoundedListItem({required this.icon, required this.title, this.onTap});
+  final Widget? trailing;
+  RoundedListItem({
+    required this.icon,
+    required this.title,
+    this.onTap,
+    this.trailing,
+  });
 }
 
 class IconListTileGroupWidget extends StatelessWidget {
   final String? heading;
   final List<RoundedListItem> items;
-
-  const IconListTileGroupWidget({super.key, this.heading, required this.items});
+  const IconListTileGroupWidget({
+    super.key,
+    this.heading,
+    required this.items,
+    required IconData icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +31,13 @@ class IconListTileGroupWidget extends StatelessWidget {
         if (heading != null)
           Padding(
             padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-            child: Text(
-              heading!,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            child: Text(heading!, style: Theme.of(context).textTheme.bodyLarge),
           ),
         Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
           elevation: 2,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: items.map((item) {
               return ListTile(
@@ -41,7 +46,9 @@ class IconListTileGroupWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 title: Text(item.title),
-                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                trailing:
+                    item.trailing ??
+                    const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: item.onTap,
               );
             }).toList(),

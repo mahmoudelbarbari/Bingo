@@ -27,11 +27,7 @@ class OnboardingWelcomeTextWidget extends StatelessWidget {
             children: [
               TextSpan(
                 text: headerText2,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ],
           ),
