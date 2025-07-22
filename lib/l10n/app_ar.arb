@@ -2,7 +2,7 @@
   "@@locale": "ar",
   "handMade": "صناعة يدوية",
   "withLove": "مع الحب",
-  "welcome": "أهلاً بك في تطبيقنا",
+  "welcome": "أهلاً",
   "discoverTalentedMakersCreatingUnique": "اكتشف صانعين موهوبين يخلقون قطعًا فريدة",
   "handmadeTreasures": "كنوز مصنوعة يدويا!",
   "sell": "بيع",
@@ -71,5 +71,11 @@
   "logout": "تسجيل الخروج",
   "settings": "الإعدادات",
   "arabic": "العربية",
-  "english": "الإنجليزية"
+  "english": "الإنجليزية",
+  "profile": "الملف الشخصي",
+  "home": "الرئيسية",
+  "community": "المجتمع",
+  "cart": "عربة التسوق",
+  "categories": "الفئات",
+  "viewAll": "عرض الكل"
 }

@@ -6,13 +6,16 @@ import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
 import 'package:bingo/features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
 import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
+import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widget.dart';
 import 'package:bingo/features/profile/presentation/pages/profile_screen.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
 import '../add_product_screen.dart';
+import 'action_btn_top_bar_widget.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   const BottomNavBarWidget({super.key});
@@ -45,9 +48,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: CustomeAppBarWidget(
         centerTitle: false,
+        subTitle: loc.createYourDreamsWithJoy,
         leading: Padding(
           padding: EdgeInsetsDirectional.only(start: 12.w),
           child: CircleAvatar(
@@ -55,29 +60,24 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           ),
         ),
         actions: [
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 7.h, horizontal: 7.w),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: InkWell(
-              onTap: () {},
-              child: ImageIcon(AssetImage(Assets.images.notification.path)),
-            ),
+          ActionBtnTopBarWidget(icon: Assets.images.chat.path, onTap: () {}),
+          SizedBox(width: 12.w),
+          ActionBtnTopBarWidget(
+            icon: Assets.images.notification.path,
+            onTap: () {},
           ),
           SizedBox(width: 7.w),
         ],
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //  floatingActionButton: ChatBotBtnWidget(
+      //   onPressed: () {
+      //     // Your action here
+      //   },
+      //   iconAssetPath: Assets.images.chatbot.path, // Add this to your assets
+      //   borderColor: Colors.purple,
+      // ),
       resizeToAvoidBottomInset: false,
-      body: _pages[_currentIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -101,11 +101,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _navItem(Icons.home, 'Home', 0),
-                _navItem(Icons.language, 'Community', 1),
+                _navItem(Icons.home, loc.home, 0),
+                _navItem(Icons.language, loc.community, 1),
                 const SizedBox(width: 48),
-                _navItem(Icons.shopping_cart_outlined, 'Cart', 3),
-                _navItem(Icons.person, 'Profile', 4),
+                _navItem(Icons.shopping_cart_outlined, loc.cart, 3),
+                _navItem(Icons.person, loc.profile, 4),
               ],
             ),
           ),
@@ -118,6 +118,17 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: Stack(
+        children: [
+          _pages[_currentIndex],
+          Positioned(
+            child: ChatBotBtnWidget(
+              onPressed: () {},
+              iconAssetPath: Assets.images.chatbot.path,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

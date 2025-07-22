@@ -53,6 +53,7 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
   @override
   Widget build(BuildContext context) {
     final isFocused = _focusNode.hasFocus;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextFormField(
       focusNode: _focusNode,
       controller: widget.controller,
@@ -63,15 +64,15 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
       textAlign: widget.isRTL ? TextAlign.right : TextAlign.left,
       decoration: InputDecoration(
         fillColor: widget.hasError
-            ? Color(0xFFFDF5F5)
+            ? (isDark ? Color(0xFF3A1F1F) : Color(0xFFFDF5F5))
             : widget.isSuccess
-            ? Color(0xFFF3FDF7)
+            ? (isDark ? Color(0xFF1F3A2B) : Color(0xFFF3FDF7))
             : null,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         prefixIcon: IconTheme(
           data: IconThemeData(
             color: isFocused
-                ? Theme.of(context).focusColor
+                ? (isDark ? Colors.white : Colors.black)
                 : const Color.fromARGB(255, 199, 199, 199),
           ),
           child: widget.prefixIcon,

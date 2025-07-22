@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 
 class CustomeAppBarWidget extends PreferredSize {
   final String? title;
+  final String? subTitle;
   final bool hideBackButton;
   final bool centerTitle;
   final List<Widget>? actions;
@@ -14,8 +15,9 @@ class CustomeAppBarWidget extends PreferredSize {
     super.preferredSize = const Size.fromHeight(kToolbarHeight),
     super.child = const SizedBox.shrink(),
     this.title,
-    required this.leading,
-    required this.actions,
+    this.subTitle,
+    this.leading,
+    this.actions,
     this.hideBackButton = true,
     this.centerTitle = true,
   });
@@ -29,15 +31,12 @@ class CustomeAppBarWidget extends PreferredSize {
       leading: leading,
       title: ListTile(
         title: Text(
-          'Welcome $title,',
+          '${loc.welcome} $title,',
           style: TextStyle(
             fontSize: lightTheme.textTheme.headlineLarge!.fontSize,
           ),
         ),
-        subtitle: Text(
-          loc.createYourDreamsWithJoy,
-          style: lightTheme.textTheme.bodySmall,
-        ),
+        subtitle: Text(subTitle ?? "", style: lightTheme.textTheme.bodySmall),
       ),
       automaticallyImplyLeading: hideBackButton,
       centerTitle: centerTitle,

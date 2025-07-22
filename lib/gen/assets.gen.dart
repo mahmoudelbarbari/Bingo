@@ -38,9 +38,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/images/chat.png');
 
+  /// File path: assets/images/chatbot.png
+  AssetGenImage get chatbot => const AssetGenImage('assets/images/chatbot.png');
+
   /// File path: assets/images/facebook-logo.png
   AssetGenImage get facebookLogo =>
       const AssetGenImage('assets/images/facebook-logo.png');
+
+  /// File path: assets/images/filter.png
+  AssetGenImage get filter => const AssetGenImage('assets/images/filter.png');
 
   /// File path: assets/images/free-plan-img.png
   AssetGenImage get freePlanImg =>
@@ -59,6 +65,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/home.png
   AssetGenImage get home => const AssetGenImage('assets/images/home.png');
+
+  /// File path: assets/images/jewelry.png
+  AssetGenImage get jewelry => const AssetGenImage('assets/images/jewelry.png');
 
   /// File path: assets/images/lockIcon.png
   AssetGenImage get lockIcon =>
@@ -135,6 +144,9 @@ class $AssetsImagesGen {
   AssetGenImage get redDeleteIcon =>
       const AssetGenImage('assets/images/red-delete-icon.png');
 
+  /// File path: assets/images/search.png
+  AssetGenImage get search => const AssetGenImage('assets/images/search.png');
+
   /// File path: assets/images/seller onboarding welcome image.png
   AssetGenImage get sellerOnboardingWelcomeImage =>
       const AssetGenImage('assets/images/seller onboarding welcome image.png');
@@ -152,12 +164,15 @@ class $AssetsImagesGen {
     buyerImg,
     cart,
     chat,
+    chatbot,
     facebookLogo,
+    filter,
     freePlanImg,
     globe,
     googleLogo,
     greyDeleteIcon,
     home,
+    jewelry,
     lockIcon,
     notification,
     onboadring8,
@@ -177,6 +192,7 @@ class $AssetsImagesGen {
     proPlanImg,
     profile,
     redDeleteIcon,
+    search,
     sellerOnboardingWelcomeImage,
     sellerImg,
   ];

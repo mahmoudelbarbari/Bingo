@@ -2,6 +2,7 @@
   "@@locale": "en",
   "handMade": "Handmade",
   "withLove": "with Love",
+  "welcome": "Welcome",
   "discoverTalentedMakersCreatingUnique": "Discover talented makers creating unique",
   "handmadeTreasures": "handmade treasures !",
   "sell": "Sell",
@@ -71,5 +72,11 @@
   "logout": "Logout",
   "settings": "Settings",
   "arabic": "Arabic",
-  "english": "English"
+  "english": "English",
+  "profile": "Profile",
+  "home": "Home",
+  "community": "Community",
+  "cart": "Cart",
+  "categories": "Categories",
+  "viewAll": "View All"
 }

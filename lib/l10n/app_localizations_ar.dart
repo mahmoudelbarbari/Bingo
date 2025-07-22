@@ -15,6 +15,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get withLove => 'مع الحب';
 
   @override
+  String get welcome => 'أهلاً';
+
+  @override
   String get discoverTalentedMakersCreatingUnique => 'اكتشف صانعين موهوبين يخلقون قطعًا فريدة';
 
   @override
@@ -223,4 +226,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get english => 'الإنجليزية';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get community => 'المجتمع';
+
+  @override
+  String get cart => 'عربة التسوق';
+
+  @override
+  String get categories => 'الفئات';
+
+  @override
+  String get viewAll => 'عرض الكل';
 }

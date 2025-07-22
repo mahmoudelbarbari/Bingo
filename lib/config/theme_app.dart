@@ -55,7 +55,7 @@ final ThemeData lightTheme = ThemeData(
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: Colors.grey.shade200,
+    fillColor: Colors.white,
     errorMaxLines: 2,
     errorStyle: const TextStyle(color: Color(0xFFB00020)),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
@@ -82,6 +82,11 @@ final ThemeData lightTheme = ThemeData(
     titleLarge: TextStyle(
       color: Colors.black,
       fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
+    titleMedium: TextStyle(
+      color: Colors.black,
+      fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
     headlineLarge: TextStyle(color: Color(0xFFAF1239)),
@@ -111,7 +116,7 @@ final ThemeData darkTheme = ThemeData(
     surface: Color(0xFF121212),
     background: Color(0xFF1E1E1E),
     error: Color(0xFFCF6679),
-    onPrimary: Colors.white,
+    onPrimary: Colors.black,
     onSecondary: Colors.white,
     onSurface: Colors.white,
     onBackground: Colors.white,
@@ -145,7 +150,7 @@ final ThemeData darkTheme = ThemeData(
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: Color(0xFF2C2C2C),
+    fillColor: Color(0x002e2e2e),
     errorMaxLines: 2,
     errorStyle: TextStyle(color: Color(0xFFCF6679)),
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.0)),
@@ -174,8 +179,13 @@ final ThemeData darkTheme = ThemeData(
       fontSize: 24,
       fontWeight: FontWeight.bold,
     ),
+    titleMedium: TextStyle(
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    ),
     headlineLarge: TextStyle(color: Color(0xFFAF1239)),
-    bodyMedium: TextStyle(color: Colors.white70),
+    bodyMedium: TextStyle(fontSize: 12, color: Colors.white70),
     bodyLarge: TextStyle(color: Color(0xFFCCCCCC)),
     bodySmall: TextStyle(color: Color(0xFF999999)),
   ),

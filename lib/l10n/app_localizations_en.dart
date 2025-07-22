@@ -15,6 +15,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get withLove => 'with Love';
 
   @override
+  String get welcome => 'Welcome';
+
+  @override
   String get discoverTalentedMakersCreatingUnique => 'Discover talented makers creating unique';
 
   @override
@@ -223,4 +226,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get english => 'English';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get community => 'Community';
+
+  @override
+  String get cart => 'Cart';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get viewAll => 'View All';
 }
