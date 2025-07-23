@@ -1,4 +1,5 @@
 import 'package:bingo/core/util/size_config.dart';
+import 'package:bingo/features/home/presentaion/pages/get_all_peoduct_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/categories_scroablle_widget.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/filter_btn_widget.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: ListView(
+      child: Column(
         children: [
           SizedBox(height: 12.h),
           Row(
@@ -49,6 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SizedBox(height: 12.h),
           CategoriesScroablleWidget(),
+          SizedBox(height: 12.h),
+          Expanded(child: GetAllPeoductScreen()),
         ],
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:bingo/app/di/provider_setup.dart';
 import 'package:bingo/features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
+import 'package:bingo/firebase_options.dart';
 import 'package:bingo/l10n/app_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:bingo/app/routes/app_routes.dart';
@@ -14,6 +16,7 @@ import 'core/bloc_observer/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await dotenv.load(fileName: ".env");
   di.init();

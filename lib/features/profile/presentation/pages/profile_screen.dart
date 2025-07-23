@@ -80,10 +80,12 @@ Widget _buildFirstWidget(BuildContext context) {
   return IconListTileGroupWidget(
     heading: loc.myAccount,
     items: [
+      RoundedListItem(icon: Icons.settings, title: loc.settings),
       RoundedListItem(
         title: loc.productsList,
         icon: Icons.production_quantity_limits,
       ),
+      RoundedListItem(icon: Icons.receipt_long, title: loc.orderList),
       RoundedListItem(title: loc.address, icon: Icons.location_city),
       RoundedListItem(title: loc.payment, icon: Icons.payment),
     ],

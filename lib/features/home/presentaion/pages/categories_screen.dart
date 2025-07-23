@@ -1,5 +1,6 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/category_item.dart';
+import 'package:bingo/features/home/presentaion/pages/widgets/category_vertical_item_widget.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/view_switch_widget.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   child: ListView.builder(
                     itemCount: remaining.length,
                     itemBuilder: (context, index) =>
-                        ListTile(title: Text('Item $index')),
+                        CategoryVerticalItemWidget(category: remaining[index]),
                   ),
                 ),
         ],

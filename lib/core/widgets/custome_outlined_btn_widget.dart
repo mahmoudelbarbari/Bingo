@@ -24,7 +24,7 @@ class CustomeOutlinedBtnWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-      child: Text(text),
+      child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
     );
   }
 }

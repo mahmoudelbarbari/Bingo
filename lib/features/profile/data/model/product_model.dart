@@ -1,24 +1,26 @@
 import 'package:bingo/features/profile/domain/entity/product.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel extends ProductEntity {
   ProductModel({
-    required super.name,
-    required super.shortDescription,
+    super.name,
+    super.shortDescription,
     super.brand,
-    required super.cashOnDelivery,
-    required super.category,
+    super.cashOnDelivery,
+    super.category,
     super.colors,
     super.customProperties,
     super.detailedDesc,
-    required super.price,
-    required super.salePrice,
-    required super.sizes,
+    super.price,
+    super.salePrice,
+    super.sizes,
     super.slug,
-    required super.stock,
+    super.stock,
     super.subCategory,
     super.tags,
     super.videoURL,
     super.warranty,
+    super.image,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
@@ -66,5 +68,33 @@ class ProductModel extends ProductEntity {
     if (warranty != null) data['warranty'] = warranty;
 
     return data;
+  }
+
+  factory ProductModel.fromSnapShot(
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot,
+  ) {
+    final map = documentSnapshot.data()!;
+    return ProductModel(
+      name: map['name'] ?? '',
+      shortDescription: map['shortDescription'] ?? '',
+      image: map['image'] ?? '',
+      cashOnDelivery: map['cashOnDelivery'] ?? false,
+      category: map['category'] ?? '',
+      price: map['price'] != null ? (map['price'] as num).toDouble() : 0.0,
+      salePrice: map['salePrice'] != null
+          ? (map['salePrice'] as num).toDouble()
+          : 0.0,
+      sizes: List<String>.from(map['sizes'] ?? []),
+      stock: map['stock'] ?? 0,
+      brand: map['brand'] ?? '',
+      colors: map['colors'] != null ? List<String>.from(map['colors']) : null,
+      customProperties: map['customProperties'] ?? '',
+      detailedDesc: map['detailedDesc'] ?? '',
+      slug: map['slug'] ?? "",
+      subCategory: map['subCategory'] ?? '',
+      tags: map['tags'] ?? '',
+      videoURL: map['videoURL'] ?? '',
+      warranty: map['warranty'] ?? '',
+    );
   }
 }

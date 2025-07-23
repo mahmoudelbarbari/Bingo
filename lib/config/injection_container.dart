@@ -5,21 +5,35 @@ import 'package:bingo/features/auth/login/data/reporisatory/login_reporisatory_i
 import 'package:bingo/features/auth/login/domain/repositories/login_repository.dart';
 import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
+import 'package:bingo/features/profile/data/datasource/product_datasource.dart';
 import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
+import 'package:bingo/features/profile/data/repo/product_repo_impl.dart';
 import 'package:bingo/features/profile/data/repo/user_repo_impl.dart';
+import 'package:bingo/features/profile/domain/repo/product_repo.dart';
 import 'package:bingo/features/profile/domain/repo/user_repo.dart';
 import 'package:bingo/features/profile/domain/usecases/get_current_user_usecase.dart';
+import 'package:bingo/features/profile/domain/usecases/get_products_usecase.dart';
+import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../core/database/firebase_db.dart';
 import '../core/network/dio_provider.dart';
 import '../features/auth/login/domain/usecases/reset_password_usecase.dart';
 import '../features/auth/login/domain/usecases/sent_otp_usecase.dart';
 import '../features/auth/login/domain/usecases/verify_otp_usecase.dart';
 import '../features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
+import '../features/cart/data/datasource/cart_datasource.dart';
+import '../features/cart/data/reporisatory_imlp/cart_reporisatory_impl.dart';
+import '../features/cart/domain/reporisatory/cart_reporisatory.dart';
+import '../features/cart/domain/usecase/add_items_to_cart_usecase.dart';
+import '../features/cart/domain/usecase/clear_cart_items_usecase.dart';
+import '../features/cart/domain/usecase/get_all_cart_items_usecase.dart';
+import '../features/cart/domain/usecase/view_orders_usecase.dart';
+import '../features/cart/presentation/cubit/cart_cubit.dart';
 import '../features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import '../features/seller_onboarding/data/repository/seller_upload_repo_impl.dart';
 import '../features/seller_onboarding/domain/repositories/upload_file_repository.dart';
@@ -30,6 +44,9 @@ final sl = GetIt.instance;
 
 void init() async {
   //lazy singleton will call the object when needed ONLY, the singleton when the app launched it will
+
+  // firebase db
+  sl.registerLazySingleton(() => FirebaseDatabseProvider());
 
   // localization preference and cubit
   sl.registerLazySingleton(() => LanguagePreference());
@@ -91,12 +108,52 @@ void init() async {
   //-----------------------------------------------------------------------------------------
   //profile datasource
   sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl(sl()));
+  sl.registerLazySingleton<ProductDatasource>(
+    () => ProductDatasourceImpl(sl()),
+  );
   //repo
   sl.registerLazySingleton<UserRepo>(() => UserRepoImpl());
+  sl.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()));
+
   // profile usecase
   sl.registerLazySingleton<GetCurrentUserUsecase>(
     () => GetCurrentUserUsecase(sl()),
   );
+  sl.registerLazySingleton<GetProductsUsecase>(() => GetProductsUsecase(sl()));
   // profile cubit
   sl.registerLazySingleton<UserCubit>(() => UserCubit());
+  sl.registerLazySingleton<ProductCubit>(() => ProductCubit(sl()));
+
+  //-----------------------------------------------------------------------------------------
+  // Cart feature (injection).
+  //-----------------------------------------------------------------------------------------
+
+  //Datasource Cart
+  sl.registerLazySingleton<CartDatasourceInterface>(() => CartDatasourceImpl());
+
+  //Repotisatory Cart
+  sl.registerLazySingleton<CartReporisatoryInterface>(
+    () => CartReporisatoryImpl(sl()),
+  );
+
+  //Cart usecase
+  sl.registerLazySingleton<AddProductToCartUsecase>(
+    () => AddProductToCartUsecase(sl<CartReporisatoryInterface>()),
+  );
+
+  sl.registerLazySingleton<GetAllCartItemsUsecase>(
+    () => GetAllCartItemsUsecase(sl<CartReporisatoryInterface>()),
+  );
+
+  sl.registerLazySingleton<ViewOrderUsecase>(
+    () => ViewOrderUsecase(sl<CartReporisatoryInterface>()),
+  );
+
+  sl.registerLazySingleton<ClearCartItemsUsecase>(
+    () => ClearCartItemsUsecase(sl<CartReporisatoryInterface>()),
+  );
+
+  //AddCartData
+  //Cart Cubit
+  sl.registerFactory(() => CartCubit());
 }

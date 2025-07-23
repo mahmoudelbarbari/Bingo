@@ -3,8 +3,8 @@
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
-import 'package:bingo/features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
 import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
+import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widget.dart';
 import 'package:bingo/features/profile/presentation/pages/profile_screen.dart';
@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../l10n/app_localizations.dart';
+import '../../../../cart/presentation/pages/cart_page.dart';
 import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
 import '../add_product_screen.dart';
 import 'action_btn_top_bar_widget.dart';
@@ -31,7 +32,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     HomeScreen(),
     LoginScreen(),
     Container(), // Placeholder for Add button
-    ForgetPassScreen(),
+    BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
     BlocProvider(create: (_) => UserCubit(), child: const ProfileScreen()),
   ];
 
@@ -69,14 +70,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           SizedBox(width: 7.w),
         ],
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //  floatingActionButton: ChatBotBtnWidget(
-      //   onPressed: () {
-      //     // Your action here
-      //   },
-      //   iconAssetPath: Assets.images.chatbot.path, // Add this to your assets
-      //   borderColor: Colors.purple,
-      // ),
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

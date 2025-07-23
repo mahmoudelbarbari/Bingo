@@ -568,6 +568,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View All'**
   String get viewAll;
+
+  /// No description provided for @orderList.
+  ///
+  /// In en, this message translates to:
+  /// **'Order List'**
+  String get orderList;
+
+  /// No description provided for @noProductYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Products Yet'**
+  String get noProductYet;
+
+  /// No description provided for @youHaventAddedAnyProductsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t added any products yet.'**
+  String get youHaventAddedAnyProductsYet;
+
+  /// No description provided for @startExploringAndFindSomethingSpecial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start exploring and find something special.'**
+  String get startExploringAndFindSomethingSpecial;
+
+  /// No description provided for @startAdding.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Adding'**
+  String get startAdding;
+
+  /// No description provided for @checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkout;
+
+  /// No description provided for @total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get total;
+
+  /// No description provided for @delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivery'**
+  String get delivery;
+
+  /// No description provided for @service.
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get service;
+
+  /// No description provided for @egp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get egp;
+
+  /// No description provided for @addItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Item'**
+  String get addItem;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -2,6 +2,7 @@ import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.
 import 'package:bingo/features/auth/login/presentation/otp_verification/otp_verification_screen.dart';
 import 'package:bingo/features/auth/login/presentation/create_new_password/create_new_pass_screen.dart';
 import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
+import 'package:bingo/features/home/presentaion/pages/widgets/bottom_nav_bar_widget.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:bingo/features/seller_onboarding/presentation/pages/file_upload_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,4 +25,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/otpVerify': (context) => const OtpVerificationScreen(),
   '/sellerOnboarding': (context) => const SellerOnboardingScreen(),
   '/fileUploadScreen': (context) => const FileUploadSection(),
+  '/bottomNavBar': (context) => const BottomNavBarWidget(),
 };

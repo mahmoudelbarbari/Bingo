@@ -244,4 +244,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewAll => 'View All';
+
+  @override
+  String get orderList => 'Order List';
+
+  @override
+  String get noProductYet => 'No Products Yet';
+
+  @override
+  String get youHaventAddedAnyProductsYet => 'You haven\'t added any products yet.';
+
+  @override
+  String get startExploringAndFindSomethingSpecial => 'Start exploring and find something special.';
+
+  @override
+  String get startAdding => 'Start Adding';
+
+  @override
+  String get checkout => 'Checkout';
+
+  @override
+  String get total => 'Total';
+
+  @override
+  String get delivery => 'Delivery';
+
+  @override
+  String get service => 'Service';
+
+  @override
+  String get egp => 'EGP';
+
+  @override
+  String get addItem => 'Add Item';
+
+  @override
+  String get price => 'Price';
 }

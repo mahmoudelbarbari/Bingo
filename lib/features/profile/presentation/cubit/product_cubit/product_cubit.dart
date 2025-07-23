@@ -7,7 +7,7 @@ import '../../../../../config/injection_container.dart';
 class ProductCubit extends Cubit<ProductState> {
   late GetProductsUsecase getProductsUsecase;
 
-  ProductCubit() : super(ProductInitState());
+  ProductCubit(this.getProductsUsecase) : super(ProductInitState());
 
   Future<void> getAllProduct() async {
     try {

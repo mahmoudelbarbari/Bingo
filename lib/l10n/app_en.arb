@@ -78,5 +78,17 @@
   "community": "Community",
   "cart": "Cart",
   "categories": "Categories",
-  "viewAll": "View All"
+  "viewAll": "View All",
+  "orderList": "Order List",
+  "noProductYet": "No Products Yet",
+  "youHaventAddedAnyProductsYet": "You haven't added any products yet.",
+  "startExploringAndFindSomethingSpecial": "Start exploring and find something special.",
+  "startAdding": "Start Adding",
+  "checkout": "Checkout",
+  "total": "Total",
+  "delivery": "Delivery",
+  "service": "Service",
+  "egp": "EGP",
+  "addItem": "Add Item",
+  "price": "Price"
 }

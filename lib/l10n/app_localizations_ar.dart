@@ -244,4 +244,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get viewAll => 'عرض الكل';
+
+  @override
+  String get orderList => 'قائمة الطلبات';
+
+  @override
+  String get noProductYet => 'لا توجد منتجات حتى الآن';
+
+  @override
+  String get youHaventAddedAnyProductsYet => 'لم تضف أي منتجات حتى الآن.';
+
+  @override
+  String get startExploringAndFindSomethingSpecial => 'ابدأ في استكشاف و العثور على شيء مميز.';
+
+  @override
+  String get startAdding => 'ابدأ في الإضافة';
+
+  @override
+  String get checkout => 'الدفع';
+
+  @override
+  String get total => 'المجموع';
+
+  @override
+  String get delivery => 'التوصيل';
+
+  @override
+  String get service => 'الخدمة';
+
+  @override
+  String get egp => 'جنيه مصري';
+
+  @override
+  String get addItem => 'إضافة عنصر';
+
+  @override
+  String get price => 'السعر';
 }

@@ -1,0 +1,111 @@
+import 'package:bingo/features/profile/data/model/product_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../core/util/base_response.dart';
+import '../models/cart_items_model.dart';
+
+class FirebaseDatasourceProvider {
+  static final _firebaseDatasourceProvider =
+      FirebaseDatasourceProvider._internal();
+
+  factory FirebaseDatasourceProvider() {
+    return _firebaseDatasourceProvider;
+  }
+
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  FirebaseDatasourceProvider._internal();
+}
+
+abstract class CartDatasourceInterface extends FirebaseDatasourceProvider {
+  CartDatasourceInterface() : super._internal();
+
+  Future<BaseResponse> addProductToCart(ProductModel productModel);
+  Future<BaseResponse> addCartData(CartItemModel cartItemModel);
+  Future<List<ProductModel>> getAllCartItems();
+  Future<List<ProductModel>> viewwOrder();
+  Future<BaseResponse> clearCartItems();
+}
+
+class CartDatasourceImpl extends CartDatasourceInterface {
+  CartDatasourceImpl() : super();
+
+  @override
+  Future<BaseResponse> addProductToCart(ProductModel productModel) async {
+    try {
+      await firebaseFirestore.collection('Cart').doc().set({
+        'name': productModel.name,
+        'price': productModel.price,
+      });
+      await firebaseFirestore.collection('order_save').doc().set({
+        'name': productModel.name,
+        'price': productModel.price,
+      });
+      return BaseResponse(
+        status: true,
+        message: "Item added , ${productModel.name} was added to your cart",
+      );
+    } catch (e) {
+      return BaseResponse(status: false, message: e.toString());
+    }
+  }
+
+  @override
+  Future<BaseResponse> addCartData(CartItemModel cartItemModel) async {
+    try {
+      await firebaseFirestore.collection("checkout_list").doc().set({
+        'name': cartItemModel.name,
+        'price': cartItemModel.price,
+        'quantity': cartItemModel.quantity,
+      });
+      return BaseResponse(
+        status: true,
+        message: "Item added , ${cartItemModel.name} to checkout list",
+      );
+    } catch (e) {
+      return BaseResponse(status: false, message: e.toString());
+    }
+  }
+
+  @override
+  Future<List<ProductModel>> getAllCartItems() async {
+    final retrive = firebaseFirestore.collection('Cart');
+    final querySnapshot = await retrive.get();
+    querySnapshot.docs.map((e) => e.data()).toList();
+    List<ProductModel> cartItems = [];
+    for (QueryDocumentSnapshot<Map<String, dynamic>> doc
+        in querySnapshot.docs) {
+      cartItems.add(ProductModel.fromSnapShot(doc));
+    }
+    return cartItems;
+  }
+
+  @override
+  Future<List<ProductModel>> viewwOrder() async {
+    final retrive = firebaseFirestore.collection('order_save');
+    final querySnapshot = await retrive.get();
+    querySnapshot.docs.map((e) => e.data()).toList();
+    List<ProductModel> cartItems = [];
+    for (QueryDocumentSnapshot<Map<String, dynamic>> doc
+        in querySnapshot.docs) {
+      cartItems.add(ProductModel.fromSnapShot(doc));
+    }
+    return cartItems;
+  }
+
+  @override
+  Future<BaseResponse> clearCartItems() async {
+    try {
+      firebaseFirestore.collection('Cart').get().then((snapshot) {
+        for (DocumentSnapshot documents in snapshot.docs) {
+          documents.reference.delete();
+        }
+      });
+      return BaseResponse(status: true, message: "Cart cleared Successfully");
+    } catch (e) {
+      return BaseResponse(status: false, message: e.toString());
+    }
+  }
+}

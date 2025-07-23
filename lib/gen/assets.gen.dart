@@ -35,6 +35,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/cart.png
   AssetGenImage get cart => const AssetGenImage('assets/images/cart.png');
 
+  /// File path: assets/images/cartEmptyImage.png
+  AssetGenImage get cartEmptyImage =>
+      const AssetGenImage('assets/images/cartEmptyImage.png');
+
   /// File path: assets/images/chat.png
   AssetGenImage get chat => const AssetGenImage('assets/images/chat.png');
 
@@ -163,6 +167,7 @@ class $AssetsImagesGen {
     bingoLogo1,
     buyerImg,
     cart,
+    cartEmptyImage,
     chat,
     chatbot,
     facebookLogo,
