@@ -640,6 +640,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Price'**
   String get price;
+
+  /// No description provided for @order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get order;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

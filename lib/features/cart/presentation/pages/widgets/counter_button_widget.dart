@@ -1,5 +1,7 @@
 import 'package:bingo/core/util/size_config.dart';
+import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CounterButton extends StatelessWidget {
   final int count;
@@ -10,6 +12,7 @@ class CounterButton extends StatelessWidget {
   final ValueChanged<int> onChange;
   final double size;
   final double iconSize;
+  final String? proId;
 
   const CounterButton({
     super.key,
@@ -21,15 +24,19 @@ class CounterButton extends StatelessWidget {
     this.loading = false,
     this.size = 40.0,
     this.iconSize = 20.0,
+    this.proId,
   });
 
   void _increment() {
     onChange(count + 1);
   }
 
-  void _decrement() {
+  void _decrement(BuildContext context, String id) {
     if (count > 1) {
       onChange(count - 1);
+    } else if (count == 1) {
+      context.read<CartCubit>().deleteItemById(id);
+      print('Attempting to delete item with ID: $id');
     }
   }
 
@@ -46,7 +53,7 @@ class CounterButton extends StatelessWidget {
             children: [
               _buildIconButton(
                 icon: Icons.remove,
-                onPressed: _decrement,
+                onPressed: () => _decrement(context, proId ?? ''),
                 color: minusIconColor,
               ),
               Container(

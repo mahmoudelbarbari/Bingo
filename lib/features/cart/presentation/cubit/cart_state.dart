@@ -25,3 +25,5 @@ class CartClearedSuccessfully extends CartState {
 }
 
 class EmptyCart extends CartState {}
+
+class ItemDeletedSuccess extends CartState {}

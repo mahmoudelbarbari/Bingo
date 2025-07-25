@@ -1,3 +1,4 @@
+import 'package:bingo/core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
 class CustomeOutlinedBtnWidget extends StatelessWidget {
@@ -22,9 +23,17 @@ class CustomeOutlinedBtnWidget extends StatelessWidget {
         side: BorderSide(color: primaryColor),
         foregroundColor: isSelected ? onPrimary : primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       ),
-      child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Text(
+          text,
+          style: isSelected
+              ? TextStyle(color: Colors.white, fontSize: 16)
+              : Theme.of(context).textTheme.bodyMedium,
+        ),
+      ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:bingo/config/theme_app.dart';
+import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class CartAlertDialogWidget extends StatelessWidget {
@@ -29,11 +30,11 @@ class CartAlertDialogWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () => Navigator.pop(context),
                         child: const Icon(Icons.cancel_outlined),
                       ),
                     ),
-                  Image.asset('assets/images/onboarding3.png'),
+                  Image.asset(Assets.images.cart.path),
                   Text(
                     'Thank you for ordering from us..!',
                     textAlign: TextAlign.center,

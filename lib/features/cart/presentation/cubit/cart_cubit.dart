@@ -1,3 +1,4 @@
+import 'package:bingo/features/cart/domain/usecase/delete_item_by_id_usecase.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +14,7 @@ class CartCubit extends Cubit<CartState> {
   late GetAllCartItemsUsecase getAllCartItemsUsecase;
   late ViewOrderUsecase viewOrderUsecase;
   late ClearCartItemsUsecase clearCartItemsUsecase;
+  late DeleteItemByIdUsecase deleteItemByIdUsecase;
 
   CartCubit() : super(CartLoading());
 
@@ -65,6 +67,21 @@ class CartCubit extends Cubit<CartState> {
         emit(CartClearedSuccessfully(clearedCart));
       } else {
         emit(CartError(errorMessage: clearedCart.message));
+      }
+    } catch (e) {
+      emit(CartError(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> deleteItemById(String id) async {
+    try {
+      deleteItemByIdUsecase = sl();
+      final deletedItem = await deleteItemByIdUsecase.call(id);
+      if (deletedItem.status) {
+        emit(ItemDeletedSuccess());
+        await getAllCartItems();
+      } else {
+        emit(CartError(errorMessage: 'There is a problem'));
       }
     } catch (e) {
       emit(CartError(errorMessage: e.toString()));

@@ -12,15 +12,12 @@ class PaymentSummaryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(startName, style: const TextStyle(fontSize: 15)),
-          Text(endName, style: const TextStyle(fontSize: 15)),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text(startName, style: const TextStyle(fontSize: 15)),
+        Text(endName, style: const TextStyle(fontSize: 15)),
+      ],
     );
   }
 }

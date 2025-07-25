@@ -1,5 +1,8 @@
+import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/cart_empty_widget.dart';
+import 'package:bingo/features/cart/presentation/pages/widgets/cart_progress_widget.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/cart_widget.dart';
+import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,8 +32,39 @@ class _CartPageState extends State<CartPage> {
           }
         },
         builder: (context, state) {
+          final loc = AppLocalizations.of(context)!;
           if (state is CartItemsLoadded) {
-            return CartWidget(productModel: state.prodcutModel);
+            return SafeArea(
+              child: Column(
+                children: [
+                  SizedBox(height: 16.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CartProgressWidget(
+                        title: loc.order,
+                        icon: Icons.shopping_cart_sharp,
+                        isSelected: true,
+                      ),
+                      CartProgressWidget(
+                        title: loc.address,
+                        icon: Icons.location_city,
+                        isSelected: false,
+                      ),
+                      CartProgressWidget(
+                        title: loc.payment,
+                        icon: Icons.payment_outlined,
+                        isSelected: false,
+                      ),
+                    ],
+                  ),
+                  Expanded(child: CartWidget(productModel: state.prodcutModel)),
+                ],
+              ),
+            );
+          }
+          if (state is ItemDeletedSuccess) {
+            context.read<CartCubit>().getAllCartItems();
           } else if (state is EmptyCart) {
             return CartEmptyWidget();
           }

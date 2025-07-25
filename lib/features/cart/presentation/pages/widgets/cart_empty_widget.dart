@@ -25,7 +25,7 @@ class CartEmptyWidget extends StatelessWidget {
             loc.startExploringAndFindSomethingSpecial,
             style: TextStyle(fontSize: 14, color: Color(0xFF999999)),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 14.h),
           CustomeOutlinedBtnWidget(
             text: loc.startAdding,
             isSelected: true,

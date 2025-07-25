@@ -21,15 +21,24 @@ class _CartWidgetState extends State<CartWidget> {
     });
   }
 
+  Map<String, int> itemCounts = {};
+  double deliveryFee = 25.0;
+  double serviceFee = 12.0;
+
+  void _updateItemPrice(String itemId, int count, double total) {
+    setState(() {
+      itemCounts[itemId] = count;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double cartTotalPrice() {
       double total = 0;
-      double delivartFee = 25.0;
-      double serviceFee = 12.0;
       for (var item in widget.productModel) {
+        int count = itemCounts[item.id ?? ''] ?? 1;
         double? price = item.price;
-        total += price! + delivartFee + serviceFee;
+        total += (price! * count) + deliveryFee + serviceFee;
       }
       return total;
     }
@@ -41,21 +50,26 @@ class _CartWidgetState extends State<CartWidget> {
           flex: 1,
           child: RefreshIndicator(
             onRefresh: _refresh,
-            child: ListView.separated(
-              padding: const EdgeInsets.all(4),
+            child: ListView.builder(
               itemCount: widget.productModel.length,
               itemBuilder: (context, index) {
                 const center = Center(
                   child: Divider(thickness: 0.5, indent: 5, endIndent: 5),
                 );
                 return CartItemsContainer(
+                  key: ValueKey(widget.productModel[index].id),
                   center: center,
                   title: widget.productModel[index].name ?? '',
-                  subTitle: widget.productModel[index].price,
+                  desc: widget.productModel[index].shortDescription ?? "",
+                  proPrice: widget.productModel[index].price,
+                  onPriceUpdate: (count, total) => _updateItemPrice(
+                    widget.productModel[index].id ?? "",
+                    count,
+                    total,
+                  ),
+                  proId: widget.productModel[index].name,
                 );
               },
-              separatorBuilder: (context, index) =>
-                  const Divider(thickness: 0.5),
             ),
           ),
         ),

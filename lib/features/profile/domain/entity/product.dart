@@ -1,4 +1,5 @@
 class ProductEntity {
+  final String? id;
   final String? name;
   final String? shortDescription;
   final String? tags;
@@ -18,6 +19,7 @@ class ProductEntity {
   final List<String>? sizes;
   final String? image;
   ProductEntity({
+    this.id,
     this.name,
     this.shortDescription,
     this.tags,

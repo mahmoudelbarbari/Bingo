@@ -1,6 +1,7 @@
 import 'package:bingo/features/profile/data/model/product_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../../core/util/base_response.dart';
 import '../models/cart_items_model.dart';
@@ -27,6 +28,7 @@ abstract class CartDatasourceInterface extends FirebaseDatasourceProvider {
   Future<List<ProductModel>> getAllCartItems();
   Future<List<ProductModel>> viewwOrder();
   Future<BaseResponse> clearCartItems();
+  Future<BaseResponse> deleteItemById(String id);
 }
 
 class CartDatasourceImpl extends CartDatasourceInterface {
@@ -35,13 +37,15 @@ class CartDatasourceImpl extends CartDatasourceInterface {
   @override
   Future<BaseResponse> addProductToCart(ProductModel productModel) async {
     try {
-      await firebaseFirestore.collection('Cart').doc().set({
+      await firebaseFirestore.collection('cart').doc().set({
         'name': productModel.name,
         'price': productModel.price,
+        'shortDescription': productModel.shortDescription,
       });
       await firebaseFirestore.collection('order_save').doc().set({
         'name': productModel.name,
         'price': productModel.price,
+        'shortDescription': productModel.shortDescription,
       });
       return BaseResponse(
         status: true,
@@ -71,7 +75,7 @@ class CartDatasourceImpl extends CartDatasourceInterface {
 
   @override
   Future<List<ProductModel>> getAllCartItems() async {
-    final retrive = firebaseFirestore.collection('Cart');
+    final retrive = firebaseFirestore.collection('cart');
     final querySnapshot = await retrive.get();
     querySnapshot.docs.map((e) => e.data()).toList();
     List<ProductModel> cartItems = [];
@@ -98,7 +102,7 @@ class CartDatasourceImpl extends CartDatasourceInterface {
   @override
   Future<BaseResponse> clearCartItems() async {
     try {
-      firebaseFirestore.collection('Cart').get().then((snapshot) {
+      firebaseFirestore.collection('cart').get().then((snapshot) {
         for (DocumentSnapshot documents in snapshot.docs) {
           documents.reference.delete();
         }
@@ -106,6 +110,44 @@ class CartDatasourceImpl extends CartDatasourceInterface {
       return BaseResponse(status: true, message: "Cart cleared Successfully");
     } catch (e) {
       return BaseResponse(status: false, message: e.toString());
+    }
+  }
+
+  @override
+  Future<BaseResponse> deleteItemById(String id) async {
+    try {
+      final cartQuery = await firebaseFirestore
+          .collection('cart')
+          .where('name', isEqualTo: id)
+          .get();
+
+      final orderQuery = await firebaseFirestore
+          .collection('order_save')
+          .where('name', isEqualTo: id)
+          .get();
+
+      // Delete matching documents
+      for (var doc in cartQuery.docs) {
+        await doc.reference.delete();
+      }
+
+      for (var doc in orderQuery.docs) {
+        await doc.reference.delete();
+      }
+
+      if (cartQuery.docs.isEmpty) {
+        return BaseResponse(status: false, message: 'Item not found in cart');
+      }
+
+      return BaseResponse(status: true, message: 'Item deleted successfully');
+    } catch (e) {
+      if (kDebugMode) {
+        print('Delete error: ${e.toString()}');
+      } // Debug print
+      return BaseResponse(
+        status: false,
+        message: 'Failed to delete item: ${e.toString()}',
+      );
     }
   }
 }

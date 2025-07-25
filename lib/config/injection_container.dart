@@ -5,6 +5,7 @@ import 'package:bingo/features/auth/login/data/reporisatory/login_reporisatory_i
 import 'package:bingo/features/auth/login/domain/repositories/login_repository.dart';
 import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
+import 'package:bingo/features/cart/domain/usecase/delete_item_by_id_usecase.dart';
 import 'package:bingo/features/profile/data/datasource/product_datasource.dart';
 import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
 import 'package:bingo/features/profile/data/repo/product_repo_impl.dart';
@@ -151,6 +152,10 @@ void init() async {
 
   sl.registerLazySingleton<ClearCartItemsUsecase>(
     () => ClearCartItemsUsecase(sl<CartReporisatoryInterface>()),
+  );
+
+  sl.registerLazySingleton<DeleteItemByIdUsecase>(
+    () => DeleteItemByIdUsecase(sl<CartReporisatoryInterface>()),
   );
 
   //AddCartData

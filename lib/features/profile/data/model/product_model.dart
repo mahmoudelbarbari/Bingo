@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel extends ProductEntity {
   ProductModel({
+    super.id,
     super.name,
     super.shortDescription,
     super.brand,

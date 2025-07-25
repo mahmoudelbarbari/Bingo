@@ -7,4 +7,5 @@ abstract class CartReporisatoryInterface {
   Future<List<ProductModel>> getAllCartItems();
   Future<List<ProductModel>> viewOrders();
   Future<BaseResponse> clearCartItems();
+  Future<BaseResponse> deleteItemByID(String id);
 }

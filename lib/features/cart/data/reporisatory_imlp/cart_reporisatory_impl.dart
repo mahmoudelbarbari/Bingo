@@ -27,4 +27,8 @@ class CartReporisatoryImpl implements CartReporisatoryInterface {
   Future<BaseResponse> clearCartItems() async {
     return await cartDatasourceInterface.clearCartItems();
   }
+
+  @override
+  Future<BaseResponse> deleteItemByID(String id) async =>
+      (await cartDatasourceInterface.deleteItemById(id));
 }

@@ -280,4 +280,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get price => 'Price';
+
+  @override
+  String get order => 'Order';
 }

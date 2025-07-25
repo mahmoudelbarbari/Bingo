@@ -1,5 +1,6 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_outlined_btn_widget.dart';
+import 'package:bingo/features/cart/presentation/pages/widgets/payment_summary_widget.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,11 +16,15 @@ class BottomContainerCartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    double delivartFee = 25.0;
+    double serviceFee = 12.0;
+
     final loc = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
+        color: isDark ? null : Colors.white,
         boxShadow: [
           ?isDark
               ? null
@@ -35,11 +40,31 @@ class BottomContainerCartWidget extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: PaymentSummaryWidget(
+              startName: loc.delivery,
+              endName: delivartFee.toString(),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 7.h),
+            child: PaymentSummaryWidget(
+              startName: loc.service,
+              endName: serviceFee.toString(),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('${loc.total} ${loc.price}'),
-                Text('$total :${loc.egp}'),
+                Text(
+                  '${loc.total} ${loc.price}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                Text(
+                  '$total :${loc.egp}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
               ],
             ),
           ),

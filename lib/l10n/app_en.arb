@@ -90,5 +90,6 @@
   "service": "Service",
   "egp": "EGP",
   "addItem": "Add Item",
-  "price": "Price"
+  "price": "Price",
+  "order": "Order"
 }
