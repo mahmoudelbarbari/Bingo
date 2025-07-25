@@ -91,5 +91,6 @@
   "egp": "EGP",
   "addItem": "Add Item",
   "price": "Price",
-  "order": "Order"
+  "order": "Order",
+  "items": "Items"
 }

@@ -73,6 +73,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/jewelry.png
   AssetGenImage get jewelry => const AssetGenImage('assets/images/jewelry.png');
 
+  /// File path: assets/images/location.png
+  AssetGenImage get location =>
+      const AssetGenImage('assets/images/location.png');
+
   /// File path: assets/images/lockIcon.png
   AssetGenImage get lockIcon =>
       const AssetGenImage('assets/images/lockIcon.png');
@@ -178,6 +182,7 @@ class $AssetsImagesGen {
     greyDeleteIcon,
     home,
     jewelry,
+    location,
     lockIcon,
     notification,
     onboadring8,

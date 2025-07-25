@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class CartItemsContainer extends StatefulWidget {
   final Center center;
+  final String image;
   final String title;
   final String desc;
   final double? proPrice;
@@ -16,6 +17,7 @@ class CartItemsContainer extends StatefulWidget {
   const CartItemsContainer({
     super.key,
     required this.center,
+    required this.image,
     required this.title,
     required this.proPrice,
     required this.desc,
@@ -56,6 +58,14 @@ class _CartItemsContainerState extends State<CartItemsContainer>
           children: <Widget>[
             widget.center,
             ListTile(
+              leading: SizedBox(
+                width: 60,
+                height: 60,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(widget.image, fit: BoxFit.cover),
+                ),
+              ),
               title: Text(
                 widget.title,
                 style: Theme.of(context).textTheme.titleLarge,
@@ -77,7 +87,7 @@ class _CartItemsContainerState extends State<CartItemsContainer>
                       CounterButton(
                         count: count,
                         plusIconColor: lightTheme.colorScheme.primary,
-                        minusIconColor: lightTheme.colorScheme.primary,
+                        minusIconColor: Colors.black12,
                         onChange: _updateCount,
                         proId: widget.proId,
                       ),

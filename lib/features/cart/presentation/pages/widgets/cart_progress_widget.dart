@@ -18,7 +18,7 @@ class CartProgressWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: BoxBorder.all(color: Color(0xFFCCCCCC)),

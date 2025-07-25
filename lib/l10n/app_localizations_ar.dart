@@ -283,4 +283,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get order => 'طلب';
+
+  @override
+  String get items => 'العناصر';
 }

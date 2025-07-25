@@ -283,4 +283,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get order => 'Order';
+
+  @override
+  String get items => 'Items';
 }

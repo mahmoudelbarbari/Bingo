@@ -1,17 +1,18 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_outlined_btn_widget.dart';
+import 'package:bingo/features/cart/presentation/pages/address_screen.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/payment_summary_widget.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../cubit/cart_cubit.dart';
-import 'cart_alert_dialog_widget.dart';
 
 class BottomContainerCartWidget extends StatelessWidget {
   final double total;
-
-  const BottomContainerCartWidget({super.key, required this.total});
+  final int productModel;
+  const BottomContainerCartWidget({
+    super.key,
+    required this.total,
+    required this.productModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +86,17 @@ class BottomContainerCartWidget extends StatelessWidget {
                   text: loc.checkout,
                   isSelected: true,
                   onPressed: () {
-                    showAlertDialog(context, isCloseDismissible: true);
-                    context.read<CartCubit>().clearCartItems();
+                    // showAlertDialog(context, isCloseDismissible: true);
+                    // context.read<CartCubit>().clearCartItems();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddressScreen(
+                          totalCartPrice: total,
+                          productModel: productModel,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],

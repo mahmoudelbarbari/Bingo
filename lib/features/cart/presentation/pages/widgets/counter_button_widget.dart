@@ -1,5 +1,7 @@
+import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +38,9 @@ class CounterButton extends StatelessWidget {
       onChange(count - 1);
     } else if (count == 1) {
       context.read<CartCubit>().deleteItemById(id);
-      print('Attempting to delete item with ID: $id');
+      if (kDebugMode) {
+        print('Attempting to delete item with ID: $id');
+      }
     }
   }
 
@@ -52,14 +56,17 @@ class CounterButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildIconButton(
-                icon: Icons.remove,
+                icon: (count == 1)
+                    ? Icons.delete_forever_outlined
+                    : Icons.remove,
                 onPressed: () => _decrement(context, proId ?? ''),
-                color: minusIconColor,
+                color: (count == 1)
+                    ? minusIconColor
+                    : lightTheme.colorScheme.primary,
+                iconColor: (count == 1) ? Colors.black38 : Colors.white,
               ),
               Container(
                 alignment: Alignment.center,
-                width: size,
-                height: size,
                 decoration: BoxDecoration(
                   color: buttonColor,
                   borderRadius: BorderRadius.circular(8),
@@ -73,6 +80,7 @@ class CounterButton extends StatelessWidget {
                 icon: Icons.add,
                 onPressed: _increment,
                 color: plusIconColor,
+                iconColor: Colors.white,
               ),
             ],
           );
@@ -82,9 +90,14 @@ class CounterButton extends StatelessWidget {
     required IconData icon,
     required VoidCallback onPressed,
     required Color color,
+    required Color iconColor,
   }) {
     return IconButton(
-      icon: Icon(icon, color: color, size: iconSize),
+      icon: Container(
+        padding: EdgeInsets.all(4),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+        child: Icon(icon, size: iconSize, color: iconColor),
+      ),
       onPressed: onPressed,
       splashRadius: size / 2,
     );
