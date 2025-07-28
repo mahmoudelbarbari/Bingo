@@ -92,5 +92,19 @@
   "addItem": "Add Item",
   "price": "Price",
   "order": "Order",
-  "items": "Items"
+  "items": "Items",
+  "confirm": "Confirm",
+  "addNewAddress": "Add New Address",
+  "cardHolderName": "Card Holder Name",
+  "expiryDate": "Expiry Date",
+  "visa": "Visa",
+  "masterCard": "Master Card",
+  "cardNumber": "Card Number",
+  "cvv": "CVV",
+  "defaultCard": "Default Card",
+  "agreeToTermsAndConditions": "I agree to the terms & conditions",
+  "addCard": "Add Card",
+  "cardTypes": "Card Types",
+  "selectCardType": "Select Card Type",
+  "pay": "Pay"
 }

@@ -1,5 +1,8 @@
 import 'package:bingo/core/util/size_config.dart';
+import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:bingo/features/cart/presentation/pages/payment_screen.dart';
+import 'package:bingo/features/cart/presentation/pages/widgets/add_new_address.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/address_items_widget.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/cart_progress_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +36,7 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
     context.read<CartCubit>().getAllCartItems();
-    var sizedBox = SizedBox(height: 16.h);
+    var sizedBox = SizedBox(height: 24.h);
     var textStyle = Theme.of(context).textTheme.headlineMedium;
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +71,7 @@ class _AddressScreenState extends State<AddressScreen> {
           ),
           sizedBox,
           Container(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
             decoration: BoxDecoration(color: Colors.black12),
             child: Column(
               children: [
@@ -97,18 +100,39 @@ class _AddressScreenState extends State<AddressScreen> {
               ],
             ),
           ),
+          sizedBox,
           Expanded(
             child: ListView.builder(
-              itemCount: addresses.length,
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              itemCount: addresses.length + 1,
               itemBuilder: (context, index) {
-                return AddressItemsWidget(
-                  address: addresses[index],
-                  isSelected: _selectedIndex == index,
-                  onSelect: () => setState(() => _selectedIndex = index),
-                );
+                if (index < addresses.length) {
+                  return AddressItemsWidget(
+                    address: addresses[index],
+                    isSelected: _selectedIndex == index,
+                    onSelect: () => setState(() => _selectedIndex = index),
+                  );
+                } else {
+                  return AddNewAddressWidget();
+                }
               },
             ),
           ),
+          ElevatedButtonWidget(
+            fun: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentScreen(
+                    totalCart: widget.totalCartPrice.toString(),
+                  ),
+                ),
+              );
+            },
+            text: loc.confirm,
+            isColored: true,
+          ),
+          sizedBox,
         ],
       ),
     );

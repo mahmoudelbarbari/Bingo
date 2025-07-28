@@ -91,5 +91,19 @@
   "addItem": "إضافة عنصر",
   "price": "السعر",
   "order": "طلب",
-  "items": "العناصر"
+  "items": "العناصر",
+  "confirm": "تأكيد",
+  "addNewAddress": "إضافة عنوان جديد",
+  "cardHolderName": "اسم حامل البطاقة",
+  "expiryDate": "تاريخ الانتهاء",
+  "visa": "فيزا",
+  "masterCard": "ماستركارد",
+  "cardNumber": "رقم البطاقة",
+  "cvv": "CVV",
+  "defaultCard": "البطاقة الافتراضية",
+  "agreeToTermsAndConditions": "أوافق على الشروط والأحكام",
+  "addCard": "إضافة بطاقة",
+  "cardTypes": "أنواع البطاقات",
+  "selectCardType": "اختر نوع البطاقة",
+  "pay": "دفع"
 }

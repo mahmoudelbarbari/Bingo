@@ -652,6 +652,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Items'**
   String get items;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @addNewAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Address'**
+  String get addNewAddress;
+
+  /// No description provided for @cardHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Holder Name'**
+  String get cardHolderName;
+
+  /// No description provided for @expiryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Expiry Date'**
+  String get expiryDate;
+
+  /// No description provided for @visa.
+  ///
+  /// In en, this message translates to:
+  /// **'Visa'**
+  String get visa;
+
+  /// No description provided for @masterCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Master Card'**
+  String get masterCard;
+
+  /// No description provided for @cardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Number'**
+  String get cardNumber;
+
+  /// No description provided for @cvv.
+  ///
+  /// In en, this message translates to:
+  /// **'CVV'**
+  String get cvv;
+
+  /// No description provided for @defaultCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Default Card'**
+  String get defaultCard;
+
+  /// No description provided for @agreeToTermsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the terms & conditions'**
+  String get agreeToTermsAndConditions;
+
+  /// No description provided for @addCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Card'**
+  String get addCard;
+
+  /// No description provided for @cardTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Types'**
+  String get cardTypes;
+
+  /// No description provided for @selectCardType.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Card Type'**
+  String get selectCardType;
+
+  /// No description provided for @pay.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay'**
+  String get pay;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

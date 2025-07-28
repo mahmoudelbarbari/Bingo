@@ -286,4 +286,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get items => 'العناصر';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get addNewAddress => 'إضافة عنوان جديد';
+
+  @override
+  String get cardHolderName => 'اسم حامل البطاقة';
+
+  @override
+  String get expiryDate => 'تاريخ الانتهاء';
+
+  @override
+  String get visa => 'فيزا';
+
+  @override
+  String get masterCard => 'ماستركارد';
+
+  @override
+  String get cardNumber => 'رقم البطاقة';
+
+  @override
+  String get cvv => 'CVV';
+
+  @override
+  String get defaultCard => 'البطاقة الافتراضية';
+
+  @override
+  String get agreeToTermsAndConditions => 'أوافق على الشروط والأحكام';
+
+  @override
+  String get addCard => 'إضافة بطاقة';
+
+  @override
+  String get cardTypes => 'أنواع البطاقات';
+
+  @override
+  String get selectCardType => 'اختر نوع البطاقة';
+
+  @override
+  String get pay => 'دفع';
 }

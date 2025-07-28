@@ -45,6 +45,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/chatbot.png
   AssetGenImage get chatbot => const AssetGenImage('assets/images/chatbot.png');
 
+  /// File path: assets/images/chip.png
+  AssetGenImage get chip => const AssetGenImage('assets/images/chip.png');
+
   /// File path: assets/images/facebook-logo.png
   AssetGenImage get facebookLogo =>
       const AssetGenImage('assets/images/facebook-logo.png');
@@ -163,6 +166,10 @@ class $AssetsImagesGen {
   AssetGenImage get sellerImg =>
       const AssetGenImage('assets/images/seller_img.png');
 
+  /// File path: assets/images/visa_network.png
+  AssetGenImage get visaNetwork =>
+      const AssetGenImage('assets/images/visa_network.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     appleLogo,
@@ -174,6 +181,7 @@ class $AssetsImagesGen {
     cartEmptyImage,
     chat,
     chatbot,
+    chip,
     facebookLogo,
     filter,
     freePlanImg,
@@ -205,6 +213,7 @@ class $AssetsImagesGen {
     search,
     sellerOnboardingWelcomeImage,
     sellerImg,
+    visaNetwork,
   ];
 }
 

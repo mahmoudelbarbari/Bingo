@@ -1,3 +1,4 @@
+import 'package:bingo/core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdown<T> extends StatefulWidget {
@@ -7,6 +8,9 @@ class CustomDropdown<T> extends StatefulWidget {
   final String placeholder;
   final void Function(T?)? onChanged;
   final String Function(T)? itemToString;
+  final String? Function(T?)? dropDownValidator;
+  final bool hasError;
+  final bool isSuccess;
 
   const CustomDropdown({
     super.key,
@@ -16,6 +20,9 @@ class CustomDropdown<T> extends StatefulWidget {
     this.initialValue,
     this.onChanged,
     this.itemToString,
+    this.dropDownValidator,
+    this.hasError = false,
+    this.isSuccess = false,
   });
 
   @override
@@ -33,15 +40,16 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-        SizedBox(height: 8),
+        Text(widget.label, style: Theme.of(context).textTheme.headlineMedium),
+        SizedBox(height: 12.h),
         DropdownButtonFormField<T>(
+          elevation: 2,
+          padding: EdgeInsets.symmetric(vertical: 2.5.h),
+          validator: widget.dropDownValidator,
           value: _selectedValue,
           isExpanded: true,
           hint: Text(widget.placeholder),
@@ -60,9 +68,22 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
             }
           },
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
+            focusedBorder: Theme.of(context).inputDecorationTheme.focusedBorder,
+            errorBorder: Theme.of(context).inputDecorationTheme.errorBorder,
+            focusedErrorBorder: Theme.of(
+              context,
+            ).inputDecorationTheme.focusedErrorBorder,
+            filled: true,
+            fillColor: widget.hasError
+                ? (isDark ? Color(0xFF3A1F1F) : Color(0xFFFDF5F5))
+                : widget.isSuccess
+                ? (isDark ? Color(0xFF1F3A2B) : Color(0xFFF3FDF7))
+                : null,
+            errorStyle: Theme.of(context).inputDecorationTheme.errorStyle,
+            border: Theme.of(context).inputDecorationTheme.border,
           ),
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );

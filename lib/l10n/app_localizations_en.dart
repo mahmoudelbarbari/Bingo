@@ -286,4 +286,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get items => 'Items';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get addNewAddress => 'Add New Address';
+
+  @override
+  String get cardHolderName => 'Card Holder Name';
+
+  @override
+  String get expiryDate => 'Expiry Date';
+
+  @override
+  String get visa => 'Visa';
+
+  @override
+  String get masterCard => 'Master Card';
+
+  @override
+  String get cardNumber => 'Card Number';
+
+  @override
+  String get cvv => 'CVV';
+
+  @override
+  String get defaultCard => 'Default Card';
+
+  @override
+  String get agreeToTermsAndConditions => 'I agree to the terms & conditions';
+
+  @override
+  String get addCard => 'Add Card';
+
+  @override
+  String get cardTypes => 'Card Types';
+
+  @override
+  String get selectCardType => 'Select Card Type';
+
+  @override
+  String get pay => 'Pay';
 }

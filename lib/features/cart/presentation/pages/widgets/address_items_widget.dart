@@ -17,16 +17,18 @@ class AddressItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      shape: RoundedRectangleBorder(
+      decoration: BoxDecoration(
+        color: isSelected
+            ? (isDark ? Color(0xFF3A1F1F) : Color(0xFFFDF5F5))
+            : null,
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
+        border: BoxBorder.all(
           color: isSelected
-              ? lightTheme.colorScheme.primary
-              : Colors.grey.shade300,
-          width: isSelected ? 2 : 1,
+              ? Colors.transparent
+              : Theme.of(context).colorScheme.background,
         ),
       ),
       child: InkWell(
@@ -51,11 +53,11 @@ class AddressItemsWidget extends StatelessWidget {
                     Text(
                       address,
                       style: TextStyle(
+                        overflow: TextOverflow.ellipsis,
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
                         color: isSelected
-                            ? lightTheme.colorScheme.primary
-                            : Colors.black,
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ],
