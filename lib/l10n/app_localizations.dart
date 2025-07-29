@@ -674,7 +674,7 @@ abstract class AppLocalizations {
   /// No description provided for @expiryDate.
   ///
   /// In en, this message translates to:
-  /// **'Expiry Date'**
+  /// **'MM/YY'**
   String get expiryDate;
 
   /// No description provided for @visa.
@@ -736,6 +736,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pay'**
   String get pay;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get fieldRequired;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @enterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get enterValidEmail;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid password....\nYour password must be at least 8 characters long,\nattached with lowercase and uppercase letters'**
+  String get passwordValidation;
+
+  /// No description provided for @minLengthRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum {count} characters required'**
+  String minLengthRequired(int count);
+
+  /// No description provided for @maxLengthRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum {count} characters allowed'**
+  String maxLengthRequired(int count);
+
+  /// No description provided for @valueDoesNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Value does not match'**
+  String get valueDoesNotMatch;
+
+  /// No description provided for @confirmOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Order'**
+  String get confirmOrder;
+
+  /// No description provided for @paymentSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Successful'**
+  String get paymentSuccessful;
+
+  /// No description provided for @paymentFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Failed'**
+  String get paymentFailed;
+
+  /// No description provided for @yourPaymentHasBeenSuccessfullyDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment has been successfully done'**
+  String get yourPaymentHasBeenSuccessfullyDone;
+
+  /// No description provided for @amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amount;
+
+  /// No description provided for @paymentStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Status'**
+  String get paymentStatus;
+
+  /// No description provided for @orderNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Number'**
+  String get orderNumber;
+
+  /// No description provided for @merchantName.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant Name'**
+  String get merchantName;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get paymentMethod;
+
+  /// No description provided for @paymentDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Date'**
+  String get paymentDate;
+
+  /// No description provided for @senderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Sender Name'**
+  String get senderName;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Home'**
+  String get backToHome;
+
+  /// No description provided for @addToYourCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to your cart'**
+  String get addToYourCart;
+
+  /// No description provided for @addedToYourCart.
+  ///
+  /// In en, this message translates to:
+  /// **'{productName} Added to your cart'**
+  String addedToYourCart(String productName);
+
+  /// No description provided for @productDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Details'**
+  String get productDetails;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @color.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get color;
+
+  /// No description provided for @size.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get size;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @addToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Cart'**
+  String get addToCart;
+
+  /// No description provided for @bingoChatBot.
+  ///
+  /// In en, this message translates to:
+  /// **'Bingo Chat Bot'**
+  String get bingoChatBot;
+
+  /// No description provided for @official.
+  ///
+  /// In en, this message translates to:
+  /// **'@Official'**
+  String get official;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get sendMessage;
+
+  /// No description provided for @microphonePermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone permission denied'**
+  String get microphonePermissionDenied;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

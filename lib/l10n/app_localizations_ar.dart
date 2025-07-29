@@ -195,7 +195,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get myAccount => 'My Account';
 
   @override
-  String get productsList => 'Products List';
+  String get productsList => 'قائمة المنتجات';
 
   @override
   String get address => 'العنوان';
@@ -328,4 +328,106 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pay => 'دفع';
+
+  @override
+  String get fieldRequired => 'هذا الحقل مطلوب';
+
+  @override
+  String get emailRequired => 'البريد الإلكتروني مطلوب';
+
+  @override
+  String get enterValidEmail => 'أدخل بريدًا إلكترونيًا صالحًا';
+
+  @override
+  String get passwordRequired => 'كلمة المرور مطلوبة';
+
+  @override
+  String get passwordValidation => 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وحروف كبيرة وصغيرة، وأرقام.';
+
+  @override
+  String minLengthRequired(int count) {
+    return 'يجب أن يتكون من $count أحرف على الأقل';
+  }
+
+  @override
+  String maxLengthRequired(int count) {
+    return 'يجب ألا يتجاوز $count أحرف';
+  }
+
+  @override
+  String get valueDoesNotMatch => 'القيمة غير متطابقة';
+
+  @override
+  String get confirmOrder => 'تأكيد الطلب';
+
+  @override
+  String get paymentSuccessful => 'تم الدفع بنجاح';
+
+  @override
+  String get paymentFailed => 'فشل الدفع';
+
+  @override
+  String get yourPaymentHasBeenSuccessfullyDone => 'تم الدفع بنجاح';
+
+  @override
+  String get amount => 'المبلغ';
+
+  @override
+  String get paymentStatus => 'حالة الدفع';
+
+  @override
+  String get orderNumber => 'رقم الطلب';
+
+  @override
+  String get merchantName => 'اسم التاجر';
+
+  @override
+  String get paymentMethod => 'طريقة الدفع';
+
+  @override
+  String get paymentDate => 'تاريخ الدفع';
+
+  @override
+  String get senderName => 'اسم المرسل';
+
+  @override
+  String get backToHome => 'العودة إلى الرئيسية';
+
+  @override
+  String get addToYourCart => 'Add to your cart';
+
+  @override
+  String addedToYourCart(String productName) {
+    return '$productName تمت إضافته إلى سلة التسوق';
+  }
+
+  @override
+  String get productDetails => 'تفاصيل المنتج';
+
+  @override
+  String get quantity => 'الكمية';
+
+  @override
+  String get color => 'اللون';
+
+  @override
+  String get size => 'الحجم';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get addToCart => 'إضافة إلى السلة';
+
+  @override
+  String get bingoChatBot => 'بينغو شات بوت';
+
+  @override
+  String get official => 'الرسمي';
+
+  @override
+  String get sendMessage => 'إرسال رسالة';
+
+  @override
+  String get microphonePermissionDenied => 'تم رفض إذن الميكروفون، يرجى منحه في إعدادات التطبيق.';
 }

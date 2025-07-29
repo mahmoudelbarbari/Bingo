@@ -1,3 +1,4 @@
+import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,8 @@ class AppProviders {
         create: (_) => di.sl<ProductCubit>()..getAllProduct(),
       ),
       BlocProvider(create: (_) => di.sl<CartCubit>()..getAllCartItems()),
+
+      BlocProvider<ChatCubit>(create: (_) => di.sl<ChatCubit>()),
     ];
   }
 }

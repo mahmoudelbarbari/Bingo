@@ -113,7 +113,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     onSelect: () => setState(() => _selectedIndex = index),
                   );
                 } else {
-                  return AddNewAddressWidget();
+                  return AddNewAddressWidget(title: loc.addNewAddress);
                 }
               },
             ),

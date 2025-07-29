@@ -297,7 +297,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cardHolderName => 'Card Holder Name';
 
   @override
-  String get expiryDate => 'Expiry Date';
+  String get expiryDate => 'MM/YY';
 
   @override
   String get visa => 'Visa';
@@ -328,4 +328,106 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pay => 'Pay';
+
+  @override
+  String get fieldRequired => 'This field is required';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get enterValidEmail => 'Enter a valid email';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
+  String get passwordValidation => 'Please enter a valid password....\nYour password must be at least 8 characters long,\nattached with lowercase and uppercase letters';
+
+  @override
+  String minLengthRequired(int count) {
+    return 'Minimum $count characters required';
+  }
+
+  @override
+  String maxLengthRequired(int count) {
+    return 'Maximum $count characters allowed';
+  }
+
+  @override
+  String get valueDoesNotMatch => 'Value does not match';
+
+  @override
+  String get confirmOrder => 'Confirm Order';
+
+  @override
+  String get paymentSuccessful => 'Payment Successful';
+
+  @override
+  String get paymentFailed => 'Payment Failed';
+
+  @override
+  String get yourPaymentHasBeenSuccessfullyDone => 'Your payment has been successfully done';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get paymentStatus => 'Payment Status';
+
+  @override
+  String get orderNumber => 'Order Number';
+
+  @override
+  String get merchantName => 'Merchant Name';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get paymentDate => 'Payment Date';
+
+  @override
+  String get senderName => 'Sender Name';
+
+  @override
+  String get backToHome => 'Back to Home';
+
+  @override
+  String get addToYourCart => 'Add to your cart';
+
+  @override
+  String addedToYourCart(String productName) {
+    return '$productName Added to your cart';
+  }
+
+  @override
+  String get productDetails => 'Product Details';
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get color => 'Color';
+
+  @override
+  String get size => 'Size';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get addToCart => 'Add to Cart';
+
+  @override
+  String get bingoChatBot => 'Bingo Chat Bot';
+
+  @override
+  String get official => '@Official';
+
+  @override
+  String get sendMessage => 'Send Message';
+
+  @override
+  String get microphonePermissionDenied => 'Microphone permission denied';
 }

@@ -1,10 +1,9 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../l10n/app_localizations.dart';
-
 class AddNewAddressWidget extends StatelessWidget {
-  const AddNewAddressWidget({super.key});
+  final String title;
+  const AddNewAddressWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class AddNewAddressWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.addNewAddress,
+                      title,
                       style: TextStyle(
                         overflow: TextOverflow.ellipsis,
                         fontSize: 16,

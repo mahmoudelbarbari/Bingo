@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomeTextfieldWidget extends StatefulWidget {
   final TextEditingController controller;
@@ -13,6 +14,7 @@ class CustomeTextfieldWidget extends StatefulWidget {
   final bool isRTL;
   final bool hasError;
   final bool isSuccess;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomeTextfieldWidget({
     super.key,
@@ -28,6 +30,7 @@ class CustomeTextfieldWidget extends StatefulWidget {
     this.hasError = false,
     this.isSuccess = false,
     this.hintlText,
+    this.inputFormatters,
   });
 
   @override
@@ -63,6 +66,7 @@ class _CustomeTextfieldWidgetState extends State<CustomeTextfieldWidget> {
       keyboardType: widget.textInputType,
       obscureText: widget.isobscureText,
       style: const TextStyle(fontSize: 20),
+      inputFormatters: widget.inputFormatters,
       textAlign: widget.isRTL ? TextAlign.right : TextAlign.left,
       decoration: InputDecoration(
         fillColor: widget.hasError

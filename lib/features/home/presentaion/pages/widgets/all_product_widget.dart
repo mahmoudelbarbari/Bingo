@@ -3,6 +3,7 @@ import 'package:bingo/features/home/presentaion/pages/widgets/card_prodcut_item_
 import 'package:bingo/features/profile/data/model/product_model.dart';
 import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:bingo/gen/assets.gen.dart';
+import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/features/profile/domain/entity/product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class _AllProductWidgetState extends State<AllProductWidget> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final loc = AppLocalizations.of(context)!;
     final isTablet = screenWidth > 600;
     return RefreshIndicator(
       onRefresh: _refresh,
@@ -44,6 +46,11 @@ class _AllProductWidgetState extends State<AllProductWidget> {
         ),
         itemBuilder: (context, index) {
           return CardProdcutItemWidget(
+            cardOnTap: () => Navigator.pushNamed(
+              context,
+              '/product-details',
+              arguments: widget.productEntity[index],
+            ),
             // image: widget.productEntity[index].image ?? "",
             image: Assets.images.onboadring12.path,
             name: widget.productEntity[index].name ?? "Product Name",
@@ -60,7 +67,9 @@ class _AllProductWidgetState extends State<AllProductWidget> {
             onTap: () {
               showAppSnackBar(
                 context,
-                "${widget.productEntity[index].name} Added to your cart",
+                loc.addedToYourCart(
+                  widget.productEntity[index].name ?? 'Product Name',
+                ),
               );
               context.read<CartCubit>().addProductToCart(
                 widget.productEntity[index] as ProductModel,

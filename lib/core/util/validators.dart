@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 class Validators {
   static String? requiredField(String? value, {String? message}) {
     if (value == null || value.trim().isEmpty) {
@@ -49,4 +51,154 @@ class Validators {
     }
     return null;
   }
+
+  static String? cardExpiryDate(String? value, {String? message}) {
+    if (value == null || value.trim().isEmpty) {
+      return message ?? 'Expiry date is required';
+    }
+
+    // Check format (MM/YY)
+    if (!RegExp(r'^\d{2}/\d{2}$').hasMatch(value.trim())) {
+      return message ?? 'Enter date in MM/YY format';
+    }
+
+    try {
+      final parts = value.split('/');
+      final month = int.parse(parts[0]);
+      final year = int.parse(parts[1]);
+
+      // Get current date
+      final now = DateTime.now();
+      final currentYear = now.year % 100; // Get last 2 digits of year
+      final currentMonth = now.month;
+
+      // Validate month
+      if (month < 1 || month > 12) {
+        return message ?? 'Invalid month';
+      }
+
+      // Validate year and expiration
+      if (year < currentYear || (year == currentYear && month < currentMonth)) {
+        return message ?? 'Card has expired';
+      }
+
+      return null;
+    } catch (e) {
+      return message ?? 'Invalid date format';
+    }
+  }
 }
+
+class CardExpiryInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var text = newValue.text;
+
+    if (newValue.selection.baseOffset == 0) {
+      return newValue;
+    }
+
+    var buffer = StringBuffer();
+    for (int i = 0; i < text.length; i++) {
+      buffer.write(text[i]);
+      var nonZeroIndex = i + 1;
+      if (nonZeroIndex % 2 == 0 && nonZeroIndex != text.length) {
+        buffer.write('/');
+      }
+    }
+
+    var string = buffer.toString();
+    return newValue.copyWith(
+      text: string,
+      selection: TextSelection.collapsed(offset: string.length),
+    );
+  }
+}
+//TODO: do this in the end of the project
+
+// import 'package:flutter/material.dart';
+// import 'package:bingo/l10n/app_localizations.dart';
+
+// class Validators {
+//   static String? requiredField(
+//     BuildContext context,
+//     String? value, {
+//     String? message,
+//   }) {
+//     final loc = AppLocalizations.of(context)!;
+//     if (value == null || value.trim().isEmpty) {
+//       return message ?? loc.fieldRequired;
+//     }
+//     return null;
+//   }
+
+//   static String? email(BuildContext context, String? value, {String? message}) {
+//     final loc = AppLocalizations.of(context)!;
+//     if (value == null || value.trim().isEmpty) {
+//       return message ?? loc.emailRequired;
+//     }
+//     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+//     if (!emailRegex.hasMatch(value.trim())) {
+//       return message ?? loc.enterValidEmail;
+//     }
+//     return null;
+//   }
+
+//   static String? password(
+//     BuildContext context,
+//     String? value, {
+//     String? message,
+//   }) {
+//     final loc = AppLocalizations.of(context)!;
+//     if (value == null || value.trim().isEmpty) {
+//       return message ?? loc.passwordRequired;
+//     }
+//     final passwordRegex = RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9.]+');
+//     if (!passwordRegex.hasMatch(value.trim())) {
+//       return message ?? loc.passwordValidation;
+//     }
+//     return null;
+//   }
+
+//   static String? minLength(
+//     BuildContext context,
+//     String? value,
+//     int min, {
+//     String? message,
+//   }) {
+//     final loc = AppLocalizations.of(context)!;
+//     if (value == null || value.length < min) {
+//       return message ?? loc.minLengthRequired(min);
+//     }
+//     return null;
+//   }
+
+//   static String? maxLength(
+//     BuildContext context,
+//     String? value,
+//     int max, {
+//     String? message,
+//   }) {
+//     final loc = AppLocalizations.of(context)!;
+//     if (value != null && value.length > max) {
+//       return message ?? loc.maxLengthRequired(max);
+//     }
+//     return null;
+//   }
+
+//   static String? match(
+//     BuildContext context,
+//     String? value,
+//     String? otherValue, {
+//     String? message,
+//   }) {
+//     final loc = AppLocalizations.of(context)!;
+//     if (value != otherValue) {
+//       return message ?? loc.valueDoesNotMatch;
+//     }
+//     return null;
+//   }
+// }

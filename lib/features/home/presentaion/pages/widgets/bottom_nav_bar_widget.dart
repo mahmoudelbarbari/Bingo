@@ -53,6 +53,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     return Scaffold(
       appBar: CustomeAppBarWidget(
         centerTitle: false,
+        title: '${loc.welcome} ,',
         subTitle: loc.createYourDreamsWithJoy,
         leading: Padding(
           padding: EdgeInsetsDirectional.only(start: 12.w),
@@ -116,7 +117,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           _pages[_currentIndex],
           Positioned(
             child: ChatBotBtnWidget(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, "/chatBot"),
               iconAssetPath: Assets.images.chatbot.path,
             ),
           ),

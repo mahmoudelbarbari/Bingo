@@ -96,7 +96,7 @@
   "confirm": "Confirm",
   "addNewAddress": "Add New Address",
   "cardHolderName": "Card Holder Name",
-  "expiryDate": "Expiry Date",
+  "expiryDate": "MM/YY",
   "visa": "Visa",
   "masterCard": "Master Card",
   "cardNumber": "Card Number",
@@ -106,5 +106,58 @@
   "addCard": "Add Card",
   "cardTypes": "Card Types",
   "selectCardType": "Select Card Type",
-  "pay": "Pay"
+  "pay": "Pay",
+  "fieldRequired": "This field is required",
+  "emailRequired": "Email is required",
+  "enterValidEmail": "Enter a valid email",
+  "passwordRequired": "Password is required",
+  "passwordValidation": "Please enter a valid password....\nYour password must be at least 8 characters long,\nattached with lowercase and uppercase letters",
+  "minLengthRequired": "Minimum {count} characters required",
+  "@minLengthRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "maxLengthRequired": "Maximum {count} characters allowed",
+  "@maxLengthRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "valueDoesNotMatch": "Value does not match",
+  "confirmOrder": "Confirm Order",
+  "paymentSuccessful": "Payment Successful",
+  "paymentFailed": "Payment Failed",
+  "yourPaymentHasBeenSuccessfullyDone": "Your payment has been successfully done",
+  "amount": "Amount",
+  "paymentStatus": "Payment Status",
+  "orderNumber": "Order Number",
+  "merchantName": "Merchant Name",
+  "paymentMethod": "Payment Method",
+  "paymentDate": "Payment Date",
+  "senderName": "Sender Name",
+  "backToHome": "Back to Home",
+  "addToYourCart": "Add to your cart",
+  "addedToYourCart": "{productName} Added to your cart",
+  "@addedToYourCart": {
+    "placeholders": {
+      "productName": {
+        "type": "String"
+      }
+    }
+  },
+  "productDetails": "Product Details",
+  "quantity": "Quantity",
+  "color": "Color",
+  "size": "Size",
+  "description": "Description",
+  "addToCart": "Add to Cart",
+  "bingoChatBot": "Bingo Chat Bot",
+  "official": "@Official",
+  "sendMessage": "Send Message",
+  "microphonePermissionDenied": "Microphone permission denied"
 }

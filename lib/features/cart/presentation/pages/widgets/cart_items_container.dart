@@ -51,6 +51,7 @@ class _CartItemsContainerState extends State<CartItemsContainer>
   Widget build(BuildContext context) {
     super.build(context);
     final loc = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return RepaintBoundary(
       child: Container(
         padding: const EdgeInsets.all(15),
@@ -87,7 +88,9 @@ class _CartItemsContainerState extends State<CartItemsContainer>
                       CounterButton(
                         count: count,
                         plusIconColor: lightTheme.colorScheme.primary,
-                        minusIconColor: Colors.black12,
+                        minusIconColor: isDark
+                            ? Colors.white10
+                            : Colors.black12,
                         onChange: _updateCount,
                         proId: widget.proId,
                       ),

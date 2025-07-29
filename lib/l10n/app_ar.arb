@@ -61,7 +61,7 @@
   "uploadProofOfIdentity": "تحميل إثبات الهوية",
   "createYourDreamsWithJoy": "اصنع أحلامك بفرح",
   "turnYourPassionIntoProfit": "! حوّل شغفك إلى ربح",
-  "productsListings": "قائمة المنتجات",
+  "productsList": "قائمة المنتجات",
   "address": "العنوان",
   "payment": "الدفع",
   "language": "اللغة",
@@ -105,5 +105,57 @@
   "addCard": "إضافة بطاقة",
   "cardTypes": "أنواع البطاقات",
   "selectCardType": "اختر نوع البطاقة",
-  "pay": "دفع"
+  "pay": "دفع",
+  "fieldRequired": "هذا الحقل مطلوب",
+  "emailRequired": "البريد الإلكتروني مطلوب",
+  "enterValidEmail": "أدخل بريدًا إلكترونيًا صالحًا",
+  "passwordRequired": "كلمة المرور مطلوبة",
+  "passwordValidation": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وحروف كبيرة وصغيرة، وأرقام.",
+  "minLengthRequired": "يجب أن يتكون من {count} أحرف على الأقل",
+  "@minLengthRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "maxLengthRequired": "يجب ألا يتجاوز {count} أحرف",
+  "@maxLengthRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "valueDoesNotMatch": "القيمة غير متطابقة",
+  "confirmOrder": "تأكيد الطلب",
+  "paymentSuccessful": "تم الدفع بنجاح",
+  "paymentFailed": "فشل الدفع",
+  "yourPaymentHasBeenSuccessfullyDone": "تم الدفع بنجاح",
+  "amount": "المبلغ",
+  "paymentStatus": "حالة الدفع",
+  "orderNumber": "رقم الطلب",
+  "merchantName": "اسم التاجر",
+  "paymentMethod": "طريقة الدفع",
+  "paymentDate": "تاريخ الدفع",
+  "senderName": "اسم المرسل",
+  "backToHome": "العودة إلى الرئيسية",
+  "addedToYourCart": "{productName} تمت إضافته إلى سلة التسوق",
+  "@addedToYourCart": {
+    "placeholders": {
+      "productName": {
+        "type": "String"
+      }
+    }
+  },
+  "productDetails": "تفاصيل المنتج",
+  "quantity": "الكمية",
+  "color": "اللون",
+  "size": "الحجم",
+  "description": "الوصف",
+  "addToCart": "إضافة إلى السلة",
+  "bingoChatBot": "بينغو شات بوت",
+  "official": "الرسمي",
+  "sendMessage": "إرسال رسالة",
+  "microphonePermissionDenied": "تم رفض إذن الميكروفون، يرجى منحه في إعدادات التطبيق."
 }

@@ -62,7 +62,10 @@ class CreditCardLayoutWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(loc.cardHolderName),
+                  Text(
+                    loc.cardHolderName,
+                    style: TextStyle(fontSize: 14, color: Colors.white60),
+                  ),
                   Text(
                     'Mariam Radhad',
                     style: TextStyle(
@@ -75,7 +78,10 @@ class CreditCardLayoutWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(loc.expiryDate),
+                  Text(
+                    loc.expiryDate,
+                    style: TextStyle(fontSize: 14, color: Colors.white60),
+                  ),
                   Text(
                     '05/30',
                     style: TextStyle(

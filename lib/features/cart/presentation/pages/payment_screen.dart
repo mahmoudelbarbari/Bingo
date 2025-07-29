@@ -1,6 +1,8 @@
 import 'package:bingo/core/widgets/custom_elevated_button.dart';
+import 'package:bingo/features/cart/presentation/pages/payment_result_page.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/Credit_card_layout_widget.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/add_card_form.dart';
+import 'package:bingo/features/cart/presentation/pages/widgets/add_new_address.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/cart_progress_widget.dart';
@@ -25,6 +27,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   final GlobalKey<FormState> _keyform = GlobalKey<FormState>();
 
   bool isButtonEnabled = false;
+  bool addCard = false;
 
   @override
   void initState() {
@@ -114,32 +117,54 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             sizedBox,
             CreditCardLayoutWidget(),
-            Expanded(
-              child: Form(
-                key: _keyform,
-                child: AddCardForm(
-                  controllerName: controllerName,
-                  controllerCVV: controllerCVV,
-                  controllerCardNumber: controllerCardNumber,
-                  controllerExpirationDate: controllerExpirationDate,
-                  controllerCardTypes: controllerCardTypes,
-                  isArabic: isArabic,
-                ),
-              ),
-            ),
-            ElevatedButtonWidget(
-              fun: () {
-                setState(() {
-                  if (_keyform.currentState!.validate()) {
-                    print(
-                      '${controllerCardNumber.text} && ${controllerName.text} && ${controllerCardTypes.text} && ${controllerExpirationDate.text} && ${controllerCVV.text}',
-                    );
-                  }
-                });
-              },
-              text: '${loc.pay} ${widget.totalCart} ${loc.egp}',
-              isColored: true,
-            ),
+            addCard
+                ? AddNewAddressWidget(title: loc.addCard)
+                : Expanded(
+                    child: Form(
+                      key: _keyform,
+                      child: AddCardForm(
+                        controllerName: controllerName,
+                        controllerCVV: controllerCVV,
+                        controllerCardNumber: controllerCardNumber,
+                        controllerExpirationDate: controllerExpirationDate,
+                        controllerCardTypes: controllerCardTypes,
+                        isArabic: isArabic,
+                      ),
+                    ),
+                  ),
+            addCard
+                ? ElevatedButtonWidget(
+                    fun: () {
+                      setState(() {
+                        if (_keyform.currentState!.validate()) {}
+                      });
+                    },
+                    text: loc.addCard,
+                    isColored: true,
+                  )
+                : ElevatedButtonWidget(
+                    fun: () {
+                      setState(() {
+                        if (_keyform.currentState!.validate()) {
+                          print(
+                            '${controllerCardNumber.text} && ${controllerName.text} && ${controllerCardTypes.text} && ${controllerExpirationDate.text} && ${controllerCVV.text}',
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentResultPage(
+                                totalPrice: widget.totalCart,
+                                paymentMethod: controllerCardTypes.text,
+                                senderName: controllerName.text,
+                              ),
+                            ),
+                          );
+                        }
+                      });
+                    },
+                    text: '${loc.pay} ${widget.totalCart} ${loc.egp}',
+                    isColored: true,
+                  ),
             sizedBox,
           ],
         ),

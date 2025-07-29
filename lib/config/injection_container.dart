@@ -6,6 +6,10 @@ import 'package:bingo/features/auth/login/domain/repositories/login_repository.d
 import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
 import 'package:bingo/features/cart/domain/usecase/delete_item_by_id_usecase.dart';
+import 'package:bingo/features/chatbot/data/datasource/chat_bot_datasource.dart';
+import 'package:bingo/features/chatbot/data/repo/chat_repo_impl.dart';
+import 'package:bingo/features/chatbot/domain/repo/chat_repo.dart';
+import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
 import 'package:bingo/features/profile/data/datasource/product_datasource.dart';
 import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
 import 'package:bingo/features/profile/data/repo/product_repo_impl.dart';
@@ -35,6 +39,7 @@ import '../features/cart/domain/usecase/clear_cart_items_usecase.dart';
 import '../features/cart/domain/usecase/get_all_cart_items_usecase.dart';
 import '../features/cart/domain/usecase/view_orders_usecase.dart';
 import '../features/cart/presentation/cubit/cart_cubit.dart';
+import '../features/chatbot/domain/usecase/chat_message_usecase.dart';
 import '../features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import '../features/seller_onboarding/data/repository/seller_upload_repo_impl.dart';
 import '../features/seller_onboarding/domain/repositories/upload_file_repository.dart';
@@ -161,4 +166,24 @@ void init() async {
   //AddCartData
   //Cart Cubit
   sl.registerFactory(() => CartCubit());
+
+  //-----------------------------------------------------------------------------------------
+  // Chat bot feature (injection).
+  //-----------------------------------------------------------------------------------------
+
+  // Datasource Chat bot
+  sl.registerLazySingleton<ChatBotDatasource>(
+    () => ChatBotDatasourceImpl(sl()),
+  );
+
+  //Repotisatory Cart
+  sl.registerLazySingleton<ChatRepository>(() => ChatRepoImpl(sl()));
+
+  //Cart usecase
+  sl.registerLazySingleton<ChatMessageUsecase>(
+    () => ChatMessageUsecase(sl<ChatRepository>()),
+  );
+
+  //Chat bot Cubit
+  sl.registerFactory(() => ChatCubit(sl()));
 }

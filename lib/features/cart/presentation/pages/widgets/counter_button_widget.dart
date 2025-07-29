@@ -46,6 +46,7 @@ class CounterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return loading
         ? SizedBox(
             height: size.h,
@@ -63,7 +64,14 @@ class CounterButton extends StatelessWidget {
                 color: (count == 1)
                     ? minusIconColor
                     : lightTheme.colorScheme.primary,
-                iconColor: (count == 1) ? Colors.black38 : Colors.white,
+                iconColor: isDark
+                    ? (count == 1
+                          ? (Colors.white60) // Dark theme, count = 1
+                          : Colors.white) // Dark theme, count > 1
+                    : (count == 1
+                          ? Colors
+                                .black38 // Light theme, count = 1
+                          : Colors.white),
               ),
               Container(
                 alignment: Alignment.center,

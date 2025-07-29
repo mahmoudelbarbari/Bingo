@@ -2,8 +2,10 @@ import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_dropdown_widget.dart';
 import 'package:bingo/core/widgets/custome_textfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../core/util/validators.dart';
+import '../../../../../core/widgets/custom_switch_widget.dart';
 import '../../../../../core/widgets/dismiss_keyboared_scroll_view.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -44,6 +46,9 @@ class _AddCardFormState extends State<AddCardForm> {
 
   bool cvvHasError = false;
   bool cvvIsValid = false;
+
+  bool defaultCard = false;
+  bool termsConditions = false;
   List<String> cardTypesItems = ['Visa', 'Master Card'];
   @override
   Widget build(BuildContext context) {
@@ -86,6 +91,7 @@ class _AddCardFormState extends State<AddCardForm> {
                       sizedBox,
                       CustomeTextfieldWidget(
                         controller: widget.controllerName,
+                        hintlText: loc.cardHolderName,
                         isRTL: widget.isArabic,
                         formFieldValidator: (value) {
                           final error = Validators.requiredField(value);
@@ -137,9 +143,15 @@ class _AddCardFormState extends State<AddCardForm> {
                       CustomeTextfieldWidget(
                         controller: widget.controllerExpirationDate,
                         textInputType: TextInputType.datetime,
+                        hintlText: 'MM/YY',
                         isRTL: widget.isArabic,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(4),
+                          CardExpiryInputFormatter(),
+                        ],
                         formFieldValidator: (value) {
-                          final error = Validators.requiredField(value);
+                          final error = Validators.cardExpiryDate(value);
                           setState(() {
                             expiryDateHasError = error != null;
                             expiryDateIsValid =
@@ -147,6 +159,7 @@ class _AddCardFormState extends State<AddCardForm> {
                           });
                           return error;
                         },
+
                         hasError: expiryDateHasError,
                         isSuccess: expiryDateIsValid,
                       ),
@@ -162,6 +175,7 @@ class _AddCardFormState extends State<AddCardForm> {
                       sizedBox,
                       CustomeTextfieldWidget(
                         controller: widget.controllerCVV,
+                        hintlText: loc.cvv,
                         textInputType: TextInputType.number,
                         isRTL: widget.isArabic,
                         formFieldValidator: (value) {
@@ -179,6 +193,24 @@ class _AddCardFormState extends State<AddCardForm> {
                   ),
                 ),
               ],
+            ),
+            SwitchWidget(
+              title: loc.defaultCard,
+              value: defaultCard,
+              onChanged: (bool newValue) {
+                setState(() {
+                  defaultCard = newValue;
+                });
+              },
+            ),
+            SwitchWidget(
+              title: loc.agreeToTermsAndConditions,
+              value: termsConditions,
+              onChanged: (bool newValue) {
+                setState(() {
+                  termsConditions = newValue;
+                });
+              },
             ),
           ],
         ),

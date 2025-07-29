@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../config/theme_app.dart';
-import '../../l10n/app_localizations.dart';
 
 class CustomeAppBarWidget extends PreferredSize {
   final String? title;
@@ -10,6 +9,8 @@ class CustomeAppBarWidget extends PreferredSize {
   final bool centerTitle;
   final List<Widget>? actions;
   final Widget? leading;
+  final TextStyle? textStyle;
+
   const CustomeAppBarWidget({
     super.key,
     super.preferredSize = const Size.fromHeight(kToolbarHeight),
@@ -20,21 +21,21 @@ class CustomeAppBarWidget extends PreferredSize {
     this.actions,
     this.hideBackButton = true,
     this.centerTitle = true,
+    this.textStyle,
   });
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
     return AppBar(
       elevation: 0,
       actions: actions,
       leading: leading,
       title: ListTile(
         title: Text(
-          '${loc.welcome} $title,',
-          style: TextStyle(
-            fontSize: lightTheme.textTheme.headlineLarge!.fontSize,
-          ),
+          '$title',
+          style:
+              textStyle ??
+              TextStyle(fontSize: lightTheme.textTheme.headlineLarge!.fontSize),
         ),
         subtitle: Text(subTitle ?? "", style: lightTheme.textTheme.bodySmall),
       ),
