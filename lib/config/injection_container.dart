@@ -5,6 +5,10 @@ import 'package:bingo/features/auth/login/data/reporisatory/login_reporisatory_i
 import 'package:bingo/features/auth/login/domain/repositories/login_repository.dart';
 import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
+import 'package:bingo/features/auth/register/data/reporisatory/register_reporisatory_impl.dart';
+import 'package:bingo/features/auth/register/domain/repositories/register_repository.dart';
+import 'package:bingo/features/auth/register/domain/usecases/register_usecase.dart';
+import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:bingo/features/cart/domain/usecase/delete_item_by_id_usecase.dart';
 import 'package:bingo/features/chatbot/data/datasource/chat_bot_datasource.dart';
 import 'package:bingo/features/chatbot/data/repo/chat_repo_impl.dart';
@@ -31,6 +35,7 @@ import '../features/auth/login/domain/usecases/reset_password_usecase.dart';
 import '../features/auth/login/domain/usecases/sent_otp_usecase.dart';
 import '../features/auth/login/domain/usecases/verify_otp_usecase.dart';
 import '../features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
+import '../features/auth/register/data/datasources/register_remote_datasource.dart';
 import '../features/cart/data/datasource/cart_datasource.dart';
 import '../features/cart/data/reporisatory_imlp/cart_reporisatory_impl.dart';
 import '../features/cart/domain/reporisatory/cart_reporisatory.dart';
@@ -63,7 +68,7 @@ void init() async {
   sl.registerFactory(() => ThemeCubit(sl()));
 
   // core
-  sl.registerLazySingleton<Dio>(() => createDio());
+  sl.registerLazySingleton<Dio>(() => createDio(sl()));
 
   //-----------------------------------------------------------------------------------------
   // Login feature (injection).
@@ -71,7 +76,7 @@ void init() async {
 
   //datasource
   sl.registerLazySingleton<RemoteLoginDatasource>(
-    () => RemoteLoginDatasourceImpl(sl()),
+    () => RemoteLoginDatasourceImpl(),
   );
   // repo
   sl.registerLazySingleton<LoginRepository>(() => LoginReporisatoryImpl(sl()));
@@ -90,6 +95,26 @@ void init() async {
   //login cubit && reset_pass and sendverify__OTP cubit
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit());
   sl.registerLazySingleton<ForgotPasswordCubit>(() => ForgotPasswordCubit());
+
+  //-----------------------------------------------------------------------------------------
+  // Register feature (injection).
+  //-----------------------------------------------------------------------------------------
+
+  // datasource register
+  sl.registerLazySingleton<RemoteRegisterDatasource>(
+    () => RemoteRegisterDatasourceImpl(),
+  );
+
+  // register repo
+  sl.registerLazySingleton<RegisterRepository>(
+    () => RegisterRepositoryImpl(sl()),
+  );
+
+  // register usecase
+  sl.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(sl()));
+
+  // register cubit
+  sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit());
 
   //-----------------------------------------------------------------------------------------
   // Upload files feature (injection).
@@ -114,9 +139,7 @@ void init() async {
   //-----------------------------------------------------------------------------------------
   //profile datasource
   sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl(sl()));
-  sl.registerLazySingleton<ProductDatasource>(
-    () => ProductDatasourceImpl(sl()),
-  );
+  sl.registerLazySingleton<ProductDatasource>(() => ProductDatasourceImpl());
   //repo
   sl.registerLazySingleton<UserRepo>(() => UserRepoImpl());
   sl.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()));

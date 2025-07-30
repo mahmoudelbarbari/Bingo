@@ -1,14 +1,19 @@
+import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
 import 'package:dio/dio.dart';
 
 abstract class RemoteRegisterDatasource {
-  Future<RegisterBaseResponse> remoteRegisterUser(String name, String email, String password);
+  Future<RegisterBaseResponse> remoteRegisterUser(
+    String name,
+    String email,
+    String password,
+  );
 }
 
 class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
-  final Dio _dio;
+  final Dio _dio = createDio(ApiTarget.auth);
 
-  RemoteRegisterDatasourceImpl(this._dio);
+  RemoteRegisterDatasourceImpl();
 
   @override
   Future<RegisterBaseResponse> remoteRegisterUser(
@@ -18,12 +23,8 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
   ) async {
     try {
       final response = await _dio.post(
-        'register-user',
-        data: {
-          'name': name,
-          'email': email,
-          'password': password,
-        },
+        'user-registration',
+        data: {'name': name, 'email': email, 'password': password},
       );
 
       if (response.statusCode == 200) {
