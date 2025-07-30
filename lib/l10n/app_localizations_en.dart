@@ -430,4 +430,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get microphonePermissionDenied => 'Microphone permission denied';
+
+  @override
+  String get filterByPrice => 'Filter By Price';
 }

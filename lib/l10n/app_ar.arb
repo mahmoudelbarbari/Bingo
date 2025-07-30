@@ -157,5 +157,6 @@
   "bingoChatBot": "بينغو شات بوت",
   "official": "الرسمي",
   "sendMessage": "إرسال رسالة",
-  "microphonePermissionDenied": "تم رفض إذن الميكروفون، يرجى منحه في إعدادات التطبيق."
+  "microphonePermissionDenied": "تم رفض إذن الميكروفون، يرجى منحه في إعدادات التطبيق.",
+  "filterByPrice": "تصفية حسب السعر"
 }

@@ -928,6 +928,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Microphone permission denied'**
   String get microphonePermissionDenied;
+
+  /// No description provided for @filterByPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter By Price'**
+  String get filterByPrice;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

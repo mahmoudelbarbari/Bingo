@@ -430,4 +430,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get microphonePermissionDenied => 'تم رفض إذن الميكروفون، يرجى منحه في إعدادات التطبيق.';
+
+  @override
+  String get filterByPrice => 'تصفية حسب السعر';
 }

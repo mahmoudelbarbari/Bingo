@@ -159,5 +159,6 @@
   "bingoChatBot": "Bingo Chat Bot",
   "official": "@Official",
   "sendMessage": "Send Message",
-  "microphonePermissionDenied": "Microphone permission denied"
+  "microphonePermissionDenied": "Microphone permission denied",
+  "filterByPrice": "Filter By Price"
 }

@@ -1,3 +1,4 @@
+import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/card_prodcut_item_widget.dart';
 import 'package:bingo/features/profile/data/model/product_model.dart';
@@ -22,62 +23,74 @@ class AllProductWidget extends StatefulWidget {
 class _AllProductWidgetState extends State<AllProductWidget> {
   Map<int, bool> favorites = {};
 
-  Future<void> _refresh() async {
-    setState(() {
-      context.read<ProductCubit>().getAllProduct();
-    });
-    return Future.delayed(const Duration(seconds: 0));
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final loc = AppLocalizations.of(context)!;
     final isTablet = screenWidth > 600;
-    return RefreshIndicator(
-      onRefresh: _refresh,
-      child: GridView.builder(
-        itemCount: widget.productEntity.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isTablet ? 3 : 2,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          childAspectRatio: 0.7,
+
+    return Column(
+      children: [
+        // Header for products section
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Products',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              // You can add a refresh button here if needed
+            ],
+          ),
         ),
-        itemBuilder: (context, index) {
-          return CardProdcutItemWidget(
-            cardOnTap: () => Navigator.pushNamed(
-              context,
-              '/product-details',
-              arguments: widget.productEntity[index],
-            ),
-            // image: widget.productEntity[index].image ?? "",
-            image: Assets.images.onboadring12.path,
-            name: widget.productEntity[index].name ?? "Product Name",
-            desc:
-                widget.productEntity[index].shortDescription ??
-                "short description",
-            price: widget.productEntity[index].price ?? 0.0,
-            isFavorite: favorites[index] ?? false,
-            onChanged: (value) {
-              setState(() {
-                favorites[index] = value;
-              });
-            },
-            onTap: () {
-              showAppSnackBar(
+        SizedBox(height: 12.h),
+        // Grid of products (non-scrollable)
+        GridView.builder(
+          shrinkWrap: true, // Important: makes it size to content
+          physics: NeverScrollableScrollPhysics(), // Disable scrolling
+          itemCount: widget.productEntity.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: isTablet ? 3 : 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            childAspectRatio: 0.7,
+          ),
+          itemBuilder: (context, index) {
+            return CardProdcutItemWidget(
+              cardOnTap: () => Navigator.pushNamed(
                 context,
-                loc.addedToYourCart(
-                  widget.productEntity[index].name ?? 'Product Name',
-                ),
-              );
-              context.read<CartCubit>().addProductToCart(
-                widget.productEntity[index] as ProductModel,
-              );
-            },
-          );
-        },
-      ),
+                '/product-details',
+                arguments: widget.productEntity[index],
+              ),
+              image: Assets.images.onboadring12.path,
+              name: widget.productEntity[index].name ?? "Product Name",
+              desc:
+                  widget.productEntity[index].shortDescription ??
+                  "short description",
+              price: widget.productEntity[index].price ?? 0.0,
+              isFavorite: favorites[index] ?? false,
+              onChanged: (value) {
+                setState(() {
+                  favorites[index] = value;
+                });
+              },
+              onTap: () {
+                showAppSnackBar(
+                  context,
+                  loc.addedToYourCart(
+                    widget.productEntity[index].name ?? 'Product Name',
+                  ),
+                );
+                context.read<CartCubit>().addProductToCart(
+                  widget.productEntity[index] as ProductModel,
+                );
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 }

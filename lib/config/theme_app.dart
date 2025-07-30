@@ -93,6 +93,7 @@ final ThemeData lightTheme = ThemeData(
     bodyMedium: TextStyle(color: Colors.black87),
     bodyLarge: TextStyle(color: Color(0xFF808080)),
     bodySmall: TextStyle(color: Color(0xFF808080)),
+    labelSmall: TextStyle(fontSize: 14, color: Colors.black54),
   ),
 );
 
@@ -188,5 +189,6 @@ final ThemeData darkTheme = ThemeData(
     bodyMedium: TextStyle(fontSize: 12, color: Colors.white70),
     bodyLarge: TextStyle(color: Color(0xFFCCCCCC)),
     bodySmall: TextStyle(color: Color(0xFF999999)),
+    labelSmall: TextStyle(fontSize: 14, color: Colors.white60),
   ),
 );

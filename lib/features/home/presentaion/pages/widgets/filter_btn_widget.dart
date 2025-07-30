@@ -1,9 +1,15 @@
+import 'package:bingo/features/home/presentaion/pages/widgets/filter_sheet_content.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
-class FilterBtnWidget extends StatelessWidget {
+class FilterBtnWidget extends StatefulWidget {
   const FilterBtnWidget({super.key});
 
+  @override
+  State<FilterBtnWidget> createState() => _FilterBtnWidgetState();
+}
+
+class _FilterBtnWidgetState extends State<FilterBtnWidget> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -24,7 +30,28 @@ class FilterBtnWidget extends StatelessWidget {
         ],
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            isDismissible: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+            builder: (context) {
+              return FractionallySizedBox(
+                heightFactor: 0.5, // Take 50% of screen height
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SingleChildScrollView(
+                    child:
+                        FilterSheetContent(), // Move your filter UI into a new widget
+                  ),
+                ),
+              );
+            },
+          );
+        },
         child: ImageIcon(AssetImage(Assets.images.filter.path)),
       ),
     );
