@@ -2,7 +2,6 @@ import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/card_prodcut_item_widget.dart';
 import 'package:bingo/features/profile/data/model/product_model.dart';
-import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';

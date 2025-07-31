@@ -192,7 +192,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get turnYourPassionIntoProfit => '! حوّل شغفك إلى ربح';
 
   @override
-  String get myAccount => 'My Account';
+  String get myAccount => 'حسابي';
 
   @override
   String get productsList => 'قائمة المنتجات';
@@ -433,4 +433,91 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get filterByPrice => 'تصفية حسب السعر';
+
+  @override
+  String get accountInfo => 'معلومات الحساب';
+
+  @override
+  String get savedAddress => 'العنوان المحفوظ';
+
+  @override
+  String get changePassword => 'تغيير كلمة المرور';
+
+  @override
+  String get edit => 'يحرر';
+
+  @override
+  String get add => 'إضافة';
+
+  @override
+  String get newAddress => 'عنوان جديد';
+
+  @override
+  String get fullName => 'الاسم الكامل';
+
+  @override
+  String get enterYourFullName => 'أدخل اسمك الكامل';
+
+  @override
+  String get streetAddress => 'عنوان الشارع';
+
+  @override
+  String get enterYourStreetAddress => 'أدخل عنوان شارعك';
+
+  @override
+  String get streetAddressIsRequired => 'عنوان الشارع مطلوب';
+
+  @override
+  String get city => 'مدينة';
+
+  @override
+  String get enterYourCity => 'أدخل مدينتك';
+
+  @override
+  String get cityIsRequired => 'المدينة مطلوبة';
+
+  @override
+  String get stateProvince => 'الولاية/المقاطعة';
+
+  @override
+  String get enterYourSateOrProvince => 'أدخل ولايتك أو مقاطعتك';
+
+  @override
+  String get stateProvinceIsRequired => 'الولاية والمقاطعة مطلوبة';
+
+  @override
+  String get zipCode => 'الرمز البريدي';
+
+  @override
+  String get enterYourZIPCode => 'أدخل الرمز البريدي الخاص بك';
+
+  @override
+  String get zipCodeIsRequired => 'الرمز البريدي مطلوب';
+
+  @override
+  String get country => 'دولة';
+
+  @override
+  String get enterYourCountry => 'أدخل بلدك';
+
+  @override
+  String get countryIsRequired => 'البلد مطلوب';
+
+  @override
+  String get setAsDefaultAddress => 'تعيين كعنوان افتراضي';
+
+  @override
+  String get thisAddressWillBeYsedAsYourDefaultShippingAddress => 'سيتم تعيين هذا العنوان كعنوان الشحن الافتراضي الخاص بك';
+
+  @override
+  String get saveAddress => 'حفظ العنوان';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get areYouSureYouWantToDeleteYourAccount => 'هل أنت متأكد أنك تريد حذف حسابك؟';
 }

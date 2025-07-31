@@ -2,7 +2,7 @@ import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bingo/features/cart/presentation/pages/payment_screen.dart';
-import 'package:bingo/features/cart/presentation/pages/widgets/add_new_address.dart';
+import 'package:bingo/features/cart/presentation/pages/widgets/add_new_address_btn.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/address_items_widget.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/cart_progress_widget.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +113,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     onSelect: () => setState(() => _selectedIndex = index),
                   );
                 } else {
-                  return AddNewAddressWidget(title: loc.addNewAddress);
+                  return AddNewAddressBtnWidget(title: loc.addNewAddress);
                 }
               },
             ),

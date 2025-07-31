@@ -1,4 +1,3 @@
-import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
 import 'package:dio/dio.dart';
 
@@ -11,9 +10,9 @@ abstract class RemoteRegisterDatasource {
 }
 
 class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
-  final Dio _dio = createDio(ApiTarget.auth);
+  final Dio _dio;
 
-  RemoteRegisterDatasourceImpl();
+  RemoteRegisterDatasourceImpl(this._dio);
 
   @override
   Future<RegisterBaseResponse> remoteRegisterUser(

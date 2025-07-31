@@ -23,9 +23,9 @@ abstract class ProductDatasource extends FirebaseDatasourceProvider {
 }
 
 class ProductDatasourceImpl extends ProductDatasource {
-  final Dio dio = createDio(ApiTarget.user);
+  final Dio dio;
 
-  ProductDatasourceImpl() : super();
+  ProductDatasourceImpl(this.dio) : super();
 
   @override
   Future<List<ProductEntity>> getAllProduct() async {

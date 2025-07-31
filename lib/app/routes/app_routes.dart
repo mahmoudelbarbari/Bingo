@@ -5,6 +5,9 @@ import 'package:bingo/features/auth/register/presentation/pages/register_screen.
 import 'package:bingo/features/home/presentaion/pages/product_details.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/bottom_nav_bar_widget.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
+import 'package:bingo/features/profile/presentation/pages/add_address_page.dart';
+import 'package:bingo/features/profile/presentation/pages/settings_page.dart';
+import 'package:bingo/features/profile/presentation/pages/saved_address_page.dart';
 import 'package:bingo/features/seller_onboarding/presentation/pages/file_upload_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen1.dart';
@@ -33,4 +36,7 @@ final Map<String, WidgetBuilder> appRoutes = {
     product: ModalRoute.of(context)!.settings.arguments as ProductEntity,
   ),
   '/chatBot': (context) => const ChatBotPage(),
+  '/settingScreen': (context) => const SettingsPage(),
+  '/savedAddressScreen': (context) => SavedAddressPage(),
+  '/addAddressScreen': (context) => AddAddressPage(),
 };

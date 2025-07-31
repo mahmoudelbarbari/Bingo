@@ -68,7 +68,7 @@ void init() async {
   sl.registerFactory(() => ThemeCubit(sl()));
 
   // core
-  sl.registerLazySingleton<Dio>(() => createDio(sl()));
+  sl.registerLazySingleton<Dio>(() => createDio());
 
   //-----------------------------------------------------------------------------------------
   // Login feature (injection).
@@ -76,7 +76,7 @@ void init() async {
 
   //datasource
   sl.registerLazySingleton<RemoteLoginDatasource>(
-    () => RemoteLoginDatasourceImpl(),
+    () => RemoteLoginDatasourceImpl(sl()),
   );
   // repo
   sl.registerLazySingleton<LoginRepository>(() => LoginReporisatoryImpl(sl()));
@@ -102,7 +102,7 @@ void init() async {
 
   // datasource register
   sl.registerLazySingleton<RemoteRegisterDatasource>(
-    () => RemoteRegisterDatasourceImpl(),
+    () => RemoteRegisterDatasourceImpl(sl()),
   );
 
   // register repo
@@ -139,7 +139,9 @@ void init() async {
   //-----------------------------------------------------------------------------------------
   //profile datasource
   sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl(sl()));
-  sl.registerLazySingleton<ProductDatasource>(() => ProductDatasourceImpl());
+  sl.registerLazySingleton<ProductDatasource>(
+    () => ProductDatasourceImpl(sl()),
+  );
   //repo
   sl.registerLazySingleton<UserRepo>(() => UserRepoImpl());
   sl.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()));

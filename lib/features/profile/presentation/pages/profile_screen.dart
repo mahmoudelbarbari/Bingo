@@ -80,13 +80,16 @@ Widget _buildFirstWidget(BuildContext context) {
   return IconListTileGroupWidget(
     heading: loc.myAccount,
     items: [
-      RoundedListItem(icon: Icons.settings, title: loc.settings),
+      RoundedListItem(
+        icon: Icons.settings,
+        title: loc.settings,
+        onTap: () => Navigator.pushNamed(context, '/settingScreen'),
+      ),
       RoundedListItem(
         title: loc.productsList,
         icon: Icons.production_quantity_limits,
       ),
       RoundedListItem(icon: Icons.receipt_long, title: loc.orderList),
-      RoundedListItem(title: loc.address, icon: Icons.location_city),
       RoundedListItem(title: loc.payment, icon: Icons.payment),
     ],
     icon: Icons.person,
@@ -136,6 +139,28 @@ Widget _buildSecondWidget(BuildContext context) {
           RoundedListItem(
             title: loc.deleteAccount,
             icon: Icons.delete_forever_outlined,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(loc.areYouSureYouWantToDeleteYourAccount),
+                    actions: [
+                      TextButton(
+                        child: Text(loc.no),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                      TextButton(
+                        child: Text(loc.yes),
+                        onPressed: () {
+                          //TODO:: my logic for deleting the account
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
           ),
         ],
         icon: Icons.person,

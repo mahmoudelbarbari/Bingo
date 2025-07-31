@@ -934,6 +934,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Filter By Price'**
   String get filterByPrice;
+
+  /// No description provided for @accountInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Info'**
+  String get accountInfo;
+
+  /// No description provided for @savedAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved Address'**
+  String get savedAddress;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePassword;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @newAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'New Address'**
+  String get newAddress;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @enterYourFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name'**
+  String get enterYourFullName;
+
+  /// No description provided for @streetAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Street Address'**
+  String get streetAddress;
+
+  /// No description provided for @enterYourStreetAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your street address'**
+  String get enterYourStreetAddress;
+
+  /// No description provided for @streetAddressIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Street address is required'**
+  String get streetAddressIsRequired;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @enterYourCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your city'**
+  String get enterYourCity;
+
+  /// No description provided for @cityIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'City is required'**
+  String get cityIsRequired;
+
+  /// No description provided for @stateProvince.
+  ///
+  /// In en, this message translates to:
+  /// **'State/Province'**
+  String get stateProvince;
+
+  /// No description provided for @enterYourSateOrProvince.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your state or province'**
+  String get enterYourSateOrProvince;
+
+  /// No description provided for @stateProvinceIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'State/Province is required'**
+  String get stateProvinceIsRequired;
+
+  /// No description provided for @zipCode.
+  ///
+  /// In en, this message translates to:
+  /// **'ZIP Code'**
+  String get zipCode;
+
+  /// No description provided for @enterYourZIPCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your ZIP code'**
+  String get enterYourZIPCode;
+
+  /// No description provided for @zipCodeIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **' ZIP code is required'**
+  String get zipCodeIsRequired;
+
+  /// No description provided for @country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get country;
+
+  /// No description provided for @enterYourCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your country'**
+  String get enterYourCountry;
+
+  /// No description provided for @countryIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Country is required'**
+  String get countryIsRequired;
+
+  /// No description provided for @setAsDefaultAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as default address'**
+  String get setAsDefaultAddress;
+
+  /// No description provided for @thisAddressWillBeYsedAsYourDefaultShippingAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'This address will be used as your default shipping address'**
+  String get thisAddressWillBeYsedAsYourDefaultShippingAddress;
+
+  /// No description provided for @saveAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Address'**
+  String get saveAddress;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @areYouSureYouWantToDeleteYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account'**
+  String get areYouSureYouWantToDeleteYourAccount;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

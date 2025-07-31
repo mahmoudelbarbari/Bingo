@@ -1,9 +1,9 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
-class AddNewAddressWidget extends StatelessWidget {
+class AddNewAddressBtnWidget extends StatelessWidget {
   final String title;
-  const AddNewAddressWidget({super.key, required this.title});
+  const AddNewAddressBtnWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,19 @@ class AddNewAddressWidget extends StatelessWidget {
         border: BoxBorder.all(color: Theme.of(context).colorScheme.background),
       ),
       child: InkWell(
-        onTap: () {
-          //TODO:: make the logic of the add new address for user
+        onTap: () async {
+          // Navigate to add address screen
+          final result = await Navigator.pushNamed(
+            context,
+            '/addAddressScreen',
+          );
+
+          // Handle the result if needed
+          if (result != null) {
+            // TODO: Update the address list or refresh data
+            // You can add your logic here to handle the new address
+            print('New address added: $result');
+          }
         },
         borderRadius: BorderRadius.circular(12),
         child: Padding(

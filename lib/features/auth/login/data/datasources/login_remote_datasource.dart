@@ -1,4 +1,3 @@
-import '../../../../../core/network/dio_provider.dart';
 import '../../domain/entities/login_entities.dart';
 import 'package:dio/dio.dart';
 
@@ -10,9 +9,9 @@ abstract class RemoteLoginDatasource {
 }
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
-  final Dio _dio = createDio(ApiTarget.auth);
+  final Dio _dio;
 
-  RemoteLoginDatasourceImpl();
+  RemoteLoginDatasourceImpl(this._dio);
 
   @override
   Future<LoginBaseResponse> remoteLoginUser(

@@ -433,4 +433,91 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get filterByPrice => 'Filter By Price';
+
+  @override
+  String get accountInfo => 'Account Info';
+
+  @override
+  String get savedAddress => 'Saved Address';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get newAddress => 'New Address';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get enterYourFullName => 'Enter your full name';
+
+  @override
+  String get streetAddress => 'Street Address';
+
+  @override
+  String get enterYourStreetAddress => 'Enter your street address';
+
+  @override
+  String get streetAddressIsRequired => 'Street address is required';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get enterYourCity => 'Enter your city';
+
+  @override
+  String get cityIsRequired => 'City is required';
+
+  @override
+  String get stateProvince => 'State/Province';
+
+  @override
+  String get enterYourSateOrProvince => 'Enter your state or province';
+
+  @override
+  String get stateProvinceIsRequired => 'State/Province is required';
+
+  @override
+  String get zipCode => 'ZIP Code';
+
+  @override
+  String get enterYourZIPCode => 'Enter your ZIP code';
+
+  @override
+  String get zipCodeIsRequired => ' ZIP code is required';
+
+  @override
+  String get country => 'Country';
+
+  @override
+  String get enterYourCountry => 'Enter your country';
+
+  @override
+  String get countryIsRequired => 'Country is required';
+
+  @override
+  String get setAsDefaultAddress => 'Set as default address';
+
+  @override
+  String get thisAddressWillBeYsedAsYourDefaultShippingAddress => 'This address will be used as your default shipping address';
+
+  @override
+  String get saveAddress => 'Save Address';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get areYouSureYouWantToDeleteYourAccount => 'Are you sure you want to delete your account';
 }

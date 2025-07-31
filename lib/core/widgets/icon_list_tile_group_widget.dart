@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
 class RoundedListItem {
-  final IconData icon;
+  final IconData? icon;
   final String title;
   final VoidCallback? onTap;
   final Widget? trailing;
-  RoundedListItem({
-    required this.icon,
-    required this.title,
-    this.onTap,
-    this.trailing,
-  });
+  RoundedListItem({this.icon, required this.title, this.onTap, this.trailing});
 }
 
 class IconListTileGroupWidget extends StatelessWidget {
@@ -31,7 +26,10 @@ class IconListTileGroupWidget extends StatelessWidget {
         if (heading != null)
           Padding(
             padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-            child: Text(heading!, style: Theme.of(context).textTheme.bodyLarge),
+            child: Text(
+              heading!,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
           ),
         Card(
           shape: RoundedRectangleBorder(
@@ -41,11 +39,16 @@ class IconListTileGroupWidget extends StatelessWidget {
           child: Column(
             children: items.map((item) {
               return ListTile(
-                leading: Icon(
-                  item.icon,
-                  color: Theme.of(context).colorScheme.primary,
+                leading: item.icon != null
+                    ? Icon(
+                        item.icon,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                    : null,
+                title: Text(
+                  item.title,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                title: Text(item.title),
                 trailing:
                     item.trailing ??
                     const Icon(Icons.arrow_forward_ios, size: 16),

@@ -2,7 +2,7 @@ import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/features/cart/presentation/pages/payment_result_page.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/Credit_card_layout_widget.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/add_card_form.dart';
-import 'package:bingo/features/cart/presentation/pages/widgets/add_new_address.dart';
+import 'package:bingo/features/cart/presentation/pages/widgets/add_new_address_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/cart_progress_widget.dart';
@@ -118,7 +118,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             sizedBox,
             CreditCardLayoutWidget(),
             addCard
-                ? AddNewAddressWidget(title: loc.addCard)
+                ? AddNewAddressBtnWidget(title: loc.addCard)
                 : Expanded(
                     child: Form(
                       key: _keyform,
