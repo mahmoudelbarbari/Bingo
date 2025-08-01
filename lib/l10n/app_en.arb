@@ -189,5 +189,21 @@
   "saveAddress": "Save Address",
   "yes": "Yes",
   "no": "No",
-  "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account"
+  "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account",
+  "areYouASellerOrBuyer": "Are You a seller Or Buyer",
+  "buyingOrSellingWeHaveGotYourBackAndMake": "Buying or selling? We've got your back and make",
+  "itSuperEasyForYou": "it super easy for you!",
+  "seller": "Seller",
+  "buyer": "Buyer",
+  "continu": "Continue",
+  "buildYourStore": "Build your store",
+  "pngOrJpgFormat": "PNG or JPG format",
+  "nameYourShop": "Name your shop",
+  "between420Characters": "Between 4-20 Character",
+  "noSpercialCharactersSpaces": "No special characters, spaces",
+  "chooseAUniqueName": "Choose a unique name",
+  "aboutStore": "About Store",
+  "descripeYourShop": "Descripe your shop",
+  "shopAddedSuccessfuly": "Shop added successfuly",
+  "faildToAddShop": "Failed to add shop"
 }

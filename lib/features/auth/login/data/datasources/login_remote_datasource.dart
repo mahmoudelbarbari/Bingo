@@ -1,17 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../domain/entities/login_entities.dart';
 import 'package:dio/dio.dart';
 
-abstract class RemoteLoginDatasource {
+class FirebaseDatasourceProvider {
+  static final _firebaseDatasourceProvider =
+      FirebaseDatasourceProvider._internal();
+
+  factory FirebaseDatasourceProvider() {
+    return _firebaseDatasourceProvider;
+  }
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseDatasourceProvider._internal();
+}
+
+abstract class RemoteLoginDatasource extends FirebaseDatasourceProvider {
+  RemoteLoginDatasource() : super._internal();
+
   Future<LoginBaseResponse> remoteLoginUser(String email, String password);
   Future<void> resetPassword(String email, String newPassword);
   Future<void> sendOTP(String email);
-  Future<void> verifyOtp(String email, String otp);
+  Future<bool> verifyOtp(String email);
 }
 
-class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
+class RemoteLoginDatasourceImpl extends RemoteLoginDatasource {
   final Dio _dio;
 
-  RemoteLoginDatasourceImpl(this._dio);
+  RemoteLoginDatasourceImpl(this._dio) : super();
 
   @override
   Future<LoginBaseResponse> remoteLoginUser(
@@ -59,11 +77,44 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
 
   @override
   Future<void> sendOTP(String email) async {
-    await _dio.post('send-otp', data: {'email': email});
+    // await _dio.post('send-otp', data: {'email': email});
+    try {
+      // Create a temporary user to send verification email
+      final userCredential = await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: 'temporary_password_${DateTime.now().millisecondsSinceEpoch}',
+      );
+
+      // Send email verification
+      await userCredential.user!.sendEmailVerification();
+
+      // Store the temporary user ID for later use
+      _temporaryUserId = userCredential.user!.uid;
+    } catch (e) {
+      throw Exception('Failed to send OTP: $e');
+    }
   }
 
   @override
-  Future<void> verifyOtp(String email, String otp) async {
-    await _dio.post('verify-user', data: {'email': email, 'otp': otp});
+  Future<bool> verifyOtp(String email) async {
+    // await _dio.post('verify-user', data: {'email': email, 'otp': otp});
+    try {
+      // Reload user to get latest verification status
+      await auth.currentUser?.reload();
+
+      final user = auth.currentUser;
+      if (user != null && user.emailVerified) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      throw Exception('Failed to verify OTP: $e');
+    }
   }
+
+  // Get current user
+  User? get currentUser => auth.currentUser;
+  // Store verification ID
+  String? _temporaryUserId;
+  String? get temporaryUserId => _temporaryUserId;
 }

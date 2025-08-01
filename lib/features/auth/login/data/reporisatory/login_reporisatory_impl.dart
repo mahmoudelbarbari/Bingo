@@ -23,7 +23,7 @@ class LoginReporisatoryImpl implements LoginRepository {
   }
 
   @override
-  Future<void> verifyOtp(String email, String otp) async {
-    return await remoteLoginDatasource.verifyOtp(email, otp);
+  Future<bool> verifyOtp(String email) async {
+    return await remoteLoginDatasource.verifyOtp(email);
   }
 }

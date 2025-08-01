@@ -11,6 +11,8 @@ import 'package:bingo/core/widgets/welcome_header_widget.dart';
 import 'package:bingo/features/auth/register/presentation/pages/widgets/register_form.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 
+import '../../../login/presentation/otp_verification/otp_verification_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -69,7 +71,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           create: (context) => RegisterCubit(),
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
-              if (state is RegisterSuccessState) {
+              if (state is OtpSentState) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OtpVerificationScreen(
+                      name: nameController.text.trim(),
+                      email: emailController.text.trim(),
+                      password: passwordController.text,
+                    ),
+                  ),
+                );
+              } else if (state is RegisterSuccessState) {
                 showDialog(
                   context: context,
                   builder: (context) => CustomAlertDialog(
@@ -92,7 +105,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 key: _formKey,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 15,
+                    ),
                     child: Column(
                       children: [
                         WelcomeHeaderWidget(
@@ -114,13 +130,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ElevatedButtonWidget(
                           fun: () {
                             if (_formKey.currentState!.validate()) {
-                              context.read<RegisterCubit>().registerUser(
-                                    nameController.text.trim(),
-                                    emailController.text.trim(),
-                                    passwordController.text,
-                                  
-                                    context,
-                                  );
+                              // context.read<RegisterCubit>().sendOtpToEmail(
+                              //   emailController.text.trim(),
+                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OtpVerificationScreen(
+                                    name: nameController.text.trim(),
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text,
+                                  ),
+                                ),
+                              );
                             }
                           },
                           text: loc.signUp,
@@ -131,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(height: 24),
                         TextButtonWidget(
                           fun: () {
-                            Navigator.pop(context); 
+                            Navigator.pushNamed(context, '/loginScreen');
                           },
                           text1: loc.dontHaveAnAccount,
                           text2: loc.login,

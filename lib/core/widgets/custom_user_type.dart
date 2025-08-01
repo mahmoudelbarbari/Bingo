@@ -1,35 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:bingo/core/util/size_config.dart';
 
-class UserType extends StatelessWidget {
-  final String text;
-  final String imgPath;
-  UserType({required this.text, required this.imgPath});
+class UserTypeSelector extends StatefulWidget {
+  final List<UserTypeOption> options;
+  final ValueChanged<String> onSelected;
+
+  const UserTypeSelector({
+    super.key,
+    required this.options,
+    required this.onSelected,
+  });
+
+  @override
+  State<UserTypeSelector> createState() => _UserTypeSelectorState();
+}
+
+class _UserTypeSelectorState extends State<UserTypeSelector> {
+  String? selectedType;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.withOpacity(.3), width: 2),
-      ),
-      margin: EdgeInsets.symmetric(horizontal: 27, vertical: 20),
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height * .35,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onSurface,
+    return Column(
+      children: widget.options.map((option) {
+        final isSelected = option.text == selectedType;
+
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              selectedType = option.text;
+            });
+            widget.onSelected(option.text);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: isSelected
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.grey.withOpacity(.3),
+                width: 2,
+              ),
+            ),
+            margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+            padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 20.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  option.text,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                Image.asset(option.imgPath),
+              ],
             ),
           ),
-          Image.asset(imgPath),
-        ],
-      ),
+        );
+      }).toList(),
     );
   }
+}
+
+class UserTypeOption {
+  final String text;
+  final String imgPath;
+
+  UserTypeOption({required this.text, required this.imgPath});
 }

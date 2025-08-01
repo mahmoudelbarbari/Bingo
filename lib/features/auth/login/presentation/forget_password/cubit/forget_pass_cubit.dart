@@ -28,11 +28,11 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 
-  Future<void> verifyOtp(String otp) async {
+  Future<void> verifyOtp(String otpCode) async {
     emit(ForgotPasswordLoading());
     try {
       verifyOtpUseCase = sl();
-      await verifyOtpUseCase.call(email!, otp);
+      await verifyOtpUseCase.call(otpCode);
       emit(ForgotPasswordOtpVerified());
     } catch (e) {
       emit(ForgotPasswordError(e.toString()));

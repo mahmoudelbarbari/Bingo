@@ -1108,6 +1108,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete your account'**
   String get areYouSureYouWantToDeleteYourAccount;
+
+  /// No description provided for @areYouASellerOrBuyer.
+  ///
+  /// In en, this message translates to:
+  /// **'Are You a seller Or Buyer'**
+  String get areYouASellerOrBuyer;
+
+  /// No description provided for @buyingOrSellingWeHaveGotYourBackAndMake.
+  ///
+  /// In en, this message translates to:
+  /// **'Buying or selling? We\'ve got your back and make'**
+  String get buyingOrSellingWeHaveGotYourBackAndMake;
+
+  /// No description provided for @itSuperEasyForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'it super easy for you!'**
+  String get itSuperEasyForYou;
+
+  /// No description provided for @seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Seller'**
+  String get seller;
+
+  /// No description provided for @buyer.
+  ///
+  /// In en, this message translates to:
+  /// **'Buyer'**
+  String get buyer;
+
+  /// No description provided for @continu.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continu;
+
+  /// No description provided for @buildYourStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Build your store'**
+  String get buildYourStore;
+
+  /// No description provided for @pngOrJpgFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'PNG or JPG format'**
+  String get pngOrJpgFormat;
+
+  /// No description provided for @nameYourShop.
+  ///
+  /// In en, this message translates to:
+  /// **'Name your shop'**
+  String get nameYourShop;
+
+  /// No description provided for @between420Characters.
+  ///
+  /// In en, this message translates to:
+  /// **'Between 4-20 Character'**
+  String get between420Characters;
+
+  /// No description provided for @noSpercialCharactersSpaces.
+  ///
+  /// In en, this message translates to:
+  /// **'No special characters, spaces'**
+  String get noSpercialCharactersSpaces;
+
+  /// No description provided for @chooseAUniqueName.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a unique name'**
+  String get chooseAUniqueName;
+
+  /// No description provided for @aboutStore.
+  ///
+  /// In en, this message translates to:
+  /// **'About Store'**
+  String get aboutStore;
+
+  /// No description provided for @descripeYourShop.
+  ///
+  /// In en, this message translates to:
+  /// **'Descripe your shop'**
+  String get descripeYourShop;
+
+  /// No description provided for @shopAddedSuccessfuly.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop added successfuly'**
+  String get shopAddedSuccessfuly;
+
+  /// No description provided for @faildToAddShop.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add shop'**
+  String get faildToAddShop;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

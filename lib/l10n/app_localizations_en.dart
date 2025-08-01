@@ -520,4 +520,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get areYouSureYouWantToDeleteYourAccount => 'Are you sure you want to delete your account';
+
+  @override
+  String get areYouASellerOrBuyer => 'Are You a seller Or Buyer';
+
+  @override
+  String get buyingOrSellingWeHaveGotYourBackAndMake => 'Buying or selling? We\'ve got your back and make';
+
+  @override
+  String get itSuperEasyForYou => 'it super easy for you!';
+
+  @override
+  String get seller => 'Seller';
+
+  @override
+  String get buyer => 'Buyer';
+
+  @override
+  String get continu => 'Continue';
+
+  @override
+  String get buildYourStore => 'Build your store';
+
+  @override
+  String get pngOrJpgFormat => 'PNG or JPG format';
+
+  @override
+  String get nameYourShop => 'Name your shop';
+
+  @override
+  String get between420Characters => 'Between 4-20 Character';
+
+  @override
+  String get noSpercialCharactersSpaces => 'No special characters, spaces';
+
+  @override
+  String get chooseAUniqueName => 'Choose a unique name';
+
+  @override
+  String get aboutStore => 'About Store';
+
+  @override
+  String get descripeYourShop => 'Descripe your shop';
+
+  @override
+  String get shopAddedSuccessfuly => 'Shop added successfuly';
+
+  @override
+  String get faildToAddShop => 'Failed to add shop';
 }

@@ -1,5 +1,7 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
+import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
+import 'package:bingo/features/auth/register/presentation/cubit/register_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +16,17 @@ import 'widgets/otp_textfield_widget.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final int otpLength;
-  const OtpVerificationScreen({super.key, this.otpLength = 5});
+  final String name;
+  final String email;
+  final String password;
+
+  const OtpVerificationScreen({
+    super.key,
+    this.otpLength = 5,
+    required this.email,
+    required this.name,
+    required this.password,
+  });
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -76,28 +88,28 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     _updateButtonState();
   }
 
-  String get _enteredOtp => _controllers.map((e) => e.text).join();
+  // String get _enteredOtp => _controllers.map((e) => e.text).join();
 
-  void _onVerifyPressed(BuildContext context) {
-    final otp = _enteredOtp;
-    context.read<ForgotPasswordCubit>().verifyOtp(otp);
-  }
+  // void _onVerifyPressed(BuildContext context) {
+  //   final otp = _enteredOtp;
+  //   context.read<ForgotPasswordCubit>().verifyOtp(otp);
+  // }
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
+    return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        if (state is ForgotPasswordOtpVerified) {
+        if (state is OtpVerificationSuccessState) {
           showAppSnackBar(context, "OTP verified successfully!");
           // Navigate to next screen
-        } else if (state is ForgotPasswordError) {
-          // showAppSnackBar(
-          //   context,
-          //   '${loc.error}: ${state.message}',
-          //   isError: true,
-          // );
-          Navigator.pushNamed(context, '/createPassword', arguments: email);
+        } else if (state is OtpVerificationErrorState) {
+          showAppSnackBar(
+            context,
+            '${loc.error}: ${state.errorMessage}',
+            isError: true,
+          );
+          // Navigator.pushNamed(context, '/createPassword', arguments: email);
         }
       },
       child: Scaffold(
@@ -130,7 +142,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     builder: (context, state) {
                       return ElevatedButtonWidget(
                         text: loc.send,
-                        fun: () => _onVerifyPressed(context),
+                        // fun: () => _onVerifyPressed(context),
+                        fun: () {
+                          Navigator.pushNamed(context, '/accountType');
+                        },
                         isColored: isButtonEnabled,
                         isEnabled: isButtonEnabled,
                       );

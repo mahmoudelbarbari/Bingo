@@ -1,7 +1,9 @@
 import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
 import 'package:bingo/features/auth/login/presentation/otp_verification/otp_verification_screen.dart';
 import 'package:bingo/features/auth/login/presentation/create_new_password/create_new_pass_screen.dart';
+import 'package:bingo/features/auth/register/presentation/pages/account_type_page.dart';
 import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
+import 'package:bingo/features/shops/presentation/pages/add_shop_page.dart';
 import 'package:bingo/features/home/presentaion/pages/product_details.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/bottom_nav_bar_widget.dart';
 import 'package:bingo/features/onboarding/presentation/pages/splash_screen.dart';
@@ -28,7 +30,12 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/forgetPassword': (context) => const ForgetPassScreen(),
   '/createPassword': (context) => const CreateNewPasswordScreen(),
   '/register': (context) => const RegisterScreen(),
-  '/otpVerify': (context) => const OtpVerificationScreen(),
+  '/otpVerify': (context) => OtpVerificationScreen(
+    name: ModalRoute.of(context)!.settings.arguments as String,
+    email: ModalRoute.of(context)!.settings.arguments as String,
+    password: ModalRoute.of(context)!.settings.arguments as String,
+  ),
+  '/accountType': (context) => const AccountTypePage(),
   '/sellerOnboarding': (context) => const SellerOnboardingScreen(),
   '/fileUploadScreen': (context) => const FileUploadSection(),
   '/bottomNavBar': (context) => const BottomNavBarWidget(),
@@ -38,5 +45,6 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/chatBot': (context) => const ChatBotPage(),
   '/settingScreen': (context) => const SettingsPage(),
   '/savedAddressScreen': (context) => SavedAddressPage(),
-  '/addAddressScreen': (context) => AddAddressPage(),
+  '/addAddressScreen': (context) => const AddAddressPage(),
+  '/addSeller': (context) => AddShopPage(),
 };

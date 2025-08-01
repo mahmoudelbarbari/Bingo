@@ -520,4 +520,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get areYouSureYouWantToDeleteYourAccount => 'هل أنت متأكد أنك تريد حذف حسابك؟';
+
+  @override
+  String get areYouASellerOrBuyer => 'هل أنت بائع أم مشتري؟';
+
+  @override
+  String get buyingOrSellingWeHaveGotYourBackAndMake => 'سواء كنت تشتري أو تبيع، فنحن ندعمك ونجعل .';
+
+  @override
+  String get itSuperEasyForYou => 'الأمر سهلاً للغاية بالنسبة لك';
+
+  @override
+  String get seller => 'بائع';
+
+  @override
+  String get buyer => 'المشتري';
+
+  @override
+  String get continu => 'استمر';
+
+  @override
+  String get buildYourStore => 'قم ببناء متجرك';
+
+  @override
+  String get pngOrJpgFormat => 'صيغة PNG أو Jpg';
+
+  @override
+  String get nameYourShop => 'اسم متجرك';
+
+  @override
+  String get between420Characters => 'بين 4-20 حرفًا';
+
+  @override
+  String get noSpercialCharactersSpaces => 'لا الأحرف الخاصة والمسافات';
+
+  @override
+  String get chooseAUniqueName => 'اختر اسمًا فريدًا';
+
+  @override
+  String get aboutStore => 'حول المتجر';
+
+  @override
+  String get descripeYourShop => 'وصف متجرك';
+
+  @override
+  String get shopAddedSuccessfuly => 'تمت إضافة المتجر بنجاح';
+
+  @override
+  String get faildToAddShop => 'فشل في إضافة المتجر';
 }

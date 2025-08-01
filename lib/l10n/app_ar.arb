@@ -188,5 +188,21 @@
   "saveAddress": "حفظ العنوان",
   "yes": "نعم",
   "no": "لا",
-  "areYouSureYouWantToDeleteYourAccount": "هل أنت متأكد أنك تريد حذف حسابك؟"
+  "areYouSureYouWantToDeleteYourAccount": "هل أنت متأكد أنك تريد حذف حسابك؟",
+  "areYouASellerOrBuyer": "هل أنت بائع أم مشتري؟",
+  "buyingOrSellingWeHaveGotYourBackAndMake": "سواء كنت تشتري أو تبيع، فنحن ندعمك ونجعل .",
+  "itSuperEasyForYou": "الأمر سهلاً للغاية بالنسبة لك",
+  "seller": "بائع",
+  "buyer": "المشتري",
+  "continu": "استمر",
+  "buildYourStore": "قم ببناء متجرك",
+  "pngOrJpgFormat": "صيغة PNG أو Jpg",
+  "nameYourShop": "اسم متجرك",
+  "between420Characters": "بين 4-20 حرفًا",
+  "noSpercialCharactersSpaces": "لا الأحرف الخاصة والمسافات",
+  "chooseAUniqueName": "اختر اسمًا فريدًا",
+  "aboutStore": "حول المتجر",
+  "descripeYourShop": "وصف متجرك",
+  "shopAddedSuccessfuly": "تمت إضافة المتجر بنجاح",
+  "faildToAddShop": "فشل في إضافة المتجر"
 }

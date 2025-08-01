@@ -7,7 +7,10 @@ import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
 import 'package:bingo/features/auth/register/data/reporisatory/register_reporisatory_impl.dart';
 import 'package:bingo/features/auth/register/domain/repositories/register_repository.dart';
+import 'package:bingo/features/auth/register/domain/usecases/add_seller_data_usecase.dart';
+import 'package:bingo/features/auth/register/domain/usecases/firebase_register_usecase.dart';
 import 'package:bingo/features/auth/register/domain/usecases/register_usecase.dart';
+import 'package:bingo/features/auth/register/domain/usecases/sign_out_usecase.dart';
 import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:bingo/features/cart/domain/usecase/delete_item_by_id_usecase.dart';
 import 'package:bingo/features/chatbot/data/datasource/chat_bot_datasource.dart';
@@ -26,6 +29,11 @@ import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
+import 'package:bingo/features/shops/data/datasource/shop_datasource.dart';
+import 'package:bingo/features/shops/data/reporisatory/shop_repo_impl.dart';
+import 'package:bingo/features/shops/domain/repo/shops_repo.dart';
+import 'package:bingo/features/shops/domain/usecase/add_shop_usecase.dart';
+import 'package:bingo/features/shops/presentation/cubit/shop_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -112,6 +120,16 @@ void init() async {
 
   // register usecase
   sl.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(sl()));
+
+  sl.registerLazySingleton<AddSellerDataUsecase>(
+    () => AddSellerDataUsecase(sl()),
+  );
+
+  sl.registerLazySingleton<FirebaseRegisterUsecase>(
+    () => FirebaseRegisterUsecase(sl()),
+  );
+
+  sl.registerLazySingleton<SignOutUsecase>(() => SignOutUsecase(sl()));
 
   // register cubit
   sl.registerLazySingleton<RegisterCubit>(() => RegisterCubit());
@@ -211,4 +229,21 @@ void init() async {
 
   //Chat bot Cubit
   sl.registerFactory(() => ChatCubit(sl()));
+
+  //-----------------------------------------------------------------------------------------
+  // shop feature (injection).
+  //-----------------------------------------------------------------------------------------
+  //datasource
+  sl.registerLazySingleton<ShopDatasource>(() => ShopDatasourceImpl());
+
+  //repo
+  sl.registerLazySingleton<ShopsRepo>(() => ShopRepoImpl(sl()));
+
+  // usecases
+  sl.registerLazySingleton<AddShopUsecase>(
+    () => AddShopUsecase(sl<ShopsRepo>()),
+  );
+
+  //cubit
+  sl.registerLazySingleton<ShopCubit>(() => ShopCubit());
 }

@@ -2,6 +2,7 @@ import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.d
 import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
+import 'package:bingo/features/shops/presentation/cubit/shop_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -35,6 +36,8 @@ class AppProviders {
       BlocProvider<ChatCubit>(create: (_) => di.sl<ChatCubit>()),
 
       BlocProvider<RegisterCubit>(create: (_) => di.sl<RegisterCubit>()),
+
+      BlocProvider<ShopCubit>(create: (_) => di.sl<ShopCubit>()),
     ];
   }
 }

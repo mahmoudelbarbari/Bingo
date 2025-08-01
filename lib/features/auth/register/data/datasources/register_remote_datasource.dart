@@ -1,18 +1,41 @@
+import 'package:bingo/core/util/base_response.dart';
+import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class RemoteRegisterDatasource {
+class FirebaseDatasourceProvider {
+  static final _firebaseDatasourceProvider =
+      FirebaseDatasourceProvider._internal();
+
+  factory FirebaseDatasourceProvider() {
+    return _firebaseDatasourceProvider;
+  }
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseDatasourceProvider._internal();
+}
+
+abstract class RemoteRegisterDatasource extends FirebaseDatasourceProvider {
+  RemoteRegisterDatasource() : super._internal();
+
   Future<RegisterBaseResponse> remoteRegisterUser(
     String name,
     String email,
     String password,
   );
+
+  Future<UserCredential> firebaseRegister(String email, String password);
+  Future<BaseResponse> addSellerData(SellerAccountModel sellerAccountModel);
+  Future<void> signOut();
 }
 
-class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
+class RemoteRegisterDatasourceImpl extends RemoteRegisterDatasource {
   final Dio _dio;
 
-  RemoteRegisterDatasourceImpl(this._dio);
+  RemoteRegisterDatasourceImpl(this._dio) : super();
 
   @override
   Future<RegisterBaseResponse> remoteRegisterUser(
@@ -54,4 +77,55 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
       );
     }
   }
+
+  @override
+  Future<BaseResponse> addSellerData(
+    SellerAccountModel sellerAccountModel,
+  ) async {
+    try {
+      await firebaseFirestore
+          .collection('sellers')
+          .doc(sellerAccountModel.id)
+          .set({
+            'id': sellerAccountModel.id,
+            "name": sellerAccountModel.name,
+            "email": sellerAccountModel.email,
+            "country": sellerAccountModel.country,
+            "phoneNum": sellerAccountModel.phoneNum,
+            'createdAt': FieldValue.serverTimestamp(),
+            'isPhoneVerified': true,
+          });
+      return BaseResponse(status: true, message: 'Seller added Successfully');
+    } catch (e) {
+      return BaseResponse(
+        status: false,
+        message: 'Failed to save user data: $e',
+      );
+    }
+  }
+
+  @override
+  Future<UserCredential> firebaseRegister(String email, String password) async {
+    try {
+      // Delete the temporary user
+      if (_temporaryUserId != null) {
+        await auth.currentUser?.delete();
+      }
+
+      return await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      throw Exception('Failed to create user: $e');
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    await auth.signOut();
+  }
+
+  String? _temporaryUserId;
+  String? get temporaryUserId => _temporaryUserId;
 }

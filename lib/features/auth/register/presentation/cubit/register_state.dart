@@ -15,3 +15,30 @@ class RegisterErrorState extends RegisterState {
 
   RegisterErrorState({required this.errorMessage});
 }
+
+// Add new states for OTP flow
+class OtpSentState extends RegisterState {
+  final String email;
+
+  OtpSentState(this.email);
+}
+
+class OtpVerificationLoadingState extends RegisterState {}
+
+class OtpVerificationSuccessState extends RegisterState {
+  final String message;
+
+  OtpVerificationSuccessState(this.message);
+}
+
+class OtpVerificationErrorState extends RegisterState {
+  final String errorMessage;
+
+  OtpVerificationErrorState({required this.errorMessage});
+}
+
+class AccountTypeSelectionState extends RegisterState {
+  final String userId;
+
+  AccountTypeSelectionState(this.userId);
+}
