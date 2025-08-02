@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:bingo/config/injection_container.dart';
-import 'package:bingo/core/errors/handler_request_api.dart';
 import 'package:bingo/features/shops/domain/entity/shop_entity.dart';
 import 'package:bingo/features/shops/domain/usecase/add_shop_usecase.dart';
 import 'package:bingo/features/shops/presentation/cubit/shop_state.dart';
@@ -20,17 +19,12 @@ class ShopCubit extends Cubit<ShopState> {
     File imageFile,
   ) async {
     final loc = AppLocalizations.of(context)!;
-    emit(ShopLoadingState());
 
+    emit(ShopLoadingState());
     try {
       addShopUsecase = sl();
-      handlerRequestApi(
-        context: context,
-        body: () async {
-          await addShopUsecase.call(shopEntity, imageFile);
-          emit(ShopSuccessState(loc.shopAddedSuccessfuly));
-        },
-      );
+      await addShopUsecase.call(shopEntity, imageFile);
+      emit(ShopSuccessState(loc.shopAddedSuccessfuly));
     } catch (e) {
       emit(ShopErrorState('${loc.faildToAddShop} ${e.toString()}'));
     }

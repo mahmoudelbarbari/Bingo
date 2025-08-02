@@ -31,6 +31,7 @@ class ShopDatasourceImpl extends ShopDatasource {
   Future<BaseResponse> addShop(ShopModel shopModel, File imageFile) async {
     try {
       // Read image as bytes
+
       final bytes = await imageFile.readAsBytes();
       // Convert to base64
       final base64Image = base64Encode(bytes);

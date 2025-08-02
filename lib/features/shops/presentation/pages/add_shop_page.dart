@@ -53,11 +53,18 @@ class _AddShopPageState extends State<AddShopPage> {
   }
 
   void _submitShop(BuildContext context) {
-    if (_selectedImage == null || _nameController.text.isEmpty) {
+    print("_submitShop called");
+    if (_selectedImage == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Please select an image")));
+      return;
+    }
+
+    // Check if categories are selected
+    if (selectedCategories.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please fill all fields and select an image"),
-        ),
+        const SnackBar(content: Text("Please select at least one category")),
       );
       return;
     }
@@ -70,6 +77,8 @@ class _AddShopPageState extends State<AddShopPage> {
       sellerId: 'current_seller_id', // Inject actual seller ID here
     );
 
+    print("Shop entity created: ${shop.name}"); // Debug print
+    print("Selected categories: $selectedCategories"); // Debug print
     context.read<ShopCubit>().addShop(context, shop, _selectedImage!);
   }
 
@@ -82,6 +91,7 @@ class _AddShopPageState extends State<AddShopPage> {
         appBar: AppBar(title: Text(loc.addShop)),
         body: BlocConsumer<ShopCubit, ShopState>(
           listener: (context, state) {
+            print("ShopCubit state changed: $state"); // Debug print
             if (state is ShopSuccessState) {
               showAppSnackBar(context, state.message);
               Navigator.pushNamed(context, '/bottomNavBar');
@@ -145,7 +155,10 @@ class _AddShopPageState extends State<AddShopPage> {
                                                   .primary,
                                             ),
                                             title: Text(loc.takePhoto),
-                                            onTap: () => _handleImagePick(true),
+                                            onTap: () {
+                                              _handleImagePick(true);
+                                              Navigator.pop(context);
+                                            },
                                           ),
                                           Divider(
                                             thickness: 0.5,
@@ -160,8 +173,10 @@ class _AddShopPageState extends State<AddShopPage> {
                                                   .primary,
                                             ),
                                             title: Text(loc.pickFromGallry),
-                                            onTap: () =>
-                                                _handleImagePick(false),
+                                            onTap: () {
+                                              _handleImagePick(false);
+                                              Navigator.pop(context);
+                                            },
                                           ),
                                         ],
                                       ),
@@ -193,18 +208,33 @@ class _AddShopPageState extends State<AddShopPage> {
                             },
                           );
                         },
-                        child: DottedBorder(
-                          borderType: BorderType.Circle,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey[300],
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(30.w),
-                              child: _selectedImage != null
-                                  ? Image.file(_selectedImage!)
-                                  : Image.asset(Assets.images.addFileIcon.path),
+                        child: SizedBox(
+                          width: 100.w,
+                          height: 100.w,
+                          child: DottedBorder(
+                            borderType: BorderType.Circle,
+                            strokeWidth: 2,
+                            dashPattern: const [6, 3],
+                            color: Colors.grey,
+                            child: ClipOval(
+                              child: Container(
+                                width: 100.w,
+                                height: 100.w,
+                                color: Colors.grey[300],
+                                child: _selectedImage != null
+                                    ? Image.file(
+                                        _selectedImage!,
+                                        width: 100.w,
+                                        height: 100.w,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Padding(
+                                        padding: EdgeInsets.all(30.w),
+                                        child: Image.asset(
+                                          Assets.images.addFileIcon.path,
+                                        ),
+                                      ),
+                              ),
                             ),
                           ),
                         ),
@@ -249,7 +279,7 @@ class _AddShopPageState extends State<AddShopPage> {
                         spacing: 8,
                         children: availableCategories.map((category) {
                           final isSelected = selectedCategories.contains(
-                            category,
+                            category.name,
                           );
                           return FilterChip(
                             label: Text(category.name),
@@ -259,7 +289,7 @@ class _AddShopPageState extends State<AddShopPage> {
                                 if (selected) {
                                   selectedCategories.add(category.name);
                                 } else {
-                                  selectedCategories.remove(category);
+                                  selectedCategories.remove(category.name);
                                 }
                               });
                             },
@@ -274,23 +304,7 @@ class _AddShopPageState extends State<AddShopPage> {
                             Validators.requiredField(context, value),
                         isRTL: isArabic,
                       ),
-                      // const SizedBox(height: 16),
-                      // _selectedImage != null
-                      //     ? Image.file(_selectedImage!, height: 120)
-                      //     : const Text("No image selected"),
-                      // Row(
-                      //   children: [
-                      //     ElevatedButton(
-                      //       onPressed: () => _handleImagePick(false),
-                      //       child: const Text("Pick from Gallery"),
-                      //     ),
-                      //     const SizedBox(width: 10),
-                      //     ElevatedButton(
-                      //       onPressed: () => _handleImagePick(true),
-                      //       child: const Text("Take Photo"),
-                      //     ),
-                      //   ],
-                      // ),
+
                       const SizedBox(height: 20),
                       ElevatedButtonWidget(
                         fun: () => state is ShopLoadingState
@@ -305,7 +319,6 @@ class _AddShopPageState extends State<AddShopPage> {
                                   );
                                   return;
                                 }
-
                                 // Then validate the form
                                 if (_keyform.currentState!.validate()) {
                                   _submitShop(context);
@@ -316,15 +329,6 @@ class _AddShopPageState extends State<AddShopPage> {
                             : loc.addShop,
                         isColored: true,
                       ),
-
-                      // ElevatedButton(
-                      //   onPressed: state is ShopLoadingState
-                      //       ? null
-                      //       : () => _submitShop(context),
-                      //   child: state is ShopLoadingState
-                      //       ? const CircularProgressIndicator()
-                      //       : const Text("Add Shop"),
-                      // ),
                     ],
                   ),
                 ),
