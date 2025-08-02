@@ -94,7 +94,9 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
                           labelText: loc.yourEmail,
                           prefixIcon: Icon(Icons.email),
                           isRTL: isArabic,
-                          formFieldValidator: Validators.email,
+                          formFieldValidator: (value) {
+                            return Validators.email(context, value);
+                          },
                         ),
                         SizedBox(height: 24.h),
                         ElevatedButtonWidget(

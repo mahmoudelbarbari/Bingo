@@ -43,8 +43,11 @@ class _RegisterFormState extends State<RegisterForm> {
           prefixIcon: const Icon(Icons.person),
           labelText: loc.userName,
           isRTL: widget.isArabic,
-          formFieldValidator: (value) =>
-              Validators.requiredField(value, message: loc.requiredField),
+          formFieldValidator: (value) => Validators.requiredField(
+            context,
+            value,
+            message: loc.requiredField,
+          ),
         ),
         SizedBox(height: 20.h),
 
@@ -54,8 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
           prefixIcon: const Icon(Icons.email),
           labelText: loc.yourEmail,
           isRTL: widget.isArabic,
-          formFieldValidator: (value) =>
-              Validators.email(value),
+          formFieldValidator: (value) => Validators.email(context, value),
         ),
         SizedBox(height: 20.h),
 
@@ -76,10 +78,8 @@ class _RegisterFormState extends State<RegisterForm> {
               passwordVisible ? Icons.visibility : Icons.visibility_off,
             ),
           ),
-          formFieldValidator: (value) => Validators.password(
-            value,
-            message: loc.invalidPassword,
-          ),
+          formFieldValidator: (value) =>
+              Validators.password(context, value, message: loc.invalidPassword),
         ),
         SizedBox(height: 20.h),
 
@@ -101,6 +101,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
           formFieldValidator: (value) => Validators.match(
+            context,
             value,
             widget.passwordController.text,
             message: loc.passwordsDoNotMatch,

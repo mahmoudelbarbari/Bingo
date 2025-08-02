@@ -114,7 +114,9 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                         prefixIcon: Image.asset(Assets.images.lockIcon.path),
                         isRTL: isArabic,
                         isobscureText: passwordVisible,
-                        formFieldValidator: Validators.password,
+                        formFieldValidator: (value) {
+                          return Validators.password(context, value);
+                        },
                         suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
@@ -136,6 +138,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                         isRTL: isArabic,
                         isobscureText: confPasswordVisible,
                         formFieldValidator: (value) => Validators.match(
+                          context,
                           value?.trim(),
                           controllerPassword.text.trim(),
                           message: loc.passwordsDoNotMatch,

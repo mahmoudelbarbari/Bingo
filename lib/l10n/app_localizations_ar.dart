@@ -568,4 +568,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get faildToAddShop => 'فشل في إضافة المتجر';
+
+  @override
+  String get addShop => 'إضافة المتجر';
+
+  @override
+  String get selectCategories => 'اختر الفئات';
+
+  @override
+  String get pickFromGallry => 'اختر من المعرض';
+
+  @override
+  String get takePhoto => 'التقط صورة';
+
+  @override
+  String get openingHours => 'ساعات العمل';
+
+  @override
+  String get loading => 'تحميل';
+
+  @override
+  String get cancel => 'إلغاء';
 }

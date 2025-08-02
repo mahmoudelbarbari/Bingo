@@ -69,7 +69,7 @@ class _AddCardFormState extends State<AddCardForm> {
               isRTL: widget.isArabic,
               textInputType: TextInputType.number,
               formFieldValidator: (value) {
-                final error = Validators.requiredField(value);
+                final error = Validators.requiredField(context, value);
                 setState(() {
                   cardNumHasError = error != null;
                   cardNumIsValid = error == null && value!.isNotEmpty;
@@ -94,7 +94,10 @@ class _AddCardFormState extends State<AddCardForm> {
                         hintlText: loc.cardHolderName,
                         isRTL: widget.isArabic,
                         formFieldValidator: (value) {
-                          final error = Validators.requiredField(value);
+                          final error = Validators.requiredField(
+                            context,
+                            value,
+                          );
                           setState(() {
                             nameHasError = error != null;
                             nameIsValid = error == null && value!.isNotEmpty;
@@ -114,7 +117,7 @@ class _AddCardFormState extends State<AddCardForm> {
                     items: [loc.visa, loc.masterCard],
                     placeholder: loc.selectCardType,
                     dropDownValidator: (value) {
-                      final error = Validators.requiredField(value);
+                      final error = Validators.requiredField(context, value);
                       setState(() {
                         typesHasError = error != null;
                         typesIsValid = error == null && value!.isNotEmpty;
@@ -179,7 +182,10 @@ class _AddCardFormState extends State<AddCardForm> {
                         textInputType: TextInputType.number,
                         isRTL: widget.isArabic,
                         formFieldValidator: (value) {
-                          final error = Validators.requiredField(value);
+                          final error = Validators.requiredField(
+                            context,
+                            value,
+                          );
                           setState(() {
                             cvvHasError = error != null;
                             cvvIsValid = error == null && value!.isNotEmpty;

@@ -117,10 +117,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   hasError: _fullNameHasError,
                   isSuccess: _fullNameIsValid,
                   formFieldValidator: (value) {
-                    final error = Validators.requiredField(
-                      value,
-                      message: loc.fieldRequired,
-                    );
+                    final error = Validators.requiredField(context, value);
                     setState(() {
                       _fullNameHasError = error != null;
                       _fullNameIsValid = error == null && value!.isNotEmpty;
@@ -141,10 +138,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   hasError: _streetAddressHasError,
                   isSuccess: _streetAddressIsValid,
                   formFieldValidator: (value) {
-                    final error = Validators.requiredField(
-                      value,
-                      message: loc.streetAddressIsRequired,
-                    );
+                    final error = Validators.requiredField(context, value);
                     setState(() {
                       _streetAddressHasError = error != null;
                       _streetAddressIsValid =
@@ -166,10 +160,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   hasError: _cityHasError,
                   isSuccess: _cityIsValid,
                   formFieldValidator: (value) {
-                    final error = Validators.requiredField(
-                      value,
-                      message: loc.countryIsRequired,
-                    );
+                    final error = Validators.requiredField(context, value);
                     setState(() {
                       _cityHasError = error != null;
                       _cityIsValid = error == null && value!.isNotEmpty;
@@ -191,6 +182,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   isSuccess: _stateIsValid,
                   formFieldValidator: (value) {
                     final error = Validators.requiredField(
+                      context,
                       value,
                       message: loc.stateProvinceIsRequired,
                     );
@@ -219,6 +211,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   ],
                   formFieldValidator: (value) {
                     final error = Validators.requiredField(
+                      context,
                       value,
                       message: loc.zipCodeIsRequired,
                     );
@@ -243,6 +236,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   isSuccess: _countryIsValid,
                   formFieldValidator: (value) {
                     final error = Validators.requiredField(
+                      context,
                       value,
                       message: loc.countryIsRequired,
                     );

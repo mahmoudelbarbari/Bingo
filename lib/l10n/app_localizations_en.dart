@@ -568,4 +568,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faildToAddShop => 'Failed to add shop';
+
+  @override
+  String get addShop => 'Add Shop';
+
+  @override
+  String get selectCategories => 'Select Categories';
+
+  @override
+  String get pickFromGallry => 'Pick from Gallery';
+
+  @override
+  String get takePhoto => 'Take Photo';
+
+  @override
+  String get openingHours => 'Opening Hours';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get cancel => 'Cancel';
 }

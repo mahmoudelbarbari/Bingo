@@ -42,7 +42,7 @@ class _LoginFormState extends State<LoginForm> {
           controller: widget.emailController,
           prefixIcon: Icon(Icons.email),
           formFieldValidator: (value) {
-            final error = Validators.email(value);
+            final error = Validators.email(context, value);
             setState(() {
               emailHasError = error != null;
               emailIsValid = error == null && value!.isNotEmpty;
@@ -63,7 +63,7 @@ class _LoginFormState extends State<LoginForm> {
           labelText: loc.yourPassword,
           isobscureText: passwordVisible,
           formFieldValidator: (v) {
-            final error = Validators.password(v);
+            final error = Validators.password(context, v);
             setState(() {
               passHasError = error != null;
               passIsValid = error == null && v!.isNotEmpty;

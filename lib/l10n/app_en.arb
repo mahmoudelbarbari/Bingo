@@ -205,5 +205,12 @@
   "aboutStore": "About Store",
   "descripeYourShop": "Descripe your shop",
   "shopAddedSuccessfuly": "Shop added successfuly",
-  "faildToAddShop": "Failed to add shop"
+  "faildToAddShop": "Failed to add shop",
+  "addShop": "Add Shop",
+  "selectCategories": "Select Categories",
+  "pickFromGallry": "Pick from Gallery",
+  "takePhoto": "Take Photo",
+  "openingHours": "Opening Hours",
+  "loading": "Loading",
+  "cancel": "Cancel"
 }

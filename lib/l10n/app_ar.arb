@@ -204,5 +204,12 @@
   "aboutStore": "حول المتجر",
   "descripeYourShop": "وصف متجرك",
   "shopAddedSuccessfuly": "تمت إضافة المتجر بنجاح",
-  "faildToAddShop": "فشل في إضافة المتجر"
+  "faildToAddShop": "فشل في إضافة المتجر",
+  "addShop": "إضافة المتجر",
+  "selectCategories": "اختر الفئات",
+  "pickFromGallry": "اختر من المعرض",
+  "takePhoto": "التقط صورة",
+  "openingHours": "ساعات العمل",
+  "loading": "تحميل",
+  "cancel": "إلغاء"
 }

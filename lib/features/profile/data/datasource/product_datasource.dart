@@ -1,4 +1,3 @@
-import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/features/profile/data/model/product_model.dart';
 import 'package:bingo/features/profile/domain/entity/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
