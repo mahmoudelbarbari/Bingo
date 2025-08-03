@@ -4,9 +4,11 @@ class TextFieldForInstructions extends StatelessWidget {
   final String title;
   final String hintText;
   final TextEditingController textEditingController;
+  final String? Function(String?)? formFieldValidator;
 
   const TextFieldForInstructions({
     super.key,
+    this.formFieldValidator,
     required this.title,
     required this.hintText,
     required this.textEditingController,
@@ -21,11 +23,11 @@ class TextFieldForInstructions extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
-        TextField(
+        TextFormField(
           cursorColor: Colors.grey[600],
           maxLines: 7,
           controller: textEditingController,
-
+          validator: formFieldValidator,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(

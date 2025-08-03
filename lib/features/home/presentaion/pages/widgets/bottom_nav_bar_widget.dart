@@ -57,8 +57,13 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         subTitle: loc.createYourDreamsWithJoy,
         leading: Padding(
           padding: EdgeInsetsDirectional.only(start: 12.w),
-          child: CircleAvatar(
-            child: ImageIcon(AssetImage(Assets.images.profile.path)),
+          child: InkWell(
+            onTap: () {
+              //TODO:: THIS THE IMPLEMTNATION OF THE PROFILE SCREEN
+            },
+            child: CircleAvatar(
+              child: ImageIcon(AssetImage(Assets.images.profile.path)),
+            ),
           ),
         ),
         actions: [

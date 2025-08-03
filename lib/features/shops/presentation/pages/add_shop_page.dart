@@ -52,290 +52,259 @@ class _AddShopPageState extends State<AddShopPage> {
     }
   }
 
-  void _submitShop(BuildContext context) {
-    print("_submitShop called");
-    if (_selectedImage == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Please select an image")));
-      return;
-    }
-
-    // Check if categories are selected
-    if (selectedCategories.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please select at least one category")),
-      );
-      return;
-    }
-
-    final shop = ShopEntity(
-      name: _nameController.text.trim(),
-      bio: _bioController.text.trim(),
-      category: selectedCategories,
-      openingHours: _openingHoursController.text.trim(),
-      sellerId: 'current_seller_id', // Inject actual seller ID here
-    );
-
-    print("Shop entity created: ${shop.name}"); // Debug print
-    print("Selected categories: $selectedCategories"); // Debug print
-    context.read<ShopCubit>().addShop(context, shop, _selectedImage!);
-  }
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return BlocProvider(
-      create: (_) => ShopCubit(),
-      child: Scaffold(
-        appBar: AppBar(title: Text(loc.addShop)),
-        body: BlocConsumer<ShopCubit, ShopState>(
-          listener: (context, state) {
-            print("ShopCubit state changed: $state"); // Debug print
-            if (state is ShopSuccessState) {
-              showAppSnackBar(context, state.message);
-              Navigator.pushNamed(context, '/bottomNavBar');
-            } else if (state is ShopErrorState) {
-              showAppSnackBar(context, state.errMessage, isError: true);
-            }
-          },
-          builder: (context, state) {
-            final isArabic =
-                Localizations.localeOf(context).languageCode == 'ar';
-            var sizedBox = SizedBox(height: 12.h);
-            final isDark = Theme.of(context).brightness == Brightness.dark;
-            return Form(
-              key: _keyform,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        loc.buildYourStore,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      sizedBox,
-                      GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            backgroundColor: Colors.transparent,
-                            isDismissible: true,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: EdgeInsetsGeometry.all(16),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: isDark
-                                            ? Colors.grey[900]
-                                            : Colors.white,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          sizedBox,
-                                          Text(
-                                            loc.add,
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.titleLarge,
-                                          ),
-                                          ListTile(
-                                            leading: Icon(
-                                              Icons.camera_alt,
-                                              color: lightTheme
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                            title: Text(loc.takePhoto),
-                                            onTap: () {
-                                              _handleImagePick(true);
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                          Divider(
-                                            thickness: 0.5,
-                                            indent: 10,
-                                            endIndent: 10,
-                                          ),
-                                          ListTile(
-                                            leading: Icon(
-                                              Icons.attach_file,
-                                              color: lightTheme
-                                                  .colorScheme
-                                                  .primary,
-                                            ),
-                                            title: Text(loc.pickFromGallry),
-                                            onTap: () {
-                                              _handleImagePick(false);
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        ],
-                                      ),
+    return Scaffold(
+      appBar: AppBar(title: Text(loc.addShop)),
+      body: BlocConsumer<ShopCubit, ShopState>(
+        listener: (context, state) {
+          if (state is ShopSuccessState) {
+            showAppSnackBar(context, state.message);
+            Navigator.pushNamed(context, '/bottomNavBar');
+          } else if (state is ShopErrorState) {
+            showAppSnackBar(context, state.errMessage, isError: true);
+          }
+        },
+        builder: (context, state) {
+          final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+          var sizedBox = SizedBox(height: 12.h);
+          final isDark = Theme.of(context).brightness == Brightness.dark;
+          return Form(
+            key: _keyform,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      loc.buildYourStore,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    sizedBox,
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          isDismissible: true,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: EdgeInsetsGeometry.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: isDark
+                                          ? Colors.grey[900]
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
-                                    sizedBox,
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: isDark
-                                            ? Colors.grey[900]
-                                            : Colors.white,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: ListTile(
-                                        title: Center(
-                                          child: Text(
-                                            loc.cancel,
-                                            style: Theme.of(
-                                              context,
-                                            ).textTheme.bodyLarge,
-                                          ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        sizedBox,
+                                        Text(
+                                          loc.add,
+                                          style: Theme.of(
+                                            context,
+                                          ).textTheme.titleLarge,
                                         ),
-                                        onTap: () => Navigator.pop(context),
-                                      ),
+                                        ListTile(
+                                          leading: Icon(
+                                            Icons.camera_alt,
+                                            color:
+                                                lightTheme.colorScheme.primary,
+                                          ),
+                                          title: Text(loc.takePhoto),
+                                          onTap: () {
+                                            _handleImagePick(true);
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        Divider(
+                                          thickness: 0.5,
+                                          indent: 10,
+                                          endIndent: 10,
+                                        ),
+                                        ListTile(
+                                          leading: Icon(
+                                            Icons.attach_file,
+                                            color:
+                                                lightTheme.colorScheme.primary,
+                                          ),
+                                          title: Text(loc.pickFromGallry),
+                                          onTap: () {
+                                            _handleImagePick(false);
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height: 16.h),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: SizedBox(
-                          width: 100.w,
-                          height: 100.w,
-                          child: DottedBorder(
-                            borderType: BorderType.Circle,
-                            strokeWidth: 2,
-                            dashPattern: const [6, 3],
-                            color: Colors.grey,
-                            child: ClipOval(
-                              child: Container(
-                                width: 100.w,
-                                height: 100.w,
-                                color: Colors.grey[300],
-                                child: _selectedImage != null
-                                    ? Image.file(
-                                        _selectedImage!,
-                                        width: 100.w,
-                                        height: 100.w,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Padding(
-                                        padding: EdgeInsets.all(30.w),
-                                        child: Image.asset(
-                                          Assets.images.addFileIcon.path,
+                                  ),
+                                  sizedBox,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: isDark
+                                          ? Colors.grey[900]
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: ListTile(
+                                      title: Center(
+                                        child: Text(
+                                          loc.cancel,
+                                          style: Theme.of(
+                                            context,
+                                          ).textTheme.bodyLarge,
                                         ),
                                       ),
+                                      onTap: () => Navigator.pop(context),
+                                    ),
+                                  ),
+                                  SizedBox(height: 16.h),
+                                ],
                               ),
+                            );
+                          },
+                        );
+                      },
+                      child: SizedBox(
+                        width: 100.w,
+                        height: 100.w,
+                        child: DottedBorder(
+                          borderType: BorderType.Circle,
+                          strokeWidth: 2,
+                          dashPattern: const [6, 3],
+                          color: Colors.grey,
+                          child: ClipOval(
+                            child: Container(
+                              width: 100.w,
+                              height: 100.w,
+                              color: Colors.grey[300],
+                              child: _selectedImage != null
+                                  ? Image.file(
+                                      _selectedImage!,
+                                      width: 100.w,
+                                      height: 100.w,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Padding(
+                                      padding: EdgeInsets.all(30.w),
+                                      child: Image.asset(
+                                        Assets.images.addFileIcon.path,
+                                      ),
+                                    ),
                             ),
                           ),
                         ),
                       ),
-                      sizedBox,
-                      Row(
-                        children: [
-                          Text(
-                            loc.pngOrJpgFormat,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          SizedBox(width: 5.w),
-                          Icon(
-                            Icons.info_outline_rounded,
-                            color: lightTheme.colorScheme.primary,
-                          ),
-                        ],
-                      ),
-                      sizedBox,
-                      CustomeTextfieldWidget(
-                        controller: _nameController,
-                        labelText: loc.nameYourShop,
-                        formFieldValidator: (value) {
-                          return Validators.requiredField(context, value);
-                        },
-                        isRTL: isArabic,
-                      ),
-                      sizedBox,
-                      ShopNameInstruction(loc: loc, sizedBox: sizedBox),
-                      sizedBox,
-                      TextFieldForInstructions(
-                        textEditingController: _bioController,
-                        title: loc.aboutStore,
-                        hintText: loc.descripeYourShop,
-                      ),
-                      sizedBox,
-                      Text(
-                        loc.selectCategories,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Wrap(
-                        spacing: 8,
-                        children: availableCategories.map((category) {
-                          final isSelected = selectedCategories.contains(
-                            category.name,
-                          );
-                          return FilterChip(
-                            label: Text(category.name),
-                            selected: isSelected,
-                            onSelected: (selected) {
-                              setState(() {
-                                if (selected) {
-                                  selectedCategories.add(category.name);
-                                } else {
-                                  selectedCategories.remove(category.name);
-                                }
-                              });
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      sizedBox,
-                      CustomeTextfieldWidget(
-                        controller: _openingHoursController,
-                        labelText: loc.openingHours,
-                        formFieldValidator: (value) =>
-                            Validators.requiredField(context, value),
-                        isRTL: isArabic,
-                      ),
-
-                      const SizedBox(height: 20),
-                      ElevatedButtonWidget(
-                        fun: () => state is ShopLoadingState
-                            ? null
-                            : () {
-                                // Check if image is selected first
-                                if (_selectedImage == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text("Please select an image"),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                // Then validate the form
-                                if (_keyform.currentState!.validate()) {
-                                  _submitShop(context);
-                                }
-                              },
-                        text: state is ShopLoadingState
-                            ? '${loc.loading}....'
-                            : loc.addShop,
-                        isColored: true,
-                      ),
-                    ],
-                  ),
+                    ),
+                    sizedBox,
+                    Row(
+                      children: [
+                        Text(
+                          loc.pngOrJpgFormat,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        SizedBox(width: 5.w),
+                        Icon(
+                          Icons.info_outline_rounded,
+                          color: lightTheme.colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                    sizedBox,
+                    CustomeTextfieldWidget(
+                      controller: _nameController,
+                      labelText: loc.nameYourShop,
+                      formFieldValidator: (value) {
+                        return Validators.requiredField(context, value);
+                      },
+                      isRTL: isArabic,
+                    ),
+                    sizedBox,
+                    ShopNameInstruction(loc: loc, sizedBox: sizedBox),
+                    sizedBox,
+                    TextFieldForInstructions(
+                      textEditingController: _bioController,
+                      title: loc.aboutStore,
+                      hintText: loc.descripeYourShop,
+                      formFieldValidator: (value) {
+                        return Validators.requiredField(context, value);
+                      },
+                    ),
+                    sizedBox,
+                    Text(
+                      loc.selectCategories,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Wrap(
+                      spacing: 8,
+                      children: availableCategories.map((category) {
+                        final isSelected = selectedCategories.contains(
+                          category.name,
+                        );
+                        return FilterChip(
+                          label: Text(category.name),
+                          selected: isSelected,
+                          onSelected: (selected) {
+                            setState(() {
+                              if (selected) {
+                                selectedCategories.add(category.name);
+                              } else {
+                                selectedCategories.remove(category.name);
+                              }
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    sizedBox,
+                    CustomeTextfieldWidget(
+                      controller: _openingHoursController,
+                      labelText: loc.openingHours,
+                      formFieldValidator: (value) =>
+                          Validators.requiredField(context, value),
+                      isRTL: isArabic,
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButtonWidget(
+                      fun: () {
+                        setState(() {
+                          if (_keyform.currentState!.validate()) {
+                            context.read<ShopCubit>().addShop(
+                              context,
+                              ShopEntity(
+                                id: '515',
+                                image: _selectedImage?.path,
+                                name: _nameController.text.trim(),
+                                bio: _bioController.text.trim(),
+                                category: selectedCategories,
+                                openingHours: _openingHoursController.text
+                                    .trim(),
+                                rating: '0.0',
+                                sellerId: 'current_seller_id',
+                              ),
+                              _selectedImage!,
+                            );
+                          }
+                        });
+                      },
+                      text: state is ShopLoadingState
+                          ? '${loc.loading}....'
+                          : loc.addShop,
+                      isColored: true,
+                    ),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
