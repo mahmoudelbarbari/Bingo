@@ -77,19 +77,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               }
               if (state is LoginErrorState) {
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => CustomAlertDialog(
-                //     message: state.errorMessage,
-                //     isSuccess: false,
-                //   ),
-                // );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const BottomNavBarWidget(),
+                showDialog(
+                  context: context,
+                  builder: (context) => CustomAlertDialog(
+                    message: state.errorMessage,
+                    isSuccess: false,
                   ),
                 );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const BottomNavBarWidget(),
+                //   ),
+                // );
               }
             },
             builder: (context, state) {

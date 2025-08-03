@@ -1,35 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bingo/core/network/dio_provider.dart';
 
 import '../../domain/entities/login_entities.dart';
 import 'package:dio/dio.dart';
 
-class FirebaseDatasourceProvider {
-  static final _firebaseDatasourceProvider =
-      FirebaseDatasourceProvider._internal();
-
-  factory FirebaseDatasourceProvider() {
-    return _firebaseDatasourceProvider;
-  }
-
-  FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  FirebaseDatasourceProvider._internal();
-}
-
-abstract class RemoteLoginDatasource extends FirebaseDatasourceProvider {
-  RemoteLoginDatasource() : super._internal();
-
+abstract class RemoteLoginDatasource {
   Future<LoginBaseResponse> remoteLoginUser(String email, String password);
   Future<void> resetPassword(String email, String newPassword);
   Future<void> sendOTP(String email);
   Future<bool> verifyOtp(String email);
 }
 
-class RemoteLoginDatasourceImpl extends RemoteLoginDatasource {
-  final Dio _dio;
+class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
+  final Dio _dio = createDio(ApiTarget.auth);
 
-  RemoteLoginDatasourceImpl(this._dio) : super();
+  RemoteLoginDatasourceImpl();
 
   @override
   Future<LoginBaseResponse> remoteLoginUser(
@@ -77,19 +61,8 @@ class RemoteLoginDatasourceImpl extends RemoteLoginDatasource {
 
   @override
   Future<void> sendOTP(String email) async {
-    // await _dio.post('send-otp', data: {'email': email});
     try {
-      // Create a temporary user to send verification email
-      final userCredential = await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: 'temporary_password_${DateTime.now().millisecondsSinceEpoch}',
-      );
-
-      // Send email verification
-      await userCredential.user!.sendEmailVerification();
-
-      // Store the temporary user ID for later use
-      _temporaryUserId = userCredential.user!.uid;
+      await _dio.post('send-otp', data: {'email': email});
     } catch (e) {
       throw Exception('Failed to send OTP: $e');
     }
@@ -97,24 +70,17 @@ class RemoteLoginDatasourceImpl extends RemoteLoginDatasource {
 
   @override
   Future<bool> verifyOtp(String email) async {
-    // await _dio.post('verify-user', data: {'email': email, 'otp': otp});
     try {
-      // Reload user to get latest verification status
-      await auth.currentUser?.reload();
-
-      final user = auth.currentUser;
-      if (user != null && user.emailVerified) {
-        return true;
-      }
-      return false;
+      await _dio.post('verify-user', data: {'email': email});
+      return true;
     } catch (e) {
       throw Exception('Failed to verify OTP: $e');
     }
   }
 
-  // Get current user
-  User? get currentUser => auth.currentUser;
-  // Store verification ID
-  String? _temporaryUserId;
-  String? get temporaryUserId => _temporaryUserId;
+  // // Get current user
+  // User? get currentUser => auth.currentUser;
+  // // Store verification ID
+  // String? _temporaryUserId;
+  // String? get temporaryUserId => _temporaryUserId;
 }
