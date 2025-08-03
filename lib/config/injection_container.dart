@@ -110,7 +110,7 @@ void init() async {
 
   // datasource register
   sl.registerLazySingleton<RemoteRegisterDatasource>(
-    () => RemoteRegisterDatasourceImpl(sl()),
+    () => RemoteRegisterDatasourceImpl(),
   );
 
   // register repo

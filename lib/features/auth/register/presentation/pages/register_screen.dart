@@ -130,9 +130,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ElevatedButtonWidget(
                           fun: () {
                             if (_formKey.currentState!.validate()) {
-                              // context.read<RegisterCubit>().sendOtpToEmail(
-                              //   emailController.text.trim(),
-                              // );
+                              context.read<RegisterCubit>().registerUser(
+                                nameController.text.trim(),
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                                context,
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

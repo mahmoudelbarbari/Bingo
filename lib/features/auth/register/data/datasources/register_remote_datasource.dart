@@ -1,26 +1,11 @@
+import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseDatasourceProvider {
-  static final _firebaseDatasourceProvider =
-      FirebaseDatasourceProvider._internal();
-
-  factory FirebaseDatasourceProvider() {
-    return _firebaseDatasourceProvider;
-  }
-
-  FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  FirebaseDatasourceProvider._internal();
-}
-
-abstract class RemoteRegisterDatasource extends FirebaseDatasourceProvider {
-  RemoteRegisterDatasource() : super._internal();
-
+abstract class RemoteRegisterDatasource {
   Future<RegisterBaseResponse> remoteRegisterUser(
     String name,
     String email,
@@ -32,10 +17,10 @@ abstract class RemoteRegisterDatasource extends FirebaseDatasourceProvider {
   Future<void> signOut();
 }
 
-class RemoteRegisterDatasourceImpl extends RemoteRegisterDatasource {
-  final Dio _dio;
+class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
+  final Dio _dio = createDio(ApiTarget.auth);
 
-  RemoteRegisterDatasourceImpl(this._dio) : super();
+  RemoteRegisterDatasourceImpl();
 
   @override
   Future<RegisterBaseResponse> remoteRegisterUser(
@@ -83,18 +68,18 @@ class RemoteRegisterDatasourceImpl extends RemoteRegisterDatasource {
     SellerAccountModel sellerAccountModel,
   ) async {
     try {
-      await firebaseFirestore
-          .collection('sellers')
-          .doc(sellerAccountModel.id)
-          .set({
-            'id': sellerAccountModel.id,
-            "name": sellerAccountModel.name,
-            "email": sellerAccountModel.email,
-            "country": sellerAccountModel.country,
-            "phoneNum": sellerAccountModel.phoneNum,
-            'createdAt': FieldValue.serverTimestamp(),
-            'isPhoneVerified': true,
-          });
+      // await firebaseFirestore
+      //     .collection('sellers')
+      //     .doc(sellerAccountModel.id)
+      //     .set({
+      //       'id': sellerAccountModel.id,
+      //       "name": sellerAccountModel.name,
+      //       "email": sellerAccountModel.email,
+      //       "country": sellerAccountModel.country,
+      //       "phoneNum": sellerAccountModel.phoneNum,
+      //       'createdAt': FieldValue.serverTimestamp(),
+      //       'isPhoneVerified': true,
+      //     });
       return BaseResponse(status: true, message: 'Seller added Successfully');
     } catch (e) {
       return BaseResponse(
@@ -109,13 +94,13 @@ class RemoteRegisterDatasourceImpl extends RemoteRegisterDatasource {
     try {
       // Delete the temporary user
       if (_temporaryUserId != null) {
-        await auth.currentUser?.delete();
+        // await auth.currentUser?.delete();
       }
-
-      return await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      throw Exception();
+      // return await auth.createUserWithEmailAndPassword(
+      //   email: email,
+      //   password: password,
+      // );
     } catch (e) {
       throw Exception('Failed to create user: $e');
     }
@@ -123,7 +108,7 @@ class RemoteRegisterDatasourceImpl extends RemoteRegisterDatasource {
 
   @override
   Future<void> signOut() async {
-    await auth.signOut();
+    // await auth.signOut();
   }
 
   String? _temporaryUserId;
