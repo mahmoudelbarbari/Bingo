@@ -38,7 +38,7 @@ class _AccountTypePageState extends State<AccountTypePage> {
       body: ListView(
         children: [
           WelcomeHeaderWidget(
-            imageURL: Assets.images.bingoLogo1.path,
+            imageURL: Assets.images.bingologo2.path,
             headerText1: loc.areYouASellerOrBuyer,
             headerSubText:
                 '${loc.buyingOrSellingWeHaveGotYourBackAndMake} \n                        ${loc.itSuperEasyForYou}',

@@ -52,15 +52,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final isNameFilled = nameController.text.trim().isNotEmpty;
     final isEmailFilled = emailController.text.trim().isNotEmpty;
     final isPasswordFilled = passwordController.text.isNotEmpty;
-    final isPhoneNumbFilled = phoneNumbController.text.isNotEmpty;
-    final isCountrySelected = selectedCountry != null;
     setState(() {
-      isButtonEnabled =
-          isNameFilled &&
-          isEmailFilled &&
-          isPasswordFilled &&
-          isPhoneNumbFilled &&
-          isCountrySelected;
+      isButtonEnabled = isNameFilled && isEmailFilled && isPasswordFilled;
     });
   }
 
@@ -125,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Column(
                       children: [
                         WelcomeHeaderWidget(
-                          imageURL: Assets.images.bingoLogo1.path,
+                          imageURL: Assets.images.bingologo2.path,
                           headerText1: '${loc.letsGetStarted} ',
                           headerText2: '${loc.signUp}!',
                           icon: Icons.person_add_alt_1_outlined,

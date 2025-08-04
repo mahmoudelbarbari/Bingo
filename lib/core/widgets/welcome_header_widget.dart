@@ -1,3 +1,4 @@
+import 'package:bingo/core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeHeaderWidget extends StatelessWidget {
@@ -19,9 +20,9 @@ class WelcomeHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 10),
-        Image.asset(imageURL),
-        SizedBox(height: 10),
+        SizedBox(height: 10.h),
+        Image.asset(imageURL, width: 200.w, height: 200.h),
+        SizedBox(height: 10.h),
         RichText(
           text: TextSpan(
             text: headerText1,

@@ -32,6 +32,10 @@ class $AssetsImagesGen {
   AssetGenImage get bingoLogo1 =>
       const AssetGenImage('assets/images/bingo-logo1.png');
 
+  /// File path: assets/images/bingologo2.png
+  AssetGenImage get bingologo2 =>
+      const AssetGenImage('assets/images/bingologo2.png');
+
   /// File path: assets/images/buyer_img.png
   AssetGenImage get buyerImg =>
       const AssetGenImage('assets/images/buyer_img.png');
@@ -181,6 +185,7 @@ class $AssetsImagesGen {
     addFileIcon,
     bingoLogo,
     bingoLogo1,
+    bingologo2,
     buyerImg,
     cart,
     cartEmptyImage,

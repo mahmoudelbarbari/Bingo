@@ -1,3 +1,4 @@
+import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custom_divider_widget.dart';
 import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/core/widgets/custom_text_button.dart';
@@ -86,19 +87,19 @@ class _LoginScreenState extends State<LoginScreen> {
               }
             },
             builder: (context, state) {
-              final sizeBox = SizedBox(height: 24);
+              final sizeBox = SizedBox(height: 24.h);
               return Form(
                 key: _keyform,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 15,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15.w,
+                      vertical: 15.h,
                     ),
                     child: Column(
                       children: [
                         WelcomeHeaderWidget(
-                          imageURL: Assets.images.bingoLogo1.path,
+                          imageURL: Assets.images.bingologo2.path,
                           headerText1: '${loc.greateToSeeYouHere} ',
                           headerText2: '${loc.back} !👋',
                           headerSubText: loc.justLogInAndHavefun,
