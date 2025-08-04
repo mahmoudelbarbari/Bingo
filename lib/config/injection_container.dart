@@ -17,6 +17,11 @@ import 'package:bingo/features/chatbot/data/datasource/chat_bot_datasource.dart'
 import 'package:bingo/features/chatbot/data/repo/chat_repo_impl.dart';
 import 'package:bingo/features/chatbot/domain/repo/chat_repo.dart';
 import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
+import 'package:bingo/features/home/data/datasource/home_datasource.dart';
+import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
+import 'package:bingo/features/home/domain/repo/home_repo.dart';
+import 'package:bingo/features/home/domain/usecase/get_all_categories_usecase.dart';
+import 'package:bingo/features/home/presentaion/cubit/home_cubit.dart';
 import 'package:bingo/features/profile/data/datasource/product_datasource.dart';
 import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
 import 'package:bingo/features/profile/data/repo/product_repo_impl.dart';
@@ -157,9 +162,7 @@ void init() async {
   //-----------------------------------------------------------------------------------------
   //profile datasource
   sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl(sl()));
-  sl.registerLazySingleton<ProductDatasource>(
-    () => ProductDatasourceImpl(sl()),
-  );
+  sl.registerLazySingleton<ProductDatasource>(() => ProductDatasourceImpl());
   //repo
   sl.registerLazySingleton<UserRepo>(() => UserRepoImpl());
   sl.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()));
@@ -246,4 +249,21 @@ void init() async {
 
   //cubit
   sl.registerLazySingleton<ShopCubit>(() => ShopCubit());
+
+  //-----------------------------------------------------------------------------------------
+  // home feature (injection).
+  //-----------------------------------------------------------------------------------------
+  //home datasource
+  sl.registerLazySingleton<HomeDatasource>(() => HomeDatasourceImpl());
+
+  //home repo
+  sl.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(sl()));
+
+  //home usecases
+  sl.registerLazySingleton<GetAllCategoriesUsecase>(
+    () => GetAllCategoriesUsecase(sl<HomeRepo>()),
+  );
+
+  //home cubit
+  sl.registerLazySingleton<HomeCubit>(() => HomeCubit());
 }

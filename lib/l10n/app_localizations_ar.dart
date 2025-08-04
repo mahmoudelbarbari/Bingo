@@ -69,7 +69,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forgotPassword => 'هل نسيت كلمة المرور؟';
 
   @override
-  String get remmberMe => 'Remember Me';
+  String get remmberMe => 'تذكرني';
 
   @override
   String get or => 'أو';
@@ -589,4 +589,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get yourPhoneNumb => 'رقم هاتفك';
+
+  @override
+  String get categoriesSelected => 'الفئات المحددة';
+
+  @override
+  String get phoneNumbIsRequired => 'رقم الهاتف مطلوب';
+
+  @override
+  String get enterValidPhoneNumber => 'أدخل رقم الهاتف الصحيح';
+
+  @override
+  String get pleaseSelectACountry => 'الرجاء اختيار البلد';
+
+  @override
+  String get selectCountry => 'حدد البلد';
 }

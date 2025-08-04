@@ -19,8 +19,6 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await dotenv.load(fileName: ".env");
-  // Add this debug line
-  print('🔧 Loaded AUTH_BASE_URL: ${dotenv.env['AUTH_BASE_URL']}');
   di.init();
   Bloc.observer = MyGlobalObserver();
 

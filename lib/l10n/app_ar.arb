@@ -211,5 +211,12 @@
   "takePhoto": "التقط صورة",
   "openingHours": "ساعات العمل",
   "loading": "تحميل",
-  "cancel": "إلغاء"
+  "cancel": "إلغاء",
+  "yourPhoneNumb": "رقم هاتفك",
+  "categoriesSelected": "الفئات المحددة",
+  "phoneNumbIsRequired": "رقم الهاتف مطلوب",
+  "enterValidPhoneNumber": "أدخل رقم الهاتف الصحيح",
+  "pleaseSelectACountry": "الرجاء اختيار البلد",
+  "selectCountry": "حدد البلد",
+  "remmberMe": "تذكرني"
 }

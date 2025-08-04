@@ -29,14 +29,14 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   }
 
   Future<void> verifyOtp(String otpCode) async {
-    emit(ForgotPasswordLoading());
-    try {
-      verifyOtpUseCase = sl();
-      await verifyOtpUseCase.call(otpCode);
-      emit(ForgotPasswordOtpVerified());
-    } catch (e) {
-      emit(ForgotPasswordError(e.toString()));
-    }
+    // emit(ForgotPasswordLoading());
+    // try {
+    //   verifyOtpUseCase = sl();
+    //   await verifyOtpUseCase.call(otpCode);
+    //   emit(ForgotPasswordOtpVerified());
+    // } catch (e) {
+    //   emit(ForgotPasswordError(e.toString()));
+    // }
   }
 
   Future<void> resetPassword(String email, String newPassword) async {

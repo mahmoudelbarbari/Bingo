@@ -15,6 +15,7 @@ class AccountTypePage extends StatefulWidget {
 
 class _AccountTypePageState extends State<AccountTypePage> {
   String? selectedType;
+
   // Track selected type
   void userType(String type) {
     setState(() {
@@ -24,11 +25,8 @@ class _AccountTypePageState extends State<AccountTypePage> {
 
   void continueToNext() {
     if (selectedType != null) {
-      if (selectedType == 'Buyer') {
-        Navigator.pushNamed(context, '/bottomNavBar');
-      } else {
-        Navigator.pushNamed(context, '/addSeller');
-      }
+      print(selectedType);
+      Navigator.pushNamed(context, '/register', arguments: selectedType);
     }
   }
 
@@ -50,10 +48,14 @@ class _AccountTypePageState extends State<AccountTypePage> {
             options: [
               UserTypeOption(
                 text: loc.seller,
+                displayText: loc.seller,
+                value: 'Seller',
                 imgPath: Assets.images.sellerImg.path,
               ),
               UserTypeOption(
                 text: loc.buyer,
+                displayText: loc.buyer,
+                value: 'Buyer',
                 imgPath: Assets.images.buyerImg.path,
               ),
             ],

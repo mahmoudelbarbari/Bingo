@@ -1246,6 +1246,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancel;
+
+  /// No description provided for @yourPhoneNumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Your phone Number'**
+  String get yourPhoneNumb;
+
+  /// No description provided for @categoriesSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories selected'**
+  String get categoriesSelected;
+
+  /// No description provided for @phoneNumbIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number is required'**
+  String get phoneNumbIsRequired;
+
+  /// No description provided for @enterValidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an valid phone number'**
+  String get enterValidPhoneNumber;
+
+  /// No description provided for @pleaseSelectACountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a country'**
+  String get pleaseSelectACountry;
+
+  /// No description provided for @selectCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Country'**
+  String get selectCountry;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

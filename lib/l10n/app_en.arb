@@ -212,5 +212,11 @@
   "takePhoto": "Take Photo",
   "openingHours": "Opening Hours",
   "loading": "Loading",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "yourPhoneNumb": "Your phone Number",
+  "categoriesSelected": "Categories selected",
+  "phoneNumbIsRequired": "Phone number is required",
+  "enterValidPhoneNumber": "Enter an valid phone number",
+  "pleaseSelectACountry": "Please select a country",
+  "selectCountry": "Select Country"
 }

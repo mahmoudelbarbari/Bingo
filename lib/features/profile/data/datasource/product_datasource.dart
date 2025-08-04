@@ -1,7 +1,6 @@
 import 'package:bingo/features/profile/data/model/product_model.dart';
 import 'package:bingo/features/profile/domain/entity/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 
 class FirebaseDatasourceProvider {
   static final _firebaseDatasourceProvider =
@@ -22,9 +21,7 @@ abstract class ProductDatasource extends FirebaseDatasourceProvider {
 }
 
 class ProductDatasourceImpl extends ProductDatasource {
-  final Dio dio;
-
-  ProductDatasourceImpl(this.dio) : super();
+  ProductDatasourceImpl() : super();
 
   @override
   Future<List<ProductEntity>> getAllProduct() async {

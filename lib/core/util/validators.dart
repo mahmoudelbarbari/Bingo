@@ -140,6 +140,22 @@ class Validators {
     return null;
   }
 
+  static String? phoneNumber(
+    BuildContext context,
+    String? value, {
+    String? message,
+  }) {
+    final loc = AppLocalizations.of(context)!;
+    if (value == null || value.trim().isEmpty) {
+      return message ?? loc.phoneNumbIsRequired;
+    }
+    final passwordRegex = RegExp(r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}');
+    if (!passwordRegex.hasMatch(value.trim())) {
+      return message ?? loc.enterValidPhoneNumber;
+    }
+    return null;
+  }
+
   static String? cardExpiryDate(String? value, {String? message}) {
     if (value == null || value.trim().isEmpty) {
       return message ?? 'Expiry date is required';

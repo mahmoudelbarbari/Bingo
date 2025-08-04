@@ -1,5 +1,6 @@
 import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:bingo/features/auth/register/presentation/cubit/register_state.dart';
+import 'package:bingo/features/auth/register/presentation/pages/widgets/register_seller_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bingo/gen/assets.gen.dart';
@@ -12,9 +13,11 @@ import 'package:bingo/features/auth/register/presentation/pages/widgets/register
 import 'package:bingo/l10n/app_localizations.dart';
 
 import '../../../login/presentation/otp_verification/otp_verification_screen.dart';
+import '../../domain/entities/countries_entity.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  final String selectType;
+  const RegisterScreen({super.key, required this.selectType});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -24,9 +27,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  late TextEditingController phoneNumbController;
   late TextEditingController confirmPasswordController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isButtonEnabled = false;
+  CountriesEntity? selectedCountry;
 
   @override
   void initState() {
@@ -34,10 +39,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    phoneNumbController = TextEditingController();
     confirmPasswordController = TextEditingController();
     nameController.addListener(_validateForm);
     emailController.addListener(_validateForm);
     passwordController.addListener(_validateForm);
+    phoneNumbController.addListener(_validateForm);
     confirmPasswordController.addListener(_validateForm);
   }
 
@@ -45,10 +52,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final isNameFilled = nameController.text.trim().isNotEmpty;
     final isEmailFilled = emailController.text.trim().isNotEmpty;
     final isPasswordFilled = passwordController.text.isNotEmpty;
-
+    final isPhoneNumbFilled = phoneNumbController.text.isNotEmpty;
+    final isCountrySelected = selectedCountry != null;
     setState(() {
-      isButtonEnabled = isNameFilled && isEmailFilled && isPasswordFilled;
+      isButtonEnabled =
+          isNameFilled &&
+          isEmailFilled &&
+          isPasswordFilled &&
+          isPhoneNumbFilled &&
+          isCountrySelected;
     });
+  }
+
+  void _onCountryChanged(CountriesEntity? country) {
+    setState(() {
+      selectedCountry = country;
+    });
+    _validateForm();
   }
 
   @override
@@ -56,6 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    phoneNumbController.dispose();
     super.dispose();
   }
 
@@ -71,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           create: (context) => RegisterCubit(),
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
-              if (state is OtpSentState) {
+              if (state is RegisterSuccessState) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -80,14 +101,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       email: emailController.text.trim(),
                       password: passwordController.text,
                     ),
-                  ),
-                );
-              } else if (state is RegisterSuccessState) {
-                showDialog(
-                  context: context,
-                  builder: (context) => CustomAlertDialog(
-                    message: state.message,
-                    isSuccess: true,
                   ),
                 );
               } else if (state is RegisterErrorState) {
@@ -119,35 +132,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           headerSubText: loc.createAnAccountToContinue,
                         ),
                         const SizedBox(height: 24),
-                        RegisterForm(
-                          nameController: nameController,
-                          emailController: emailController,
-                          passwordController: passwordController,
-                          isArabic: isArabic,
-                          confirmPasswordController: confirmPasswordController,
-                        ),
+                        widget.selectType == 'Buyer'
+                            ? RegisterForm(
+                                nameController: nameController,
+                                emailController: emailController,
+                                passwordController: passwordController,
+                                isArabic: isArabic,
+                                confirmPasswordController:
+                                    confirmPasswordController,
+                              )
+                            : RegisterSellerFormWidget(
+                                nameController: nameController,
+                                emailController: emailController,
+                                passwordController: passwordController,
+                                selectedCountry: selectedCountry,
+                                onCountryChanged: _onCountryChanged,
+                                phoneNumbController: phoneNumbController,
+                                isArabic: isArabic,
+                              ),
                         const SizedBox(height: 24),
                         ElevatedButtonWidget(
-                          fun: () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<RegisterCubit>().registerUser(
-                                nameController.text.trim(),
-                                emailController.text.trim(),
-                                passwordController.text.trim(),
-                                context,
-                              );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => OtpVerificationScreen(
-                                    name: nameController.text.trim(),
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text,
-                                  ),
-                                ),
-                              );
-                            }
-                          },
+                          fun: widget.selectType == 'Buyer'
+                              ? () {
+                                  if (_formKey.currentState!.validate()) {
+                                    context.read<RegisterCubit>().registerUser(
+                                      nameController.text.trim(),
+                                      emailController.text.trim(),
+                                      passwordController.text.trim(),
+                                      context,
+                                    );
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            OtpVerificationScreen(
+                                              name: nameController.text.trim(),
+                                              email: emailController.text
+                                                  .trim(),
+                                              password: passwordController.text,
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                }
+                              : () {
+                                  print(
+                                    'This is will be the implementation of the riger seller',
+                                  );
+                                },
                           text: loc.signUp,
                           isColored: isButtonEnabled,
                           isEnabled: isButtonEnabled,

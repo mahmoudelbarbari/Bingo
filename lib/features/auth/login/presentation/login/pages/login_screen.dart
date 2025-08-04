@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         sizeBox,
                         TextButtonWidget(
                           fun: () {
-                            Navigator.pushNamed(context, '/register');
+                            Navigator.pushNamed(context, '/accountType');
                           },
                           text1: loc.dontHaveAnAccount,
                           text2: loc.signUp,

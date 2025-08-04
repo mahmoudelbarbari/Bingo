@@ -7,7 +7,7 @@ abstract class RemoteLoginDatasource {
   Future<LoginBaseResponse> remoteLoginUser(String email, String password);
   Future<void> resetPassword(String email, String newPassword);
   Future<void> sendOTP(String email);
-  Future<bool> verifyOtp(String email);
+  Future<bool> verifyOtp(String name, String email, String password, int otp);
 }
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
@@ -69,9 +69,17 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
   }
 
   @override
-  Future<bool> verifyOtp(String email) async {
+  Future<bool> verifyOtp(
+    String name,
+    String email,
+    String password,
+    int otp,
+  ) async {
     try {
-      await _dio.post('verify-user', data: {'email': email});
+      await _dio.post(
+        'verify-user',
+        data: {'name': name, 'email': email, 'password': password, 'otp': otp},
+      );
       return true;
     } catch (e) {
       throw Exception('Failed to verify OTP: $e');

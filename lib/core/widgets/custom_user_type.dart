@@ -22,14 +22,14 @@ class _UserTypeSelectorState extends State<UserTypeSelector> {
   Widget build(BuildContext context) {
     return Column(
       children: widget.options.map((option) {
-        final isSelected = option.text == selectedType;
+        final isSelected = option.value == selectedType;
 
         return GestureDetector(
           onTap: () {
             setState(() {
-              selectedType = option.text;
+              selectedType = option.value;
             });
-            widget.onSelected(option.text);
+            widget.onSelected(option.value);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class _UserTypeSelectorState extends State<UserTypeSelector> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  option.text,
+                  option.displayText,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -66,7 +66,14 @@ class _UserTypeSelectorState extends State<UserTypeSelector> {
 
 class UserTypeOption {
   final String text;
+  final String displayText;
+  final String value;
   final String imgPath;
 
-  UserTypeOption({required this.text, required this.imgPath});
+  UserTypeOption({
+    required this.text,
+    required this.displayText,
+    required this.value,
+    required this.imgPath,
+  });
 }

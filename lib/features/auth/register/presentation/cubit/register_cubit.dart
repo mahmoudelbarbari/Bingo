@@ -1,5 +1,4 @@
 import 'package:bingo/features/auth/login/domain/usecases/sent_otp_usecase.dart';
-import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/auth/register/domain/usecases/add_seller_data_usecase.dart';
 import 'package:bingo/features/auth/register/domain/usecases/firebase_register_usecase.dart';
 import 'package:flutter/material.dart';
@@ -74,37 +73,22 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String name,
     required String email,
     required String password,
-    required BuildContext context,
-    required SellerAccountModel sellerAccountModel,
+    required int otp,
   }) async {
     verifyOtpUsecase = sl();
-    firebaseRegisterUsecase = sl();
-    addSellerDataUsecase = sl();
+
     try {
       emit(OtpVerificationLoadingState());
 
       // Verify OTP
-      final isvrified = await verifyOtpUsecase.call(email);
+      final isvrified = await verifyOtpUsecase.call(name, email, password, otp);
       if (isvrified) {
         emit(
-          OtpVerificationErrorState(
-            errorMessage: 'Please verify your email first',
+          OtpVerificationSuccessState(
+            "Registration completed successfully! Welcome $name",
           ),
         );
-        return;
       }
-      // Create user with email and password
-      final userCredential = await firebaseRegisterUsecase.call(
-        email,
-        password,
-      );
-      final updatedModel = SellerAccountModel(
-        id: userCredential.user!.uid,
-        name: name,
-        email: email,
-      );
-      // Save user data to Firestore
-      await addSellerDataUsecase.call(updatedModel);
 
       emit(
         OtpVerificationSuccessState(

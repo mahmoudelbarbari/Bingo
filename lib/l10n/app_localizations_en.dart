@@ -589,4 +589,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get yourPhoneNumb => 'Your phone Number';
+
+  @override
+  String get categoriesSelected => 'Categories selected';
+
+  @override
+  String get phoneNumbIsRequired => 'Phone number is required';
+
+  @override
+  String get enterValidPhoneNumber => 'Enter an valid phone number';
+
+  @override
+  String get pleaseSelectACountry => 'Please select a country';
+
+  @override
+  String get selectCountry => 'Select Country';
 }

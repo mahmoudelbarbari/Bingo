@@ -29,7 +29,9 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/loginScreen': (context) => const LoginScreen(),
   '/forgetPassword': (context) => const ForgetPassScreen(),
   '/createPassword': (context) => const CreateNewPasswordScreen(),
-  '/register': (context) => const RegisterScreen(),
+  '/register': (context) => RegisterScreen(
+    selectType: ModalRoute.of(context)!.settings.arguments as String,
+  ),
   '/otpVerify': (context) => OtpVerificationScreen(
     name: ModalRoute.of(context)!.settings.arguments as String,
     email: ModalRoute.of(context)!.settings.arguments as String,

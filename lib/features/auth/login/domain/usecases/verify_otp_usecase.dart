@@ -5,7 +5,7 @@ class VerifyOtpUsecase {
 
   VerifyOtpUsecase(this._loginRepository);
 
-  Future<bool> call(String email) async {
-    return await _loginRepository.verifyOtp(email);
+  Future<bool> call(String name, String email, String password, int otp) async {
+    return await _loginRepository.verifyOtp(name, email, password, otp);
   }
 }

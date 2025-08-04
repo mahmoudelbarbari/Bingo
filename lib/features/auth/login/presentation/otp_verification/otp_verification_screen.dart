@@ -22,7 +22,7 @@ class OtpVerificationScreen extends StatefulWidget {
 
   const OtpVerificationScreen({
     super.key,
-    this.otpLength = 5,
+    this.otpLength = 4,
     required this.email,
     required this.name,
     required this.password,
@@ -57,11 +57,17 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       (_) => TextEditingController(),
     );
     _focusNodes = List.generate(widget.otpLength, (_) => FocusNode());
+
+    // Add listeners to update button state
+    for (final controller in _controllers) {
+      controller.addListener(_updateButtonState);
+    }
   }
 
   @override
   void dispose() {
     for (final controller in _controllers) {
+      controller.removeListener(_updateButtonState);
       controller.dispose();
     }
     for (final node in _focusNodes) {
@@ -88,13 +94,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     _updateButtonState();
   }
 
-  // String get _enteredOtp => _controllers.map((e) => e.text).join();
-
-  // void _onVerifyPressed(BuildContext context) {
-  //   final otp = _enteredOtp;
-  //   context.read<ForgotPasswordCubit>().verifyOtp(otp);
-  // }
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -102,6 +101,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       listener: (context, state) {
         if (state is OtpVerificationSuccessState) {
           showAppSnackBar(context, "OTP verified successfully!");
+          Navigator.pushNamed(context, '/bottomNavBar');
           // Navigate to next screen
         } else if (state is OtpVerificationErrorState) {
           showAppSnackBar(
@@ -142,10 +142,29 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     builder: (context, state) {
                       return ElevatedButtonWidget(
                         text: loc.send,
-                        // fun: () => _onVerifyPressed(context),
                         fun: () {
-                          Navigator.pushNamed(context, '/accountType');
+                          final otpString = _controllers
+                              .map((controller) => controller.text)
+                              .join();
+                          final otp = int.tryParse(otpString);
+                          if (otp != null) {
+                            context.read<RegisterCubit>().verifyOtpAndRegister(
+                              name: widget.name,
+                              email: widget.email,
+                              password: widget.password,
+                              otp: otp,
+                            );
+                          } else {
+                            showAppSnackBar(
+                              context,
+                              'Please enter a valid OTP',
+                              isError: true,
+                            );
+                          }
                         },
+                        // fun: () {
+                        //   Navigator.pushNamed(context, '/accountType');
+                        // },
                         isColored: isButtonEnabled,
                         isEnabled: isButtonEnabled,
                       );
