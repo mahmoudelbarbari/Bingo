@@ -32,7 +32,7 @@ class _WelcomeSplashScreenState extends State<WelcomeSplashScreen> {
             padding: const EdgeInsets.only(top: 60.0),
             child: Center(
               child: Image.asset(
-                Assets.images.bingoLogo1.path,
+                Assets.images.bingologo2.path,
                 fit: BoxFit.contain,
               ),
             ),

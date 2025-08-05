@@ -3,7 +3,6 @@ import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class RemoteRegisterDatasource {
   Future<RegisterBaseResponse> remoteRegisterUser(
@@ -12,8 +11,11 @@ abstract class RemoteRegisterDatasource {
     String password,
   );
 
-  Future<UserCredential> firebaseRegister(String email, String password);
-  Future<BaseResponse> addSellerData(SellerAccountModel sellerAccountModel);
+  Future<BaseResponse> registerSeller(SellerAccountModel sellerAccountModel);
+  Future<bool> verifySellerOTP(
+    SellerAccountModel sellerAccountModel,
+    String otp,
+  );
   Future<void> signOut();
 }
 
@@ -64,53 +66,97 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
   }
 
   @override
-  Future<BaseResponse> addSellerData(
-    SellerAccountModel sellerAccountModel,
-  ) async {
-    try {
-      // await firebaseFirestore
-      //     .collection('sellers')
-      //     .doc(sellerAccountModel.id)
-      //     .set({
-      //       'id': sellerAccountModel.id,
-      //       "name": sellerAccountModel.name,
-      //       "email": sellerAccountModel.email,
-      //       "country": sellerAccountModel.country,
-      //       "phoneNum": sellerAccountModel.phoneNum,
-      //       'createdAt': FieldValue.serverTimestamp(),
-      //       'isPhoneVerified': true,
-      //     });
-      return BaseResponse(status: true, message: 'Seller added Successfully');
-    } catch (e) {
-      return BaseResponse(
-        status: false,
-        message: 'Failed to save user data: $e',
-      );
-    }
-  }
-
-  @override
-  Future<UserCredential> firebaseRegister(String email, String password) async {
-    try {
-      // Delete the temporary user
-      if (_temporaryUserId != null) {
-        // await auth.currentUser?.delete();
-      }
-      throw Exception();
-      // return await auth.createUserWithEmailAndPassword(
-      //   email: email,
-      //   password: password,
-      // );
-    } catch (e) {
-      throw Exception('Failed to create user: $e');
-    }
-  }
-
-  @override
   Future<void> signOut() async {
     // await auth.signOut();
   }
 
-  String? _temporaryUserId;
-  String? get temporaryUserId => _temporaryUserId;
+  @override
+  Future<BaseResponse> registerSeller(
+    SellerAccountModel sellerAccountModel,
+  ) async {
+    try {
+      final response = await _dio.post(
+        'seller-registration',
+        data: {
+          'name': sellerAccountModel.name,
+          'email': sellerAccountModel.email,
+          'phone_number': sellerAccountModel.phoneNum,
+          'password': sellerAccountModel.password,
+          'country': sellerAccountModel.country,
+        },
+      );
+      if (response.statusCode == 200) {
+        return BaseResponse(
+          status: true,
+          message: 'Seller registratedsuccessfully',
+        );
+      } else {
+        return BaseResponse(
+          status: false,
+          message: 'Unexpected response status: ${response.statusCode}',
+        );
+      }
+    } on DioException catch (e) {
+      String errorMessage = 'Registration Failed';
+      if (e.response != null && e.response?.data != null) {
+        errorMessage = e.response?.data['error'] ?? e.message;
+      } else {
+        errorMessage = e.message ?? '';
+      }
+      return BaseResponse(status: false, message: errorMessage);
+    } catch (e) {
+      return BaseResponse(status: false, message: 'Unexpected error: $e');
+    }
+  }
+
+  @override
+  Future<bool> verifySellerOTP(
+    SellerAccountModel sellerAccountModel,
+    String otp,
+  ) async {
+    try {
+      final response = await _dio.post(
+        'verify-seller',
+        data: {
+          'name': sellerAccountModel.name,
+          'email': sellerAccountModel.email,
+          'phone_number': sellerAccountModel.phoneNum,
+          'password': sellerAccountModel.password,
+          'country': sellerAccountModel.country,
+          'otp': otp,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return true;
+      } else {
+        // Handle non-success status codes
+        String errorMessage = 'Verification failed';
+        if (response.data != null && response.data['message'] != null) {
+          errorMessage = response.data['message'];
+        } else if (response.data != null && response.data['error'] != null) {
+          errorMessage = response.data['error'];
+        }
+        throw Exception(errorMessage);
+      }
+    } on DioException catch (e) {
+      String errorMessage = 'Failed to verify OTP';
+
+      if (e.response != null && e.response?.data != null) {
+        // Extract error message from response
+        if (e.response?.data['message'] != null) {
+          errorMessage = e.response?.data['message'];
+        } else if (e.response?.data['error'] != null) {
+          errorMessage = e.response?.data['error'];
+        } else if (e.response?.statusCode == 400) {
+          errorMessage = 'Invalid OTP or user data';
+        }
+      } else {
+        errorMessage = e.message ?? 'Network error occurred';
+      }
+
+      throw Exception(errorMessage);
+    } catch (e) {
+      throw Exception('Unexpected error: $e');
+    }
+  }
 }

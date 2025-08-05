@@ -1,7 +1,7 @@
 class ShopEntity {
   final String? id;
-  final String? image;
   final String? name;
+  final String? address;
   final String? bio;
   final List<String>? category;
   final String? openingHours;
@@ -10,8 +10,8 @@ class ShopEntity {
 
   ShopEntity({
     this.id,
-    this.image,
     this.name,
+    this.address,
     this.bio,
     this.category,
     this.openingHours,

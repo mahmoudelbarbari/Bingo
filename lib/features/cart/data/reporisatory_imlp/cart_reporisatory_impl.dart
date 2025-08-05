@@ -1,6 +1,6 @@
 import 'package:bingo/features/cart/data/datasource/cart_datasource.dart';
 import 'package:bingo/features/cart/domain/reporisatory/cart_reporisatory.dart';
-import 'package:bingo/features/profile/data/model/product_model.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 
 import '../../../../core/util/base_response.dart';
 

@@ -1,5 +1,5 @@
 import 'package:bingo/features/cart/domain/reporisatory/cart_reporisatory.dart';
-import 'package:bingo/features/profile/data/model/product_model.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 
 class ViewOrderUsecase {
   final CartReporisatoryInterface cartReporisatoryInterface;

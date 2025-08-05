@@ -7,10 +7,10 @@ import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
 import 'package:bingo/features/auth/register/data/reporisatory/register_reporisatory_impl.dart';
 import 'package:bingo/features/auth/register/domain/repositories/register_repository.dart';
-import 'package:bingo/features/auth/register/domain/usecases/add_seller_data_usecase.dart';
-import 'package:bingo/features/auth/register/domain/usecases/firebase_register_usecase.dart';
+import 'package:bingo/features/auth/register/domain/usecases/register_seller_account.dart';
 import 'package:bingo/features/auth/register/domain/usecases/register_usecase.dart';
 import 'package:bingo/features/auth/register/domain/usecases/sign_out_usecase.dart';
+import 'package:bingo/features/auth/register/domain/usecases/verify_otp_seller_usecase.dart';
 import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:bingo/features/cart/domain/usecase/delete_item_by_id_usecase.dart';
 import 'package:bingo/features/chatbot/data/datasource/chat_bot_datasource.dart';
@@ -22,21 +22,23 @@ import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
 import 'package:bingo/features/home/domain/repo/home_repo.dart';
 import 'package:bingo/features/home/domain/usecase/get_all_categories_usecase.dart';
 import 'package:bingo/features/home/presentaion/cubit/home_cubit.dart';
-import 'package:bingo/features/profile/data/datasource/product_datasource.dart';
+import 'package:bingo/features/product/data/datasource/product_datasource.dart';
 import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
-import 'package:bingo/features/profile/data/repo/product_repo_impl.dart';
+import 'package:bingo/features/product/data/repo/product_repo_impl.dart';
 import 'package:bingo/features/profile/data/repo/user_repo_impl.dart';
-import 'package:bingo/features/profile/domain/repo/product_repo.dart';
+import 'package:bingo/features/product/domain/repo/product_repo.dart';
 import 'package:bingo/features/profile/domain/repo/user_repo.dart';
+import 'package:bingo/features/product/domain/usecase/add_product_usecase.dart';
 import 'package:bingo/features/profile/domain/usecases/get_current_user_usecase.dart';
-import 'package:bingo/features/profile/domain/usecases/get_products_usecase.dart';
-import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
+import 'package:bingo/features/product/domain/usecase/get_products_usecase.dart';
+import 'package:bingo/features/product/presentation/cubit/product_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
 import 'package:bingo/features/shops/data/datasource/shop_datasource.dart';
 import 'package:bingo/features/shops/data/reporisatory/shop_repo_impl.dart';
 import 'package:bingo/features/shops/domain/repo/shops_repo.dart';
+import 'package:bingo/features/shops/domain/usecase/add_shop_image.dart';
 import 'package:bingo/features/shops/domain/usecase/add_shop_usecase.dart';
 import 'package:bingo/features/shops/presentation/cubit/shop_cubit.dart';
 import 'package:dio/dio.dart';
@@ -71,7 +73,6 @@ void init() async {
 
   // firebase db
   sl.registerLazySingleton(() => FirebaseDatabseProvider());
-
   // localization preference and cubit
   sl.registerLazySingleton(() => LanguagePreference());
   sl.registerFactory(() => LanguageCubit(sl()));
@@ -126,12 +127,12 @@ void init() async {
   // register usecase
   sl.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(sl()));
 
-  sl.registerLazySingleton<AddSellerDataUsecase>(
-    () => AddSellerDataUsecase(sl()),
+  sl.registerLazySingleton<RegisterSellerAccount>(
+    () => RegisterSellerAccount(sl()),
   );
 
-  sl.registerLazySingleton<FirebaseRegisterUsecase>(
-    () => FirebaseRegisterUsecase(sl()),
+  sl.registerLazySingleton<VerifyOtpSellerUsecase>(
+    () => VerifyOtpSellerUsecase(sl()),
   );
 
   sl.registerLazySingleton<SignOutUsecase>(() => SignOutUsecase(sl()));
@@ -172,9 +173,11 @@ void init() async {
     () => GetCurrentUserUsecase(sl()),
   );
   sl.registerLazySingleton<GetProductsUsecase>(() => GetProductsUsecase(sl()));
+
+  sl.registerLazySingleton<AddProductUsecase>(() => AddProductUsecase(sl()));
   // profile cubit
   sl.registerLazySingleton<UserCubit>(() => UserCubit());
-  sl.registerLazySingleton<ProductCubit>(() => ProductCubit(sl()));
+  sl.registerLazySingleton<ProductCubit>(() => ProductCubit());
 
   //-----------------------------------------------------------------------------------------
   // Cart feature (injection).
@@ -246,6 +249,8 @@ void init() async {
   sl.registerLazySingleton<AddShopUsecase>(
     () => AddShopUsecase(sl<ShopsRepo>()),
   );
+
+  sl.registerLazySingleton<AddShopImage>(() => AddShopImage(sl<ShopsRepo>()));
 
   //cubit
   sl.registerLazySingleton<ShopCubit>(() => ShopCubit());

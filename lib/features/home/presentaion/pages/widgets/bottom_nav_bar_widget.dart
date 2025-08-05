@@ -3,7 +3,6 @@
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
-import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widget.dart';
@@ -30,7 +29,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    LoginScreen(),
+    SafeArea(child: Text('data')),
     Container(), // Placeholder for Add button
     BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
     BlocProvider(create: (_) => UserCubit(), child: const ProfileScreen()),

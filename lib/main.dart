@@ -1,4 +1,5 @@
 import 'package:bingo/app/di/provider_setup.dart';
+import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/firebase_options.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
                 routes: appRoutes,
                 builder: (context, child) {
                   final locale = Localizations.localeOf(context);
+                  SizeConfig.init(context);
                   return Directionality(
                     textDirection: locale.languageCode == 'ar'
                         ? TextDirection.rtl

@@ -109,7 +109,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             '${loc.error}: ${state.errorMessage}',
             isError: true,
           );
-          // Navigator.pushNamed(context, '/createPassword', arguments: email);
         }
       },
       child: Scaffold(
@@ -162,9 +161,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                             );
                           }
                         },
-                        // fun: () {
-                        //   Navigator.pushNamed(context, '/accountType');
-                        // },
                         isColored: isButtonEnabled,
                         isEnabled: isButtonEnabled,
                       );

@@ -1,4 +1,4 @@
-import 'package:bingo/features/profile/data/model/product_model.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ViewOrderWidget extends StatelessWidget {
@@ -37,7 +37,7 @@ class ViewOrderWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        menuModel[index].name ?? '',
+                        menuModel[index].title ?? '',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),

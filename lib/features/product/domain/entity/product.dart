@@ -1,14 +1,15 @@
 class ProductEntity {
   final String? id;
-  final String? name;
+  final String? shopId;
+  final String? title;
   final String? shortDescription;
-  final String? tags;
+  final List<String>? tags;
   final String? warranty;
   final String? slug;
   final String? brand;
   final List<String>? colors;
-  final String? customProperties;
-  final bool? cashOnDelivery;
+  final Map<String, dynamic>? customProperties;
+  final String? cashOnDelivery;
   final String? category;
   final String? subCategory;
   final String? detailedDesc;
@@ -17,10 +18,12 @@ class ProductEntity {
   final double? salePrice;
   final int? stock;
   final List<String>? sizes;
-  final String? image;
+  final List<String>? image;
+
   ProductEntity({
     this.id,
-    this.name,
+    this.shopId,
+    this.title,
     this.shortDescription,
     this.tags,
     this.warranty,

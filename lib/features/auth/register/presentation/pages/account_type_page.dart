@@ -25,7 +25,6 @@ class _AccountTypePageState extends State<AccountTypePage> {
 
   void continueToNext() {
     if (selectedType != null) {
-      print(selectedType);
       Navigator.pushNamed(context, '/register', arguments: selectedType);
     }
   }

@@ -61,54 +61,79 @@ class _MultiSelectCategoriesDropdownState
                         : '${widget.selectedCategories.length} ${loc.categoriesSelected}',
                   ),
                   children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.categories.categories.length,
-                      itemBuilder: (context, index) {
-                        final category = state.categories.categories[index];
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: state.categories.categories.map((category) {
                         final isSelected = widget.selectedCategories.contains(
                           category,
                         );
-                        final subCategories =
-                            state.categories.subCategories[category] ?? [];
-
-                        return ExpansionTile(
-                          title: CheckboxListTile(
-                            title: Text(category),
-                            value: isSelected,
-                            onChanged: (bool? value) {
-                              final newSelection = List<String>.from(
-                                widget.selectedCategories,
-                              );
-
-                              if (value == true) {
-                                newSelection.add(category);
-                              } else {
-                                newSelection.remove(category);
-                              }
-
-                              widget.onCategoriesChanged(newSelection);
-                            },
-                            controlAffinity: ListTileControlAffinity.leading,
-                          ),
-                          children: subCategories.map((subCategory) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 32.0),
-                              child: ListTile(
-                                title: Text(
-                                  subCategory,
-                                  style: const TextStyle(fontSize: 14),
-                                ),
-                                leading: const Icon(
-                                  Icons.subdirectory_arrow_right,
-                                  size: 16,
-                                ),
-                              ),
+                        return FilterChip(
+                          label: Text(category),
+                          selected: isSelected,
+                          onSelected: (selected) {
+                            final newSelection = List<String>.from(
+                              widget.selectedCategories,
                             );
-                          }).toList(),
+                            if (selected) {
+                              newSelection.add(category);
+                            } else {
+                              newSelection.remove(category);
+                            }
+                            widget.onCategoriesChanged(newSelection);
+                          },
                         );
-                      },
+                      }).toList(),
                     ),
+
+                    // ListView.builder(
+                    //   shrinkWrap: true,
+                    //   itemCount: state.categories.categories.length,
+                    //   itemBuilder: (context, index) {
+                    //     final category = state.categories.categories[index];
+                    //     final isSelected = widget.selectedCategories.contains(
+                    //       category,
+                    //     );
+                    //     final subCategories =
+                    //         state.categories.subCategories[category] ?? [];
+
+                    //     return ExpansionTile(
+                    //       title: CheckboxListTile(
+                    //         title: Text(category),
+                    //         value: isSelected,
+                    //         onChanged: (bool? value) {
+                    //           final newSelection = List<String>.from(
+                    //             widget.selectedCategories,
+                    //           );
+
+                    //           if (value == true) {
+                    //             newSelection.add(category);
+                    //           } else {
+                    //             newSelection.remove(category);
+                    //           }
+
+                    //           widget.onCategoriesChanged(newSelection);
+                    //         },
+                    //         controlAffinity: ListTileControlAffinity.leading,
+                    //       ),
+                    //       children: subCategories.map((subCategory) {
+                    //         return Padding(
+                    //           padding: const EdgeInsets.only(left: 32.0),
+                    //           child: ListTile(
+                    //             title: Text(
+                    //               subCategory,
+                    //               style: const TextStyle(fontSize: 14),
+                    //             ),
+                    //             leading: const Icon(
+                    //               Icons.subdirectory_arrow_right,
+                    //               size: 16,
+                    //             ),
+                    //           ),
+                    //         );
+                    //       }).toList(),
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
               ),

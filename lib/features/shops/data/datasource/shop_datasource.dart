@@ -1,53 +1,77 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/core/util/base_response.dart';
+import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/shops/data/models/shop_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dio/dio.dart';
 
-class FirebaseDatasourceProvider {
-  static final _firebaseDatasourceProvider =
-      FirebaseDatasourceProvider._internal();
+abstract class ShopDatasource {
+  final Dio _dio = createDio(ApiTarget.seller);
 
-  factory FirebaseDatasourceProvider() {
-    return _firebaseDatasourceProvider;
-  }
+  ShopDatasource();
 
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Future<BaseResponse> addShop(
+    ShopModel shopModel,
+    SellerAccountModel sellerAccountModel,
+  );
 
-  FirebaseDatasourceProvider._internal();
-}
-
-abstract class ShopDatasource extends FirebaseDatasourceProvider {
-  ShopDatasource() : super._internal();
-
-  Future<BaseResponse> addShop(ShopModel shopModel, File imageFile);
+  Future<void> addShopImage(File imageFile);
 }
 
 class ShopDatasourceImpl extends ShopDatasource {
   @override
-  Future<BaseResponse> addShop(ShopModel shopModel, File imageFile) async {
+  Future<BaseResponse> addShop(
+    ShopModel shopModel,
+    SellerAccountModel sellerAccountModel,
+  ) async {
+    try {
+      final response = await _dio.post(
+        'create-shop',
+        data: {
+          'name': shopModel.name,
+          'address': shopModel.address,
+          'opening_hours': shopModel.openingHours,
+          'bio': shopModel.bio,
+          'category': shopModel.category,
+          'email': sellerAccountModel.email,
+          'phone_number': sellerAccountModel.phoneNum,
+          'country': sellerAccountModel.country,
+          'sellerId': sellerAccountModel.id,
+        },
+      );
+      if (response.statusCode == 200) {
+        return BaseResponse(status: true, message: 'Shop Added Successfully');
+      } else {
+        return BaseResponse(
+          status: false,
+          message: 'Failed to add shop: ${response.statusMessage}',
+        );
+      }
+    } catch (e) {
+      return throw (message: 'Failed to add shop: $e');
+    }
+  }
+
+  @override
+  Future<void> addShopImage(File imageFile) async {
     try {
       // Read image as bytes
-
       final bytes = await imageFile.readAsBytes();
       // Convert to base64
       final base64Image = base64Encode(bytes);
-
-      await firebaseFirestore.collection('shops').doc().set({
-        'name': shopModel.name,
-        'bio': shopModel.bio,
-        'category': shopModel.category,
-        'openingHours': shopModel.openingHours,
-        'rating': '0.0',
-        'sellerId': shopModel.sellerId,
-        'imageBase64': base64Image,
-      });
-      return BaseResponse(status: true, message: 'Shop Added Successfully');
+      final response = await _dio.post(
+        'upload-image',
+        data: {'image': base64Image},
+      );
+      if (response.statusCode == 200) {
+        print('Image upload success');
+      } else {
+        throw ("Faild to upload ${response.statusMessage}");
+      }
     } catch (e) {
-      return BaseResponse(status: false, message: 'Failed to add shop: $e');
+      throw ('Unexpected error ${e.toString()}');
     }
   }
 }

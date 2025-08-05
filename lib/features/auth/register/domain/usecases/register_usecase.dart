@@ -6,8 +6,11 @@ class RegisterUsecase {
 
   RegisterUsecase(this._registerRepository);
 
-  Future<RegisterBaseResponse> call(String name, String email, String password) async {
+  Future<RegisterBaseResponse> call(
+    String name,
+    String email,
+    String password,
+  ) async {
     return await _registerRepository.remoteRegister(name, email, password);
   }
 }
-

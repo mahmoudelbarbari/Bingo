@@ -1,6 +1,8 @@
 import 'package:bingo/features/auth/login/domain/usecases/sent_otp_usecase.dart';
-import 'package:bingo/features/auth/register/domain/usecases/add_seller_data_usecase.dart';
-import 'package:bingo/features/auth/register/domain/usecases/firebase_register_usecase.dart';
+import 'package:bingo/features/auth/register/data/model/register_model.dart';
+import 'package:bingo/features/auth/register/domain/usecases/register_seller_account.dart';
+import 'package:bingo/features/auth/register/domain/usecases/verify_otp_seller_usecase.dart';
+import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bingo/core/errors/handler_request_api.dart';
@@ -12,18 +14,18 @@ import '../../../login/domain/usecases/verify_otp_usecase.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   late RegisterUsecase registerUsecase;
-  late AddSellerDataUsecase addSellerDataUsecase;
+  late RegisterSellerAccount registerSellerAccount;
   late SentOtpUsecase sentOtpUsecase;
   late VerifyOtpUsecase verifyOtpUsecase;
-  late FirebaseRegisterUsecase firebaseRegisterUsecase;
+  late VerifyOtpSellerUsecase verifyOtpSellerUsecase;
 
   RegisterCubit() : super(RegisterInitialState()) {
     // Initialize all use cases in the constructor
     registerUsecase = sl<RegisterUsecase>();
-    addSellerDataUsecase = sl<AddSellerDataUsecase>();
+    registerSellerAccount = sl<RegisterSellerAccount>();
     sentOtpUsecase = sl<SentOtpUsecase>();
     verifyOtpUsecase = sl<VerifyOtpUsecase>();
-    firebaseRegisterUsecase = sl<FirebaseRegisterUsecase>();
+    verifyOtpSellerUsecase = sl<VerifyOtpSellerUsecase>();
   }
 
   Future<void> registerUser(
@@ -68,7 +70,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  // Verify OTP and complete registration
   Future<void> verifyOtpAndRegister({
     required String name,
     required String email,
@@ -93,6 +94,71 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(
         OtpVerificationSuccessState(
           "Registration completed successfully! Welcome $name",
+        ),
+      );
+    } catch (e) {
+      emit(OtpVerificationErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> registerSeller(
+    SellerAccountModel sellerAccountModel,
+    BuildContext context,
+  ) async {
+    final sellerRegistration = RegisterSellerAccount(sl());
+
+    try {
+      final loc = AppLocalizations.of(context)!;
+      emit(RegisterLoadingState());
+      handlerRequestApi(
+        context: context,
+        body: () async {
+          final result = await sellerRegistration.call(sellerAccountModel);
+          if (result.status) {
+            return emit(
+              SellerRegisterSuccessState(
+                '${loc.welcome} ${sellerAccountModel.name}',
+              ),
+            );
+          } else {
+            return emit(
+              RegisterErrorState(
+                errorMessage: '${loc.error} : ${result.message}',
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      emit(RegisterErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> verifyOtpSeller({
+    required SellerAccountModel sellerAccountModel,
+    required String otp,
+  }) async {
+    verifyOtpSellerUsecase = sl();
+
+    try {
+      emit(OtpVerificationLoadingState());
+
+      // Verify OTP
+      final isvrified = await verifyOtpSellerUsecase.call(
+        sellerAccountModel,
+        otp,
+      );
+      if (isvrified) {
+        emit(
+          SellerOtpVerificationSuccessState(
+            "Seller Registration completed successfully! Welcome ${sellerAccountModel.name}",
+          ),
+        );
+      }
+
+      emit(
+        SellerOtpVerificationSuccessState(
+          "Seller Registration completed successfully! Welcome ${sellerAccountModel.name}",
         ),
       );
     } catch (e) {

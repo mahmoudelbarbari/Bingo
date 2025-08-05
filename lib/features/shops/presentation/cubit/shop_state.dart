@@ -15,3 +15,9 @@ class ShopErrorState extends ShopState {
 }
 
 class ShopLoadingState extends ShopState {}
+
+class ImageShopSuccessState extends ShopState {
+  final String message;
+
+  ImageShopSuccessState(this.message);
+}

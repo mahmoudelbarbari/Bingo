@@ -68,6 +68,10 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
     }
   }
 
+  // ... existing code ...
+
+  // ... existing code ...
+
   @override
   Future<bool> verifyOtp(
     String name,
@@ -76,13 +80,47 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
     int otp,
   ) async {
     try {
-      await _dio.post(
-        'verify-user',
-        data: {'name': name, 'email': email, 'password': password, 'otp': otp},
-      );
-      return true;
+      final requestData = {
+        'name': name,
+        'email': email,
+        'password': password,
+        'otp': otp.toString(), // Convert to string
+      };
+
+      final response = await _dio.post('verify-user', data: requestData);
+
+      // Check if the request was successful
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return true;
+      } else {
+        // Handle non-success status codes
+        String errorMessage = 'Verification failed';
+        if (response.data != null && response.data['message'] != null) {
+          errorMessage = response.data['message'];
+        } else if (response.data != null && response.data['error'] != null) {
+          errorMessage = response.data['error'];
+        }
+        throw Exception(errorMessage);
+      }
+    } on DioException catch (e) {
+      String errorMessage = 'Failed to verify OTP';
+
+      if (e.response != null && e.response?.data != null) {
+        // Extract error message from response
+        if (e.response?.data['message'] != null) {
+          errorMessage = e.response?.data['message'];
+        } else if (e.response?.data['error'] != null) {
+          errorMessage = e.response?.data['error'];
+        } else if (e.response?.statusCode == 400) {
+          errorMessage = 'Invalid OTP or user data';
+        }
+      } else {
+        errorMessage = e.message ?? 'Network error occurred';
+      }
+
+      throw Exception(errorMessage);
     } catch (e) {
-      throw Exception('Failed to verify OTP: $e');
+      throw Exception('Unexpected error: $e');
     }
   }
 

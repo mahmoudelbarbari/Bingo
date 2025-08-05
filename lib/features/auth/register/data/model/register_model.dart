@@ -52,7 +52,6 @@ class SellerAccountModel extends SellerAccount {
       'country': country,
       'phoneNum': phoneNum,
       'stripId': stripId,
-      // ID is usually managed by Firestore document itself, so excluded
     };
   }
 

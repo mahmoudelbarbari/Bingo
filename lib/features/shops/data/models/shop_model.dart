@@ -5,9 +5,9 @@ class ShopModel extends ShopEntity {
   ShopModel({
     super.id,
     super.name,
+    super.address,
     super.bio,
     super.category,
-    super.image,
     super.openingHours,
     super.rating,
     super.sellerId,
@@ -16,7 +16,6 @@ class ShopModel extends ShopEntity {
   // Convert to Map for Firestore
   Map<String, dynamic> toMap() {
     return {
-      'image': image,
       'name': name,
       'bio': bio,
       'category': category,
@@ -31,7 +30,6 @@ class ShopModel extends ShopEntity {
   factory ShopModel.fromMap(Map<String, dynamic> map, String id) {
     return ShopModel(
       id: id,
-      image: map['image'],
       name: map['name'],
       bio: map['bio'],
       category: List<String>.from(map['category'] ?? []),
@@ -44,8 +42,8 @@ class ShopModel extends ShopEntity {
   //shop model from shop entity
   factory ShopModel.fromEntity(ShopEntity shopEntity) => ShopModel(
     id: shopEntity.id,
-    image: shopEntity.image,
     name: shopEntity.name,
+    address: shopEntity.address,
     bio: shopEntity.bio,
     category: shopEntity.category,
     openingHours: shopEntity.openingHours,

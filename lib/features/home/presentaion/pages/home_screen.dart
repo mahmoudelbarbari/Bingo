@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/custom_textfield_for_search.dart';
-import '../../../profile/presentation/cubit/product_cubit/product_cubit.dart';
+import '../../../product/presentation/cubit/product_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

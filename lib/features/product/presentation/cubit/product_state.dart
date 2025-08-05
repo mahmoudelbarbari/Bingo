@@ -1,4 +1,4 @@
-import 'package:bingo/features/profile/domain/entity/product.dart';
+import 'package:bingo/features/product/domain/entity/product.dart';
 
 abstract class ProductState {}
 
@@ -14,4 +14,15 @@ class ProductLoadedState extends ProductState {
 class ProductErrorState extends ProductState {
   ProductErrorState({required this.errorMessage});
   String errorMessage;
+}
+
+class ProductAddedSuccess extends ProductState {
+  final String message;
+
+  ProductAddedSuccess(this.message);
+}
+
+class ProductCreateError extends ProductState {
+  final String message;
+  ProductCreateError(this.message);
 }

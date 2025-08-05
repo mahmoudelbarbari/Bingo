@@ -1,6 +1,6 @@
 import 'package:bingo/features/home/presentaion/pages/widgets/all_product_widget.dart';
-import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_cubit.dart';
-import 'package:bingo/features/profile/presentation/cubit/product_cubit/product_state.dart';
+import 'package:bingo/features/product/presentation/cubit/product_cubit.dart';
+import 'package:bingo/features/product/presentation/cubit/product_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +24,7 @@ class _GetAllPeoductScreenState extends State<GetAllPeoductScreen> {
         } else if (state is ProductLoadedState) {
           return AllProductWidget(productEntity: state.productEntity);
         } else if (state is ProductErrorState) {
-          if (kDebugMode) {
-            print(state.errorMessage);
-          }
+          return const LoadingWidget();
         }
         return const LoadingWidget();
       },

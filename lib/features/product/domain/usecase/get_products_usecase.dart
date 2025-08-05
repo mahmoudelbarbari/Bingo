@@ -1,5 +1,5 @@
-import 'package:bingo/features/profile/domain/entity/product.dart';
-import 'package:bingo/features/profile/domain/repo/product_repo.dart';
+import 'package:bingo/features/product/domain/entity/product.dart';
+import 'package:bingo/features/product/domain/repo/product_repo.dart';
 
 class GetProductsUsecase {
   final ProductRepo _productRepo;

@@ -43,7 +43,15 @@ Dio createDio(ApiTarget target) {
   if (baseUrl == null || baseUrl.isEmpty) {
     throw Exception('Base URL for $target not set in .env');
   }
-  final dio = Dio(BaseOptions(baseUrl: baseUrl));
+
+  final dio = Dio(
+    BaseOptions(
+      baseUrl: baseUrl,
+      validateStatus: (status) {
+        return status != null && status < 500;
+      },
+    ),
+  );
 
   // Add detailed logging
   dio.interceptors.add(
@@ -57,5 +65,5 @@ Dio createDio(ApiTarget target) {
     ),
   );
 
-  return Dio(BaseOptions(baseUrl: baseUrl));
+  return dio;
 }

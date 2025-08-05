@@ -10,6 +10,12 @@ class RegisterSuccessState extends RegisterState {
   RegisterSuccessState(this.message);
 }
 
+class SellerRegisterSuccessState extends RegisterState {
+  final String message;
+
+  SellerRegisterSuccessState(this.message);
+}
+
 class RegisterErrorState extends RegisterState {
   final String errorMessage;
 
@@ -29,6 +35,12 @@ class OtpVerificationSuccessState extends RegisterState {
   final String message;
 
   OtpVerificationSuccessState(this.message);
+}
+
+class SellerOtpVerificationSuccessState extends RegisterState {
+  final String message;
+
+  SellerOtpVerificationSuccessState(this.message);
 }
 
 class OtpVerificationErrorState extends RegisterState {

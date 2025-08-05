@@ -1,4 +1,4 @@
-import 'package:bingo/features/profile/data/model/product_model.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 
 abstract class CartState {}
 

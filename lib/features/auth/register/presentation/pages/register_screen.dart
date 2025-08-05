@@ -1,5 +1,7 @@
+import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:bingo/features/auth/register/presentation/cubit/register_state.dart';
+import 'package:bingo/features/auth/register/presentation/pages/seller_otp_verification/seller_otp_verification_screen.dart';
 import 'package:bingo/features/auth/register/presentation/pages/widgets/register_seller_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,17 +87,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
           create: (context) => RegisterCubit(),
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
-              if (state is RegisterSuccessState) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => OtpVerificationScreen(
-                      name: nameController.text.trim(),
-                      email: emailController.text.trim(),
-                      password: passwordController.text,
+              if (state is RegisterSuccessState &&
+                  widget.selectType == 'Buyer') {
+                if (context.mounted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OtpVerificationScreen(
+                        name: nameController.text.trim(),
+                        email: emailController.text.trim(),
+                        password: passwordController.text,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
+              } else if (state is SellerRegisterSuccessState &&
+                  widget.selectType == "Seller") {
+                if (context.mounted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SellerOtpVerificationScreen(
+                        sellerAccountModel: SellerAccountModel(
+                          name: nameController.text.trim(),
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                          country: selectedCountry!.name,
+                          phoneNum: phoneNumbController.text,
+                        ),
+                      ),
+                    ),
+                  );
+                }
               } else if (state is RegisterErrorState) {
                 showDialog(
                   context: context,
@@ -154,24 +177,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       passwordController.text.trim(),
                                       context,
                                     );
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            OtpVerificationScreen(
-                                              name: nameController.text.trim(),
-                                              email: emailController.text
-                                                  .trim(),
-                                              password: passwordController.text,
-                                            ),
-                                      ),
-                                    );
                                   }
                                 }
                               : () {
-                                  print(
-                                    'This is will be the implementation of the riger seller',
-                                  );
+                                  if (selectedCountry != null &&
+                                      _formKey.currentState!.validate()) {
+                                    context
+                                        .read<RegisterCubit>()
+                                        .registerSeller(
+                                          SellerAccountModel(
+                                            name: nameController.text.trim(),
+                                            email: emailController.text.trim(),
+                                            password: passwordController.text
+                                                .trim(),
+                                            country: selectedCountry!.name,
+                                            phoneNum: phoneNumbController.text,
+                                          ),
+                                          context,
+                                        );
+                                  }
                                 },
                           text: loc.signUp,
                           isColored: isButtonEnabled,

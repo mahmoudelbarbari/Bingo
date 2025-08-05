@@ -1,11 +1,11 @@
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/card_prodcut_item_widget.dart';
-import 'package:bingo/features/profile/data/model/product_model.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:bingo/features/profile/domain/entity/product.dart';
+import 'package:bingo/features/product/domain/entity/product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../cart/presentation/cubit/cart_cubit.dart';
@@ -57,36 +57,38 @@ class _AllProductWidgetState extends State<AllProductWidget> {
             childAspectRatio: 0.7,
           ),
           itemBuilder: (context, index) {
-            return CardProdcutItemWidget(
-              cardOnTap: () => Navigator.pushNamed(
-                context,
-                '/product-details',
-                arguments: widget.productEntity[index],
-              ),
-              image: Assets.images.onboadring12.path,
-              name: widget.productEntity[index].name ?? "Product Name",
-              desc:
-                  widget.productEntity[index].shortDescription ??
-                  "short description",
-              price: widget.productEntity[index].price ?? 0.0,
-              isFavorite: favorites[index] ?? false,
-              onChanged: (value) {
-                setState(() {
-                  favorites[index] = value;
-                });
-              },
-              onTap: () {
-                showAppSnackBar(
-                  context,
-                  loc.addedToYourCart(
-                    widget.productEntity[index].name ?? 'Product Name',
-                  ),
-                );
-                context.read<CartCubit>().addProductToCart(
-                  widget.productEntity[index] as ProductModel,
-                );
-              },
-            );
+            return widget.productEntity.isNotEmpty
+                ? CardProdcutItemWidget(
+                    cardOnTap: () => Navigator.pushNamed(
+                      context,
+                      '/product-details',
+                      arguments: widget.productEntity[index],
+                    ),
+                    image: Assets.images.onboadring12.path,
+                    name: widget.productEntity[index].title ?? "Product Name",
+                    desc:
+                        widget.productEntity[index].shortDescription ??
+                        "short description",
+                    price: widget.productEntity[index].price ?? 0.0,
+                    isFavorite: favorites[index] ?? false,
+                    onChanged: (value) {
+                      setState(() {
+                        favorites[index] = value;
+                      });
+                    },
+                    onTap: () {
+                      showAppSnackBar(
+                        context,
+                        loc.addedToYourCart(
+                          widget.productEntity[index].title ?? 'Product Name',
+                        ),
+                      );
+                      context.read<CartCubit>().addProductToCart(
+                        widget.productEntity[index] as ProductModel,
+                      );
+                    },
+                  )
+                : Text('There is no product at this moment');
           },
         ),
       ],

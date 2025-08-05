@@ -3,7 +3,7 @@ import 'package:bingo/features/cart/presentation/cubit/cart_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/injection_container.dart';
-import '../../../profile/data/model/product_model.dart';
+import '../../../product/data/models/product_model.dart';
 import '../../domain/usecase/add_items_to_cart_usecase.dart';
 import '../../domain/usecase/clear_cart_items_usecase.dart';
 import '../../domain/usecase/get_all_cart_items_usecase.dart';

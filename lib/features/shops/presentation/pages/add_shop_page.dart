@@ -6,6 +6,8 @@ import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/core/widgets/custom_textfield_for_instructions.dart';
 import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/core/widgets/custome_textfield_widget.dart';
+import 'package:bingo/features/auth/register/data/model/register_model.dart';
+import 'package:bingo/features/auth/register/presentation/pages/widgets/multi_select_category_dropdown.dart';
 import 'package:bingo/features/shops/presentation/pages/shop_name_instruction_widget.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:bingo/l10n/app_localizations.dart';
@@ -17,10 +19,10 @@ import 'package:bingo/features/shops/presentation/cubit/shop_cubit.dart';
 import 'package:bingo/features/shops/presentation/cubit/shop_state.dart';
 
 import '../../../../core/service/shop_service.dart';
-import '../../../home/domain/entity/categoriy_entity.dart';
 
 class AddShopPage extends StatefulWidget {
-  const AddShopPage({super.key});
+  final SellerAccountModel sellerAccountModel;
+  const AddShopPage({super.key, required this.sellerAccountModel});
 
   @override
   State<AddShopPage> createState() => _AddShopPageState();
@@ -33,9 +35,10 @@ class _AddShopPageState extends State<AddShopPage> {
   final GlobalKey<FormState> _keyform = GlobalKey<FormState>();
   File? _selectedImage;
 
-  final availableCategories = categoryList.toList();
+  // final availableCategories = categoryList.toList();
+  // List<String> selectedCategories = [];
+  late final Function(List<String>) onCategoriesSelected;
   List<String> selectedCategories = [];
-
   void _handleImagePick(bool fromCamera) async {
     try {
       final picked = fromCamera
@@ -238,30 +241,39 @@ class _AddShopPageState extends State<AddShopPage> {
                       },
                     ),
                     sizedBox,
-                    Text(
-                      loc.selectCategories,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Wrap(
-                      spacing: 8,
-                      children: availableCategories.map((category) {
-                        final isSelected = selectedCategories.contains(
-                          category.name,
-                        );
-                        return FilterChip(
-                          label: Text(category.name),
-                          selected: isSelected,
-                          onSelected: (selected) {
-                            setState(() {
-                              if (selected) {
-                                selectedCategories.add(category.name);
-                              } else {
-                                selectedCategories.remove(category.name);
-                              }
-                            });
-                          },
-                        );
-                      }).toList(),
+                    // Text(
+                    //   loc.selectCategories,
+                    //   style: TextStyle(fontWeight: FontWeight.bold),
+                    // ),
+                    // Wrap(
+                    //   spacing: 8,
+                    //   children: availableCategories.map((category) {
+                    //     final isSelected = selectedCategories.contains(
+                    //       category.name,
+                    //     );
+                    //     return FilterChip(
+                    //       label: Text(category.name),
+                    //       selected: isSelected,
+                    //       onSelected: (selected) {
+                    //         setState(() {
+                    //           if (selected) {
+                    //             selectedCategories.add(category.name);
+                    //           } else {
+                    //             selectedCategories.remove(category.name);
+                    //           }
+                    //         });
+                    //       },
+                    //     );
+                    //   }).toList(),
+                    // ),
+                    MultiSelectCategoriesDropdown(
+                      selectedCategories: selectedCategories,
+                      onCategoriesChanged: (categories) {
+                        setState(() {
+                          selectedCategories = categories;
+                        });
+                        onCategoriesSelected(categories);
+                      },
                     ),
                     sizedBox,
                     CustomeTextfieldWidget(
@@ -280,15 +292,22 @@ class _AddShopPageState extends State<AddShopPage> {
                               context,
                               ShopEntity(
                                 id: '515',
-                                image: _selectedImage?.path,
+                                // image: _selectedImage?.path,
                                 name: _nameController.text.trim(),
                                 bio: _bioController.text.trim(),
                                 category: selectedCategories,
                                 openingHours: _openingHoursController.text
                                     .trim(),
                                 rating: '0.0',
-                                sellerId: 'current_seller_id',
                               ),
+                              SellerAccountModel(
+                                email: widget.sellerAccountModel.email,
+                                password: widget.sellerAccountModel.password,
+                                country: widget.sellerAccountModel.country,
+                                phoneNum: widget.sellerAccountModel.phoneNum,
+                              ),
+                            );
+                            context.read<ShopCubit>().addShopImage(
                               _selectedImage!,
                             );
                           }

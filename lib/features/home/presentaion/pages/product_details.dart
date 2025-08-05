@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/custom_counter_button_widget.dart';
 import '../../../../core/widgets/custome_snackbar_widget.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../profile/data/model/product_model.dart';
-import '../../../profile/domain/entity/product.dart';
+import '../../../product/data/models/product_model.dart';
+import '../../../product/domain/entity/product.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductEntity product;
@@ -44,8 +44,9 @@ class _ProductDetailsState extends State<ProductDetails> {
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
                 (widget.product.image != null &&
-                        widget.product.image!.isNotEmpty)
-                    ? widget.product.image ?? ''
+                        widget.product.image is String &&
+                        (widget.product.image as String).isNotEmpty)
+                    ? widget.product.image as String
                     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQinI_44p5jN05YioLyPBhn_1j5tsl7q85rfA&s',
                 width: double.infinity,
                 height: 300.h,
@@ -54,7 +55,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             SizedBox(height: 16.h),
             Text(
-              widget.product.name ?? '',
+              widget.product.title ?? '',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Divider(thickness: 0.5),
@@ -153,7 +154,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       showAppSnackBar(
                         context,
                         loc.addedToYourCart(
-                          widget.product.name ?? 'Product Name',
+                          widget.product.title ?? 'Product Name',
                         ),
                       );
                       context.read<CartCubit>().addProductToCart(
