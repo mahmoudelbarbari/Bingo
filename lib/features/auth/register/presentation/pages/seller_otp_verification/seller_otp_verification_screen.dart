@@ -98,7 +98,7 @@ class _SellerOtpVerificationScreenState
     final loc = AppLocalizations.of(context)!;
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        if (state is OtpVerificationSuccessState) {
+        if (state is SellerOtpVerificationSuccessState) {
           showAppSnackBar(context, "OTP verified successfully!");
           Navigator.pushNamed(
             context,

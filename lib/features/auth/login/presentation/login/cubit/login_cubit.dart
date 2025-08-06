@@ -14,8 +14,9 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> remoteLogin(
     String email,
     String password,
-    BuildContext context,
-  ) async {
+    BuildContext context, {
+    required bool isSeller, // Add this parameter
+  }) async {
     loginUsecase = sl();
 
     try {
@@ -23,16 +24,16 @@ class LoginCubit extends Cubit<LoginState> {
       handlerRequestApi(
         context: context,
         body: () async {
-          final loggedin = await loginUsecase.call(email, password);
+          final loggedin = await loginUsecase.call(email, password, isSeller);
           if (loggedin.status) {
-            return emit(LoginSuccessState("Welcome back $email"));
+            emit(LoginSuccessState("Welcome back $email"));
           } else {
-            return emit(LoginErrorState(errorMessage: loggedin.message));
+            emit(LoginErrorState(errorMessage: loggedin.message));
           }
         },
       );
     } catch (e) {
-      return emit(LoginErrorState(errorMessage: e.toString()));
+      emit(LoginErrorState(errorMessage: e.toString()));
     }
   }
 }

@@ -607,4 +607,85 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get selectCountry => 'حدد البلد';
+
+  @override
+  String get addProduct => 'إضافة منتج';
+
+  @override
+  String get productTitle => 'عنوان المنتج';
+
+  @override
+  String get shortDescription => 'وصف قصير';
+
+  @override
+  String get tags => 'العلامات';
+
+  @override
+  String get warranty => 'الضمان';
+
+  @override
+  String get slug => 'الرابط الثابت';
+
+  @override
+  String get colors => 'الألوان';
+
+  @override
+  String get customeSpecifications => 'المواصفات المخصصة';
+
+  @override
+  String get cashOnDelivery => 'الدفع عند الاستلام';
+
+  @override
+  String get subCategories => 'الفئات الفرعية';
+
+  @override
+  String get detailedDescription => 'وصف تفصيلي';
+
+  @override
+  String get videoURL => 'رابط الفيديو';
+
+  @override
+  String get regularPrice => 'السعر العادي';
+
+  @override
+  String get salePrice => 'سعر البيع';
+
+  @override
+  String get stock => 'المخزون';
+
+  @override
+  String get sizes => 'الأحجام';
+
+  @override
+  String get selectDiscountCodes => 'اختر رموز الخصم';
+
+  @override
+  String get create => 'إنشاء';
+
+  @override
+  String get enterProductDescriptionForQuickView => 'أدخل وصف المنتج للعرض السريع';
+
+  @override
+  String get brand => 'العلامة التجارية';
+
+  @override
+  String get addSpecification => 'إضافة مواصفة';
+
+  @override
+  String get selectAnOption => 'اختر خيارًا';
+
+  @override
+  String get writeADetailedDescriptionHere => 'اكتب وصفًا تفصيليًا هنا...';
+
+  @override
+  String get subcategories => 'الفئات الفرعية';
+
+  @override
+  String get selectSubcategories => 'حدد الفئات الفرعية';
+
+  @override
+  String get failedToLoadCategories => 'فشل في تحميل الفئات.';
+
+  @override
+  String get user => 'المستخدم';
 }

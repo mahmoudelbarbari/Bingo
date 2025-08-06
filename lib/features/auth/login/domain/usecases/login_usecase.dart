@@ -6,7 +6,11 @@ class LoginUsecase {
   final LoginRepository _loginRepository;
   LoginUsecase(this._loginRepository);
 
-  Future<LoginBaseResponse> call(String email, String password) async {
-    return await _loginRepository.remoteLogin(email, password);
+  Future<LoginBaseResponse> call(
+    String email,
+    String password,
+    bool isSeller,
+  ) async {
+    return await _loginRepository.remoteLogin(email, password, isSeller);
   }
 }

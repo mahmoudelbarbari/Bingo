@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../cart/presentation/pages/cart_page.dart';
 import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
-import '../add_product_screen.dart';
 import 'action_btn_top_bar_widget.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
@@ -30,20 +29,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   final List<Widget> _pages = [
     HomeScreen(),
     SafeArea(child: Text('data')),
-    Container(), // Placeholder for Add button
     BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
     BlocProvider(create: (_) => UserCubit(), child: const ProfileScreen()),
   ];
 
   void _onTap(int index) {
-    if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AddProductPage()),
-      );
-    } else {
-      setState(() => _currentIndex = index);
-    }
+    setState(() => _currentIndex = index);
   }
 
   @override
@@ -102,15 +93,17 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
                 _navItem(Icons.home, loc.home, 0),
                 _navItem(Icons.language, loc.community, 1),
                 const SizedBox(width: 48),
-                _navItem(Icons.shopping_cart_outlined, loc.cart, 3),
-                _navItem(Icons.person, loc.profile, 4),
+                _navItem(Icons.shopping_cart_outlined, loc.cart, 2),
+                _navItem(Icons.person, loc.profile, 3),
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _onTap(2),
+        onPressed: () {
+          Navigator.pushNamed(context, '/add-product');
+        },
         shape: CircleBorder(),
         backgroundColor: lightTheme.primaryColor,
         child: const Icon(Icons.add),

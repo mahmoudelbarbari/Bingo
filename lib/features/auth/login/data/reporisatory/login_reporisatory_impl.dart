@@ -8,8 +8,16 @@ class LoginReporisatoryImpl implements LoginRepository {
   LoginReporisatoryImpl(this.remoteLoginDatasource);
 
   @override
-  Future<LoginBaseResponse> remoteLogin(String email, String password) async {
-    return await remoteLoginDatasource.remoteLoginUser(email, password);
+  Future<LoginBaseResponse> remoteLogin(
+    String email,
+    String password,
+    bool isSeller,
+  ) async {
+    return await remoteLoginDatasource.remoteLoginUser(
+      email,
+      password,
+      isSeller,
+    );
   }
 
   @override

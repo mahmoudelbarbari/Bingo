@@ -20,6 +20,7 @@ import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen3.
 import '../../features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
 import '../../features/chatbot/presentation/pages/chat_bot_page.dart';
 import '../../features/product/domain/entity/product.dart';
+import '../../features/product/presentation/pages/add_product_page.dart';
 import '../../features/seller_onboarding/presentation/pages/seller_onboarding_screen.dart';
 
 final Map<String, WidgetBuilder> appRoutes = {
@@ -53,4 +54,5 @@ final Map<String, WidgetBuilder> appRoutes = {
     sellerAccountModel:
         ModalRoute.of(context)!.settings.arguments as SellerAccountModel,
   ),
+  '/add-product': (context) => const AddProductPage(),
 };

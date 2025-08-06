@@ -22,12 +22,16 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+enum UserType { user, seller }
+
 class _LoginScreenState extends State<LoginScreen> {
   late TextEditingController controllerEmail;
   late TextEditingController controllerPassword;
   final GlobalKey<FormState> _keyform = GlobalKey<FormState>();
   bool passwordVisible = false;
   bool isButtonEnabled = false;
+
+  UserType _selectedUserType = UserType.user;
 
   @override
   void initState() {
@@ -105,6 +109,34 @@ class _LoginScreenState extends State<LoginScreen> {
                           headerSubText: loc.justLogInAndHavefun,
                         ),
                         sizeBox,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Radio<UserType>(
+                              value: UserType.user,
+                              groupValue: _selectedUserType,
+                              onChanged: (UserType? value) {
+                                setState(() {
+                                  _selectedUserType = value!;
+                                });
+                              },
+                            ),
+                            Text(loc.user), // localize as needed
+                            SizedBox(width: 20),
+                            Radio<UserType>(
+                              value: UserType.seller,
+                              groupValue: _selectedUserType,
+                              onChanged: (UserType? value) {
+                                setState(() {
+                                  _selectedUserType = value!;
+                                });
+                              },
+                            ),
+                            Text(loc.seller), // localize as needed
+                          ],
+                        ),
+
+                        sizeBox,
                         LoginForm(
                           emailController: controllerEmail,
                           passwordController: controllerPassword,
@@ -119,6 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   controllerEmail.text.trim(),
                                   controllerPassword.text,
                                   context,
+                                  isSeller:
+                                      _selectedUserType == UserType.seller,
                                 );
                               }
                             });

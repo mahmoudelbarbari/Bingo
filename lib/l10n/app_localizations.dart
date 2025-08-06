@@ -1282,6 +1282,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select Country'**
   String get selectCountry;
+
+  /// No description provided for @addProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Product'**
+  String get addProduct;
+
+  /// No description provided for @productTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Product title'**
+  String get productTitle;
+
+  /// No description provided for @shortDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Short description'**
+  String get shortDescription;
+
+  /// No description provided for @tags.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get tags;
+
+  /// No description provided for @warranty.
+  ///
+  /// In en, this message translates to:
+  /// **'Warranty'**
+  String get warranty;
+
+  /// No description provided for @slug.
+  ///
+  /// In en, this message translates to:
+  /// **'Slug'**
+  String get slug;
+
+  /// No description provided for @colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors'**
+  String get colors;
+
+  /// No description provided for @customeSpecifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Specifications'**
+  String get customeSpecifications;
+
+  /// No description provided for @cashOnDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash on Delivery'**
+  String get cashOnDelivery;
+
+  /// No description provided for @subCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Sub Categories'**
+  String get subCategories;
+
+  /// No description provided for @detailedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed Description'**
+  String get detailedDescription;
+
+  /// No description provided for @videoURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Video URL'**
+  String get videoURL;
+
+  /// No description provided for @regularPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Regular Price'**
+  String get regularPrice;
+
+  /// No description provided for @salePrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Sale Price'**
+  String get salePrice;
+
+  /// No description provided for @stock.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock'**
+  String get stock;
+
+  /// No description provided for @sizes.
+  ///
+  /// In en, this message translates to:
+  /// **'Sizes'**
+  String get sizes;
+
+  /// No description provided for @selectDiscountCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Discount Codes'**
+  String get selectDiscountCodes;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
+
+  /// No description provided for @enterProductDescriptionForQuickView.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter product description for quick view'**
+  String get enterProductDescriptionForQuickView;
+
+  /// No description provided for @brand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get brand;
+
+  /// No description provided for @addSpecification.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Specification'**
+  String get addSpecification;
+
+  /// No description provided for @selectAnOption.
+  ///
+  /// In en, this message translates to:
+  /// **'Select an option'**
+  String get selectAnOption;
+
+  /// No description provided for @writeADetailedDescriptionHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a detailed description here...'**
+  String get writeADetailedDescriptionHere;
+
+  /// No description provided for @subcategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Subcategories'**
+  String get subcategories;
+
+  /// No description provided for @selectSubcategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Subcategories'**
+  String get selectSubcategories;
+
+  /// No description provided for @failedToLoadCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load categories.'**
+  String get failedToLoadCategories;
+
+  /// No description provided for @user.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get user;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

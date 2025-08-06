@@ -1,4 +1,4 @@
-import 'package:bingo/features/product/domain/entity/product.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:bingo/features/product/domain/usecase/add_product_usecase.dart';
 import 'package:bingo/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:bingo/features/product/presentation/cubit/product_state.dart';
@@ -23,12 +23,14 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  Future<void> createProduct(ProductEntity product) async {
+  Future<void> createProduct(ProductModel product) async {
     try {
       emit(ProductLoadingState());
-      addProductUsecase = sl();
+      // Initialize usecase only once in constructor or inject it!
+      final addProductUsecase = sl<AddProductUsecase>();
       await addProductUsecase.call(product);
-      emit(ProductAddedSuccess('Product added successfuly'));
+      // You might want to check result here if it is a response or success bool
+      emit(ProductAddedSuccess('Product added successfully'));
     } catch (e) {
       emit(ProductCreateError(e.toString()));
     }

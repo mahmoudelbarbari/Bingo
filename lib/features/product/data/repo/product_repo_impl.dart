@@ -1,5 +1,6 @@
 import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/product/data/datasource/product_datasource.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:bingo/features/product/domain/entity/product.dart';
 import 'package:bingo/features/product/domain/repo/product_repo.dart';
 
@@ -13,8 +14,7 @@ class ProductRepoImpl implements ProductRepo {
   }
 
   @override
-  Future<BaseResponse> createProduct(ProductEntity product) async {
-    // TODO: implement createProduct
-    throw UnimplementedError();
+  Future<BaseResponse> createProduct(ProductModel product) async {
+    return await productDatasource.createProduct(product);
   }
 }

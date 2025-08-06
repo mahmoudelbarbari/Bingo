@@ -607,4 +607,85 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectCountry => 'Select Country';
+
+  @override
+  String get addProduct => 'Add Product';
+
+  @override
+  String get productTitle => 'Product title';
+
+  @override
+  String get shortDescription => 'Short description';
+
+  @override
+  String get tags => 'Tags';
+
+  @override
+  String get warranty => 'Warranty';
+
+  @override
+  String get slug => 'Slug';
+
+  @override
+  String get colors => 'Colors';
+
+  @override
+  String get customeSpecifications => 'Custom Specifications';
+
+  @override
+  String get cashOnDelivery => 'Cash on Delivery';
+
+  @override
+  String get subCategories => 'Sub Categories';
+
+  @override
+  String get detailedDescription => 'Detailed Description';
+
+  @override
+  String get videoURL => 'Video URL';
+
+  @override
+  String get regularPrice => 'Regular Price';
+
+  @override
+  String get salePrice => 'Sale Price';
+
+  @override
+  String get stock => 'Stock';
+
+  @override
+  String get sizes => 'Sizes';
+
+  @override
+  String get selectDiscountCodes => 'Select Discount Codes';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get enterProductDescriptionForQuickView => 'Enter product description for quick view';
+
+  @override
+  String get brand => 'Brand';
+
+  @override
+  String get addSpecification => 'Add Specification';
+
+  @override
+  String get selectAnOption => 'Select an option';
+
+  @override
+  String get writeADetailedDescriptionHere => 'Write a detailed description here...';
+
+  @override
+  String get subcategories => 'Subcategories';
+
+  @override
+  String get selectSubcategories => 'Select Subcategories';
+
+  @override
+  String get failedToLoadCategories => 'Failed to load categories.';
+
+  @override
+  String get user => 'User';
 }
