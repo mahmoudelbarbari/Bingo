@@ -82,7 +82,20 @@ void init() async {
   sl.registerFactory(() => ThemeCubit(sl()));
 
   // core
-  sl.registerLazySingleton<Dio>(() => createDio(sl()));
+  sl.registerLazySingletonAsync<Dio>(
+    () => DioClient.createDio(ApiTarget.auth),
+    instanceName: 'authDio',
+  );
+
+  sl.registerLazySingletonAsync<Dio>(
+    () => DioClient.createDio(ApiTarget.product),
+    instanceName: 'productDio',
+  );
+
+  sl.registerLazySingletonAsync<Dio>(
+    () => DioClient.createDio(ApiTarget.seller),
+    instanceName: 'sellerDio',
+  );
 
   //-----------------------------------------------------------------------------------------
   // Login feature (injection).

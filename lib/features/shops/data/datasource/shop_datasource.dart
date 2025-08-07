@@ -8,10 +8,6 @@ import 'package:bingo/features/shops/data/models/shop_model.dart';
 import 'package:dio/dio.dart';
 
 abstract class ShopDatasource {
-  final Dio _dio = createDio(ApiTarget.seller);
-
-  ShopDatasource();
-
   Future<BaseResponse> addShop(
     ShopModel shopModel,
     SellerAccountModel sellerAccountModel,
@@ -20,14 +16,17 @@ abstract class ShopDatasource {
   Future<void> addShopImage(File imageFile);
 }
 
-class ShopDatasourceImpl extends ShopDatasource {
+class ShopDatasourceImpl implements ShopDatasource {
+  final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.seller);
+
   @override
   Future<BaseResponse> addShop(
     ShopModel shopModel,
     SellerAccountModel sellerAccountModel,
   ) async {
     try {
-      final response = await _dio.post(
+      final dio = await _dioFuture;
+      final response = await dio.post(
         'create-shop',
         data: {
           'name': shopModel.name,
@@ -57,11 +56,12 @@ class ShopDatasourceImpl extends ShopDatasource {
   @override
   Future<void> addShopImage(File imageFile) async {
     try {
+      final dio = await _dioFuture;
       // Read image as bytes
       final bytes = await imageFile.readAsBytes();
       // Convert to base64
       final base64Image = base64Encode(bytes);
-      final response = await _dio.post(
+      final response = await dio.post(
         'upload-image',
         data: {'image': base64Image},
       );

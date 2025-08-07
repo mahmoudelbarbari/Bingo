@@ -1,4 +1,5 @@
 import 'package:bingo/core/network/dio_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/entities/login_entities.dart';
 import 'package:dio/dio.dart';
@@ -15,9 +16,7 @@ abstract class RemoteLoginDatasource {
 }
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
-  final Dio _dio = createDio(ApiTarget.auth);
-
-  RemoteLoginDatasourceImpl();
+  final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.auth);
 
   // @override
   // Future<LoginBaseResponse> remoteLoginUser(
@@ -97,7 +96,9 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
 
   @override
   Future<void> resetPassword(String email, String newPassword) async {
-    await _dio.post(
+    final dio = await _dioFuture;
+
+    await dio.post(
       'reset-password-user',
       data: {'email': email, 'new_password': newPassword},
     );
@@ -106,7 +107,9 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
   @override
   Future<void> sendOTP(String email) async {
     try {
-      await _dio.post('send-otp', data: {'email': email});
+      final dio = await _dioFuture;
+
+      await dio.post('send-otp', data: {'email': email});
     } catch (e) {
       throw Exception('Failed to send OTP: $e');
     }
@@ -124,6 +127,8 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
     int otp,
   ) async {
     try {
+      final dio = await _dioFuture;
+
       final requestData = {
         'name': name,
         'email': email,
@@ -131,7 +136,7 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
         'otp': otp.toString(), // Convert to string
       };
 
-      final response = await _dio.post('verify-user', data: requestData);
+      final response = await dio.post('verify-user', data: requestData);
 
       // Check if the request was successful
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -175,42 +180,29 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
     bool isSeller,
   ) async {
     try {
+      final dio = await _dioFuture;
+
       final endpoint = isSeller ? 'login-seller' : 'login-user';
 
-      final response = await _dio.post(
+      final response = await dio.post(
         endpoint,
         data: {'email': email, 'password': password},
       );
 
       if (response.statusCode == 200) {
-        final token = response.data['token'];
-        return LoginBaseResponse(
-          status: true,
-          message: 'Login successful',
-          token: token,
-        );
+        // Save user role only
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('auth_role', isSeller ? 'seller' : 'user');
+
+        return LoginBaseResponse(status: true, message: 'Login successful');
       } else {
         return LoginBaseResponse(
           status: false,
-          message: 'Unexpected response status: ${response.statusCode}',
+          message: 'Unexpected status: ${response.statusCode}',
         );
       }
-    } on DioException catch (e) {
-      String errorMessage = 'Login Failed';
-      if (e.response != null && e.response?.data != null) {
-        errorMessage = e.response?.data['error'] ?? e.message;
-      } else {
-        errorMessage = e.message ?? '';
-      }
-      return LoginBaseResponse(status: false, message: errorMessage);
     } catch (e) {
-      return LoginBaseResponse(status: false, message: 'Unexpected error: $e');
+      return LoginBaseResponse(status: false, message: 'Login error: $e');
     }
   }
-
-  // // Get current user
-  // User? get currentUser => auth.currentUser;
-  // // Store verification ID
-  // String? _temporaryUserId;
-  // String? get temporaryUserId => _temporaryUserId;
 }

@@ -20,7 +20,7 @@ abstract class RemoteRegisterDatasource {
 }
 
 class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
-  final Dio _dio = createDio(ApiTarget.auth);
+  final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.auth);
 
   RemoteRegisterDatasourceImpl();
 
@@ -31,7 +31,8 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
     String password,
   ) async {
     try {
-      final response = await _dio.post(
+      final dio = await _dioFuture;
+      final response = await dio.post(
         'user-registration',
         data: {'name': name, 'email': email, 'password': password},
       );
@@ -75,7 +76,8 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
     SellerAccountModel sellerAccountModel,
   ) async {
     try {
-      final response = await _dio.post(
+      final dio = await _dioFuture;
+      final response = await dio.post(
         'seller-registration',
         data: {
           'name': sellerAccountModel.name,
@@ -115,7 +117,8 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
     String otp,
   ) async {
     try {
-      final response = await _dio.post(
+      final dio = await _dioFuture;
+      final response = await dio.post(
         'verify-seller',
         data: {
           'name': sellerAccountModel.name,

@@ -3,6 +3,7 @@ import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:bingo/features/product/domain/entity/product.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProductDatasource {
   Future<List<ProductEntity>> getAllProduct();
@@ -10,12 +11,13 @@ abstract class ProductDatasource {
 }
 
 class ProductDatasourceImpl implements ProductDatasource {
-  final Dio _dio = createDio(ApiTarget.product);
+  final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.product);
 
   @override
   Future<List<ProductEntity>> getAllProduct() async {
     try {
-      final response = await _dio.get('get-all-products');
+      final dio = await _dioFuture;
+      final response = await dio.get('get-all-products');
 
       if (response.statusCode == 200) {
         final data = response.data;
@@ -42,10 +44,19 @@ class ProductDatasourceImpl implements ProductDatasource {
   @override
   Future<BaseResponse> createProduct(ProductModel product) async {
     try {
-      final response = await _dio.post(
-        'create-product',
-        data: product.toJson(),
-      );
+      final dio = await _dioFuture;
+      final prefs = await SharedPreferences.getInstance();
+      final role = prefs.getString('auth_role');
+
+      if (role != 'seller') {
+        return BaseResponse(
+          status: false,
+          message: 'Only sellers can create products',
+        );
+      }
+
+      final response = await dio.post('create-product', data: product.toJson());
+
       if (response.statusCode == 200) {
         return BaseResponse(
           status: true,
@@ -54,13 +65,11 @@ class ProductDatasourceImpl implements ProductDatasource {
       } else {
         return BaseResponse(
           status: false,
-          message: 'Faild to create product ${response.statusMessage}',
+          message: 'Failed: ${response.statusMessage}',
         );
       }
-    } on DioException catch (e) {
-      throw Exception('Dio error while creating product: ${e.message}');
     } catch (e) {
-      return BaseResponse(status: false, message: 'Unexpected error: $e');
+      return BaseResponse(status: false, message: 'Error: $e');
     }
   }
 }

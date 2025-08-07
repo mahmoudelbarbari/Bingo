@@ -7,12 +7,13 @@ abstract class HomeDatasource {
 }
 
 class HomeDatasourceImpl implements HomeDatasource {
-  final Dio _dio = createDio(ApiTarget.product);
+  final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.product);
 
   @override
   Future<CategoryModel> getCategories() async {
     try {
-      final response = await _dio.get('get-categories');
+      final dio = await _dioFuture;
+      final response = await dio.get('get-categories');
       if (response.statusCode == 200) {
         return CategoryModel.fromJson(response.data);
       } else {
