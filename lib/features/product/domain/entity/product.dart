@@ -18,7 +18,7 @@ class ProductEntity {
   final double? salePrice;
   final int? stock;
   final List<String>? sizes;
-  final List<String>? image;
+  final List<Map<String, dynamic>>? image;
 
   ProductEntity({
     this.id,

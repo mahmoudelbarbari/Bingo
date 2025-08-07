@@ -174,6 +174,12 @@ class _AddProdcutFormState extends State<AddProdcutForm> {
               labelText: loc.customeSpecifications,
             ),
           sizedBox,
+          CustomeTextfieldWidget(
+            controller: widget.slugController,
+            isRTL: widget.isArabic,
+            labelText: loc.slug,
+          ),
+          sizedBox,
           Text(
             loc.cashOnDelivery,
             style: Theme.of(context).textTheme.headlineMedium,

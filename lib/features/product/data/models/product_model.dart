@@ -74,7 +74,7 @@ class ProductModel extends ProductEntity {
       customProperties: json['custom_properties'] as Map<String, dynamic>?,
       cashOnDelivery: json['cashOnDelivery'],
       image: (json['images'] as List<dynamic>?)
-          ?.map((e) => e.toString())
+          ?.map((e) => Map<String, dynamic>.from(e))
           .toList(),
     );
   }

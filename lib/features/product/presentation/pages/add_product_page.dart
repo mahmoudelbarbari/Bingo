@@ -265,94 +265,128 @@ class _AddProductPageState extends State<AddProductPage> {
                         ElevatedButtonWidget(
                           fun: state is ProductLoadingState
                               ? () {}
-                              : () {
-                                  if (_keyform.currentState!.validate()) {
-                                    // Validate JSON input for customProperties safely
-                                    String input =
-                                        _customPropertiesController.text;
+                              : () async {
+                                  if (!_keyform.currentState!.validate())
+                                    return;
 
-                                    if (_customPropertiesController
-                                        .text
-                                        .isNotEmpty) {
-                                      try {
-                                        final parsed = jsonDecode(input);
-                                        if (parsed is! Map<String, dynamic>) {
-                                          showAppSnackBar(
-                                            context,
-                                            'Custom properties must be a JSON object.',
-                                          );
-                                          return;
-                                        }
-                                      } catch (e) {
+                                  // 1. Validate customProperties JSON
+                                  final input =
+                                      _customPropertiesController.text;
+                                  if (input.isNotEmpty) {
+                                    try {
+                                      final parsed = jsonDecode(input);
+                                      if (parsed is! Map<String, dynamic>) {
                                         showAppSnackBar(
                                           context,
-                                          'Please enter valid JSON format.',
+                                          'Custom properties must be a JSON object.',
+                                          isError: true,
                                         );
                                         return;
                                       }
+                                    } catch (e) {
+                                      showAppSnackBar(
+                                        context,
+                                        'Please enter valid JSON format.',
+                                        isError: true,
+                                      );
+                                      return;
                                     }
-
-                                    final product = ProductModel(
-                                      title: _titleController.text,
-                                      shortDescription:
-                                          _shortDescriptionController.text,
-                                      detailedDesc:
-                                          _detailedDescriptionController.text,
-                                      brand: _brandController.text,
-                                      tags: _tagController.text
-                                          .split(',')
-                                          .map((e) => e.trim())
-                                          .toList(),
-                                      warranty: _warranty.text,
-                                      slug: _slugController.text,
-                                      customProperties:
-                                          _customPropertiesController
-                                              .text
-                                              .isNotEmpty
-                                          ? Map<String, dynamic>.from(
-                                              jsonDecode(
-                                                _customPropertiesController
-                                                    .text,
-                                              ),
-                                            )
-                                          : null,
-
-                                      videoURL: _videoURLController.text,
-                                      price:
-                                          double.tryParse(
-                                            _regularPriceController.text,
-                                          ) ??
-                                          0.0,
-                                      salePrice:
-                                          double.tryParse(
-                                            _salePriceController.text,
-                                          ) ??
-                                          0.0,
-                                      stock:
-                                          int.tryParse(_stockController.text) ??
-                                          0,
-                                      cashOnDelivery:
-                                          _paymentOptionController.text,
-                                      category: selectedCategories.isNotEmpty
-                                          ? selectedCategories.first
-                                          : null,
-                                      subCategory:
-                                          selectedSubCategories.isNotEmpty
-                                          ? selectedSubCategories.first
-                                          : null,
-                                      colors: selectedColors.toList(),
-                                      sizes: selectedSizes.toList(),
-                                      image: _selectedImage != null
-                                          ? [_selectedImage!.path]
-                                          : [],
-                                    );
-
-                                    context.read<ProductCubit>().createProduct(
-                                      product,
-                                    );
                                   }
-                                },
 
+                                  // 2. Upload Image (if selected)
+                                  List<Map<String, dynamic>> uploadedImages =
+                                      [];
+
+                                  if (_selectedImage != null) {
+                                    showAppSnackBar(
+                                      context,
+                                      'Uploading image...',
+                                    );
+
+                                    try {
+                                      final data =
+                                          await ShopService.uploadImage(
+                                            _selectedImage!,
+                                          );
+
+                                      if (data != null &&
+                                          data['fileId'] != null &&
+                                          data['file_url'] != null) {
+                                        uploadedImages.add({
+                                          'fileId': data['fileId'],
+                                          'file_url': data['file_url'],
+                                        });
+                                      } else {
+                                        showAppSnackBar(
+                                          context,
+                                          'Invalid image upload response.',
+                                          isError: true,
+                                        );
+                                        return;
+                                      }
+                                    } catch (e) {
+                                      showAppSnackBar(
+                                        context,
+                                        'Image upload error: $e',
+                                        isError: true,
+                                      );
+                                      return;
+                                    }
+                                  }
+
+                                  // 3. Create ProductModel
+                                  final product = ProductModel(
+                                    title: _titleController.text,
+                                    shortDescription:
+                                        _shortDescriptionController.text,
+                                    detailedDesc:
+                                        _detailedDescriptionController.text,
+                                    brand: _brandController.text,
+                                    tags: _tagController.text
+                                        .split(',')
+                                        .map((e) => e.trim())
+                                        .toList(),
+                                    warranty: _warranty.text,
+                                    slug: _slugController.text,
+                                    customProperties: input.isNotEmpty
+                                        ? Map<String, dynamic>.from(
+                                            jsonDecode(input),
+                                          )
+                                        : null,
+                                    videoURL: _videoURLController.text,
+                                    price:
+                                        double.tryParse(
+                                          _regularPriceController.text,
+                                        ) ??
+                                        0.0,
+                                    salePrice:
+                                        double.tryParse(
+                                          _salePriceController.text,
+                                        ) ??
+                                        0.0,
+                                    stock:
+                                        int.tryParse(_stockController.text) ??
+                                        0,
+                                    cashOnDelivery:
+                                        _paymentOptionController.text,
+                                    category: selectedCategories.isNotEmpty
+                                        ? selectedCategories.first
+                                        : null,
+                                    subCategory:
+                                        selectedSubCategories.isNotEmpty
+                                        ? selectedSubCategories.first
+                                        : null,
+                                    colors: selectedColors.toList(),
+                                    sizes: selectedSizes.toList(),
+                                    image:
+                                        uploadedImages, // 👈 updated image format
+                                  );
+
+                                  // 4. Trigger Product Creation
+                                  context.read<ProductCubit>().createProduct(
+                                    product,
+                                  );
+                                },
                           text: loc.create,
                           isColored: true,
                         ),
