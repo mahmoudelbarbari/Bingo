@@ -35,7 +35,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
   }
 
   @override
-  Future<bool> verifySellerOTP(
+  Future<SellerAccountModel> verifySellerOTP(
     SellerAccountModel sellerAccountModel,
     String otp,
   ) async {

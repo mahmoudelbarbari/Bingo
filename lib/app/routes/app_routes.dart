@@ -1,7 +1,6 @@
 import 'package:bingo/features/auth/login/presentation/login/pages/login_screen.dart';
 import 'package:bingo/features/auth/login/presentation/otp_verification/otp_verification_screen.dart';
 import 'package:bingo/features/auth/login/presentation/create_new_password/create_new_pass_screen.dart';
-import 'package:bingo/features/auth/register/data/model/register_model.dart';
 import 'package:bingo/features/auth/register/presentation/pages/account_type_page.dart';
 import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
 import 'package:bingo/features/shops/presentation/pages/add_shop_page.dart';
@@ -50,9 +49,6 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/settingScreen': (context) => const SettingsPage(),
   '/savedAddressScreen': (context) => SavedAddressPage(),
   '/addAddressScreen': (context) => const AddAddressPage(),
-  '/addSellerShop': (context) => AddShopPage(
-    sellerAccountModel:
-        ModalRoute.of(context)!.settings.arguments as SellerAccountModel,
-  ),
+  '/addSellerShop': (context) => AddShopPage(),
   '/add-product': (context) => const AddProductPage(),
 };

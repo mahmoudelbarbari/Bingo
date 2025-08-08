@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:bingo/core/network/dio_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopService {
@@ -79,11 +78,9 @@ class ShopService {
     // Convert image to base64
     final bytes = await imageFile.readAsBytes();
     final base64String = base64Encode(bytes);
-    
+
     // Send as JSON instead of FormData
-    final requestData = {
-      'fileName': base64String,
-    };
+    final requestData = {'fileName': base64String};
 
     try {
       final response = await dio.post(
@@ -110,22 +107,60 @@ class ShopService {
     }
   }
 
-  // // Create shop with image
-  // static Future<String> createShop({
-  //   required String name,
-  //   required String bio,
-  //   required List<String> category,
-  //   required String openingHours,
-  //   required String sellerId,
-  //   required File imageFile,
-  // }) async {
-  //   return await ShopEntity.addShopWithImage(
-  //     name: name,
-  //     bio: bio,
-  //     category: category,
-  //     openingHours: openingHours,
-  //     sellerId: sellerId,
-  //     imageFile: imageFile,
-  //   );
-  // }
+  static Future<String?> uploadSellerImage(File imageFile) async {
+    // 1. Check if user is a seller
+    final prefs = await SharedPreferences.getInstance();
+    final role = prefs.getString('auth_role');
+
+    if (role != 'seller') {
+      print("Only sellers are allowed to upload images.");
+      return null;
+    }
+
+    // 2. Get auth token if required
+    final token = prefs.getString('auth_token'); // Adjust key if needed
+
+    final dio = await DioClient.createDio(ApiTarget.seller);
+
+    // Convert image to base64
+    final bytes = await imageFile.readAsBytes();
+    final base64String = base64Encode(bytes);
+
+    final requestData = {'fileName': base64String};
+
+    try {
+      final response = await dio.post(
+        'upload-image', // <-- Make sure this route exists on the server
+        data: requestData,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            if (token != null) 'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // If your backend just returns the URL or path as string
+        if (response.data is String) {
+          return response.data as String;
+        }
+
+        // If the backend returns a map like: { "imageUrl": "..." }
+        if (response.data is Map<String, dynamic>) {
+          return response.data['imageUrl'] ?? response.data['url'];
+        }
+
+        print("Unexpected response format: ${response.data}");
+        return null;
+      } else {
+        print("Upload failed: ${response.statusCode}");
+        print("Response: ${response.data}");
+        return null;
+      }
+    } catch (e) {
+      print("Upload error: $e");
+      return null;
+    }
+  }
 }

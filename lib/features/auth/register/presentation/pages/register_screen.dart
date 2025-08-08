@@ -31,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late TextEditingController passwordController;
   late TextEditingController phoneNumbController;
   late TextEditingController confirmPasswordController;
+  late TextEditingController addressController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isButtonEnabled = false;
   CountriesEntity? selectedCountry;
@@ -42,11 +43,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     emailController = TextEditingController();
     passwordController = TextEditingController();
     phoneNumbController = TextEditingController();
+    addressController = TextEditingController();
     confirmPasswordController = TextEditingController();
     nameController.addListener(_validateForm);
     emailController.addListener(_validateForm);
     passwordController.addListener(_validateForm);
     phoneNumbController.addListener(_validateForm);
+    addressController.addListener(_validateForm);
     confirmPasswordController.addListener(_validateForm);
   }
 
@@ -72,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     emailController.dispose();
     passwordController.dispose();
     phoneNumbController.dispose();
+    addressController.dispose();
     super.dispose();
   }
 
@@ -161,6 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 nameController: nameController,
                                 emailController: emailController,
                                 passwordController: passwordController,
+                                addressController: addressController,
                                 selectedCountry: selectedCountry,
                                 onCountryChanged: _onCountryChanged,
                                 phoneNumbController: phoneNumbController,

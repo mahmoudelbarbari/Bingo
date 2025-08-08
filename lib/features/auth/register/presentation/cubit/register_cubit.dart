@@ -144,21 +144,15 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(OtpVerificationLoadingState());
 
       // Verify OTP
-      final isvrified = await verifyOtpSellerUsecase.call(
+      final verifiedSeller = await verifyOtpSellerUsecase.call(
         sellerAccountModel,
         otp,
       );
-      if (isvrified) {
-        emit(
-          SellerOtpVerificationSuccessState(
-            "Seller Registration completed successfully! Welcome ${sellerAccountModel.name}",
-          ),
-        );
-      }
 
       emit(
         SellerOtpVerificationSuccessState(
           "Seller Registration completed successfully! Welcome ${sellerAccountModel.name}",
+          verifiedSeller,
         ),
       );
     } catch (e) {

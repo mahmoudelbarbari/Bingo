@@ -1,3 +1,5 @@
+import '../../data/model/register_model.dart';
+
 abstract class RegisterState {}
 
 class RegisterInitialState extends RegisterState {}
@@ -39,8 +41,9 @@ class OtpVerificationSuccessState extends RegisterState {
 
 class SellerOtpVerificationSuccessState extends RegisterState {
   final String message;
+  final SellerAccountModel sellerAccountModel;
 
-  SellerOtpVerificationSuccessState(this.message);
+  SellerOtpVerificationSuccessState(this.message, this.sellerAccountModel);
 }
 
 class OtpVerificationErrorState extends RegisterState {

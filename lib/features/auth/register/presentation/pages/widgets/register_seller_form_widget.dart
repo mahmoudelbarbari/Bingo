@@ -12,6 +12,7 @@ class RegisterSellerFormWidget extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController phoneNumbController;
+  final TextEditingController addressController;
   final bool isArabic;
   final Function(CountriesEntity?)? onCountryChanged;
   final CountriesEntity? selectedCountry;
@@ -22,6 +23,7 @@ class RegisterSellerFormWidget extends StatefulWidget {
     required this.emailController,
     required this.passwordController,
     required this.phoneNumbController,
+    required this.addressController,
     required this.isArabic,
     this.onCountryChanged,
     this.selectedCountry,
@@ -78,6 +80,16 @@ class _RegisterSellerFormWidgetState extends State<RegisterSellerFormWidget> {
           onCountryChanged: widget.onCountryChanged!,
           isArabic: widget.isArabic,
           labelText: loc.country,
+        ),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.addressController,
+          labelText: loc.address,
+          prefixIcon: Icon(Icons.home_outlined),
+          isRTL: widget.isArabic,
+          formFieldValidator: (value) {
+            return Validators.requiredField(context, value);
+          },
         ),
         sizedBox,
         CustomeTextfieldWidget(

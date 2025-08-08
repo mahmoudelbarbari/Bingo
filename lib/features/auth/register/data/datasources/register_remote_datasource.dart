@@ -12,7 +12,7 @@ abstract class RemoteRegisterDatasource {
   );
 
   Future<BaseResponse> registerSeller(SellerAccountModel sellerAccountModel);
-  Future<bool> verifySellerOTP(
+  Future<SellerAccountModel> verifySellerOTP(
     SellerAccountModel sellerAccountModel,
     String otp,
   );
@@ -112,7 +112,7 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
   }
 
   @override
-  Future<bool> verifySellerOTP(
+  Future<SellerAccountModel> verifySellerOTP(
     SellerAccountModel sellerAccountModel,
     String otp,
   ) async {
@@ -130,7 +130,16 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return true;
+        final sellerData = response.data['seller'];
+        // Return updated SellerAccountModel with sellerId
+        return SellerAccountModel(
+          id: sellerData['id'],
+          name: sellerData['name'],
+          email: sellerData['email'],
+          phoneNum: sellerData['phone_number'],
+          password: sellerAccountModel.password, // Keep original plain password
+          country: sellerData['country'],
+        );
       } else {
         // Handle non-success status codes
         String errorMessage = 'Verification failed';

@@ -6,6 +6,8 @@ class VerifyOtpSellerUsecase {
 
   VerifyOtpSellerUsecase(this._registerRepository);
 
-  Future<bool> call(SellerAccountModel sellerAccountModel, String otp) async =>
-      await _registerRepository.verifySellerOTP(sellerAccountModel, otp);
+  Future<SellerAccountModel> call(
+    SellerAccountModel sellerAccountModel,
+    String otp,
+  ) async => await _registerRepository.verifySellerOTP(sellerAccountModel, otp);
 }

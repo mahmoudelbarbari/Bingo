@@ -99,12 +99,9 @@ class _SellerOtpVerificationScreenState
     return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is SellerOtpVerificationSuccessState) {
+          final seller = state.sellerAccountModel;
           showAppSnackBar(context, "OTP verified successfully!");
-          Navigator.pushNamed(
-            context,
-            '/addSellerShop',
-            arguments: widget.sellerAccountModel,
-          );
+          Navigator.pushNamed(context, '/addSellerShop', arguments: seller);
           // Navigate to next screen
         } else if (state is OtpVerificationErrorState) {
           showAppSnackBar(

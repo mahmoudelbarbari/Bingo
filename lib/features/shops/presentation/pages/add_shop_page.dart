@@ -21,8 +21,7 @@ import 'package:bingo/features/shops/presentation/cubit/shop_state.dart';
 import '../../../../core/service/shop_service.dart';
 
 class AddShopPage extends StatefulWidget {
-  final SellerAccountModel sellerAccountModel;
-  const AddShopPage({super.key, required this.sellerAccountModel});
+  const AddShopPage({super.key});
 
   @override
   State<AddShopPage> createState() => _AddShopPageState();
@@ -64,7 +63,7 @@ class _AddShopPageState extends State<AddShopPage> {
         listener: (context, state) {
           if (state is ShopSuccessState) {
             showAppSnackBar(context, state.message);
-            Navigator.pushNamed(context, '/bottomNavBar');
+            // Navigator.pushNamed(context, '/bottomNavBar');
           } else if (state is ShopErrorState) {
             showAppSnackBar(context, state.errMessage, isError: true);
           }
@@ -73,6 +72,8 @@ class _AddShopPageState extends State<AddShopPage> {
           final isArabic = Localizations.localeOf(context).languageCode == 'ar';
           var sizedBox = SizedBox(height: 12.h);
           final isDark = Theme.of(context).brightness == Brightness.dark;
+          final SellerAccountModel sellerAccountModel =
+              ModalRoute.of(context)!.settings.arguments as SellerAccountModel;
           return Form(
             key: _keyform,
             child: SingleChildScrollView(
@@ -285,13 +286,37 @@ class _AddShopPageState extends State<AddShopPage> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButtonWidget(
-                      fun: () {
-                        setState(() {
+                      fun: () async {
+                        setState(() async {
                           if (_keyform.currentState!.validate()) {
+                            if (_selectedImage == null) {
+                              showAppSnackBar(
+                                context,
+                                "Please select an image",
+                                isError: true,
+                              );
+                              return;
+                            }
+
+                            // Upload image directly via service
+                            final uploadedImageUrl =
+                                await ShopService.uploadSellerImage(
+                                  _selectedImage!,
+                                );
+
+                            if (uploadedImageUrl == null) {
+                              showAppSnackBar(
+                                context,
+                                "Image upload failed",
+                                isError: true,
+                              );
+                              return;
+                            }
+
                             context.read<ShopCubit>().addShop(
                               context,
                               ShopEntity(
-                                id: '515',
+                                sellerId: sellerAccountModel.id,
                                 // image: _selectedImage?.path,
                                 name: _nameController.text.trim(),
                                 bio: _bioController.text.trim(),
@@ -301,10 +326,11 @@ class _AddShopPageState extends State<AddShopPage> {
                                 rating: '0.0',
                               ),
                               SellerAccountModel(
-                                email: widget.sellerAccountModel.email,
-                                password: widget.sellerAccountModel.password,
-                                country: widget.sellerAccountModel.country,
-                                phoneNum: widget.sellerAccountModel.phoneNum,
+                                id: sellerAccountModel.id,
+                                email: sellerAccountModel.email,
+                                password: sellerAccountModel.password,
+                                country: sellerAccountModel.country,
+                                phoneNum: sellerAccountModel.phoneNum,
                               ),
                             );
                             context.read<ShopCubit>().addShopImage(

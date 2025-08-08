@@ -9,7 +9,7 @@ abstract class RegisterRepository {
     String password,
   );
   Future<BaseResponse> registerSeller(SellerAccountModel sellerAccountModel);
-  Future<bool> verifySellerOTP(
+  Future<SellerAccountModel> verifySellerOTP(
     SellerAccountModel sellerAccountModel,
     String otp,
   );
