@@ -14,6 +14,11 @@ class ProductRepoImpl implements ProductRepo {
   }
 
   @override
+  Future<List<ProductEntity>> getProductsByShopId(String shopId) async {
+    return await productDatasource.getProductsByShopId(shopId);
+  }
+
+  @override
   Future<BaseResponse> createProduct(ProductModel product) async {
     return await productDatasource.createProduct(product);
   }

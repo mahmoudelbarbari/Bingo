@@ -31,9 +31,12 @@ import 'package:bingo/features/profile/domain/repo/user_repo.dart';
 import 'package:bingo/features/product/domain/usecase/add_product_usecase.dart';
 import 'package:bingo/features/profile/domain/usecases/get_current_user_usecase.dart';
 import 'package:bingo/features/product/domain/usecase/get_products_usecase.dart';
+import 'package:bingo/features/product/domain/usecase/get_products_by_shop_usecase.dart';
+import 'package:bingo/features/product/domain/usecase/get_seller_products_usecase.dart';
 import 'package:bingo/features/product/presentation/cubit/product_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
+import 'package:bingo/features/profile/presentation/cubit/seller_products_cubit/seller_products_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
 import 'package:bingo/features/shops/data/datasource/shop_datasource.dart';
 import 'package:bingo/features/shops/data/reporisatory/shop_repo_impl.dart';
@@ -51,6 +54,7 @@ import '../features/auth/login/domain/usecases/sent_otp_usecase.dart';
 import '../features/auth/login/domain/usecases/verify_otp_usecase.dart';
 import '../features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
 import '../features/auth/register/data/datasources/register_remote_datasource.dart';
+import '../features/auth/register/domain/usecases/auto_seller_login_after_otp_verify_usecase.dart';
 import '../features/cart/data/datasource/cart_datasource.dart';
 import '../features/cart/data/reporisatory_imlp/cart_reporisatory_impl.dart';
 import '../features/cart/domain/reporisatory/cart_reporisatory.dart';
@@ -147,7 +151,11 @@ void init() async {
   sl.registerLazySingleton<VerifyOtpSellerUsecase>(
     () => VerifyOtpSellerUsecase(sl()),
   );
-
+  // AutoSellerLoginAfterOtpVerifyUsecase
+  sl.registerLazySingleton<AutoSellerLoginAfterOtpVerifyUsecase>(
+    () => AutoSellerLoginAfterOtpVerifyUsecase(sl()),
+  );
+  // signout usecase
   sl.registerLazySingleton<SignOutUsecase>(() => SignOutUsecase(sl()));
 
   // register cubit
@@ -186,11 +194,18 @@ void init() async {
     () => GetCurrentUserUsecase(sl()),
   );
   sl.registerLazySingleton<GetProductsUsecase>(() => GetProductsUsecase(sl()));
+  sl.registerLazySingleton<GetProductsByShopUsecase>(
+    () => GetProductsByShopUsecase(sl()),
+  );
+  sl.registerLazySingleton<GetSellerProductsUsecase>(
+    () => GetSellerProductsUsecase(sl()),
+  );
 
   sl.registerLazySingleton<AddProductUsecase>(() => AddProductUsecase(sl()));
   // profile cubit
   sl.registerLazySingleton<UserCubit>(() => UserCubit());
   sl.registerLazySingleton<ProductCubit>(() => ProductCubit());
+  sl.registerLazySingleton<SellerProductsCubit>(() => SellerProductsCubit());
 
   //-----------------------------------------------------------------------------------------
   // Cart feature (injection).

@@ -12,7 +12,6 @@ class RegisterSellerFormWidget extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final TextEditingController phoneNumbController;
-  final TextEditingController addressController;
   final bool isArabic;
   final Function(CountriesEntity?)? onCountryChanged;
   final CountriesEntity? selectedCountry;
@@ -23,7 +22,6 @@ class RegisterSellerFormWidget extends StatefulWidget {
     required this.emailController,
     required this.passwordController,
     required this.phoneNumbController,
-    required this.addressController,
     required this.isArabic,
     this.onCountryChanged,
     this.selectedCountry,
@@ -36,6 +34,7 @@ class RegisterSellerFormWidget extends StatefulWidget {
 
 class _RegisterSellerFormWidgetState extends State<RegisterSellerFormWidget> {
   List<String> selectedCategories = [];
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,25 +82,24 @@ class _RegisterSellerFormWidgetState extends State<RegisterSellerFormWidget> {
         ),
         sizedBox,
         CustomeTextfieldWidget(
-          controller: widget.addressController,
-          labelText: loc.address,
-          prefixIcon: Icon(Icons.home_outlined),
-          isRTL: widget.isArabic,
-          formFieldValidator: (value) {
-            return Validators.requiredField(context, value);
-          },
-        ),
-        sizedBox,
-        CustomeTextfieldWidget(
           controller: widget.passwordController,
           labelText: loc.yourPassword,
           prefixIcon: Icon(Icons.lock),
-          isobscureText: true,
           isRTL: widget.isArabic,
-
           formFieldValidator: (value) {
             return Validators.password(context, value);
           },
+          isobscureText: !passwordVisible,
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                passwordVisible = !passwordVisible;
+              });
+            },
+            icon: Icon(
+              passwordVisible ? Icons.visibility : Icons.visibility_off,
+            ),
+          ),
         ),
       ],
     );

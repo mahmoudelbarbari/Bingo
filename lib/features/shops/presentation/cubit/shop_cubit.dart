@@ -26,8 +26,15 @@ class ShopCubit extends Cubit<ShopState> {
     emit(ShopLoadingState());
     try {
       addShopUsecase = sl();
-      await addShopUsecase.call(shopEntity, sellerAccountModel);
-      emit(ShopSuccessState(loc.shopAddedSuccessfuly));
+      final response = await addShopUsecase.call(
+        shopEntity,
+        sellerAccountModel,
+      );
+      if (response.status) {
+        emit(ShopSuccessState(loc.shopAddedSuccessfuly));
+      } else {
+        emit(ShopErrorState('${loc.faildToAddShop} : ${response.message}'));
+      }
     } catch (e) {
       emit(ShopErrorState('${loc.faildToAddShop} ${e.toString()}'));
     }

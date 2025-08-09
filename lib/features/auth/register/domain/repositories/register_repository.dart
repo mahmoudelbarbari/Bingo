@@ -13,5 +13,8 @@ abstract class RegisterRepository {
     SellerAccountModel sellerAccountModel,
     String otp,
   );
+
+  Future<void> autoSellerLoginAfterVerification(String email, String password);
+
   Future<void> signOut();
 }

@@ -31,6 +31,7 @@ class _AddShopPageState extends State<AddShopPage> {
   final _nameController = TextEditingController();
   final _bioController = TextEditingController();
   final _openingHoursController = TextEditingController();
+  final _addressController = TextEditingController();
   final GlobalKey<FormState> _keyform = GlobalKey<FormState>();
   File? _selectedImage;
 
@@ -74,220 +75,234 @@ class _AddShopPageState extends State<AddShopPage> {
           final isDark = Theme.of(context).brightness == Brightness.dark;
           final SellerAccountModel sellerAccountModel =
               ModalRoute.of(context)!.settings.arguments as SellerAccountModel;
-          return Form(
-            key: _keyform,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      loc.buildYourStore,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    sizedBox,
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          backgroundColor: Colors.transparent,
-                          isDismissible: true,
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: EdgeInsetsGeometry.all(16),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: isDark
-                                          ? Colors.grey[900]
-                                          : Colors.white,
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        sizedBox,
-                                        Text(
-                                          loc.add,
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.titleLarge,
-                                        ),
-                                        ListTile(
-                                          leading: Icon(
-                                            Icons.camera_alt,
-                                            color:
-                                                lightTheme.colorScheme.primary,
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Form(
+              key: _keyform,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        loc.buildYourStore,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      sizedBox,
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            isDismissible: true,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: EdgeInsetsGeometry.all(16),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: isDark
+                                            ? Colors.grey[900]
+                                            : Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          sizedBox,
+                                          Text(
+                                            loc.add,
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.titleLarge,
                                           ),
-                                          title: Text(loc.takePhoto),
-                                          onTap: () {
-                                            _handleImagePick(true);
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                        Divider(
-                                          thickness: 0.5,
-                                          indent: 10,
-                                          endIndent: 10,
-                                        ),
-                                        ListTile(
-                                          leading: Icon(
-                                            Icons.attach_file,
-                                            color:
-                                                lightTheme.colorScheme.primary,
+                                          ListTile(
+                                            leading: Icon(
+                                              Icons.camera_alt,
+                                              color: lightTheme
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                            title: Text(loc.takePhoto),
+                                            onTap: () {
+                                              _handleImagePick(true);
+                                              Navigator.pop(context);
+                                            },
                                           ),
-                                          title: Text(loc.pickFromGallry),
-                                          onTap: () {
-                                            _handleImagePick(false);
-                                            Navigator.pop(context);
-                                          },
+                                          Divider(
+                                            thickness: 0.5,
+                                            indent: 10,
+                                            endIndent: 10,
+                                          ),
+                                          ListTile(
+                                            leading: Icon(
+                                              Icons.attach_file,
+                                              color: lightTheme
+                                                  .colorScheme
+                                                  .primary,
+                                            ),
+                                            title: Text(loc.pickFromGallry),
+                                            onTap: () {
+                                              _handleImagePick(false);
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    sizedBox,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: isDark
+                                            ? Colors.grey[900]
+                                            : Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: ListTile(
+                                        title: Center(
+                                          child: Text(
+                                            loc.cancel,
+                                            style: Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge,
+                                          ),
                                         ),
-                                      ],
+                                        onTap: () => Navigator.pop(context),
+                                      ),
                                     ),
-                                  ),
-                                  sizedBox,
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: isDark
-                                          ? Colors.grey[900]
-                                          : Colors.white,
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: ListTile(
-                                      title: Center(
-                                        child: Text(
-                                          loc.cancel,
-                                          style: Theme.of(
-                                            context,
-                                          ).textTheme.bodyLarge,
+                                    SizedBox(height: 16.h),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: SizedBox(
+                          width: 100.w,
+                          height: 100.w,
+                          child: DottedBorder(
+                            borderType: BorderType.Circle,
+                            strokeWidth: 2,
+                            dashPattern: const [6, 3],
+                            color: Colors.grey,
+                            child: ClipOval(
+                              child: Container(
+                                width: 100.w,
+                                height: 100.w,
+                                color: Colors.grey[300],
+                                child: _selectedImage != null
+                                    ? Image.file(
+                                        _selectedImage!,
+                                        width: 100.w,
+                                        height: 100.w,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Padding(
+                                        padding: EdgeInsets.all(30.w),
+                                        child: Image.asset(
+                                          Assets.images.addFileIcon.path,
                                         ),
                                       ),
-                                      onTap: () => Navigator.pop(context),
-                                    ),
-                                  ),
-                                  SizedBox(height: 16.h),
-                                ],
                               ),
-                            );
-                          },
-                        );
-                      },
-                      child: SizedBox(
-                        width: 100.w,
-                        height: 100.w,
-                        child: DottedBorder(
-                          borderType: BorderType.Circle,
-                          strokeWidth: 2,
-                          dashPattern: const [6, 3],
-                          color: Colors.grey,
-                          child: ClipOval(
-                            child: Container(
-                              width: 100.w,
-                              height: 100.w,
-                              color: Colors.grey[300],
-                              child: _selectedImage != null
-                                  ? Image.file(
-                                      _selectedImage!,
-                                      width: 100.w,
-                                      height: 100.w,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Padding(
-                                      padding: EdgeInsets.all(30.w),
-                                      child: Image.asset(
-                                        Assets.images.addFileIcon.path,
-                                      ),
-                                    ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    sizedBox,
-                    Row(
-                      children: [
-                        Text(
-                          loc.pngOrJpgFormat,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        SizedBox(width: 5.w),
-                        Icon(
-                          Icons.info_outline_rounded,
-                          color: lightTheme.colorScheme.primary,
-                        ),
-                      ],
-                    ),
-                    sizedBox,
-                    CustomeTextfieldWidget(
-                      controller: _nameController,
-                      labelText: loc.nameYourShop,
-                      formFieldValidator: (value) {
-                        return Validators.requiredField(context, value);
-                      },
-                      isRTL: isArabic,
-                    ),
-                    sizedBox,
-                    ShopNameInstruction(loc: loc, sizedBox: sizedBox),
-                    sizedBox,
-                    TextFieldForInstructions(
-                      textEditingController: _bioController,
-                      title: loc.aboutStore,
-                      hintText: loc.descripeYourShop,
-                      formFieldValidator: (value) {
-                        return Validators.requiredField(context, value);
-                      },
-                    ),
-                    sizedBox,
-                    // Text(
-                    //   loc.selectCategories,
-                    //   style: TextStyle(fontWeight: FontWeight.bold),
-                    // ),
-                    // Wrap(
-                    //   spacing: 8,
-                    //   children: availableCategories.map((category) {
-                    //     final isSelected = selectedCategories.contains(
-                    //       category.name,
-                    //     );
-                    //     return FilterChip(
-                    //       label: Text(category.name),
-                    //       selected: isSelected,
-                    //       onSelected: (selected) {
-                    //         setState(() {
-                    //           if (selected) {
-                    //             selectedCategories.add(category.name);
-                    //           } else {
-                    //             selectedCategories.remove(category.name);
-                    //           }
-                    //         });
-                    //       },
-                    //     );
-                    //   }).toList(),
-                    // ),
-                    MultiSelectCategoriesDropdown(
-                      selectedCategories: selectedCategories,
-                      onCategoriesChanged: (categories) {
-                        setState(() {
-                          selectedCategories = categories;
-                        });
-                        onCategoriesSelected(categories);
-                      },
-                    ),
-                    sizedBox,
-                    CustomeTextfieldWidget(
-                      controller: _openingHoursController,
-                      labelText: loc.openingHours,
-                      formFieldValidator: (value) =>
-                          Validators.requiredField(context, value),
-                      isRTL: isArabic,
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButtonWidget(
-                      fun: () async {
-                        setState(() async {
+                      sizedBox,
+                      Row(
+                        children: [
+                          Text(
+                            loc.pngOrJpgFormat,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          SizedBox(width: 5.w),
+                          Icon(
+                            Icons.info_outline_rounded,
+                            color: lightTheme.colorScheme.primary,
+                          ),
+                        ],
+                      ),
+                      sizedBox,
+                      CustomeTextfieldWidget(
+                        controller: _nameController,
+                        labelText: loc.nameYourShop,
+                        formFieldValidator: (value) {
+                          return Validators.requiredField(context, value);
+                        },
+                        isRTL: isArabic,
+                      ),
+                      sizedBox,
+                      ShopNameInstruction(loc: loc, sizedBox: sizedBox),
+                      sizedBox,
+                      CustomeTextfieldWidget(
+                        controller: _addressController,
+                        labelText: loc.address,
+                        formFieldValidator: (value) {
+                          return Validators.requiredField(context, value);
+                        },
+                        isRTL: isArabic,
+                      ),
+                      sizedBox,
+                      CustomeTextfieldWidget(
+                        controller: _openingHoursController,
+                        labelText: loc.openingHours,
+                        formFieldValidator: (value) =>
+                            Validators.requiredField(context, value),
+                        isRTL: isArabic,
+                      ),
+                      sizedBox,
+                      TextFieldForInstructions(
+                        textEditingController: _bioController,
+                        title: loc.aboutStore,
+                        hintText: loc.descripeYourShop,
+                        formFieldValidator: (value) {
+                          return Validators.requiredField(context, value);
+                        },
+                      ),
+                      sizedBox,
+                      // Text(
+                      //   loc.selectCategories,
+                      //   style: TextStyle(fontWeight: FontWeight.bold),
+                      // ),
+                      // Wrap(
+                      //   spacing: 8,
+                      //   children: availableCategories.map((category) {
+                      //     final isSelected = selectedCategories.contains(
+                      //       category.name,
+                      //     );
+                      //     return FilterChip(
+                      //       label: Text(category.name),
+                      //       selected: isSelected,
+                      //       onSelected: (selected) {
+                      //         setState(() {
+                      //           if (selected) {
+                      //             selectedCategories.add(category.name);
+                      //           } else {
+                      //             selectedCategories.remove(category.name);
+                      //           }
+                      //         });
+                      //       },
+                      //     );
+                      //   }).toList(),
+                      // ),
+                      MultiSelectCategoriesDropdown(
+                        selectedCategories: selectedCategories,
+                        onCategoriesChanged: (categories) {
+                          setState(() {
+                            selectedCategories = categories;
+                          });
+                          onCategoriesSelected(categories);
+                        },
+                      ),
+                      sizedBox,
+
+                      const SizedBox(height: 20),
+                      ElevatedButtonWidget(
+                        fun: () async {
                           if (_keyform.currentState!.validate()) {
                             if (_selectedImage == null) {
                               showAppSnackBar(
@@ -317,13 +332,13 @@ class _AddShopPageState extends State<AddShopPage> {
                               context,
                               ShopEntity(
                                 sellerId: sellerAccountModel.id,
-                                // image: _selectedImage?.path,
                                 name: _nameController.text.trim(),
                                 bio: _bioController.text.trim(),
                                 category: selectedCategories,
                                 openingHours: _openingHoursController.text
                                     .trim(),
                                 rating: '0.0',
+                                address: _addressController.text.trim(),
                               ),
                               SellerAccountModel(
                                 id: sellerAccountModel.id,
@@ -337,14 +352,14 @@ class _AddShopPageState extends State<AddShopPage> {
                               _selectedImage!,
                             );
                           }
-                        });
-                      },
-                      text: state is ShopLoadingState
-                          ? '${loc.loading}....'
-                          : loc.addShop,
-                      isColored: true,
-                    ),
-                  ],
+                        },
+                        text: state is ShopLoadingState
+                            ? '${loc.loading}....'
+                            : loc.addShop,
+                        isColored: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -44,4 +44,15 @@ class RegisterRepositoryImpl implements RegisterRepository {
       otp,
     );
   }
+
+  @override
+  Future<void> autoSellerLoginAfterVerification(
+    String email,
+    String password,
+  ) async {
+    return await remoteRegisterDatasource.autoSellerLoginAfterVerification(
+      email,
+      password,
+    );
+  }
 }

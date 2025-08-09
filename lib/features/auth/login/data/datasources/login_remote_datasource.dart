@@ -1,6 +1,6 @@
 import 'package:bingo/core/network/dio_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../../core/helper/token_storage.dart';
 import '../../domain/entities/login_entities.dart';
 import 'package:dio/dio.dart';
 
@@ -17,82 +17,6 @@ abstract class RemoteLoginDatasource {
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
   final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.auth);
-
-  // @override
-  // Future<LoginBaseResponse> remoteLoginUser(
-  //   String email,
-  //   String password,
-  // ) async {
-  //   try {
-  //     final response = await _dio.post(
-  //       'login-user',
-  //       data: {'email': email, 'password': password},
-  //     );
-  //     if (response.statusCode == 200) {
-  //       final token = response.data['token'];
-  //       return LoginBaseResponse(
-  //         status: true,
-  //         message: 'Login successful',
-  //         token: token,
-  //       );
-  //     } else {
-  //       return LoginBaseResponse(
-  //         status: false,
-  //         message: 'Unexpected response status: ${response.statusCode}',
-  //       );
-  //     }
-  //   } on DioException catch (e) {
-  //     String errorMessage = 'Login Failed';
-  //     if (e.response != null && e.response?.data != null) {
-  //       errorMessage = e.response?.data['error'] ?? e.message;
-  //     } else {
-  //       errorMessage = e.message ?? '';
-  //     }
-  //     return LoginBaseResponse(status: false, message: errorMessage);
-  //   } catch (e) {
-  //     return LoginBaseResponse(status: false, message: 'Unexpected error: $e');
-  //   }
-  // }
-
-  // @override
-  // Future<LoginBaseResponse> remoteLoginUser(
-  //   String email,
-  //   String password, {
-  //   required bool isSeller, // added parameter to determine type
-  // }) async {
-  //   try {
-  //     final endpoint = isSeller ? 'login-seller' : 'login-user';
-
-  //     final response = await _dio.post(
-  //       endpoint,
-  //       data: {'email': email, 'password': password},
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       final token = response.data['token'];
-  //       return LoginBaseResponse(
-  //         status: true,
-  //         message: 'Login successful',
-  //         token: token,
-  //       );
-  //     } else {
-  //       return LoginBaseResponse(
-  //         status: false,
-  //         message: 'Unexpected response status: ${response.statusCode}',
-  //       );
-  //     }
-  //   } on DioException catch (e) {
-  //     String errorMessage = 'Login Failed';
-  //     if (e.response != null && e.response?.data != null) {
-  //       errorMessage = e.response?.data['error'] ?? e.message;
-  //     } else {
-  //       errorMessage = e.message ?? '';
-  //     }
-  //     return LoginBaseResponse(status: false, message: errorMessage);
-  //   } catch (e) {
-  //     return LoginBaseResponse(status: false, message: 'Unexpected error: $e');
-  //   }
-  // }
 
   @override
   Future<void> resetPassword(String email, String newPassword) async {
@@ -190,9 +114,32 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       );
 
       if (response.statusCode == 200) {
-        // Save user role only
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('auth_role', isSeller ? 'seller' : 'user');
+        // Save authentication token and role
+        if (response.data['token'] != null) {
+          await TokenStorage.saveToken(response.data['token']);
+          await TokenStorage.saveRole(isSeller ? 'seller' : 'user');
+
+          // If it's a seller login, try to save seller ID from response
+          if (isSeller &&
+              response.data['seller'] != null &&
+              response.data['seller']['id'] != null) {
+            await TokenStorage.saveSellerId(
+              response.data['seller']['id'].toString(),
+            );
+            print(
+              '💾 Saved sellerId from login: ${response.data['seller']['id']}',
+            );
+          } else if (isSeller &&
+              response.data['user'] != null &&
+              response.data['user']['id'] != null) {
+            await TokenStorage.saveSellerId(
+              response.data['user']['id'].toString(),
+            );
+            print(
+              '💾 Saved sellerId from login (user field): ${response.data['user']['id']}',
+            );
+          }
+        }
 
         return LoginBaseResponse(status: true, message: 'Login successful');
       } else {

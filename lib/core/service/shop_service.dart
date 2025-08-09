@@ -118,7 +118,7 @@ class ShopService {
     }
 
     // 2. Get auth token if required
-    final token = prefs.getString('auth_token'); // Adjust key if needed
+    final token = prefs.getString('auth_token');
 
     final dio = await DioClient.createDio(ApiTarget.seller);
 
@@ -126,11 +126,21 @@ class ShopService {
     final bytes = await imageFile.readAsBytes();
     final base64String = base64Encode(bytes);
 
-    final requestData = {'fileName': base64String};
+    // Generate a unique filename
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final extension = imageFile.path.split('.').last;
+    final uniqueFileName = 'shop_image_${timestamp}.$extension';
+
+    // Prepare request data with all required fields
+    final requestData = {
+      'file': base64String, // The base64 image data
+      'fileName': uniqueFileName, // A unique filename
+      'folder': 'shop-images', // Folder to organize images
+    };
 
     try {
       final response = await dio.post(
-        'upload-image', // <-- Make sure this route exists on the server
+        'upload-image',
         data: requestData,
         options: Options(
           headers: {
@@ -141,14 +151,14 @@ class ShopService {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // If your backend just returns the URL or path as string
-        if (response.data is String) {
-          return response.data as String;
-        }
-
-        // If the backend returns a map like: { "imageUrl": "..." }
+        // Based on your backend response structure
         if (response.data is Map<String, dynamic>) {
-          return response.data['imageUrl'] ?? response.data['url'];
+          final responseData = response.data as Map<String, dynamic>;
+
+          // Return the URL from your backend response
+          if (responseData['success'] == true && responseData['url'] != null) {
+            return responseData['url'] as String;
+          }
         }
 
         print("Unexpected response format: ${response.data}");

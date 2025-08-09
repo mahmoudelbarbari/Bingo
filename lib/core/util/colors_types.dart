@@ -2,29 +2,22 @@ import 'package:flutter/material.dart';
 
 Color getColorFromName(String name) {
   switch (name.toLowerCase()) {
-    case 'red':
+    case '#FF0000':
       return Colors.red;
-    case 'green':
+    case '#00FF00':
       return Colors.green;
-    case 'blue':
+    case '#0000FF':
       return Colors.blue;
-    case 'yellow':
+    case '#FFFF00':
       return Colors.yellow;
-    case 'orange':
-      return Colors.orange;
-    case 'purple':
-      return Colors.purple;
-    case 'pink':
-      return Colors.pink;
-    case 'brown':
-      return Colors.brown;
-    case 'grey':
-    case 'gray':
-      return Colors.grey;
-    case 'black':
-      return Colors.black;
-    case 'white':
-      return Colors.white;
+    case '#220000':
+      return const Color(0xFF220000);
+    case '#000000':
+      return const Color(0xFF000000);
+    case '#FFA500':
+      return const Color(0xFFFFA500);
+    case '#800080':
+      return const Color(0xFF800080);
     default:
       return Colors.transparent; // fallback color
   }

@@ -87,6 +87,8 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../helper/token_storage.dart';
+
 enum ApiTarget { auth, product, seller, order, admin, chatting }
 
 class DioClient {
@@ -136,6 +138,29 @@ class DioClient {
     }
 
     dio.interceptors.add(CookieManager(_cookieJar!));
+
+    // Add authentication interceptor
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          // Add authorization header if token exists
+          final token = await TokenStorage.getToken();
+          if (token != null && token.isNotEmpty) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          handler.next(options);
+        },
+        onError: (error, handler) async {
+          // Handle 401 unauthorized errors
+          if (error.response?.statusCode == 401) {
+            // Clear invalid token
+            await TokenStorage.clearAll();
+            print('🔒 Token expired or invalid, cleared from storage');
+          }
+          handler.next(error);
+        },
+      ),
+    );
 
     dio.interceptors.add(
       LogInterceptor(
