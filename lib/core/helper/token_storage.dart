@@ -60,7 +60,6 @@ class TokenStorage {
     await prefs.remove('seller_shop_id');
   }
 
-  // Add sellerId management methods
   static Future<void> saveSellerId(String sellerId) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('seller_id', sellerId);

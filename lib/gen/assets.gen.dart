@@ -16,9 +16,16 @@ class $AssetsImagesGen {
   AssetGenImage get appleLogo =>
       const AssetGenImage('assets/images/Apple-Logo.png');
 
+  /// File path: assets/images/Frame_4.png
+  AssetGenImage get frame4 => const AssetGenImage('assets/images/Frame_4.png');
+
   /// File path: assets/images/No connection.png
   AssetGenImage get noConnection =>
       const AssetGenImage('assets/images/No connection.png');
+
+  /// File path: assets/images/Rectangle_34624629_1.png
+  AssetGenImage get rectangle346246291 =>
+      const AssetGenImage('assets/images/Rectangle_34624629_1.png');
 
   /// File path: assets/images/addFileIcon.png
   AssetGenImage get addFileIcon =>
@@ -78,6 +85,10 @@ class $AssetsImagesGen {
   AssetGenImage get greyDeleteIcon =>
       const AssetGenImage('assets/images/grey-delete-icon.png');
 
+  /// File path: assets/images/heart-hand_1.png
+  AssetGenImage get heartHand1 =>
+      const AssetGenImage('assets/images/heart-hand_1.png');
+
   /// File path: assets/images/home.png
   AssetGenImage get home => const AssetGenImage('assets/images/home.png');
 
@@ -91,6 +102,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/lockIcon.png
   AssetGenImage get lockIcon =>
       const AssetGenImage('assets/images/lockIcon.png');
+
+  /// File path: assets/images/message-chat-circle.png
+  AssetGenImage get messageChatCircle =>
+      const AssetGenImage('assets/images/message-chat-circle.png');
+
+  /// File path: assets/images/message-chat-circle_1.png
+  AssetGenImage get messageChatCircle1 =>
+      const AssetGenImage('assets/images/message-chat-circle_1.png');
 
   /// File path: assets/images/notification.png
   AssetGenImage get notification =>
@@ -144,6 +163,9 @@ class $AssetsImagesGen {
   AssetGenImage get onboarding1 =>
       const AssetGenImage('assets/images/onboarding1.png');
 
+  /// File path: assets/images/package.png
+  AssetGenImage get package => const AssetGenImage('assets/images/package.png');
+
   /// File path: assets/images/post img.png
   AssetGenImage get postImg =>
       const AssetGenImage('assets/images/post img.png');
@@ -174,6 +196,10 @@ class $AssetsImagesGen {
   AssetGenImage get sellerImg =>
       const AssetGenImage('assets/images/seller_img.png');
 
+  /// File path: assets/images/shopping-cart-03.png
+  AssetGenImage get shoppingCart03 =>
+      const AssetGenImage('assets/images/shopping-cart-03.png');
+
   /// File path: assets/images/visa_network.png
   AssetGenImage get visaNetwork =>
       const AssetGenImage('assets/images/visa_network.png');
@@ -181,7 +207,9 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     appleLogo,
+    frame4,
     noConnection,
+    rectangle346246291,
     addFileIcon,
     bingoLogo,
     bingoLogo1,
@@ -198,10 +226,13 @@ class $AssetsImagesGen {
     globe,
     googleLogo,
     greyDeleteIcon,
+    heartHand1,
     home,
     jewelry,
     location,
     lockIcon,
+    messageChatCircle,
+    messageChatCircle1,
     notification,
     onboadring8,
     onboadring10,
@@ -215,6 +246,7 @@ class $AssetsImagesGen {
     onboadring7,
     onboadring9,
     onboarding1,
+    package,
     postImg,
     premPlanImg,
     proPlanImg,
@@ -223,6 +255,7 @@ class $AssetsImagesGen {
     search,
     sellerOnboardingWelcomeImage,
     sellerImg,
+    shoppingCart03,
     visaNetwork,
   ];
 }

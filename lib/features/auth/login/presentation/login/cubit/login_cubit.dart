@@ -15,13 +15,13 @@ class LoginCubit extends Cubit<LoginState> {
     String email,
     String password,
     BuildContext context, {
-    required bool isSeller, // Add this parameter
+    required bool isSeller,
   }) async {
     loginUsecase = sl();
 
     try {
       emit(LoginLoadingState());
-      handlerRequestApi(
+      await handlerRequestApi(
         context: context,
         body: () async {
           final loggedin = await loginUsecase.call(email, password, isSeller);

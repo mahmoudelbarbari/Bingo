@@ -75,7 +75,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   iOS: true
-  image_path: "assets/images/bingo-logo.jpg"
+  image_path: "assets/images/bingologo2.png"
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is

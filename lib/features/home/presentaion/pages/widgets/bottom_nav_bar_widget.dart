@@ -3,6 +3,7 @@
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
+import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widget.dart';
@@ -11,6 +12,7 @@ import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/helper/token_storage.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../cart/presentation/pages/cart_page.dart';
 import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
@@ -48,8 +50,22 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         leading: Padding(
           padding: EdgeInsetsDirectional.only(start: 12.w),
           child: InkWell(
-            onTap: () {
-              //TODO:: THIS THE IMPLEMTNATION OF THE PROFILE SCREEN
+            onTap: () async {
+              final sellerId = await TokenStorage.getSellerId();
+              print('DAMAVIAAAAAAAAAAAAAAAAAAAAAAAAA $sellerId');
+              if (sellerId != null) {
+                Navigator.pushNamed(
+                  context,
+                  '/seller-profile',
+                  arguments: sellerId,
+                );
+              } else {
+                showAppSnackBar(
+                  context,
+                  'Seller profile not available',
+                  isError: true,
+                );
+              }
             },
             child: CircleAvatar(
               child: ImageIcon(AssetImage(Assets.images.profile.path)),

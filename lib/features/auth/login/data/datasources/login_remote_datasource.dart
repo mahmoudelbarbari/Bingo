@@ -114,31 +114,23 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       );
 
       if (response.statusCode == 200) {
-        // Save authentication token and role
-        if (response.data['token'] != null) {
-          await TokenStorage.saveToken(response.data['token']);
-          await TokenStorage.saveRole(isSeller ? 'seller' : 'user');
+        await TokenStorage.saveRole(isSeller ? 'seller' : 'user');
 
-          // If it's a seller login, try to save seller ID from response
-          if (isSeller &&
-              response.data['seller'] != null &&
-              response.data['seller']['id'] != null) {
-            await TokenStorage.saveSellerId(
-              response.data['seller']['id'].toString(),
-            );
-            print(
-              '💾 Saved sellerId from login: ${response.data['seller']['id']}',
-            );
-          } else if (isSeller &&
-              response.data['user'] != null &&
-              response.data['user']['id'] != null) {
-            await TokenStorage.saveSellerId(
-              response.data['user']['id'].toString(),
-            );
-            print(
-              '💾 Saved sellerId from login (user field): ${response.data['user']['id']}',
-            );
-          }
+        // After successful login, save the seller ID
+        if (isSeller &&
+            response.data['seller'] != null &&
+            response.data['seller']['id'] != null) {
+          await TokenStorage.saveSellerId(response.data['seller']['id']);
+          print('�� Saved sellerId: ${response.data['seller']['id']}');
+        } else if (isSeller &&
+            response.data['user'] != null &&
+            response.data['user']['id'] != null) {
+          await TokenStorage.saveSellerId(
+            response.data['user']['id'].toString(),
+          );
+          print(
+            '💾 Saved sellerId from login (user field): ${response.data['user']['id']}',
+          );
         }
 
         return LoginBaseResponse(status: true, message: 'Login successful');

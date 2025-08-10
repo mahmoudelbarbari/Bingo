@@ -38,6 +38,8 @@ import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubi
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/seller_products_cubit/seller_products_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
+import 'package:bingo/features/seller_profile/domain/usecases/get_seller_profile.dart';
+import 'package:bingo/features/seller_profile/domain/usecases/get_seller_reviews_usecase.dart';
 import 'package:bingo/features/shops/data/datasource/shop_datasource.dart';
 import 'package:bingo/features/shops/data/reporisatory/shop_repo_impl.dart';
 import 'package:bingo/features/shops/domain/repo/shops_repo.dart';
@@ -69,6 +71,12 @@ import '../features/seller_onboarding/data/repository/seller_upload_repo_impl.da
 import '../features/seller_onboarding/domain/repositories/upload_file_repository.dart';
 import '../features/seller_onboarding/domain/usecase/seller_upload_doc_usecase.dart';
 import '../features/seller_onboarding/presentation/cubit/file_upload_cubit.dart';
+import '../features/seller_profile/data/datasources/seller_profile_remote_data_source_impl.dart';
+import '../features/seller_profile/data/repo/seller_profile_repository_impl.dart';
+import '../features/seller_profile/domain/repo/seller_profile_repo.dart';
+import '../features/seller_profile/domain/usecases/get_seller_events_usecase.dart';
+import '../features/seller_profile/domain/usecases/get_seller_products.dart';
+import '../features/seller_profile/presentation/cubit/seller_profile_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -299,4 +307,42 @@ void init() async {
 
   //home cubit
   sl.registerLazySingleton<HomeCubit>(() => HomeCubit());
+
+  //-----------------------------------------------------------------------------------------
+  // seller profile feature (injection).
+  //-----------------------------------------------------------------------------------------
+
+  //datasource
+  sl.registerLazySingleton<SellerProfileRemoteDataSource>(
+    () => SellerProfileRemoteDataSourceImpl(),
+  );
+
+  //repo
+  sl.registerLazySingleton<SellerProfileRepository>(
+    () => SellerProfileRepositoryImpl(sl()),
+  );
+
+  // usecases
+  sl.registerLazySingleton<GetSellerEventsUseCase>(
+    () => GetSellerEventsUseCase(sl<SellerProfileRepository>()),
+  );
+  sl.registerLazySingleton<GetSellerProducts>(
+    () => GetSellerProducts(sl<SellerProfileRepository>()),
+  );
+  sl.registerLazySingleton<GetSellerProfile>(
+    () => GetSellerProfile(sl<SellerProfileRepository>()),
+  );
+  sl.registerLazySingleton<GetSellerReviewsUseCase>(
+    () => GetSellerReviewsUseCase(sl<SellerProfileRepository>()),
+  );
+
+  //cubit
+  sl.registerLazySingleton<SellerProfileCubit>(
+    () => SellerProfileCubit(
+      getSellerProfile: sl(),
+      getSellerProducts: sl(),
+      getSellerEvents: sl(),
+      getSellerReviews: sl(),
+    ),
+  );
 }

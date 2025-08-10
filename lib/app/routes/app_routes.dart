@@ -16,11 +16,13 @@ import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen1.
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen2.dart';
 import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen3.dart';
 
+import '../../core/helper/token_storage.dart';
 import '../../features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
 import '../../features/chatbot/presentation/pages/chat_bot_page.dart';
 import '../../features/product/domain/entity/product.dart';
 import '../../features/product/presentation/pages/add_product_page.dart';
 import '../../features/seller_onboarding/presentation/pages/seller_onboarding_screen.dart';
+import '../../features/seller_profile/presentation/pages/seller_profile_screen.dart';
 
 final Map<String, WidgetBuilder> appRoutes = {
   '/': (context) => const WelcomeSplashScreen(),
@@ -51,4 +53,42 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/addAddressScreen': (context) => const AddAddressPage(),
   '/addSellerShop': (context) => AddShopPage(),
   '/add-product': (context) => const AddProductPage(),
+  '/seller-profile': (context) {
+    // Get the current seller's ID from storage
+    return FutureBuilder<String?>(
+      future: TokenStorage.getSellerId(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData &&
+            snapshot.data != null &&
+            snapshot.data!.isNotEmpty) {
+          return SellerProfileScreen(sellerId: snapshot.data!);
+        } else {
+          // Show error instead of passing empty string
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error, size: 64, color: Colors.red),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Seller ID not found',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text('Please login again as a seller'),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, '/loginScreen'),
+                    child: const Text('Go to Login'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
+    );
+  },
 };
