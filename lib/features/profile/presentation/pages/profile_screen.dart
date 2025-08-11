@@ -18,46 +18,47 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<UserCubit>().loadCurrentUser();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
-      builder: (context, state) {
-        if (state is UserLoadingState) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is UserloadedDataState) {
-          final user = state.userEntity;
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildHeader(context, user.name ?? "Test test"),
-              const SizedBox(height: 20),
-              _buildFirstWidget(context),
-              const SizedBox(height: 20),
-              _buildSecondWidget(context),
-              const SizedBox(height: 20),
-              _buildThirdWidget(context),
-            ],
-          );
-        } else if (state is UserErrorState) {
-          return Center(child: Text('Error: ${state.errMessage}'));
-        }
-
-        return SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _buildHeader(context, "Mahmoud Awad"),
-              const SizedBox(height: 20),
-              _buildFirstWidget(context),
-              const SizedBox(height: 20),
-              _buildSecondWidget(context),
-              const SizedBox(height: 20),
-              _buildThirdWidget(context),
-            ],
-          ),
-        );
-      },
+    return BlocProvider(
+      create: (context) => UserCubit()..loadCurrentUser(),
+      child: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          if (state is UserLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is UserloadedDataState) {
+            final user = state.userEntity;
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildHeader(context, user.name ?? "Test test"),
+                    const SizedBox(height: 20),
+                    _buildFirstWidget(context),
+                    const SizedBox(height: 20),
+                    _buildSecondWidget(context),
+                    const SizedBox(height: 20),
+                    _buildThirdWidget(context),
+                  ],
+                ),
+              ),
+            );
+          } else if (state is UserErrorState) {
+            return Center(child: Text('Error: ${state.errMessage}'));
+          } else {
+            return Center(child: Text('Not logged in'));
+          }
+        },
+      ),
     );
   }
 }

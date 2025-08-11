@@ -15,7 +15,7 @@ class UserDatasourceImpl implements UserDatasource {
   @override
   Future<UserEntity> getCurrentUser() async {
     try {
-      final response = await dio.get('/logges-in-user');
+      final response = await dio.get('logges-in-user');
       if (response.statusCode == 200) {
         return UserModel.fromMap(response.data);
       } else {

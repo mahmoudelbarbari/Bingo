@@ -103,6 +103,10 @@ class $AssetsImagesGen {
   AssetGenImage get lockIcon =>
       const AssetGenImage('assets/images/lockIcon.png');
 
+  /// File path: assets/images/logo_foreground.png
+  AssetGenImage get logoForeground =>
+      const AssetGenImage('assets/images/logo_foreground.png');
+
   /// File path: assets/images/message-chat-circle.png
   AssetGenImage get messageChatCircle =>
       const AssetGenImage('assets/images/message-chat-circle.png');
@@ -231,6 +235,7 @@ class $AssetsImagesGen {
     jewelry,
     location,
     lockIcon,
+    logoForeground,
     messageChatCircle,
     messageChatCircle1,
     notification,

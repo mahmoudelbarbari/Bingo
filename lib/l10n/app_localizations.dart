@@ -1444,6 +1444,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'User'**
   String get user;
+
+  /// No description provided for @setupPaymentAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup Payment Account'**
+  String get setupPaymentAccount;
+
+  /// No description provided for @shopCreatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop Created Successfully!'**
+  String get shopCreatedSuccessfully;
+
+  /// No description provided for @yourShopHasVeenCreatedSuccessfullyNowYouNeedToSetUpYourPaymentAccountToStartReceivingPayments.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shop has been created successfully. Now you need to set up your payment account to start receiving payments.'**
+  String get yourShopHasVeenCreatedSuccessfullyNowYouNeedToSetUpYourPaymentAccountToStartReceivingPayments;
+
+  /// No description provided for @skipForNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip for now'**
+  String get skipForNow;
+
+  /// No description provided for @sellerIdNotFoundPleaseTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Seller ID not found. Please try again.'**
+  String get sellerIdNotFoundPleaseTryAgain;
+
+  /// No description provided for @paymentSetupInitiated.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Setup Initiated'**
+  String get paymentSetupInitiated;
+
+  /// No description provided for @yourPaymentAccountSetupHasBeenInitiatedPleaseCompleteTheSetupProcessInTheBrowserThatJustOpenedYouWillBeRedirectedToTheLoginPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your payment account setup has been initiated. Please complete the setup process in the browser that just opened. You will be redirected to the login page.'**
+  String get yourPaymentAccountSetupHasBeenInitiatedPleaseCompleteTheSetupProcessInTheBrowserThatJustOpenedYouWillBeRedirectedToTheLoginPage;
+
+  /// No description provided for @continueToLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to Login'**
+  String get continueToLogin;
+
+  /// No description provided for @failedToOpenPaymentSetupPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to open payment setup page'**
+  String get failedToOpenPaymentSetupPage;
+
+  /// No description provided for @completeThePaymentSetupInYourBrowserThenReturnToTheApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete the payment setup in your browser, then return to the app.'**
+  String get completeThePaymentSetupInYourBrowserThenReturnToTheApp;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

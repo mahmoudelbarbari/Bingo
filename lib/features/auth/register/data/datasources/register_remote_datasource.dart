@@ -1,6 +1,7 @@
 import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/auth/register/data/model/register_model.dart';
+import 'package:bingo/features/auth/register/data/model/stripe_model.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
 import 'package:dio/dio.dart';
 
@@ -19,6 +20,7 @@ abstract class RemoteRegisterDatasource {
     String otp,
   );
   Future<void> autoSellerLoginAfterVerification(String email, String password);
+  Future<StripeModel> createStripeConnectLink(String sellerId);
   Future<void> signOut();
 }
 
@@ -257,6 +259,36 @@ class RemoteRegisterDatasourceImpl implements RemoteRegisterDatasource {
       print('❌ Auto-login error: $e');
       // Still save role even if auto-login fails
       await TokenStorage.saveRole('seller');
+    }
+  }
+
+  @override
+  Future<StripeModel> createStripeConnectLink(String sellerId) async {
+    try {
+      final dio = await _dioFuture;
+      final response = await dio.post(
+        'create-stripe-link',
+        data: {'sellerId': sellerId},
+      );
+
+      if (response.statusCode == 200) {
+        return StripeModel.fromJson(response.data);
+      } else {
+        return StripeModel(
+          status: 'error',
+          message: 'Failed to create Stripe connect link',
+        );
+      }
+    } on DioException catch (e) {
+      String errorMessage = 'Failed to create Stripe connect link';
+      if (e.response != null && e.response?.data != null) {
+        errorMessage = e.response?.data['error'] ?? e.message ?? errorMessage;
+      } else {
+        errorMessage = e.message ?? errorMessage;
+      }
+      return StripeModel(status: 'error', message: errorMessage);
+    } catch (e) {
+      return StripeModel(status: 'error', message: 'Unexpected error: $e');
     }
   }
 }

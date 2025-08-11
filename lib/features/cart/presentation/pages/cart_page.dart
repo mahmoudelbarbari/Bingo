@@ -27,8 +27,9 @@ class _CartPageState extends State<CartPage> {
         listener: (context, state) {
           if (state is CartError) {
             if (kDebugMode) {
-              print(state.errorMessage);
+              print('THIS IS DAMCIAAAAAAAAAAAAAAAAAAAAAA${state.errorMessage}');
             }
+            Text(AppLocalizations.of(context)!.error);
           }
         },
         builder: (context, state) {

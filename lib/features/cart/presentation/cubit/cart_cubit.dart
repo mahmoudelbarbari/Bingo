@@ -81,7 +81,9 @@ class CartCubit extends Cubit<CartState> {
         emit(ItemDeletedSuccess());
         await getAllCartItems();
       } else {
-        emit(CartError(errorMessage: 'There is a problem'));
+        emit(
+          CartError(errorMessage: 'There is a problem ${deletedItem.message}'),
+        );
       }
     } catch (e) {
       emit(CartError(errorMessage: e.toString()));

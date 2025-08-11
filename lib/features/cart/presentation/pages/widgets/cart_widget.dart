@@ -1,5 +1,4 @@
 import 'package:bingo/features/product/data/models/product_model.dart';
-import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,7 +59,7 @@ class _CartWidgetState extends State<CartWidget> {
                 return CartItemsContainer(
                   key: ValueKey(widget.productModel[index].id),
                   center: center,
-                  image: Assets.images.noConnection.path,
+                  image: widget.productModel[index].firstImageUrl,
                   title: widget.productModel[index].title ?? '',
                   desc: widget.productModel[index].shortDescription ?? "",
                   proPrice: widget.productModel[index].price,
@@ -69,7 +68,7 @@ class _CartWidgetState extends State<CartWidget> {
                     count,
                     total,
                   ),
-                  proId: widget.productModel[index].title,
+                  proId: widget.productModel[index].id,
                 );
               },
             ),

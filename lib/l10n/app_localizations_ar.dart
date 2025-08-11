@@ -688,4 +688,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get user => 'المستخدم';
+
+  @override
+  String get setupPaymentAccount => 'إعداد حساب الدفع';
+
+  @override
+  String get shopCreatedSuccessfully => 'تم إنشاء المتجر بنجاح';
+
+  @override
+  String get yourShopHasVeenCreatedSuccessfullyNowYouNeedToSetUpYourPaymentAccountToStartReceivingPayments => 'تم إنشاء متجرك بنجاح. الآن، عليك إعداد حساب الدفع الخاص بك لبدء استلام المدفوعات.';
+
+  @override
+  String get skipForNow => 'تخطي الآن';
+
+  @override
+  String get sellerIdNotFoundPleaseTryAgain => 'لم يتم العثور على معرف البائع، يرجى المحاولة مرة أخرى';
+
+  @override
+  String get paymentSetupInitiated => 'تم بدء إعداد الدفع';
+
+  @override
+  String get yourPaymentAccountSetupHasBeenInitiatedPleaseCompleteTheSetupProcessInTheBrowserThatJustOpenedYouWillBeRedirectedToTheLoginPage => 'تم بدء إعداد حساب الدفع الخاص بك. يُرجى إكمال عملية الإعداد في المتصفح الذي فُتح للتو. سيتم توجيهك إلى صفحة تسجيل الدخول.';
+
+  @override
+  String get continueToLogin => 'متابعة تسجيل الدخول';
+
+  @override
+  String get failedToOpenPaymentSetupPage => 'فشل في فتح صفحة إعداد الدفع';
+
+  @override
+  String get completeThePaymentSetupInYourBrowserThenReturnToTheApp => 'أكمل إعداد الدفع في متصفحك، ثم ارجع إلى التطبيق.';
 }

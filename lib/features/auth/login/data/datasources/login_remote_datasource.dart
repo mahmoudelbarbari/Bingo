@@ -105,7 +105,6 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
   ) async {
     try {
       final dio = await _dioFuture;
-
       final endpoint = isSeller ? 'login-seller' : 'login-user';
 
       final response = await dio.post(
@@ -116,21 +115,22 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       if (response.statusCode == 200) {
         await TokenStorage.saveRole(isSeller ? 'seller' : 'user');
 
-        // After successful login, save the seller ID
-        if (isSeller &&
-            response.data['seller'] != null &&
-            response.data['seller']['id'] != null) {
-          await TokenStorage.saveSellerId(response.data['seller']['id']);
-          print('�� Saved sellerId: ${response.data['seller']['id']}');
-        } else if (isSeller &&
-            response.data['user'] != null &&
-            response.data['user']['id'] != null) {
-          await TokenStorage.saveSellerId(
-            response.data['user']['id'].toString(),
-          );
-          print(
-            '💾 Saved sellerId from login (user field): ${response.data['user']['id']}',
-          );
+        // 👇 Handle data saving for BOTH user types 👇
+        if (isSeller) {
+          // Seller login handling
+          dynamic userData = response.data['seller'] ?? response.data['user'];
+          if (userData != null && userData['id'] != null) {
+            await TokenStorage.saveSellerId(userData['id'].toString());
+            await TokenStorage.saveCurrentUser(userData);
+            print('Saved seller data: $userData');
+          }
+        } else {
+          // Regular user handling
+          if (response.data['user'] != null &&
+              response.data['user']['id'] != null) {
+            await TokenStorage.saveCurrentUser(response.data['user']);
+            print('Saved user data: ${response.data['user']}');
+          }
         }
 
         return LoginBaseResponse(status: true, message: 'Login successful');
@@ -144,4 +144,11 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       return LoginBaseResponse(status: false, message: 'Login error: $e');
     }
   }
+
+  // Helper method for seller data
+  // Future<void> _saveSellerData(dynamic sellerData) async {
+  //   await TokenStorage.saveSellerId(sellerData['id'].toString());
+  //   await TokenStorage.saveCurrentUser(sellerData);
+  //   print('Saved seller data: $sellerData');
+  // }
 }

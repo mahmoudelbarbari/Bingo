@@ -1,5 +1,6 @@
 class ProductEntity {
   final String? id;
+  final String? images;
   final String? shopId;
   final String? title;
   final String? shortDescription;
@@ -23,6 +24,7 @@ class ProductEntity {
   ProductEntity({
     this.id,
     this.shopId,
+    this.images,
     this.title,
     this.shortDescription,
     this.tags,

@@ -1,5 +1,3 @@
-// lib/presentation/widgets/bottom_nav_bar.dart
-
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
@@ -27,6 +25,7 @@ class BottomNavBarWidget extends StatefulWidget {
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _currentIndex = 0;
+  bool _isSeller = false;
 
   final List<Widget> _pages = [
     HomeScreen(),
@@ -34,6 +33,19 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
     BlocProvider(create: (_) => UserCubit(), child: const ProfileScreen()),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _checkUserRole();
+  }
+
+  Future<void> _checkUserRole() async {
+    final isSeller = await TokenStorage.isSeller();
+    setState(() {
+      _isSeller = isSeller;
+    });
+  }
 
   void _onTap(int index) {
     setState(() => _currentIndex = index);
@@ -52,7 +64,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           child: InkWell(
             onTap: () async {
               final sellerId = await TokenStorage.getSellerId();
-              print('DAMAVIAAAAAAAAAAAAAAAAAAAAAAAAA $sellerId');
               if (sellerId != null) {
                 Navigator.pushNamed(
                   context,
@@ -108,7 +119,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               children: [
                 _navItem(Icons.home, loc.home, 0),
                 _navItem(Icons.language, loc.community, 1),
-                const SizedBox(width: 48),
+                if (_isSeller) const SizedBox(width: 48),
                 _navItem(Icons.shopping_cart_outlined, loc.cart, 2),
                 _navItem(Icons.person, loc.profile, 3),
               ],
@@ -116,15 +127,19 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/add-product');
-        },
-        shape: CircleBorder(),
-        backgroundColor: lightTheme.primaryColor,
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: _isSeller
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/add-product');
+              },
+              shape: CircleBorder(),
+              backgroundColor: lightTheme.primaryColor,
+              child: const Icon(Icons.add),
+            )
+          : null,
+      floatingActionButtonLocation: _isSeller
+          ? FloatingActionButtonLocation.centerDocked
+          : null,
       body: Stack(
         children: [
           _pages[_currentIndex],

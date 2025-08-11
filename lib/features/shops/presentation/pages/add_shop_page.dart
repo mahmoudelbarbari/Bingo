@@ -19,6 +19,7 @@ import 'package:bingo/features/shops/presentation/cubit/shop_cubit.dart';
 import 'package:bingo/features/shops/presentation/cubit/shop_state.dart';
 
 import '../../../../core/service/shop_service.dart';
+import '../../../auth/register/presentation/pages/stripe_link/stripe_connect_page.dart';
 
 class AddShopPage extends StatefulWidget {
   const AddShopPage({super.key});
@@ -62,8 +63,23 @@ class _AddShopPageState extends State<AddShopPage> {
       appBar: AppBar(title: Text(loc.addShop)),
       body: BlocConsumer<ShopCubit, ShopState>(
         listener: (context, state) {
+          final SellerAccountModel sellerAccountModel =
+              ModalRoute.of(context)!.settings.arguments as SellerAccountModel;
           if (state is ShopSuccessState) {
             showAppSnackBar(context, state.message);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => StripeConnectPage(
+                  sellerAccountModel: SellerAccountModel(
+                    id: sellerAccountModel.id,
+                    email: sellerAccountModel.email,
+                    password: sellerAccountModel.password,
+                    country: sellerAccountModel.country,
+                    phoneNum: sellerAccountModel.phoneNum,
+                  ), // Pass your seller model here
+                ),
+              ),
+            );
             // Navigator.pushNamed(context, '/bottomNavBar');
           } else if (state is ShopErrorState) {
             showAppSnackBar(context, state.errMessage, isError: true);

@@ -64,7 +64,17 @@ class _CartItemsContainerState extends State<CartItemsContainer>
                 height: 60,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(widget.image, fit: BoxFit.cover),
+                  child:
+                      (widget.image.startsWith('http') ||
+                          widget.image.startsWith('https'))
+                      ? Image.network(
+                          widget.image,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(Icons.broken_image);
+                          },
+                        )
+                      : const Icon(Icons.image_not_supported),
                 ),
               ),
               title: Text(

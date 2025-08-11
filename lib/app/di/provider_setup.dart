@@ -22,7 +22,7 @@ class AppProviders {
       BlocProvider<LanguageCubit>(create: (_) => di.sl<LanguageCubit>()),
       BlocProvider<LoginCubit>(create: (_) => di.sl<LoginCubit>()),
       BlocProvider<UserCubit>(
-        create: (_) => di.sl<UserCubit>()..getCurrentUser(),
+        create: (_) => di.sl<UserCubit>()..getCurrentUserId(),
       ),
       BlocProvider<ForgotPasswordCubit>(
         create: (_) => di.sl<ForgotPasswordCubit>(),

@@ -1,6 +1,7 @@
 import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/auth/register/data/datasources/register_remote_datasource.dart';
 import 'package:bingo/features/auth/register/data/model/register_model.dart';
+import 'package:bingo/features/auth/register/data/model/stripe_model.dart';
 import 'package:bingo/features/auth/register/domain/entities/register_entities.dart';
 import 'package:bingo/features/auth/register/domain/repositories/register_repository.dart';
 
@@ -54,5 +55,10 @@ class RegisterRepositoryImpl implements RegisterRepository {
       email,
       password,
     );
+  }
+
+  @override
+  Future<StripeModel> createStripeConnectLink(String sellerId) async {
+    return await remoteRegisterDatasource.createStripeConnectLink(sellerId);
   }
 }

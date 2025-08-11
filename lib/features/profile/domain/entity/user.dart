@@ -16,6 +16,26 @@ class UserEntity {
     this.role,
     this.address,
   });
+
+  factory UserEntity.fromMap(Map<String, dynamic> map) {
+    return UserEntity(
+      idUser: map['id'],
+      name: map['name'],
+      email: map['email'],
+      phoneNumber: map['phoneNumber'],
+      country: map['country'],
+      role: map['role'],
+      address: map['address'] != null
+          ? AddressEntity(
+              streetAddress: map['address']['streetAddress'],
+              city: map['address']['city'],
+              state: map['address']['state'],
+              country: map['address']['country'],
+              zipCode: map['address']['zipCode'],
+            )
+          : null,
+    );
+  }
 }
 
 class AddressEntity {

@@ -245,5 +245,15 @@
   "subcategories": "Subcategories",
   "selectSubcategories": "Select Subcategories",
   "failedToLoadCategories": "Failed to load categories.",
-  "user": "User"
+  "user": "User",
+  "setupPaymentAccount": "Setup Payment Account",
+  "shopCreatedSuccessfully": "Shop Created Successfully!",
+  "yourShopHasVeenCreatedSuccessfullyNowYouNeedToSetUpYourPaymentAccountToStartReceivingPayments": "Your shop has been created successfully. Now you need to set up your payment account to start receiving payments.",
+  "skipForNow": "Skip for now",
+  "sellerIdNotFoundPleaseTryAgain": "Seller ID not found. Please try again.",
+  "paymentSetupInitiated": "Payment Setup Initiated",
+  "yourPaymentAccountSetupHasBeenInitiatedPleaseCompleteTheSetupProcessInTheBrowserThatJustOpenedYouWillBeRedirectedToTheLoginPage": "Your payment account setup has been initiated. Please complete the setup process in the browser that just opened. You will be redirected to the login page.",
+  "continueToLogin": "Continue to Login",
+  "failedToOpenPaymentSetupPage": "Failed to open payment setup page",
+  "completeThePaymentSetupInYourBrowserThenReturnToTheApp": "Complete the payment setup in your browser, then return to the app."
 }

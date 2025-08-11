@@ -57,3 +57,15 @@ class AccountTypeSelectionState extends RegisterState {
 
   AccountTypeSelectionState(this.userId);
 }
+
+class StripeConnectLoadingState extends RegisterState {}
+
+class StripeConnectSuccessState extends RegisterState {
+  final String url;
+  StripeConnectSuccessState(this.url);
+}
+
+class StripeConnectErrorState extends RegisterState {
+  final String errorMessage;
+  StripeConnectErrorState({required this.errorMessage});
+}

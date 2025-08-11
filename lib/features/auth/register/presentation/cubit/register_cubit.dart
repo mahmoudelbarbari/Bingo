@@ -11,6 +11,7 @@ import 'package:bingo/features/auth/register/presentation/cubit/register_state.d
 
 import '../../../../../config/injection_container.dart';
 import '../../../login/domain/usecases/verify_otp_usecase.dart';
+import '../../domain/usecases/create_stripe_link_usecase.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   late RegisterUsecase registerUsecase;
@@ -18,6 +19,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   late SentOtpUsecase sentOtpUsecase;
   late VerifyOtpUsecase verifyOtpUsecase;
   late VerifyOtpSellerUsecase verifyOtpSellerUsecase;
+  late CreateStripeLinkUsecase _createStripeLinkUsecase;
 
   RegisterCubit() : super(RegisterInitialState()) {
     // Initialize all use cases in the constructor
@@ -157,6 +159,23 @@ class RegisterCubit extends Cubit<RegisterState> {
       );
     } catch (e) {
       emit(OtpVerificationErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> createStripeConnectLink(String sellerId) async {
+    _createStripeLinkUsecase = sl();
+    emit(StripeConnectLoadingState());
+
+    try {
+      final result = await _createStripeLinkUsecase(sellerId);
+
+      if (result.status == 'success') {
+        emit(StripeConnectSuccessState(result.url ?? ''));
+      } else {
+        emit(StripeConnectErrorState(errorMessage: result.message));
+      }
+    } catch (e) {
+      emit(StripeConnectErrorState(errorMessage: e.toString()));
     }
   }
 }

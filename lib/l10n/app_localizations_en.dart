@@ -688,4 +688,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get user => 'User';
+
+  @override
+  String get setupPaymentAccount => 'Setup Payment Account';
+
+  @override
+  String get shopCreatedSuccessfully => 'Shop Created Successfully!';
+
+  @override
+  String get yourShopHasVeenCreatedSuccessfullyNowYouNeedToSetUpYourPaymentAccountToStartReceivingPayments => 'Your shop has been created successfully. Now you need to set up your payment account to start receiving payments.';
+
+  @override
+  String get skipForNow => 'Skip for now';
+
+  @override
+  String get sellerIdNotFoundPleaseTryAgain => 'Seller ID not found. Please try again.';
+
+  @override
+  String get paymentSetupInitiated => 'Payment Setup Initiated';
+
+  @override
+  String get yourPaymentAccountSetupHasBeenInitiatedPleaseCompleteTheSetupProcessInTheBrowserThatJustOpenedYouWillBeRedirectedToTheLoginPage => 'Your payment account setup has been initiated. Please complete the setup process in the browser that just opened. You will be redirected to the login page.';
+
+  @override
+  String get continueToLogin => 'Continue to Login';
+
+  @override
+  String get failedToOpenPaymentSetupPage => 'Failed to open payment setup page';
+
+  @override
+  String get completeThePaymentSetupInYourBrowserThenReturnToTheApp => 'Complete the payment setup in your browser, then return to the app.';
 }

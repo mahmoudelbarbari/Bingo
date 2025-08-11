@@ -7,6 +7,7 @@ import 'package:bingo/features/auth/login/domain/usecases/login_usecase.dart';
 import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
 import 'package:bingo/features/auth/register/data/reporisatory/register_reporisatory_impl.dart';
 import 'package:bingo/features/auth/register/domain/repositories/register_repository.dart';
+import 'package:bingo/features/auth/register/domain/usecases/create_stripe_link_usecase.dart';
 import 'package:bingo/features/auth/register/domain/usecases/register_seller_account.dart';
 import 'package:bingo/features/auth/register/domain/usecases/register_usecase.dart';
 import 'package:bingo/features/auth/register/domain/usecases/sign_out_usecase.dart';
@@ -162,6 +163,10 @@ void init() async {
   // AutoSellerLoginAfterOtpVerifyUsecase
   sl.registerLazySingleton<AutoSellerLoginAfterOtpVerifyUsecase>(
     () => AutoSellerLoginAfterOtpVerifyUsecase(sl()),
+  );
+  // stripe linlk usecase
+  sl.registerLazySingleton<CreateStripeLinkUsecase>(
+    () => CreateStripeLinkUsecase(sl()),
   );
   // signout usecase
   sl.registerLazySingleton<SignOutUsecase>(() => SignOutUsecase(sl()));

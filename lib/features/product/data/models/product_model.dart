@@ -22,6 +22,7 @@ class ProductModel extends ProductEntity {
     super.warranty,
     super.image,
     super.shopId,
+    super.images,
   });
 
   Map<String, dynamic> toJson() {
@@ -37,6 +38,7 @@ class ProductModel extends ProductEntity {
       'tags': tags,
       'brand': brand,
       'colors': colors,
+      'image': images,
       'sizes': sizes,
       'stock': stock,
       'sale_price': salePrice,
@@ -54,6 +56,7 @@ class ProductModel extends ProductEntity {
       shopId: json['shopId'],
       title: json['title'],
       slug: json['slug'],
+      images: json['image'],
       category: json['category'],
       subCategory: json['subCategory'],
       shortDescription: json['short_description'],
@@ -77,5 +80,11 @@ class ProductModel extends ProductEntity {
           ?.map((e) => Map<String, dynamic>.from(e))
           .toList(),
     );
+  }
+  String get firstImageUrl {
+    if (image == null || image!.isEmpty) return '';
+    final url = image!.first['url'] ?? '';
+    if (url.startsWith('http')) return url;
+    return 'https://ik.imagekit.io/zeyuss/$url';
   }
 }

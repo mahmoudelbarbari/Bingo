@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TokenStorage {
@@ -75,11 +77,31 @@ class TokenStorage {
     await prefs.remove('seller_id');
   }
 
+  // Save current user data
+  static Future<void> saveCurrentUser(Map<String, dynamic> user) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('current_user', jsonEncode(user));
+  }
+
+  // Get current user data
+  static Future<Map<String, dynamic>?> getCurrentUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userString = prefs.getString('current_user');
+    return userString != null ? jsonDecode(userString) : null;
+  }
+
+  // Clear current user data
+  static Future<void> clearCurrentUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('current_user');
+  }
+
   // Clear all auth data
   static Future<void> clearAll() async {
     await clearToken();
     await clearRole();
     await clearShopId();
     await clearSellerId();
+    await clearCurrentUser();
   }
 }
