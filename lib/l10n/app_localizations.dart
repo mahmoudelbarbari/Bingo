@@ -1504,6 +1504,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Complete the payment setup in your browser, then return to the app.'**
   String get completeThePaymentSetupInYourBrowserThenReturnToTheApp;
+
+  /// No description provided for @noAddressesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No addresses found.'**
+  String get noAddressesFound;
+
+  /// No description provided for @wishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Wishlist'**
+  String get wishlist;
+
+  /// No description provided for @securePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure Payment'**
+  String get securePayment;
+
+  /// No description provided for @paymentProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Processing...'**
+  String get paymentProcessing;
+
+  /// No description provided for @pleaseSelectAtLeastOneSize.
+  ///
+  /// In en, this message translates to:
+  /// **'please Select AtLeast One Size'**
+  String get pleaseSelectAtLeastOneSize;
+
+  /// No description provided for @pleaseSelectAtLeastOneColor.
+  ///
+  /// In en, this message translates to:
+  /// **'please Select AtLeast One Color'**
+  String get pleaseSelectAtLeastOneColor;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

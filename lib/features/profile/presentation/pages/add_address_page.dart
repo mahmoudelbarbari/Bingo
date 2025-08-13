@@ -3,9 +3,12 @@ import 'package:bingo/core/util/validators.dart';
 import 'package:bingo/core/widgets/custome_textfield_widget.dart';
 import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/core/widgets/dismiss_keyboared_scroll_view.dart';
+import 'package:bingo/features/profile/domain/entity/user.dart';
+import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/custome_snackbar_widget.dart';
 
@@ -56,29 +59,26 @@ class _AddAddressPageState extends State<AddAddressPage> {
     super.dispose();
   }
 
+  List<String?> labelItems = ['Home', 'Work', 'Other'];
+  String? selectedAddress = 'Home';
+
   void _saveAddress() {
     if (_formKey.currentState!.validate()) {
       // TODO: Implement address saving logic
       // You can add your API call or local storage logic here
-
       // Example of collecting form data
-      final addressData = {
-        'fullName': _fullNameController.text.trim(),
-        'streetAddress': _streetAddressController.text.trim(),
-        'city': _cityController.text.trim(),
-        'state': _stateController.text.trim(),
-        'zipCode': _zipCodeController.text.trim(),
-        'country': _countryController.text.trim(),
-        'isDefault': _isDefaultAddress,
-      };
-
-      print('Address Data: $addressData'); // For debugging
-
-      // Show success message
-
+      final addressData = AddressEntity(
+        name: _fullNameController.text.trim(),
+        city: _cityController.text.trim(),
+        country: _countryController.text.trim(),
+        isDefault: _isDefaultAddress,
+        state: _stateController.text.trim(),
+        streetAddress: _streetAddressController.text.trim(),
+        zipCode: _zipCodeController.text.trim(),
+        label: selectedAddress,
+      );
+      context.read<UserCubit>().addUserAddress(addressData, context);
       showAppSnackBar(context, "Address saved successfully!");
-      // Navigate back
-      Navigator.pop(context, addressData);
     }
   }
 
@@ -106,6 +106,21 @@ class _AddAddressPageState extends State<AddAddressPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                DropdownButton<String>(
+                  value: selectedAddress,
+                  items: labelItems
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(item ?? ''),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (item) => setState(() {
+                    selectedAddress = item;
+                  }),
+                ),
+                SizedBox(height: 20.h),
                 // Full Name Field
                 CustomeTextfieldWidget(
                   controller: _fullNameController,

@@ -3,7 +3,6 @@ import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bingo/core/util/base_response.dart';
-import '../models/cart_items_model.dart';
 
 class FirebaseDatasourceProvider {
   static final _firebaseDatasourceProvider =
@@ -23,7 +22,6 @@ abstract class CartDatasourceInterface extends FirebaseDatasourceProvider {
   CartDatasourceInterface() : super._internal();
 
   Future<BaseResponse> addProductToCart(ProductModel productModel);
-  Future<BaseResponse> addCartData(CartItemModel cartItemModel);
   Future<List<ProductModel>> getAllCartItems();
   Future<BaseResponse> clearCartItems();
   Future<List<ProductModel>> viewwOrder();
@@ -97,17 +95,31 @@ class CartDatasourceImpl extends CartDatasourceInterface {
     try {
       // Get current user ID from local storage
       final userId = await CurrentUserService.getCurrentUserId();
-      if (userId == null) return [];
+      if (userId == null) {
+        print('No user ID found, returning empty cart');
+        return [];
+      }
 
-      final cartSnapshot = await firebaseFirestore.collection('cart').get();
+      print('Getting cart items for user: $userId');
+
+      // Get cart items for the current user only
+      final cartSnapshot = await firebaseFirestore
+          .collection('cart')
+          .where('userId', isEqualTo: userId)
+          .get();
+
+      print('Found ${cartSnapshot.docs.length} cart items in Firebase');
 
       return cartSnapshot.docs.map((doc) {
         final data = doc.data();
+        print('Cart item data: $data');
+
         String imageUrl = data['image'] ?? '';
         // Handle relative URLs if needed
         if (imageUrl.isNotEmpty && !imageUrl.startsWith('http')) {
           imageUrl = 'https://ik.imagekit.io/zeyuss/$imageUrl';
         }
+
         return ProductModel(
           id: data['productId'],
           title: data['title'],
@@ -126,6 +138,7 @@ class CartDatasourceImpl extends CartDatasourceInterface {
       }
       throw Exception(e.message);
     } catch (e) {
+      print('Error getting cart items: $e');
       throw Exception('Failed to get cart items: $e');
     }
   }
@@ -273,12 +286,6 @@ class CartDatasourceImpl extends CartDatasourceInterface {
       print('Error calculating cart total: $e');
       return 0;
     }
-  }
-
-  // Unused methods
-  @override
-  Future<BaseResponse> addCartData(CartItemModel cartItemModel) {
-    throw UnimplementedError();
   }
 
   @override

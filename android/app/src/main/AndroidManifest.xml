@@ -1,10 +1,11 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.bingo">
     <!-- Add permissions at the top level of manifest -->
     <uses-permission android:name="android.permission.INTERNET" />
     
     <application
         android:label="Bingo"
         android:name="${applicationName}"
+        android:theme="@style/NormalTheme"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -15,6 +16,19 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
+            <!-- Add these meta-data tags -->
+            <meta-data
+              android:name="com.stripe.android.publishableKey"
+              android:value="pk_test_51RhFN6FJW8ocTpM877r3OGawMfTQlUB5So1WqTs0rg544D33F7P2dcMBzN8URPpBpwTFXzXNQvUoEwVgaKZsXXsu00GTkFBQXT" />
+    
+            <meta-data
+              android:name="com.google.android.gms.wallet.api.enabled"
+              android:value="true" />
+    
+            <!-- Add this if you want to enable cleartext traffic for local testing -->
+            <meta-data
+              android:name="android:usesCleartextTraffic"
+              android:value="true" />
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues

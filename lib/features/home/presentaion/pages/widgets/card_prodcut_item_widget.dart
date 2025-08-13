@@ -41,15 +41,36 @@ class CardProdcutItemWidget extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
+                      // Container(
+                      //   height: imageHeight,
+                      //   width: double.infinity,
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(8),
+                      //     image: DecorationImage(
+                      //       image: AssetImage(image),
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
-                        height: imageHeight,
                         width: double.infinity,
+                        height: imageHeight,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                            image: AssetImage(image),
-                            fit: BoxFit.cover,
-                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child:
+                              (image.startsWith('http') ||
+                                  image.startsWith('https'))
+                              ? Image.network(
+                                  image,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(Icons.broken_image);
+                                  },
+                                )
+                              : const Icon(Icons.image_not_supported),
                         ),
                       ),
                       Positioned(

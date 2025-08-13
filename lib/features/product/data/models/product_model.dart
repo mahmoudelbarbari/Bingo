@@ -23,6 +23,7 @@ class ProductModel extends ProductEntity {
     super.image,
     super.shopId,
     super.images,
+    super.quantity,
   });
 
   Map<String, dynamic> toJson() {
@@ -33,12 +34,11 @@ class ProductModel extends ProductEntity {
       'subCategory': subCategory,
       'short_description': shortDescription,
       'detailed_description': detailedDesc,
-      'images': image,
+      'images': image, // This should be 'images' not 'image'
       'video_url': videoURL,
       'tags': tags,
       'brand': brand,
       'colors': colors,
-      'image': images,
       'sizes': sizes,
       'stock': stock,
       'sale_price': salePrice,
@@ -79,6 +79,7 @@ class ProductModel extends ProductEntity {
       image: (json['images'] as List<dynamic>?)
           ?.map((e) => Map<String, dynamic>.from(e))
           .toList(),
+      quantity: json['quantity'] ?? 1,
     );
   }
   String get firstImageUrl {

@@ -1,3 +1,4 @@
+import 'package:bingo/features/payment/data/models/cart_items_model.dart';
 import 'package:bingo/features/product/data/models/product_model.dart';
 
 abstract class CartState {}
@@ -27,3 +28,9 @@ class CartClearedSuccessfully extends CartState {
 class EmptyCart extends CartState {}
 
 class ItemDeletedSuccess extends CartState {}
+
+class CartLoaded extends CartState {
+  final List<CartItemModel> cartItems;
+
+  CartLoaded(this.cartItems);
+}

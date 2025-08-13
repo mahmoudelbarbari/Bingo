@@ -86,10 +86,7 @@ Widget _buildFirstWidget(BuildContext context) {
         title: loc.settings,
         onTap: () => Navigator.pushNamed(context, '/settingScreen'),
       ),
-      RoundedListItem(
-        title: loc.productsList,
-        icon: Icons.production_quantity_limits,
-      ),
+      RoundedListItem(title: loc.wishlist, icon: Icons.favorite_border),
       RoundedListItem(icon: Icons.receipt_long, title: loc.orderList),
       RoundedListItem(title: loc.payment, icon: Icons.payment),
     ],

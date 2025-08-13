@@ -11,15 +11,29 @@ import 'package:bingo/app/routes/app_routes.dart';
 import 'package:bingo/config/theme_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'config/injection_container.dart' as di;
 import 'core/bloc_observer/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await dotenv.load(fileName: ".env");
+  try {
+    final stripeKey = dotenv.env['NEXT_PUBLIC_STRIPE_PUBLIC_KEY'];
+    if (stripeKey != null && stripeKey.isNotEmpty) {
+      Stripe.publishableKey = stripeKey;
+      print('✅ Stripe initialized successfully');
+    } else {
+      print('❌ Stripe key not found in .env file');
+    }
+  } catch (e) {
+    print('❌ Error initializing Stripe: $e');
+  }
+  await Stripe.instance.applySettings();
   di.init();
   Bloc.observer = MyGlobalObserver();
 

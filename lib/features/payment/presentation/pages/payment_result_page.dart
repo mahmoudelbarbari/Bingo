@@ -2,23 +2,22 @@ import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custom_elevated_button.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/dotted_line_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../l10n/app_localizations.dart';
 
 class PaymentResultPage extends StatelessWidget {
   final String totalPrice;
-  final String? merchantName;
   final String paymentMethod;
-  final String? paymentDate;
   final String senderName;
+  final String transactionId;
 
   const PaymentResultPage({
     super.key,
     required this.totalPrice,
-    this.merchantName,
-    this.paymentDate,
     required this.paymentMethod,
     required this.senderName,
+    required this.transactionId,
   });
 
   @override
@@ -73,16 +72,10 @@ class PaymentResultPage extends StatelessWidget {
                 children: [
                   _infoRow(loc.amount, "$totalPrice ${loc.egp}"),
                   _statusRow(loc.paymentStatus, loc.success, Colors.green),
-                  DottedLine(
-                    height: 1,
-                    dotSpacing: 6,
-                    color: Colors.grey.shade400,
-                  ),
-
-                  _infoRow(loc.orderNumber, "000005558884"),
-                  _infoRow(loc.merchantName, merchantName ?? "Ahmed Tarek"),
+                  DottedLine(color: Colors.grey.shade400),
+                  _infoRow(loc.orderNumber, transactionId),
                   _infoRow(loc.paymentMethod, paymentMethod),
-                  _infoRow(loc.paymentDate, paymentDate ?? "Mar 22, 2025"),
+                  _infoRow(loc.paymentDate, _formatDate(DateTime.now())),
                   _infoRow(loc.senderName, senderName),
                 ],
               ),
@@ -98,6 +91,10 @@ class PaymentResultPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _formatDate(DateTime date) {
+    return DateFormat('MMM dd, yyyy').format(date);
   }
 
   Widget _infoRow(String label, String value) {

@@ -20,6 +20,7 @@ class ProductEntity {
   final int? stock;
   final List<String>? sizes;
   final List<Map<String, dynamic>>? image;
+  final int quantity;
 
   ProductEntity({
     this.id,
@@ -43,5 +44,13 @@ class ProductEntity {
     this.stock,
     this.sizes,
     this.image,
+    this.quantity = 1,
   });
+
+  String get firstImageUrl {
+    if (image == null || image!.isEmpty) return '';
+    final url = image!.first['url'] ?? '';
+    if (url.startsWith('http')) return url;
+    return 'https://ik.imagekit.io/zeyuss/$url';
+  }
 }

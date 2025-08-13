@@ -718,4 +718,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get completeThePaymentSetupInYourBrowserThenReturnToTheApp => 'أكمل إعداد الدفع في متصفحك، ثم ارجع إلى التطبيق.';
+
+  @override
+  String get noAddressesFound => 'لم يتم العثور على عناوين.';
+
+  @override
+  String get wishlist => 'قائمة الأمنيات';
+
+  @override
+  String get securePayment => 'دفع آمن';
+
+  @override
+  String get paymentProcessing => 'Payment Processing...';
+
+  @override
+  String get pleaseSelectAtLeastOneSize => 'يرجى تحديد مقاس واحد على الأقل';
+
+  @override
+  String get pleaseSelectAtLeastOneColor => 'الرجاء تحديد لون واحد على الأقل';
 }

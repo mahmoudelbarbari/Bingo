@@ -109,20 +109,27 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             ),
           ],
         ),
-        child: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 8.0,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
           child: SizedBox(
-            height: 60.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _navItem(Icons.home, loc.home, 0),
-                _navItem(Icons.language, loc.community, 1),
-                if (_isSeller) const SizedBox(width: 48),
-                _navItem(Icons.shopping_cart_outlined, loc.cart, 2),
-                _navItem(Icons.person, loc.profile, 3),
-              ],
+            child: BottomAppBar(
+              shape: const CircularNotchedRectangle(),
+              child: SizedBox(
+                height: 60.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _navItem(Icons.home, 0),
+                    _navItem(Icons.language, 1),
+                    if (_isSeller) const SizedBox(width: 48),
+                    _navItem(Icons.shopping_cart_outlined, 2),
+                    _navItem(Icons.person, 3),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -154,7 +161,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     );
   }
 
-  Widget _navItem(IconData icon, String label, int index) {
+  Widget _navItem(IconData icon, int index) {
     final isActive = _currentIndex == index;
     return Expanded(
       child: InkWell(
@@ -164,13 +171,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, color: isActive ? lightTheme.primaryColor : Colors.grey),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: isActive ? lightTheme.primaryColor : Colors.grey,
-              ),
-            ),
           ],
         ),
       ),

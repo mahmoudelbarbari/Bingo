@@ -718,4 +718,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get completeThePaymentSetupInYourBrowserThenReturnToTheApp => 'Complete the payment setup in your browser, then return to the app.';
+
+  @override
+  String get noAddressesFound => 'No addresses found.';
+
+  @override
+  String get wishlist => 'Wishlist';
+
+  @override
+  String get securePayment => 'Secure Payment';
+
+  @override
+  String get paymentProcessing => 'Payment Processing...';
+
+  @override
+  String get pleaseSelectAtLeastOneSize => 'please Select AtLeast One Size';
+
+  @override
+  String get pleaseSelectAtLeastOneColor => 'please Select AtLeast One Color';
 }

@@ -19,3 +19,29 @@ class UserloadedDataState extends UserState {
 
   UserloadedDataState({required this.userEntity});
 }
+
+class AddUserAddressLoading extends UserState {}
+
+class AddUserAddressSuccess extends UserState {
+  String message;
+
+  AddUserAddressSuccess(this.message);
+}
+
+class AddUserAddressError extends UserState {
+  String errMessage;
+
+  AddUserAddressError(this.errMessage);
+}
+
+class AddressLoadedState extends UserState {
+  final List<AddressEntity> addressEntity;
+
+  AddressLoadedState(this.addressEntity);
+}
+
+class AddressErrorState extends UserState {
+  final String err;
+
+  AddressErrorState(this.err);
+}

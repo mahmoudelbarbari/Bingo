@@ -24,10 +24,10 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   Future<void> createProduct(ProductModel product) async {
+    addProductUsecase = sl();
     try {
       emit(ProductLoadingState());
       // Initialize usecase only once in constructor or inject it!
-      final addProductUsecase = sl<AddProductUsecase>();
       await addProductUsecase.call(product);
       // You might want to check result here if it is a response or success bool
       emit(ProductAddedSuccess('Product added successfully'));

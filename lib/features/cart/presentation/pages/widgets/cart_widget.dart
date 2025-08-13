@@ -1,3 +1,4 @@
+import 'package:bingo/features/cart/presentation/cubit/cart_state.dart';
 import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,9 +75,29 @@ class _CartWidgetState extends State<CartWidget> {
             ),
           ),
         ),
-        BottomContainerCartWidget(
-          total: cartTotalPrice(),
-          productModel: widget.productModel.length,
+        BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            if (state is CartLoaded) {
+              return BottomContainerCartWidget(
+                total: cartTotalPrice(),
+                productModel: widget.productModel.length,
+                cartItems: widget.productModel.map((product) {
+                  return {
+                    'id': product.id,
+                    'quantity': itemCounts[product.id] ?? 1,
+                    'sale_price': product.price,
+                    'shopId': product.shopId,
+                    'selectedOptions': {}, // Add if you have options
+                  };
+                }).toList(),
+              );
+            }
+            return BottomContainerCartWidget(
+              total: cartTotalPrice(),
+              productModel: widget.productModel.length,
+              cartItems: [], // Fallback empty list
+            );
+          },
         ),
       ],
     );

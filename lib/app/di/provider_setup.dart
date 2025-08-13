@@ -12,6 +12,7 @@ import '../../config/injection_container.dart' as di;
 import '../../features/auth/login/presentation/forget_password/cubit/forget_pass_cubit.dart';
 import '../../features/auth/login/presentation/login/cubit/login_cubit.dart';
 import '../../features/cart/presentation/cubit/cart_cubit.dart';
+import '../../features/payment/presentation/cubit/payment_cubit.dart';
 import '../../features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import '../../features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import '../../features/seller_onboarding/presentation/cubit/file_upload_cubit.dart';
@@ -45,6 +46,7 @@ class AppProviders {
       BlocProvider<SellerProfileCubit>(
         create: (_) => di.sl<SellerProfileCubit>(),
       ),
+      BlocProvider<PaymentCubit>(create: (_) => di.sl<PaymentCubit>()),
     ];
   }
 }

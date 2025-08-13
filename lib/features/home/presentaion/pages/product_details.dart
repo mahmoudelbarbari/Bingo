@@ -43,10 +43,10 @@ class _ProductDetailsState extends State<ProductDetails> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                (widget.product.image != null &&
-                        widget.product.image is String &&
-                        (widget.product.image as String).isNotEmpty)
-                    ? widget.product.image as String
+                (widget.product.images != null &&
+                        widget.product.images is String &&
+                        (widget.product.images as String).isNotEmpty)
+                    ? widget.product.images as String
                     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQinI_44p5jN05YioLyPBhn_1j5tsl7q85rfA&s',
                 width: double.infinity,
                 height: 300.h,

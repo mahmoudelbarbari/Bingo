@@ -54,30 +54,56 @@ class UserModel extends UserEntity {
 
 class AddressModel extends AddressEntity {
   AddressModel({
+    super.id,
     super.streetAddress,
     super.city,
     super.state,
     super.country,
     super.zipCode,
+    super.isDefault,
+    super.userId,
+    super.label,
+    super.name,
   });
 
   factory AddressModel.fromMap(Map<String, dynamic> map) {
     return AddressModel(
-      streetAddress: map['streetAddress'],
-      city: map['city'],
-      state: map['state'],
-      country: map['country'],
-      zipCode: map['zipCode'],
+      id: map['id'] as String?,
+      userId: map['userId'] as String?,
+      name: map['name'] as String?,
+      streetAddress: map['street'] as String?,
+      city: map['city'] as String?,
+      state: map['state'] as String?,
+      country: map['country'] as String?,
+      zipCode: map['zip'] as String?,
+      isDefault: map['isDefault'] as bool?,
+      label: map['label'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'userId': userId,
+      'name': name,
       'streetAddress': streetAddress,
       'city': city,
       'state': state,
       'country': country,
       'zipCode': zipCode,
+      'isDefault': isDefault,
+      'label': label,
     };
   }
+
+  factory AddressModel.fromEntity(AddressEntity addressEntity) => AddressModel(
+    label: addressEntity.label,
+    city: addressEntity.city,
+    country: addressEntity.country,
+    isDefault: addressEntity.isDefault,
+    state: addressEntity.state,
+    streetAddress: addressEntity.streetAddress,
+    userId: addressEntity.userId,
+    zipCode: addressEntity.zipCode,
+    name: addressEntity.name,
+  );
 }

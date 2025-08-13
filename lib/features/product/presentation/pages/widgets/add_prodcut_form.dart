@@ -69,225 +69,256 @@ class _AddProdcutFormState extends State<AddProdcutForm> {
     var sizedBox = SizedBox(height: 12.h);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomeTextfieldWidget(
-            controller: widget.titleController,
-            isRTL: widget.isArabic,
-            formFieldValidator: (p0) => Validators.requiredField(context, p0),
-            labelText: loc.productTitle,
-          ),
-          sizedBox,
-          TextFieldForInstructions(
-            title: loc.shortDescription,
-            hintText: loc.enterProductDescriptionForQuickView,
-            textEditingController: widget.shortDescriptionController,
-          ),
-          sizedBox,
-          CustomeTextfieldWidget(
-            controller: widget.tagController,
-            isRTL: widget.isArabic,
-            labelText: loc.tags,
-          ),
-          sizedBox,
-          CustomeTextfieldWidget(
-            controller: widget.warranty,
-            isRTL: widget.isArabic,
-            labelText: loc.warranty,
-          ),
-          sizedBox,
-          CustomeTextfieldWidget(
-            controller: widget.brandController,
-            isRTL: widget.isArabic,
-            labelText: loc.brand,
-          ),
-          sizedBox,
-          Text(loc.colors, style: Theme.of(context).textTheme.headlineMedium),
-          sizedBox,
-          Wrap(
-            spacing: 10,
-            children: colorOptions.entries.map((entry) {
-              final hex = entry.key;
-              final color = entry.value;
-              final isSelected = selectedColors.contains(hex);
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (isSelected) {
-                      selectedColors.remove(hex);
-                    } else {
-                      selectedColors.add(hex);
-                    }
-                  });
-                  widget.onColorsSelected?.call(selectedColors);
-                },
-                child: Container(
-                  width: 24.w,
-                  height: 24.h,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isSelected
-                          ? (isDark ? Colors.white : Colors.black)
-                          : Colors.black12,
-                      width: isSelected ? 2 : 1,
-                    ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomeTextfieldWidget(
+          controller: widget.titleController,
+          isRTL: widget.isArabic,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+          labelText: loc.productTitle,
+        ),
+        sizedBox,
+        TextFieldForInstructions(
+          title: loc.shortDescription,
+          hintText: loc.enterProductDescriptionForQuickView,
+          textEditingController: widget.shortDescriptionController,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+        ),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.tagController,
+          isRTL: widget.isArabic,
+          labelText: loc.tags,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+        ),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.warranty,
+          isRTL: widget.isArabic,
+          labelText: loc.warranty,
+        ),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.brandController,
+          isRTL: widget.isArabic,
+          labelText: loc.brand,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+        ),
+        sizedBox,
+        Text(loc.colors, style: Theme.of(context).textTheme.headlineMedium),
+        sizedBox,
+        Wrap(
+          spacing: 10,
+          children: colorOptions.entries.map((entry) {
+            final hex = entry.key;
+            final color = entry.value;
+            final isSelected = selectedColors.contains(hex);
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (isSelected) {
+                    selectedColors.remove(hex);
+                  } else {
+                    selectedColors.add(hex);
+                  }
+                });
+                widget.onColorsSelected?.call(selectedColors);
+              },
+              child: Container(
+                width: 24.w,
+                height: 24.h,
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isSelected
+                        ? (isDark ? Colors.white : Colors.black)
+                        : Colors.black12,
+                    width: isSelected ? 2 : 1,
                   ),
                 ),
-              );
-            }).toList(),
-          ),
+              ),
+            );
+          }).toList(),
+        ),
+        if (selectedColors.isEmpty) ...[
           sizedBox,
           Text(
-            loc.customeSpecifications,
-            style: Theme.of(context).textTheme.headlineMedium,
+            loc.pleaseSelectAtLeastOneColor,
+            style: TextStyle(color: Colors.red, fontSize: 12),
           ),
-          sizedBox,
-          TextButton(
-            onPressed: () {
-              setState(() {
-                showTextField = !showTextField;
-              });
-            },
-            child: Row(
-              children: [
-                Icon(
-                  Icons.add_circle_outline_rounded,
-                  color: lightTheme.colorScheme.primary,
-                ),
-                SizedBox(width: 10.w),
-                Text(
-                  loc.addSpecification,
-                  style: TextStyle(color: lightTheme.colorScheme.primary),
-                ),
-              ],
-            ),
-          ),
-          sizedBox,
-          if (showTextField)
-            CustomeTextfieldWidget(
-              controller: widget.customPropertiesController,
-              isRTL: widget.isArabic,
-              labelText: loc.customeSpecifications,
-            ),
-          sizedBox,
-          CustomeTextfieldWidget(
-            controller: widget.slugController,
-            isRTL: widget.isArabic,
-            labelText: loc.slug,
-          ),
-          sizedBox,
-          Text(
-            loc.cashOnDelivery,
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          sizedBox,
-          DropdownButtonFormField<String?>(
-            value: selectedOption,
-            icon: const Icon(Icons.keyboard_arrow_down),
-            decoration: InputDecoration(
-              labelText: loc.selectAnOption,
-              border: const OutlineInputBorder(),
-            ),
-            items: paymentOption.map((String item) {
-              return DropdownMenuItem(
-                value: item,
-                child: Text(
-                  item == 'yes' ? loc.yes : loc.no,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              );
-            }).toList(),
-            onChanged: (value) {
-              setState(() {
-                selectedOption = value;
-                widget.paymentOptionController.text = value!;
-              });
-            },
-          ),
-          sizedBox,
-          CategorySelectionWidget(
-            // onSelectionChanged: (categories, subcategories) {
-            //   setState(() {
-            //     selectedCategories = categories;
-            //     selectedSubCategories = subcategories;
-            //   });
-            //   // Now you can use these values in your form
-            //   print('Selected categories: $selectedCategories');
-            //   print('Selected subcategories: $selectedSubCategories');
-            // },
-            onSelectionChanged: widget.onCategorySelected,
-          ),
-          sizedBox,
-          TextFieldForInstructions(
-            title: loc.detailedDescription,
-            hintText: loc.writeADetailedDescriptionHere,
-            textEditingController: widget.detailedDescriptionController,
-          ),
-          sizedBox,
-          CustomeTextfieldWidget(
-            controller: widget.videoURLController,
-            isRTL: widget.isArabic,
-            labelText: loc.videoURL,
-          ),
-          sizedBox,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+        ],
+        sizedBox,
+        Text(
+          loc.customeSpecifications,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        sizedBox,
+        TextButton(
+          onPressed: () {
+            setState(() {
+              showTextField = !showTextField;
+            });
+          },
+          child: Row(
             children: [
-              Expanded(
-                child: CustomeTextfieldWidget(
-                  controller: widget.regularPriceController,
-                  isRTL: widget.isArabic,
-                  labelText: loc.regularPrice,
-                ),
+              Icon(
+                Icons.add_circle_outline_rounded,
+                color: lightTheme.colorScheme.primary,
               ),
               SizedBox(width: 10.w),
-              Expanded(
-                child: CustomeTextfieldWidget(
-                  controller: widget.salePriceController,
-                  isRTL: widget.isArabic,
-                  labelText: loc.salePrice,
-                ),
+              Text(
+                loc.addSpecification,
+                style: TextStyle(color: lightTheme.colorScheme.primary),
               ),
             ],
           ),
-          sizedBox,
+        ),
+        sizedBox,
+        if (showTextField)
           CustomeTextfieldWidget(
-            controller: widget.stockController,
+            controller: widget.customPropertiesController,
             isRTL: widget.isArabic,
-            labelText: loc.stock,
+            labelText: loc.customeSpecifications,
           ),
-          sizedBox,
-          Text(loc.sizes, style: Theme.of(context).textTheme.headlineMedium),
-          sizedBox,
-          Center(
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 10,
-              children: sizes.map((size) {
-                final isSelected = selectedSizes.contains(size);
-                return FilterChip(
-                  label: Text(size),
-                  selected: isSelected,
-                  onSelected: (bool selected) {
-                    setState(() {
-                      if (selected) {
-                        selectedSizes.add(size);
-                      } else {
-                        selectedSizes.remove(size);
-                      }
-                    });
-                    widget.onSizesSelected?.call(selectedSizes);
-                  },
-                );
-              }).toList(),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.slugController,
+          isRTL: widget.isArabic,
+          labelText: loc.slug,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+        ),
+        sizedBox,
+        Text(
+          loc.cashOnDelivery,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        sizedBox,
+        DropdownButtonFormField<String?>(
+          value: selectedOption,
+          icon: const Icon(Icons.keyboard_arrow_down),
+          decoration: InputDecoration(
+            labelText: loc.selectAnOption,
+            border: const OutlineInputBorder(),
+          ),
+          validator: (value) => value == null ? loc.fieldRequired : null,
+          items: paymentOption.map((String item) {
+            return DropdownMenuItem(
+              value: item,
+              child: Text(
+                item == 'yes' ? loc.yes : loc.no,
+                style: const TextStyle(fontSize: 16),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              selectedOption = value;
+              widget.paymentOptionController.text = value!;
+            });
+          },
+        ),
+        sizedBox,
+        CategorySelectionWidget(
+          onSelectionChanged: (categories, subcategories) {
+            setState(() {
+              selectedCategories = categories;
+              selectedSubCategories = subcategories;
+            });
+            widget.onCategorySelected?.call(categories, subcategories);
+          },
+        ),
+        sizedBox,
+        TextFieldForInstructions(
+          title: loc.detailedDescription,
+          hintText: loc.writeADetailedDescriptionHere,
+          textEditingController: widget.detailedDescriptionController,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+        ),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.videoURLController,
+          isRTL: widget.isArabic,
+          labelText: loc.videoURL,
+        ),
+        sizedBox,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(
+              child: CustomeTextfieldWidget(
+                controller: widget.regularPriceController,
+                isRTL: widget.isArabic,
+                labelText: loc.regularPrice,
+                textInputType: TextInputType.number,
+                formFieldValidator: (value) =>
+                    Validators.requiredField(context, value),
+              ),
             ),
+            SizedBox(width: 10.w),
+            Expanded(
+              child: CustomeTextfieldWidget(
+                controller: widget.salePriceController,
+                isRTL: widget.isArabic,
+                labelText: loc.salePrice,
+                textInputType: TextInputType.number,
+                formFieldValidator: (value) {
+                  return Validators.requiredField(context, value);
+                },
+              ),
+            ),
+          ],
+        ),
+        sizedBox,
+        CustomeTextfieldWidget(
+          controller: widget.stockController,
+          isRTL: widget.isArabic,
+          labelText: loc.stock,
+          textInputType: TextInputType.number,
+          formFieldValidator: (value) =>
+              Validators.requiredField(context, value),
+        ),
+        sizedBox,
+        Text(loc.sizes, style: Theme.of(context).textTheme.headlineMedium),
+        sizedBox,
+        Center(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            children: sizes.map((size) {
+              final isSelected = selectedSizes.contains(size);
+              return FilterChip(
+                label: Text(size),
+                selected: isSelected,
+                onSelected: (bool selected) {
+                  setState(() {
+                    if (selected) {
+                      selectedSizes.add(size);
+                    } else {
+                      selectedSizes.remove(size);
+                    }
+                  });
+                  widget.onSizesSelected?.call(selectedSizes);
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        if (selectedSizes.isEmpty) ...[
+          sizedBox,
+          Text(
+            loc.pleaseSelectAtLeastOneSize,
+            style: TextStyle(color: Colors.red),
           ),
         ],
-      ),
+      ],
     );
   }
 }

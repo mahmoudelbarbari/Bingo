@@ -39,17 +39,26 @@ class UserEntity {
 }
 
 class AddressEntity {
+  final String? id;
+  final String? userId;
+  final String? name;
   final String? streetAddress;
   final String? city;
   final String? state;
   final String? country;
-  final int? zipCode;
-
+  final String? zipCode;
+  final bool? isDefault;
+  final String? label;
   AddressEntity({
+    this.id,
+    this.userId,
+    this.name,
     this.streetAddress,
     this.city,
     this.state,
     this.country,
     this.zipCode,
+    this.isDefault,
+    this.label,
   });
 }

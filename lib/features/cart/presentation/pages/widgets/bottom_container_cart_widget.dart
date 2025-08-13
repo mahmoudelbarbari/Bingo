@@ -3,16 +3,40 @@ import 'package:bingo/core/widgets/custome_outlined_btn_widget.dart';
 import 'package:bingo/features/cart/presentation/pages/address_screen.dart';
 import 'package:bingo/features/cart/presentation/pages/widgets/payment_summary_widget.dart';
 import 'package:bingo/l10n/app_localizations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class BottomContainerCartWidget extends StatelessWidget {
   final double total;
   final int productModel;
+  final List<Map<String, dynamic>> cartItems;
+
   const BottomContainerCartWidget({
     super.key,
     required this.total,
     required this.productModel,
+    required this.cartItems,
   });
+
+  List<Map<String, dynamic>> convertFirebaseCartItems(
+    List<DocumentSnapshot> docs,
+  ) {
+    return docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      return {
+        'productId': data['productId'] ?? '', // Use productId instead of id
+        'quantity': data['quantity'] ?? 1,
+        'price': (data['salePrice'] ?? 0.0)
+            .toDouble(), // Use price instead of sale_price
+        'shopId': data['shopId'] ?? '',
+        'selectedOptions': data['selectedOptions'] ?? {},
+        'productName':
+            data['productName'] ?? '', // Add product name if available
+        'productImage':
+            data['productImage'] ?? '', // Add product image if available
+      };
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +118,7 @@ class BottomContainerCartWidget extends StatelessWidget {
                         builder: (context) => AddressScreen(
                           totalCartPrice: total,
                           productModel: productModel,
+                          cartItems: cartItems,
                         ),
                       ),
                     );

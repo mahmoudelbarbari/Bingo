@@ -77,6 +77,22 @@ class TokenStorage {
     await prefs.remove('seller_id');
   }
 
+  static Future<void> saveLoggedUserData(Map<String, dynamic> user) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('logged_user', jsonEncode(user));
+  }
+
+  static Future<Map<String, dynamic>?> getLoggedUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final loggedUser = prefs.getString('logged_user');
+    return loggedUser != null ? jsonDecode(loggedUser) : null;
+  }
+
+  static Future<void> clearLoggedUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('logged_user');
+  }
+
   // Save current user data
   static Future<void> saveCurrentUser(Map<String, dynamic> user) async {
     final prefs = await SharedPreferences.getInstance();
@@ -103,5 +119,6 @@ class TokenStorage {
     await clearShopId();
     await clearSellerId();
     await clearCurrentUser();
+    await clearLoggedUserData();
   }
 }

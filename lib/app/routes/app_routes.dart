@@ -23,6 +23,7 @@ import '../../features/product/domain/entity/product.dart';
 import '../../features/product/presentation/pages/add_product_page.dart';
 import '../../features/seller_onboarding/presentation/pages/seller_onboarding_screen.dart';
 import '../../features/seller_profile/presentation/pages/seller_profile_screen.dart';
+import '../../features/payment/presentation/pages/streamlined_payment_screen.dart';
 
 final Map<String, WidgetBuilder> appRoutes = {
   '/': (context) => const WelcomeSplashScreen(),
@@ -54,7 +55,6 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/addSellerShop': (context) => AddShopPage(),
   '/add-product': (context) => const AddProductPage(),
   '/seller-profile': (context) {
-    // Get the current seller's ID from storage
     return FutureBuilder<String?>(
       future: TokenStorage.getSellerId(),
       builder: (context, snapshot) {
@@ -63,7 +63,6 @@ final Map<String, WidgetBuilder> appRoutes = {
             snapshot.data!.isNotEmpty) {
           return SellerProfileScreen(sellerId: snapshot.data!);
         } else {
-          // Show error instead of passing empty string
           return Scaffold(
             body: Center(
               child: Column(
@@ -89,6 +88,14 @@ final Map<String, WidgetBuilder> appRoutes = {
           );
         }
       },
+    );
+  },
+  '/streamlined-payment': (context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    return StreamlinedPaymentScreen(
+      totalAmount: args['totalAmount'] as double,
+      addressId: args['addressId'] as String?,
     );
   },
 };

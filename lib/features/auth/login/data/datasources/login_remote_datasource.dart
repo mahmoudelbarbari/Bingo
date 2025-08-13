@@ -117,19 +117,27 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
 
         // 👇 Handle data saving for BOTH user types 👇
         if (isSeller) {
+          final sellerData = await dio.get('logged-in-seller');
+
           // Seller login handling
           dynamic userData = response.data['seller'] ?? response.data['user'];
+          dynamic s = sellerData.data['seller'];
           if (userData != null && userData['id'] != null) {
             await TokenStorage.saveSellerId(userData['id'].toString());
             await TokenStorage.saveCurrentUser(userData);
-            print('Saved seller data: $userData');
+            await TokenStorage.saveLoggedUserData(s);
+            print('Saved seller data: $userData &&&&&&&&&&&&&&&&&&&&&&&&& $s');
           }
         } else {
+          final userData = await dio.get('logged-in-user');
           // Regular user handling
           if (response.data['user'] != null &&
               response.data['user']['id'] != null) {
             await TokenStorage.saveCurrentUser(response.data['user']);
-            print('Saved user data: ${response.data['user']}');
+            await TokenStorage.saveLoggedUserData(userData.data['user']);
+            print(
+              'Saved user data: ${response.data['user']} &&&&&&&&&&&&&& ${userData.data['user']}',
+            );
           }
         }
 

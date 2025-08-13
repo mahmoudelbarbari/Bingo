@@ -1,18 +1,40 @@
 import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SavedAddressPage extends StatelessWidget {
-  SavedAddressPage({super.key});
+import '../../../../core/service/current_user_service.dart';
+import '../../domain/entity/user.dart';
+import '../cubit/user_cubit/user_cubit.dart';
+import '../cubit/user_cubit/user_state.dart';
 
-  final List<String> addresses = [
-    'Department 7, Building 12, Apartment 5',
-    'Department 3, Building 8, Apartment 12',
-    'Department 9, Building 5, Apartment 3',
-  ];
+class SavedAddressPage extends StatefulWidget {
+  const SavedAddressPage({super.key});
+
+  @override
+  State<SavedAddressPage> createState() => _SavedAddressPageState();
+}
+
+class _SavedAddressPageState extends State<SavedAddressPage> {
+  String _userId = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUserId();
+    context.read<UserCubit>().getUserAddress(_userId);
+  }
+
+  Future<void> _getCurrentUserId() async {
+    final userId = await CurrentUserService.getCurrentUserId();
+    setState(() {
+      _userId = userId!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,23 +45,67 @@ class SavedAddressPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pushNamed(context, '/addAddressScreen'),
-            child: Text(loc.add, style: TextStyle(fontSize: 16)),
+            child: Text(loc.add, style: const TextStyle(fontSize: 16)),
           ),
         ],
       ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) {
-          return Divider(thickness: 0.5, indent: 20);
-        },
-        itemCount: addresses.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              addresses[index],
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          );
+      body: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          if (state is AddUserAddressLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is AddressLoadedState) {
+            final List<AddressEntity> addresses = state.addressEntity;
+
+            if (addresses.isEmpty) {
+              return Center(child: Text(loc.noAddressesFound));
+            }
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(12.0),
+              itemCount: addresses.length,
+              itemBuilder: (context, index) {
+                final address = addresses[index];
+                final fullAddress =
+                    '${address.name}, ${address.label}, ${address.streetAddress}, ${address.city}, ${address.country}, ${address.zipCode}';
+
+                return Column(
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 3,
+                      shadowColor: Colors.black26,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          fullAddress,
+                          style: Theme.of(context).textTheme.bodyLarge
+                              ?.copyWith(
+                                fontSize: 16,
+                                height: 1.4,
+                                color: Colors.grey[800],
+                              ),
+                        ),
+                      ),
+                    ),
+                    if (index < addresses.length - 1)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.0),
+                        child: Divider(
+                          thickness: 0.8,
+                          indent: 12,
+                          endIndent: 12,
+                        ),
+                      ),
+                  ],
+                );
+              },
+            );
+          } else if (state is AddressErrorState) {
+            return Center(child: Text(state.err));
+          }
+          return const SizedBox();
         },
       ),
     );

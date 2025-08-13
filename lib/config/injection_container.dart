@@ -23,6 +23,11 @@ import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
 import 'package:bingo/features/home/domain/repo/home_repo.dart';
 import 'package:bingo/features/home/domain/usecase/get_all_categories_usecase.dart';
 import 'package:bingo/features/home/presentaion/cubit/home_cubit.dart';
+import 'package:bingo/features/payment/data/datasource/payment_datasource.dart';
+import 'package:bingo/features/payment/data/repo/payment_repo_impl.dart';
+import 'package:bingo/features/payment/domain/repo/payment_repo.dart';
+import 'package:bingo/features/payment/domain/usecase/create_payment_intent_usecase.dart';
+import 'package:bingo/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:bingo/features/product/data/datasource/product_datasource.dart';
 import 'package:bingo/features/profile/data/datasource/user_datasource.dart';
 import 'package:bingo/features/product/data/repo/product_repo_impl.dart';
@@ -30,11 +35,13 @@ import 'package:bingo/features/profile/data/repo/user_repo_impl.dart';
 import 'package:bingo/features/product/domain/repo/product_repo.dart';
 import 'package:bingo/features/profile/domain/repo/user_repo.dart';
 import 'package:bingo/features/product/domain/usecase/add_product_usecase.dart';
+import 'package:bingo/features/profile/domain/usecases/add_user_address_usecase.dart';
 import 'package:bingo/features/profile/domain/usecases/get_current_user_usecase.dart';
 import 'package:bingo/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:bingo/features/product/domain/usecase/get_products_by_shop_usecase.dart';
 import 'package:bingo/features/product/domain/usecase/get_seller_products_usecase.dart';
 import 'package:bingo/features/product/presentation/cubit/product_cubit.dart';
+import 'package:bingo/features/profile/domain/usecases/get_user_address_usecase.dart';
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/seller_products_cubit/seller_products_cubit.dart';
@@ -67,6 +74,9 @@ import '../features/cart/domain/usecase/get_all_cart_items_usecase.dart';
 import '../features/cart/domain/usecase/view_orders_usecase.dart';
 import '../features/cart/presentation/cubit/cart_cubit.dart';
 import '../features/chatbot/domain/usecase/chat_message_usecase.dart';
+import '../features/payment/domain/usecase/create_payment_session_usecase.dart';
+import '../features/payment/domain/usecase/checkout_usecase.dart';
+import '../features/payment/domain/usecase/verify_payment_usecase.dart';
 import '../features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import '../features/seller_onboarding/data/repository/seller_upload_repo_impl.dart';
 import '../features/seller_onboarding/domain/repositories/upload_file_repository.dart';
@@ -196,10 +206,10 @@ void init() async {
   // Profile feature (injection).
   //-----------------------------------------------------------------------------------------
   //profile datasource
-  sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl(sl()));
+  sl.registerLazySingleton<UserDatasource>(() => UserDatasourceImpl());
   sl.registerLazySingleton<ProductDatasource>(() => ProductDatasourceImpl());
   //repo
-  sl.registerLazySingleton<UserRepo>(() => UserRepoImpl());
+  sl.registerLazySingleton<UserRepo>(() => UserRepoImpl(sl()));
   sl.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()));
 
   // profile usecase
@@ -215,6 +225,13 @@ void init() async {
   );
 
   sl.registerLazySingleton<AddProductUsecase>(() => AddProductUsecase(sl()));
+  sl.registerLazySingleton<AddUserAddressUsecase>(
+    () => AddUserAddressUsecase(sl()),
+  );
+  sl.registerLazySingleton<GetUserAddressUsecase>(
+    () => GetUserAddressUsecase(sl()),
+  );
+
   // profile cubit
   sl.registerLazySingleton<UserCubit>(() => UserCubit());
   sl.registerLazySingleton<ProductCubit>(() => ProductCubit());
@@ -350,4 +367,29 @@ void init() async {
       getSellerReviews: sl(),
     ),
   );
+
+  //-----------------------------------------------------------------------------------------
+  // payment feature (injection).
+  //-----------------------------------------------------------------------------------------
+  //datasource
+  sl.registerLazySingleton<PaymentDatasource>(() => PaymentDatasourceImpl());
+  // repo
+  sl.registerLazySingleton<PaymentRepo>(() => PaymentRepoImpl(sl()));
+
+  //usecases
+  sl.registerLazySingleton<CreatePaymentIntentUsecase>(
+    () => CreatePaymentIntentUsecase(sl<PaymentRepo>()),
+  );
+  sl.registerLazySingleton<CreatePaymentSessionUsecase>(
+    () => CreatePaymentSessionUsecase(sl<PaymentRepo>()),
+  );
+  sl.registerLazySingleton<CheckoutUsecase>(
+    () => CheckoutUsecase(sl<PaymentRepo>()),
+  );
+  sl.registerLazySingleton<VerifyPaymentUsecase>(
+    () => VerifyPaymentUsecase(sl<PaymentRepo>()),
+  );
+
+  //cubit
+  sl.registerLazySingleton<PaymentCubit>(() => PaymentCubit());
 }

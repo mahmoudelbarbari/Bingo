@@ -1,9 +1,9 @@
+import 'package:bingo/core/helper/token_storage.dart';
 import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:bingo/features/product/domain/entity/product.dart';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProductDatasource {
   Future<List<ProductEntity>> getAllProduct();
@@ -74,18 +74,21 @@ class ProductDatasourceImpl implements ProductDatasource {
   Future<BaseResponse> createProduct(ProductModel product) async {
     try {
       final dio = await _dioFuture;
-      final prefs = await SharedPreferences.getInstance();
-      final role = prefs.getString('auth_role');
 
-      if (role != 'seller') {
-        return BaseResponse(
-          status: false,
-          message: 'Only sellers can create products',
-        );
+      // Get logged user data
+      final loggedUserData = await TokenStorage.getLoggedUserData();
+
+      if (loggedUserData == null) {
+        return BaseResponse(status: false, message: 'User not logged in');
       }
 
-      // Get the seller's shopId from SharedPreferences
-      final shopId = prefs.getString('seller_shop_id');
+      // Extract shop ID from the nested shop object
+      String? shopId;
+      if (loggedUserData['shop'] != null && loggedUserData['shop'] is Map) {
+        final shopData = loggedUserData['shop'] as Map<String, dynamic>;
+        shopId = shopData['id']?.toString();
+      }
+
       if (shopId == null || shopId.isEmpty) {
         return BaseResponse(
           status: false,
