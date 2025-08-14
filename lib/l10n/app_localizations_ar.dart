@@ -736,4 +736,58 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pleaseSelectAtLeastOneColor => 'الرجاء تحديد لون واحد على الأقل';
+
+  @override
+  String get reviews => 'المراجعات';
+
+  @override
+  String get products => 'المنتجات';
+
+  @override
+  String get events => 'الفعاليات';
+
+  @override
+  String get specializedInHandMadeCrafts => 'متخصص في الحرف اليدوية';
+
+  @override
+  String get sellerProfile => 'ملف البائع';
+
+  @override
+  String get thereAreNoReviewsCurrently => 'لا توجد مراجعات حاليًا.';
+
+  @override
+  String get thereAreNoEventsCurrently => 'لا توجد فعاليات حاليًا.';
+
+  @override
+  String get totalRevenue => 'إجمالي الإيرادات';
+
+  @override
+  String get avgDaily => 'متوسط يومي';
+
+  @override
+  String get revenueDetails => 'تفاصيل الإيرادات';
+
+  @override
+  String get totalProducts => 'إجمالي المنتجات';
+
+  @override
+  String get activeListings => 'القوائم النشطة';
+
+  @override
+  String get todayOrders => 'طلبات اليوم';
+
+  @override
+  String get conversionRate => 'معدل التحويل';
+
+  @override
+  String get revenue => 'الربح';
+
+  @override
+  String get rate => 'المعدل';
+
+  @override
+  String get monthly => 'شهري';
+
+  @override
+  String get ytd => 'حتى اليوم';
 }

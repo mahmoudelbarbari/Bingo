@@ -1,4 +1,5 @@
 import 'package:bingo/core/util/size_config.dart';
+import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/review.dart';
@@ -11,7 +12,9 @@ class ReviewsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (reviews.isEmpty) {
-      return const Center(child: Text("لا توجد مراجعات حالياً"));
+      return Center(
+        child: Text(AppLocalizations.of(context)!.thereAreNoReviewsCurrently),
+      );
     }
 
     return ListView.builder(

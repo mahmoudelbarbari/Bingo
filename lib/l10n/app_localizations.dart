@@ -1540,6 +1540,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'please Select AtLeast One Color'**
   String get pleaseSelectAtLeastOneColor;
+
+  /// No description provided for @reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviews;
+
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get products;
+
+  /// No description provided for @events.
+  ///
+  /// In en, this message translates to:
+  /// **'Events'**
+  String get events;
+
+  /// No description provided for @specializedInHandMadeCrafts.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialized in Hand-Made Crafts'**
+  String get specializedInHandMadeCrafts;
+
+  /// No description provided for @sellerProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Seller Profile'**
+  String get sellerProfile;
+
+  /// No description provided for @thereAreNoReviewsCurrently.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no reviews currently.'**
+  String get thereAreNoReviewsCurrently;
+
+  /// No description provided for @thereAreNoEventsCurrently.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no events currently.'**
+  String get thereAreNoEventsCurrently;
+
+  /// No description provided for @totalRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Revenue'**
+  String get totalRevenue;
+
+  /// No description provided for @avgDaily.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg. Daily'**
+  String get avgDaily;
+
+  /// No description provided for @revenueDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue Details'**
+  String get revenueDetails;
+
+  /// No description provided for @totalProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Products'**
+  String get totalProducts;
+
+  /// No description provided for @activeListings.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Listings'**
+  String get activeListings;
+
+  /// No description provided for @todayOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Orders'**
+  String get todayOrders;
+
+  /// No description provided for @conversionRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Rate'**
+  String get conversionRate;
+
+  /// No description provided for @revenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get revenue;
+
+  /// No description provided for @rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate'**
+  String get rate;
+
+  /// No description provided for @monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// No description provided for @ytd.
+  ///
+  /// In en, this message translates to:
+  /// **'YTD'**
+  String get ytd;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

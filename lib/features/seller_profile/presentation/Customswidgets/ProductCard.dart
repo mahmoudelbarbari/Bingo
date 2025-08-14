@@ -1,3 +1,4 @@
+import '../../../../core/util/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -21,13 +22,13 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 3,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min, // ✅ prevent overflow by shrinking
+          mainAxisSize: MainAxisSize.min,
           children: [
             Stack(
               children: [
@@ -37,81 +38,64 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Image.network(
                     imageUrl,
-                    height: 150,
+                    height: 140.h,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                  ),
-                ),
-                const Positioned(
-                  top: 8,
-                  right: 8,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.favorite_border, color: Colors.red),
-                    radius: 14,
                   ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
+              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 5.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min, // ✅ shrink inner column too
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     title,
                     style: const TextStyle(fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis, // ✅ avoid text overflow
+                    overflow: TextOverflow.ellipsis,
                   ),
+                  SizedBox(height: 5.h),
                   Text(
                     description,
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
+                  SizedBox(height: 5.h),
                   Row(
                     children: [
-                      Text(
-                        price,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                      Flexible(
+                        child: Text(
+                          price,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.green,
+                          ),
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      Text(
-                        oldPrice,
-                        style: const TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          color: Colors.grey,
-                          fontSize: 12,
+                      SizedBox(width: 6.w),
+                      Flexible(
+                        child: Text(
+                          oldPrice,
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(height: 5.h),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.star, color: Colors.amber, size: 16),
-                          const SizedBox(width: 2),
-                          Text(
-                            "($rating)",
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ],
-                      ),
-                      CircleAvatar(
-                        radius: 14,
-                        backgroundColor: const Color(0xFFAF1239),
-                        child: const Icon(
-                          Icons.shopping_cart,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                      ),
+                      const Icon(Icons.star, color: Colors.amber, size: 16),
+                      SizedBox(width: 2.w),
+                      Text("($rating)", style: const TextStyle(fontSize: 12)),
                     ],
                   ),
                 ],

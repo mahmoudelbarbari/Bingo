@@ -2,10 +2,14 @@ import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
-  final String? coverImageUrl;
-  final String? profileImageUrl;
+  final String coverImageUrl;
+  final String profileImageUrl;
 
-  const ProfileHeader({super.key, this.coverImageUrl, this.profileImageUrl});
+  const ProfileHeader({
+    super.key,
+    required this.coverImageUrl,
+    required this.profileImageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,16 @@ class ProfileHeader extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           height: 200,
-          child: coverImageUrl != null
-              ? Image.network(coverImageUrl!, fit: BoxFit.cover)
+          child:
+              (coverImageUrl.startsWith('http') ||
+                  coverImageUrl.startsWith('https'))
+              ? Image.network(
+                  coverImageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.broken_image);
+                  },
+                )
               : Image.asset(
                   Assets.images.rectangle346246291.path,
                   fit: BoxFit.cover,
@@ -31,8 +43,10 @@ class ProfileHeader extends StatelessWidget {
             backgroundColor: Colors.white,
             child: CircleAvatar(
               radius: 37,
-              backgroundImage: profileImageUrl != null
-                  ? NetworkImage(profileImageUrl!) as ImageProvider
+              backgroundImage:
+                  (profileImageUrl.startsWith('http') ||
+                      profileImageUrl.startsWith('https'))
+                  ? NetworkImage(profileImageUrl) as ImageProvider
                   : const NetworkImage(
                       'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AA1zoMBS.img?w=768&h=1076&m=6&x=346&y=266&s=192&d=192',
                     ),

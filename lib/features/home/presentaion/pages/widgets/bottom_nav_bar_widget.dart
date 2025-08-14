@@ -3,9 +3,12 @@ import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
 import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:bingo/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:bingo/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widget.dart';
 import 'package:bingo/features/profile/presentation/pages/profile_screen.dart';
+import 'package:bingo/features/seller_profile/presentation/pages/seller_profile_screen.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,14 +29,8 @@ class BottomNavBarWidget extends StatefulWidget {
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _currentIndex = 0;
   bool _isSeller = false;
-
-  final List<Widget> _pages = [
-    HomeScreen(),
-    SafeArea(child: Text('data')),
-    BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
-    BlocProvider(create: (_) => UserCubit(), child: const ProfileScreen()),
-  ];
-
+  String _sellerId = '';
+  String _sellerName = 'test test';
   @override
   void initState() {
     super.initState();
@@ -42,8 +39,13 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
 
   Future<void> _checkUserRole() async {
     final isSeller = await TokenStorage.isSeller();
+    final sellerId = await TokenStorage.getSellerId();
+    final loggedData = await TokenStorage.getLoggedUserData();
+
     setState(() {
       _isSeller = isSeller;
+      _sellerId = sellerId ?? '';
+      _sellerName = loggedData!['name'];
     });
   }
 
@@ -54,11 +56,29 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
+    final List<Widget> _pages = [
+      _isSeller
+          ? BlocProvider(
+              create: (_) => DashboardCubit(),
+              child: DashboardPage(),
+            )
+          : HomeScreen(),
+      SafeArea(child: Text('data,')),
+      BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
+      _isSeller
+          ? SellerProfileScreen(sellerId: _sellerId)
+          : BlocProvider(
+              create: (_) => UserCubit(),
+              child: const ProfileScreen(),
+            ),
+    ];
     return Scaffold(
       appBar: CustomeAppBarWidget(
         centerTitle: false,
-        title: '${loc.welcome} ,',
-        subTitle: loc.createYourDreamsWithJoy,
+        title: '${loc.welcome} , $_sellerName',
+        subTitle: _isSeller
+            ? loc.turnYourPassionIntoProfit
+            : loc.createYourDreamsWithJoy,
         leading: Padding(
           padding: EdgeInsetsDirectional.only(start: 12.w),
           child: InkWell(

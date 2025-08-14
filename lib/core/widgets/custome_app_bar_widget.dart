@@ -37,7 +37,12 @@ class CustomeAppBarWidget extends PreferredSize {
               textStyle ??
               TextStyle(fontSize: lightTheme.textTheme.headlineLarge!.fontSize),
         ),
-        subtitle: Text(subTitle ?? "", style: lightTheme.textTheme.bodySmall),
+        subtitle: Text(
+          subTitle ?? "",
+          style: lightTheme.textTheme.bodySmall!.copyWith(
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ),
       automaticallyImplyLeading: hideBackButton,
       centerTitle: centerTitle,

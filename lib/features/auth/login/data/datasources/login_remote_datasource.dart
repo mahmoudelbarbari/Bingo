@@ -152,11 +152,4 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       return LoginBaseResponse(status: false, message: 'Login error: $e');
     }
   }
-
-  // Helper method for seller data
-  // Future<void> _saveSellerData(dynamic sellerData) async {
-  //   await TokenStorage.saveSellerId(sellerData['id'].toString());
-  //   await TokenStorage.saveCurrentUser(sellerData);
-  //   print('Saved seller data: $sellerData');
-  // }
 }

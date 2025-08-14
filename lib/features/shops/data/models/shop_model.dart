@@ -39,6 +39,18 @@ class ShopModel extends ShopEntity {
     );
   }
 
+  factory ShopModel.fromJson(Map<String, dynamic> map) {
+    return ShopModel(
+      id: map['id'],
+      name: map['name'],
+      bio: map['bio'],
+      category: List<String>.from(map['category'] ?? []),
+      openingHours: map['openingHours'],
+      rating: map['rating'],
+      sellerId: map['sellerId'],
+    );
+  }
+
   //shop model from shop entity
   factory ShopModel.fromEntity(ShopEntity shopEntity) => ShopModel(
     id: shopEntity.id,

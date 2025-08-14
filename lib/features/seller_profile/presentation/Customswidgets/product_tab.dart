@@ -1,5 +1,7 @@
+import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/util/size_config.dart';
 import '../../domain/entities/product.dart';
 import 'ProductCard.dart';
 
@@ -10,12 +12,13 @@ class ProductsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     if (products.isEmpty) {
-      return const Center(child: Text('لا يوجد منتجات'));
+      return Center(child: Text(loc.noProductYet));
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0.w),
       child: GridView.builder(
         itemCount: products.length,
         shrinkWrap: true,
@@ -32,8 +35,8 @@ class ProductsTab extends StatelessWidget {
             imageUrl: product.imageUrl,
             title: product.name,
             description: product.description,
-            price: '${product.price} EGP',
-            oldPrice: '${product.oldPrice} EGP',
+            price: '${product.price} ${loc.egp}',
+            oldPrice: '${product.oldPrice} ${loc.egp}',
             rating: product.rating,
           );
         },

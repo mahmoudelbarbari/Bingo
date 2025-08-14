@@ -1,3 +1,5 @@
+import 'package:bingo/features/shops/domain/entity/shop_entity.dart';
+
 import '../../domain/entities/seller_profile.dart';
 import '../../domain/entities/product.dart';
 import '../../domain/repo/seller_profile_repo.dart';
@@ -20,7 +22,7 @@ class SellerProfileRepositoryImpl implements SellerProfileRepository {
       );
       return model;
     } catch (e) {
-      throw Exception('Failed to fetch seller profile');
+      throw Exception('Failed to fetch seller profile $e');
     }
   }
 
@@ -51,5 +53,10 @@ class SellerProfileRepositoryImpl implements SellerProfileRepository {
     } catch (e) {
       throw Exception('Failed to fetch seller reviews');
     }
+  }
+
+  @override
+  Future<ShopEntity> getSellerData() async {
+    return await remoteDataSource.getSellerData();
   }
 }

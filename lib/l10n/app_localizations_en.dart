@@ -736,4 +736,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pleaseSelectAtLeastOneColor => 'please Select AtLeast One Color';
+
+  @override
+  String get reviews => 'Reviews';
+
+  @override
+  String get products => 'Products';
+
+  @override
+  String get events => 'Events';
+
+  @override
+  String get specializedInHandMadeCrafts => 'Specialized in Hand-Made Crafts';
+
+  @override
+  String get sellerProfile => 'Seller Profile';
+
+  @override
+  String get thereAreNoReviewsCurrently => 'There are no reviews currently.';
+
+  @override
+  String get thereAreNoEventsCurrently => 'There are no events currently.';
+
+  @override
+  String get totalRevenue => 'Total Revenue';
+
+  @override
+  String get avgDaily => 'Avg. Daily';
+
+  @override
+  String get revenueDetails => 'Revenue Details';
+
+  @override
+  String get totalProducts => 'Total Products';
+
+  @override
+  String get activeListings => 'Active Listings';
+
+  @override
+  String get todayOrders => 'Today\'s Orders';
+
+  @override
+  String get conversionRate => 'Conversion Rate';
+
+  @override
+  String get revenue => 'Revenue';
+
+  @override
+  String get rate => 'Rate';
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get ytd => 'YTD';
 }

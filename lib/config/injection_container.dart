@@ -18,6 +18,12 @@ import 'package:bingo/features/chatbot/data/datasource/chat_bot_datasource.dart'
 import 'package:bingo/features/chatbot/data/repo/chat_repo_impl.dart';
 import 'package:bingo/features/chatbot/domain/repo/chat_repo.dart';
 import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
+import 'package:bingo/features/dashboard/data/datasource/dashboard_remote_data_source.dart';
+import 'package:bingo/features/dashboard/data/repo/dashboard_repository_impl.dart';
+import 'package:bingo/features/dashboard/domain/repo/dashboard_repository.dart';
+import 'package:bingo/features/dashboard/domain/usecases/get_revenue_data.dart';
+import 'package:bingo/features/dashboard/domain/usecases/get_shop_stats_usecase.dart';
+import 'package:bingo/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:bingo/features/home/data/datasource/home_datasource.dart';
 import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
 import 'package:bingo/features/home/domain/repo/home_repo.dart';
@@ -46,6 +52,7 @@ import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubi
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/seller_products_cubit/seller_products_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
+import 'package:bingo/features/seller_profile/domain/usecases/get_seller_data_usecase.dart';
 import 'package:bingo/features/seller_profile/domain/usecases/get_seller_profile.dart';
 import 'package:bingo/features/seller_profile/domain/usecases/get_seller_reviews_usecase.dart';
 import 'package:bingo/features/shops/data/datasource/shop_datasource.dart';
@@ -357,7 +364,9 @@ void init() async {
   sl.registerLazySingleton<GetSellerReviewsUseCase>(
     () => GetSellerReviewsUseCase(sl<SellerProfileRepository>()),
   );
-
+  sl.registerLazySingleton<GetSellerDataUsecase>(
+    () => GetSellerDataUsecase(sl<SellerProfileRepository>()),
+  );
   //cubit
   sl.registerLazySingleton<SellerProfileCubit>(
     () => SellerProfileCubit(
@@ -365,6 +374,7 @@ void init() async {
       getSellerProducts: sl(),
       getSellerEvents: sl(),
       getSellerReviews: sl(),
+      getSellerDataUsecase: sl(),
     ),
   );
 
@@ -392,4 +402,27 @@ void init() async {
 
   //cubit
   sl.registerLazySingleton<PaymentCubit>(() => PaymentCubit());
+
+  //-----------------------------------------------------------------------------------------
+  // Seller dashboard feature (injection).
+  //-----------------------------------------------------------------------------------------
+  //datasource
+  sl.registerLazySingleton<DashboardRemoteDataSource>(
+    () => DashboardRemoteDataSourceImpl(),
+  );
+
+  //repo
+  sl.registerLazySingleton<DashboardRepository>(
+    () => DashboardRepositoryImpl(sl()),
+  );
+
+  //usecases
+  sl.registerLazySingleton<GetRevenueData>(
+    () => GetRevenueData(sl<DashboardRepository>()),
+  );
+  sl.registerLazySingleton<GetShopStatsUsecase>(
+    () => GetShopStatsUsecase(sl<DashboardRepository>()),
+  );
+  //cubit
+  sl.registerLazySingleton<DashboardCubit>(() => DashboardCubit());
 }

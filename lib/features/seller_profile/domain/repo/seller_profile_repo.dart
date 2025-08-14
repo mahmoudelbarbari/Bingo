@@ -1,3 +1,5 @@
+import 'package:bingo/features/shops/domain/entity/shop_entity.dart';
+
 import '../entities/seller_profile.dart';
 import '../entities/product.dart';
 import '../entities/event.dart';
@@ -8,4 +10,5 @@ abstract class SellerProfileRepository {
   Future<List<Product>> getSellerProducts(String sellerId);
   Future<List<Event>> getSellerEvents(String sellerId);
   Future<List<Review>> getSellerReviews(String sellerId);
+  Future<ShopEntity> getSellerData();
 }

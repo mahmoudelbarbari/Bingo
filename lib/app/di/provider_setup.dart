@@ -1,5 +1,6 @@
 import 'package:bingo/features/auth/register/presentation/cubit/register_cubit.dart';
 import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
+import 'package:bingo/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:bingo/features/home/presentaion/cubit/home_cubit.dart';
 import 'package:bingo/features/product/presentation/cubit/product_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
@@ -47,6 +48,7 @@ class AppProviders {
         create: (_) => di.sl<SellerProfileCubit>(),
       ),
       BlocProvider<PaymentCubit>(create: (_) => di.sl<PaymentCubit>()),
+      BlocProvider<DashboardCubit>(create: (_) => di.sl<DashboardCubit>()),
     ];
   }
 }
