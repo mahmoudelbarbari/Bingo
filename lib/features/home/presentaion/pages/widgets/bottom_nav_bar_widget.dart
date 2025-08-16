@@ -1,19 +1,21 @@
 import 'package:bingo/config/theme_app.dart';
 import 'package:bingo/core/util/size_config.dart';
 import 'package:bingo/core/widgets/custome_app_bar_widget.dart';
-import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
 import 'package:bingo/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:bingo/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import 'package:bingo/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:bingo/features/home/presentaion/pages/home_screen.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widget.dart';
 import 'package:bingo/features/profile/presentation/pages/profile_screen.dart';
+import 'package:bingo/features/seller-order/presentation/pages/seller_order_pages.dart';
 import 'package:bingo/features/seller_profile/presentation/pages/seller_profile_screen.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import '../../../../../core/helper/token_storage.dart';
+import '../../../../../core/widgets/custome_snackbar_widget.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../cart/presentation/pages/cart_page.dart';
 import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
@@ -31,6 +33,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   bool _isSeller = false;
   String _sellerId = '';
   String _sellerName = 'test test';
+  String _avatar = '';
   @override
   void initState() {
     super.initState();
@@ -46,6 +49,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       _isSeller = isSeller;
       _sellerId = sellerId ?? '';
       _sellerName = loggedData!['name'];
+      _avatar = loggedData['shop']['avatar'];
     });
   }
 
@@ -64,7 +68,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             )
           : HomeScreen(),
       SafeArea(child: Text('data,')),
-      BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
+      _isSeller
+          ? SellerOrderPages()
+          : BlocProvider(create: (_) => CartCubit(), child: const CartPage()),
       _isSeller
           ? SellerProfileScreen(sellerId: _sellerId)
           : BlocProvider(
@@ -93,13 +99,24 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               } else {
                 showAppSnackBar(
                   context,
-                  'Seller profile not available',
+                  loc.sellerProfileNotAvailable,
                   isError: true,
                 );
               }
             },
             child: CircleAvatar(
-              child: ImageIcon(AssetImage(Assets.images.profile.path)),
+              child: (_avatar.startsWith('http') || _avatar.startsWith('https'))
+                  ? Image.network(
+                      _avatar,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.broken_image);
+                      },
+                    )
+                  : Image.asset(
+                      Assets.images.rectangle346246291.path,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
         ),
@@ -114,59 +131,64 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         ],
       ),
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: _onTap,
+        selectedItemColor: lightTheme.primaryColor,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: loc.home),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.language),
+            label: loc.community,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 2),
+          BottomNavigationBarItem(
+            icon: Icon(
+              _isSeller
+                  ? Icons.receipt_long_outlined
+                  : Icons.shopping_cart_outlined,
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
+            label: _isSeller ? loc.order : loc.cart,
           ),
-          child: SizedBox(
-            child: BottomAppBar(
-              shape: const CircularNotchedRectangle(),
-              child: SizedBox(
-                height: 60.h,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _navItem(Icons.home, 0),
-                    _navItem(Icons.language, 1),
-                    if (_isSeller) const SizedBox(width: 48),
-                    _navItem(Icons.shopping_cart_outlined, 2),
-                    _navItem(Icons.person, 3),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: loc.profile),
+        ],
       ),
       floatingActionButton: _isSeller
-          ? FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/add-product');
-              },
-              shape: CircleBorder(),
-              backgroundColor: lightTheme.primaryColor,
-              child: const Icon(Icons.add),
+          ? ExpandableFab(
+              type: ExpandableFabType.fan,
+              pos: ExpandableFabPos.center,
+              distance: 80.0,
+              openButtonBuilder: RotateFloatingActionButtonBuilder(
+                child: const Icon(Icons.add),
+                fabSize: ExpandableFabSize.regular,
+                backgroundColor: lightTheme.primaryColor,
+                shape: const CircleBorder(),
+              ),
+              children: [
+                FloatingActionButton.small(
+                  heroTag: 'discount',
+                  onPressed: () =>
+                      Navigator.pushNamed(context, '/add-discount'),
+                  backgroundColor: Colors.orange,
+                  child: const Icon(Icons.discount),
+                ),
+                FloatingActionButton.small(
+                  heroTag: 'product',
+                  onPressed: () => Navigator.pushNamed(context, '/add-product'),
+                  backgroundColor: Colors.green,
+                  child: const Icon(Icons.add_task),
+                ),
+                FloatingActionButton.small(
+                  heroTag: 'event',
+                  onPressed: () => Navigator.pushNamed(context, '/add-event'),
+                  backgroundColor: Colors.blue,
+                  child: const Icon(Icons.event),
+                ),
+              ],
             )
           : null,
-      floatingActionButtonLocation: _isSeller
-          ? FloatingActionButtonLocation.centerDocked
-          : null,
+      floatingActionButtonLocation: _isSeller ? ExpandableFab.location : null,
       body: Stack(
         children: [
           _pages[_currentIndex],
@@ -177,22 +199,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _navItem(IconData icon, int index) {
-    final isActive = _currentIndex == index;
-    return Expanded(
-      child: InkWell(
-        onTap: () => _onTap(index),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: isActive ? lightTheme.primaryColor : Colors.grey),
-          ],
-        ),
       ),
     );
   }

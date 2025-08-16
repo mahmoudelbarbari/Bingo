@@ -790,4 +790,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ytd => 'YTD';
+
+  @override
+  String get pending => 'Pending';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get ordersFound => 'orders found';
+
+  @override
+  String get noOrdersAvailable => 'No orders available';
+
+  @override
+  String get customer => 'Customer';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get orderDetails => 'Order Details';
+
+  @override
+  String get orderId => 'Order ID';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get sellerProfileNotAvailable => 'Seller profile not available';
+
+  @override
+  String get discountCodes => 'Discount Codes';
+
+  @override
+  String get createEvent => 'Create Event';
 }

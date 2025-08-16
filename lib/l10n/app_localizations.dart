@@ -1648,6 +1648,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'YTD'**
   String get ytd;
+
+  /// No description provided for @pending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pending;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @ordersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'orders found'**
+  String get ordersFound;
+
+  /// No description provided for @noOrdersAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders available'**
+  String get noOrdersAvailable;
+
+  /// No description provided for @customer.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer'**
+  String get customer;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get orderDetails;
+
+  /// No description provided for @orderId.
+  ///
+  /// In en, this message translates to:
+  /// **'Order ID'**
+  String get orderId;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @sellerProfileNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Seller profile not available'**
+  String get sellerProfileNotAvailable;
+
+  /// No description provided for @discountCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount Codes'**
+  String get discountCodes;
+
+  /// No description provided for @createEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Event'**
+  String get createEvent;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

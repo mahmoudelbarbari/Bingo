@@ -51,6 +51,11 @@ import 'package:bingo/features/profile/domain/usecases/get_user_address_usecase.
 import 'package:bingo/features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/seller_products_cubit/seller_products_cubit.dart';
+import 'package:bingo/features/seller-order/data/datasource/seller_order_datasource.dart';
+import 'package:bingo/features/seller-order/data/repo/seller_orders_repo_impl.dart';
+import 'package:bingo/features/seller-order/domain/repo/seller_order_repo.dart';
+import 'package:bingo/features/seller-order/domain/usecase/get_recent_orders_usecase.dart';
+import 'package:bingo/features/seller-order/presentation/cubit/orders_cubit.dart';
 import 'package:bingo/features/seller_onboarding/data/datasource/seller_upload_file_datasource.dart';
 import 'package:bingo/features/seller_profile/domain/usecases/get_seller_data_usecase.dart';
 import 'package:bingo/features/seller_profile/domain/usecases/get_seller_profile.dart';
@@ -425,4 +430,23 @@ void init() async {
   );
   //cubit
   sl.registerLazySingleton<DashboardCubit>(() => DashboardCubit());
+
+  //-----------------------------------------------------------------------------------------
+  // seller recent order feature (injection).
+  //-----------------------------------------------------------------------------------------
+  //datasource
+  sl.registerLazySingleton<SellerOrderDatasource>(
+    () => SellerOrderDatasourceImpl(),
+  );
+
+  //repo
+  sl.registerLazySingleton<SellerOrderRepo>(() => SellerOrdersRepoImpl(sl()));
+
+  //usecase
+  sl.registerLazySingleton<GetRecentOrdersUsecase>(
+    () => GetRecentOrdersUsecase(sl<SellerOrderRepo>()),
+  );
+
+  //cubit
+  sl.registerLazySingleton<OrdersCubit>(() => OrdersCubit());
 }

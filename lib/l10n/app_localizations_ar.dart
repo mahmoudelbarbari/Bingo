@@ -790,4 +790,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ytd => 'حتى اليوم';
+
+  @override
+  String get pending => 'قيد الانتظار';
+
+  @override
+  String get delivered => 'تم التسليم';
+
+  @override
+  String get cancelled => 'ملغى';
+
+  @override
+  String get ordersFound => 'تم العثور على الطلبات';
+
+  @override
+  String get noOrdersAvailable => 'لا توجد طلبات متاحة';
+
+  @override
+  String get customer => 'العميل';
+
+  @override
+  String get details => 'التفاصيل';
+
+  @override
+  String get orderDetails => 'تفاصيل الطلب';
+
+  @override
+  String get orderId => 'معرف الطلب';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get status => 'الحالة';
+
+  @override
+  String get sellerProfileNotAvailable => 'ملف البائع غير متوفر';
+
+  @override
+  String get discountCodes => 'رموز الخصم';
+
+  @override
+  String get createEvent => 'إنشاء حدث';
 }

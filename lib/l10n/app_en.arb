@@ -279,5 +279,19 @@
   "revenue": "Revenue",
   "rate": "Rate",
   "monthly": "Monthly",
-  "ytd": "YTD"
+  "ytd": "YTD",
+  "pending": "Pending",
+  "delivered": "Delivered",
+  "cancelled": "Cancelled",
+  "ordersFound": "orders found",
+  "noOrdersAvailable": "No orders available",
+  "customer": "Customer",
+  "details": "Details",
+  "orderDetails": "Order Details",
+  "orderId": "Order ID",
+  "date": "Date",
+  "status": "Status",
+  "sellerProfileNotAvailable": "Seller profile not available",
+  "discountCodes": "Discount Codes",
+  "createEvent": "Create Event"
 }

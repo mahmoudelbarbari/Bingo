@@ -35,7 +35,10 @@ class CustomeAppBarWidget extends PreferredSize {
           '$title',
           style:
               textStyle ??
-              TextStyle(fontSize: lightTheme.textTheme.headlineLarge!.fontSize),
+              TextStyle(
+                fontSize: lightTheme.textTheme.headlineLarge!.fontSize,
+                overflow: TextOverflow.ellipsis,
+              ),
         ),
         subtitle: Text(
           subTitle ?? "",

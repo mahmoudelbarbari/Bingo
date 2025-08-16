@@ -278,5 +278,19 @@
   "revenue": "الربح",
   "rate": "المعدل",
   "monthly": "شهري",
-  "ytd": "حتى اليوم"
+  "ytd": "حتى اليوم",
+  "pending": "قيد الانتظار",
+  "delivered": "تم التسليم",
+  "cancelled": "ملغى",
+  "ordersFound": "تم العثور على الطلبات",
+  "noOrdersAvailable": "لا توجد طلبات متاحة",
+  "customer": "العميل",
+  "details": "التفاصيل",
+  "orderDetails": "تفاصيل الطلب",
+  "orderId": "معرف الطلب",
+  "date": "التاريخ",
+  "status": "الحالة",
+  "sellerProfileNotAvailable": "ملف البائع غير متوفر",
+  "discountCodes": "رموز الخصم",
+  "createEvent": "إنشاء حدث"
 }

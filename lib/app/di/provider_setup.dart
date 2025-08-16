@@ -16,6 +16,7 @@ import '../../features/cart/presentation/cubit/cart_cubit.dart';
 import '../../features/payment/presentation/cubit/payment_cubit.dart';
 import '../../features/profile/presentation/cubit/language_cubit/language_cubit.dart';
 import '../../features/profile/presentation/cubit/theme_cubit/theme_cubit.dart';
+import '../../features/seller-order/presentation/cubit/orders_cubit.dart';
 import '../../features/seller_onboarding/presentation/cubit/file_upload_cubit.dart';
 
 class AppProviders {
@@ -48,7 +49,10 @@ class AppProviders {
         create: (_) => di.sl<SellerProfileCubit>(),
       ),
       BlocProvider<PaymentCubit>(create: (_) => di.sl<PaymentCubit>()),
+
       BlocProvider<DashboardCubit>(create: (_) => di.sl<DashboardCubit>()),
+
+      BlocProvider<OrdersCubit>(create: (_) => di.sl<OrdersCubit>()),
     ];
   }
 }
