@@ -15,7 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import '../../../../../core/helper/token_storage.dart';
-import '../../../../../core/widgets/custome_snackbar_widget.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../cart/presentation/pages/cart_page.dart';
 import '../../../../profile/presentation/cubit/user_cubit/user_cubit.dart';
@@ -49,7 +48,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       _isSeller = isSeller;
       _sellerId = sellerId ?? '';
       _sellerName = loggedData!['name'];
-      _avatar = loggedData['shop']['avatar'];
+      _isSeller
+          ? _avatar = loggedData['shop']['avatar']
+          : _avatar = loggedData['user']['avatar'];
     });
   }
 
@@ -88,22 +89,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
         leading: Padding(
           padding: EdgeInsetsDirectional.only(start: 12.w),
           child: InkWell(
-            onTap: () async {
-              final sellerId = await TokenStorage.getSellerId();
-              if (sellerId != null) {
-                Navigator.pushNamed(
-                  context,
-                  '/seller-profile',
-                  arguments: sellerId,
-                );
-              } else {
-                showAppSnackBar(
-                  context,
-                  loc.sellerProfileNotAvailable,
-                  isError: true,
-                );
-              }
-            },
+            onTap: () {},
             child: CircleAvatar(
               child: (_avatar.startsWith('http') || _avatar.startsWith('https'))
                   ? Image.network(
@@ -167,19 +153,22 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               ),
               children: [
                 FloatingActionButton.small(
+                  tooltip: loc.createDiscount,
                   heroTag: 'discount',
                   onPressed: () =>
-                      Navigator.pushNamed(context, '/add-discount'),
+                      Navigator.pushNamed(context, '/discountCodes'),
                   backgroundColor: Colors.orange,
                   child: const Icon(Icons.discount),
                 ),
                 FloatingActionButton.small(
+                  tooltip: loc.addProduct,
                   heroTag: 'product',
                   onPressed: () => Navigator.pushNamed(context, '/add-product'),
                   backgroundColor: Colors.green,
                   child: const Icon(Icons.add_task),
                 ),
                 FloatingActionButton.small(
+                  tooltip: loc.createEvent,
                   heroTag: 'event',
                   onPressed: () => Navigator.pushNamed(context, '/add-event'),
                   backgroundColor: Colors.blue,
@@ -189,16 +178,18 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
             )
           : null,
       floatingActionButtonLocation: _isSeller ? ExpandableFab.location : null,
-      body: Stack(
-        children: [
-          _pages[_currentIndex],
-          Positioned(
-            child: ChatBotBtnWidget(
-              onPressed: () => Navigator.pushNamed(context, "/chatBot"),
-              iconAssetPath: Assets.images.chatbot.path,
+      body: Builder(
+        builder: (context) => Stack(
+          children: [
+            _pages[_currentIndex],
+            Positioned(
+              child: ChatBotBtnWidget(
+                onPressed: () => Navigator.pushNamed(context, "/chatBot"),
+                iconAssetPath: Assets.images.chatbot.path,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

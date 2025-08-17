@@ -121,8 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               },
                             ),
-                            Text(loc.user), // localize as needed
-                            SizedBox(width: 20),
+                            Text(loc.user),
+                            SizedBox(width: 20.w),
                             Radio<UserType>(
                               value: UserType.seller,
                               groupValue: _selectedUserType,
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               },
                             ),
-                            Text(loc.seller), // localize as needed
+                            Text(loc.seller), 
                           ],
                         ),
 

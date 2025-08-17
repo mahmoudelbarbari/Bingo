@@ -832,4 +832,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createEvent => 'Create Event';
+
+  @override
+  String get discountTitle => 'Discount title';
+
+  @override
+  String get discountCode => 'Discount code';
+
+  @override
+  String get discountPercentage => 'Discount percentage';
+
+  @override
+  String get discountFixedAmount => 'Discount fixed amount';
+
+  @override
+  String get discountType => 'Discount type';
+
+  @override
+  String get discountyValue => 'Discount value';
+
+  @override
+  String get createDiscount => 'Create Discount';
+
+  @override
+  String get createDiscountCode => 'Create discount code';
+
+  @override
+  String get discountCodeAddedSuccessfully => 'Discount code added successfully';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get egSummerSaleBlackFridayDeal => 'e.g Summer Sale, Black Friday Deal';
+
+  @override
+  String get egSummer2023Save15 => 'e.g SUMMER2023, SAVE15';
+
+  @override
+  String get discountCodeDeletedSuccessfully => 'Discount code deleted successfully';
+
+  @override
+  String get noDiscountCodesFound => 'No discount codes found';
+
+  @override
+  String get noDiscountCodesAvailable => 'No discount codes available';
+
+  @override
+  String get deleteDiscountCode => 'Delete Discount Code';
+
+  @override
+  String get areYouSureYouWantToDelete => 'Are you sure you want to delete';
+
+  @override
+  String get code => 'Code';
+
+  @override
+  String get value => 'Value';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get discountCodeCopiedToClipboard => 'Discount code copied to clipboard';
 }

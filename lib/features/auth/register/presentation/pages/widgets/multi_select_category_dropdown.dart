@@ -34,7 +34,7 @@ class _MultiSelectCategoriesDropdownState
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return BlocBuilder<HomeCubit, CategoriesState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is CategoriesLoading) {
           return const Center(child: CircularProgressIndicator());

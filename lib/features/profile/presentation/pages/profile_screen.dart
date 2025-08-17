@@ -88,7 +88,7 @@ Widget _buildFirstWidget(BuildContext context) {
       ),
       RoundedListItem(title: loc.wishlist, icon: Icons.favorite_border),
       RoundedListItem(icon: Icons.receipt_long, title: loc.orderList),
-      RoundedListItem(title: loc.payment, icon: Icons.payment),
+      // RoundedListItem(title: loc.payment, icon: Icons.payment),
     ],
     icon: Icons.person,
   );

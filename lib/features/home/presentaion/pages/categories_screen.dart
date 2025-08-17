@@ -36,14 +36,18 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
-      body: BlocBuilder<HomeCubit, CategoriesState>(
+      body: BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) {
+          return current is CategoriesLoading ||
+              current is CategoriesLoaded ||
+              current is CategoriesError;
+        },
         builder: (context, state) {
           if (state is CategoriesLoading) {
             return const LoadingWidget();
           } else if (state is CategoriesLoaded) {
             final categoryStrings = state.categories.categories;
 
-            // Optional: convert to CategoriyEntity if needed
             final remaining = categoryStrings.toList();
 
             return Column(

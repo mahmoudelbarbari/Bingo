@@ -36,7 +36,7 @@ class _CategorySelectionWidgetState extends State<CategorySelectionWidget> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    return BlocBuilder<HomeCubit, CategoriesState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is CategoriesLoaded) {
           final CategoryModel model = state.categories;

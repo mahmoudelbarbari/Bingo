@@ -61,7 +61,7 @@ class _LoginFormState extends State<LoginForm> {
           isRTL: widget.isArabic,
           prefixIcon: Image.asset(Assets.images.lockIcon.path),
           labelText: loc.yourPassword,
-          isobscureText: passwordVisible,
+          isobscureText: !passwordVisible,
           formFieldValidator: (v) {
             final error = Validators.password(context, v);
             setState(() {
@@ -77,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
               });
             },
             icon: Icon(
-              passwordVisible ? Icons.visibility_off : Icons.visibility,
+              passwordVisible ? Icons.visibility : Icons.visibility_off,
             ),
           ),
           hasError: passHasError,

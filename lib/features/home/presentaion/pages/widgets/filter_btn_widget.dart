@@ -40,13 +40,10 @@ class _FilterBtnWidgetState extends State<FilterBtnWidget> {
             ),
             builder: (context) {
               return FractionallySizedBox(
-                heightFactor: 0.5, // Take 50% of screen height
+                heightFactor: 0.5,
                 child: Padding(
                   padding: const EdgeInsets.all(16),
-                  child: SingleChildScrollView(
-                    child:
-                        FilterSheetContent(), // Move your filter UI into a new widget
-                  ),
+                  child: SingleChildScrollView(child: FilterSheetContent()),
                 ),
               );
             },

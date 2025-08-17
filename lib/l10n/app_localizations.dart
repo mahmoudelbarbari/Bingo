@@ -1732,6 +1732,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create Event'**
   String get createEvent;
+
+  /// No description provided for @discountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount title'**
+  String get discountTitle;
+
+  /// No description provided for @discountCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount code'**
+  String get discountCode;
+
+  /// No description provided for @discountPercentage.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount percentage'**
+  String get discountPercentage;
+
+  /// No description provided for @discountFixedAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount fixed amount'**
+  String get discountFixedAmount;
+
+  /// No description provided for @discountType.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount type'**
+  String get discountType;
+
+  /// No description provided for @discountyValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount value'**
+  String get discountyValue;
+
+  /// No description provided for @createDiscount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Discount'**
+  String get createDiscount;
+
+  /// No description provided for @createDiscountCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Create discount code'**
+  String get createDiscountCode;
+
+  /// No description provided for @discountCodeAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount code added successfully'**
+  String get discountCodeAddedSuccessfully;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWentWrong;
+
+  /// No description provided for @egSummerSaleBlackFridayDeal.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g Summer Sale, Black Friday Deal'**
+  String get egSummerSaleBlackFridayDeal;
+
+  /// No description provided for @egSummer2023Save15.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g SUMMER2023, SAVE15'**
+  String get egSummer2023Save15;
+
+  /// No description provided for @discountCodeDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount code deleted successfully'**
+  String get discountCodeDeletedSuccessfully;
+
+  /// No description provided for @noDiscountCodesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No discount codes found'**
+  String get noDiscountCodesFound;
+
+  /// No description provided for @noDiscountCodesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No discount codes available'**
+  String get noDiscountCodesAvailable;
+
+  /// No description provided for @deleteDiscountCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Discount Code'**
+  String get deleteDiscountCode;
+
+  /// No description provided for @areYouSureYouWantToDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete'**
+  String get areYouSureYouWantToDelete;
+
+  /// No description provided for @code.
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get code;
+
+  /// No description provided for @value.
+  ///
+  /// In en, this message translates to:
+  /// **'Value'**
+  String get value;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @discountCodeCopiedToClipboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount code copied to clipboard'**
+  String get discountCodeCopiedToClipboard;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

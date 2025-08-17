@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../config/custome_snackbar_color.dart';
 
+import 'package:bingo/main.dart'; // Import to access the global key
+
 void showAppSnackBar(
   BuildContext context,
   String message, {
@@ -29,7 +31,8 @@ void showAppSnackBar(
     duration: const Duration(seconds: 3),
   );
 
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
+  // Use the global key instead of the context
+  rootScaffoldMessengerKey.currentState
+    ?..hideCurrentSnackBar()
     ..showSnackBar(snackBar);
 }

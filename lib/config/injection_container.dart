@@ -21,6 +21,8 @@ import 'package:bingo/features/chatbot/presentation/cubit/chat_bot_cubit.dart';
 import 'package:bingo/features/dashboard/data/datasource/dashboard_remote_data_source.dart';
 import 'package:bingo/features/dashboard/data/repo/dashboard_repository_impl.dart';
 import 'package:bingo/features/dashboard/domain/repo/dashboard_repository.dart';
+import 'package:bingo/features/dashboard/domain/usecases/add_discount_code_usecase.dart';
+import 'package:bingo/features/dashboard/domain/usecases/get_discount_code_usecase.dart';
 import 'package:bingo/features/dashboard/domain/usecases/get_revenue_data.dart';
 import 'package:bingo/features/dashboard/domain/usecases/get_shop_stats_usecase.dart';
 import 'package:bingo/features/dashboard/presentation/cubit/dashboard_cubit.dart';
@@ -28,6 +30,7 @@ import 'package:bingo/features/home/data/datasource/home_datasource.dart';
 import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
 import 'package:bingo/features/home/domain/repo/home_repo.dart';
 import 'package:bingo/features/home/domain/usecase/get_all_categories_usecase.dart';
+import 'package:bingo/features/home/domain/usecase/get_three_prodcut_usecase.dart';
 import 'package:bingo/features/home/presentaion/cubit/home_cubit.dart';
 import 'package:bingo/features/payment/data/datasource/payment_datasource.dart';
 import 'package:bingo/features/payment/data/repo/payment_repo_impl.dart';
@@ -86,6 +89,7 @@ import '../features/cart/domain/usecase/get_all_cart_items_usecase.dart';
 import '../features/cart/domain/usecase/view_orders_usecase.dart';
 import '../features/cart/presentation/cubit/cart_cubit.dart';
 import '../features/chatbot/domain/usecase/chat_message_usecase.dart';
+import '../features/dashboard/domain/usecases/delete_discount_code_usecase.dart';
 import '../features/payment/domain/usecase/create_payment_session_usecase.dart';
 import '../features/payment/domain/usecase/checkout_usecase.dart';
 import '../features/payment/domain/usecase/verify_payment_usecase.dart';
@@ -338,7 +342,9 @@ void init() async {
   sl.registerLazySingleton<GetAllCategoriesUsecase>(
     () => GetAllCategoriesUsecase(sl<HomeRepo>()),
   );
-
+  sl.registerLazySingleton<GetThreeProdcutUsecase>(
+    () => GetThreeProdcutUsecase(sl<HomeRepo>()),
+  );
   //home cubit
   sl.registerLazySingleton<HomeCubit>(() => HomeCubit());
 
@@ -427,6 +433,15 @@ void init() async {
   );
   sl.registerLazySingleton<GetShopStatsUsecase>(
     () => GetShopStatsUsecase(sl<DashboardRepository>()),
+  );
+  sl.registerLazySingleton<AddDiscountCodeUsecase>(
+    () => AddDiscountCodeUsecase(sl<DashboardRepository>()),
+  );
+  sl.registerLazySingleton<GetDiscountCodeUsecase>(
+    () => GetDiscountCodeUsecase(sl<DashboardRepository>()),
+  );
+  sl.registerLazySingleton<DeleteDiscountCodeUsecase>(
+    () => DeleteDiscountCodeUsecase(sl<DashboardRepository>()),
   );
   //cubit
   sl.registerLazySingleton<DashboardCubit>(() => DashboardCubit());

@@ -56,7 +56,7 @@ class _CategoriesScroablleWidgetState extends State<CategoriesScroablleWidget> {
           ),
         ),
         SizedBox(height: 12.h),
-        BlocBuilder<HomeCubit, CategoriesState>(
+        BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is CategoriesLoading) {
               return LoadingWidget();

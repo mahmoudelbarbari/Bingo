@@ -3,6 +3,7 @@ import 'package:bingo/features/auth/login/presentation/otp_verification/otp_veri
 import 'package:bingo/features/auth/login/presentation/create_new_password/create_new_pass_screen.dart';
 import 'package:bingo/features/auth/register/presentation/pages/account_type_page.dart';
 import 'package:bingo/features/auth/register/presentation/pages/register_screen.dart';
+import 'package:bingo/features/dashboard/presentation/pages/add_discount_page.dart';
 import 'package:bingo/features/shops/presentation/pages/add_shop_page.dart';
 import 'package:bingo/features/home/presentaion/pages/product_details.dart';
 import 'package:bingo/features/home/presentaion/pages/widgets/bottom_nav_bar_widget.dart';
@@ -19,6 +20,7 @@ import 'package:bingo/features/onboarding/presentation/pages/onboarding_screen3.
 import '../../core/helper/token_storage.dart';
 import '../../features/auth/login/presentation/forget_password/pages/forget_pass_screen.dart';
 import '../../features/chatbot/presentation/pages/chat_bot_page.dart';
+import '../../features/dashboard/presentation/pages/discount_codes_page.dart';
 import '../../features/product/domain/entity/product.dart';
 import '../../features/product/presentation/pages/add_product_page.dart';
 import '../../features/seller_onboarding/presentation/pages/seller_onboarding_screen.dart';
@@ -98,4 +100,7 @@ final Map<String, WidgetBuilder> appRoutes = {
       addressId: args['addressId'] as String?,
     );
   },
+
+  '/add-discount': (context) => const AddDiscountPage(),
+  '/discountCodes': (context) => const DiscountCodesPage(),
 };

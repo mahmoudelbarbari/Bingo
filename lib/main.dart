@@ -41,6 +41,9 @@ void main() async {
   (e, s) {};
 }
 
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -53,6 +56,7 @@ class MyApp extends StatelessWidget {
           return BlocBuilder<ThemeCubit, ThemeMode>(
             builder: (context, themeMode) {
               return GetMaterialApp(
+                scaffoldMessengerKey: rootScaffoldMessengerKey,
                 title: 'Bingo',
                 key: ValueKey(locale.languageCode),
                 debugShowCheckedModeBanner: false,

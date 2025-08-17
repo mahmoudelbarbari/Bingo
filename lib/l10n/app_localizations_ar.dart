@@ -832,4 +832,67 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get createEvent => 'إنشاء حدث';
+
+  @override
+  String get discountTitle => 'عنوان الخصم';
+
+  @override
+  String get discountCode => 'رمز الخصم';
+
+  @override
+  String get discountPercentage => 'نسبة الخصم';
+
+  @override
+  String get discountFixedAmount => 'مبلغ ثابت للخصم';
+
+  @override
+  String get discountType => 'نوع الخصم';
+
+  @override
+  String get discountyValue => 'قيمة الخصم';
+
+  @override
+  String get createDiscount => 'إنشاء خصم';
+
+  @override
+  String get createDiscountCode => 'إنشاء رمز خصم';
+
+  @override
+  String get discountCodeAddedSuccessfully => 'تم إضافة رمز الخصم بنجاح';
+
+  @override
+  String get somethingWentWrong => 'هناك خطأ ما';
+
+  @override
+  String get egSummerSaleBlackFridayDeal => 'عروض الصيف في الجمعة السوداء';
+
+  @override
+  String get egSummer2023Save15 => 'على سبيل المثال صيف 2023 وفر 15';
+
+  @override
+  String get discountCodeDeletedSuccessfully => 'تم حذف رمز الخصم بنجاح';
+
+  @override
+  String get noDiscountCodesFound => 'لم يتم العثور على رموز خصم.';
+
+  @override
+  String get noDiscountCodesAvailable => 'لا توجد رموز خصم متاحة.';
+
+  @override
+  String get deleteDiscountCode => 'حذف رمز الخصم';
+
+  @override
+  String get areYouSureYouWantToDelete => 'هل أنت متأكد أنك تريد حذف هذا الرمز؟';
+
+  @override
+  String get code => 'الرمز';
+
+  @override
+  String get value => 'القيمة';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get discountCodeCopiedToClipboard => 'تم نسخ الرمز إلى الحافظة';
 }
