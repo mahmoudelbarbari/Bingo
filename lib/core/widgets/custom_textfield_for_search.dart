@@ -1,15 +1,20 @@
 import 'package:bingo/core/util/size_config.dart';
-import 'package:bingo/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class TextFieldForSearch extends StatefulWidget {
   final TextEditingController controller;
   final bool isRTL;
+  final VoidCallback? onClear;
+  final bool isLoading;
 
   const TextFieldForSearch({
     super.key,
     required this.controller,
     required this.isRTL,
+    this.onClear,
+    this.isLoading = false,
   });
 
   @override
@@ -26,22 +31,23 @@ class _TextFieldForSearchState extends State<TextFieldForSearch> {
       decoration: BoxDecoration(
         color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          ?isDark
-              ? null
-              : BoxShadow(
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 2),
+                  offset: const Offset(0, 2),
                 ),
-        ],
+              ],
       ),
       child: TextField(
         controller: widget.controller,
         textAlign: widget.isRTL ? TextAlign.right : TextAlign.left,
         decoration: InputDecoration(
           filled: true,
+          fillColor: Colors.transparent,
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
@@ -55,7 +61,21 @@ class _TextFieldForSearchState extends State<TextFieldForSearch> {
             fontWeight: FontWeight.bold,
             color: Colors.grey,
           ),
-          prefixIcon: Icon(Icons.search, color: Colors.grey),
+          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          suffixIcon: widget.isLoading
+              ? const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : widget.controller.text.isNotEmpty
+              ? IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () {
+                    widget.controller.clear();
+                    widget.onClear?.call();
+                  },
+                )
+              : null,
         ),
       ),
     );

@@ -31,6 +31,7 @@ import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
 import 'package:bingo/features/home/domain/repo/home_repo.dart';
 import 'package:bingo/features/home/domain/usecase/get_all_categories_usecase.dart';
 import 'package:bingo/features/home/domain/usecase/get_three_prodcut_usecase.dart';
+import 'package:bingo/features/home/domain/usecase/search_product_usecase.dart';
 import 'package:bingo/features/home/presentaion/cubit/home_cubit.dart';
 import 'package:bingo/features/payment/data/datasource/payment_datasource.dart';
 import 'package:bingo/features/payment/data/repo/payment_repo_impl.dart';
@@ -344,6 +345,9 @@ void init() async {
   );
   sl.registerLazySingleton<GetThreeProdcutUsecase>(
     () => GetThreeProdcutUsecase(sl<HomeRepo>()),
+  );
+  sl.registerLazySingleton<SearchProductUsecase>(
+    () => SearchProductUsecase(sl<HomeRepo>()),
   );
   //home cubit
   sl.registerLazySingleton<HomeCubit>(() => HomeCubit());

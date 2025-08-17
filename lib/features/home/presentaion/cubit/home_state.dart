@@ -37,3 +37,19 @@ class CombinedState extends HomeState {
 
   CombinedState({required this.products, this.categories});
 }
+
+// Add these to your home_state.dart file
+
+class SearchLoading extends HomeState {}
+
+class SearchLoaded extends HomeState {
+  final List<ProductEntity> products;
+  SearchLoaded(this.products);
+}
+
+class SearchError extends HomeState {
+  final String message;
+  SearchError(this.message);
+}
+
+class SearchInitial extends HomeState {}

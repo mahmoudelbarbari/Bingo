@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 abstract class HomeDatasource {
   Future<CategoryModel> getCategories();
   Future<List<ProductModel>> getThreeProduct();
+  Future<List<ProductModel>> searchProduct(String query);
 }
 
 class HomeDatasourceImpl implements HomeDatasource {
@@ -16,10 +17,9 @@ class HomeDatasourceImpl implements HomeDatasource {
     try {
       final dio = await _dioFuture;
       final response = await dio.get('get-categories');
-      final test = await dio.get(
-        'get-all-products?page=1&limit=10&includeShop=true',
-      );
-      print('THIS IS DAMCIAAAAAAAAAAA ${test.data}');
+      final test = await dio.get('search-products');
+      print('THIS IS DAMCIAAAAAA ${test.data}');
+
       if (response.statusCode == 200) {
         return CategoryModel.fromJson(response.data);
       } else {
@@ -50,6 +50,31 @@ class HomeDatasourceImpl implements HomeDatasource {
       }
     } catch (e) {
       throw Exception('Failed to load products: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<List<ProductModel>> searchProduct(String query) async {
+    try {
+      final dio = await _dioFuture;
+      final response = await dio.get(
+        'search-products',
+        queryParameters: {'q': query},
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final List<dynamic> data = response.data['products'];
+        return data.map((json) => ProductModel.fromJson(json)).toList();
+      } else {
+        throw Exception('Something wnet wrong ${response.statusMessage}');
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception('Error: ${e.response?.statusCode}');
+      } else {
+        throw Exception('Network error: ${e.message}');
+      }
+    } catch (e) {
+      throw Exception('Server error ${e.toString()}');
     }
   }
 }

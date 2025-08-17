@@ -17,4 +17,9 @@ class HomeRepoImpl implements HomeRepo {
   Future<List<ProductEntity>> getThreeProduct() async {
     return await homeDatasource.getThreeProduct();
   }
+
+  @override
+  Future<List<ProductEntity>> searchProduct(String query) async {
+    return await homeDatasource.searchProduct(query);
+  }
 }
