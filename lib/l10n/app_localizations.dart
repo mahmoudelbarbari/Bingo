@@ -1858,6 +1858,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discount code copied to clipboard'**
   String get discountCodeCopiedToClipboard;
+
+  /// No description provided for @discoverOurShops.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover Our Shops'**
+  String get discoverOurShops;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

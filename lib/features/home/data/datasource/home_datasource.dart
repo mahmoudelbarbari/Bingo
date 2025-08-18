@@ -17,9 +17,6 @@ class HomeDatasourceImpl implements HomeDatasource {
     try {
       final dio = await _dioFuture;
       final response = await dio.get('get-categories');
-      final test = await dio.get('search-products');
-      print('THIS IS DAMCIAAAAAA ${test.data}');
-
       if (response.statusCode == 200) {
         return CategoryModel.fromJson(response.data);
       } else {

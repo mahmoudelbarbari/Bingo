@@ -70,7 +70,7 @@ class _CategoriesScroablleWidgetState extends State<CategoriesScroablleWidget> {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CategoryItem(category: firstFive[index]),
+                      child: CategoryItem(title: firstFive[index]),
                     );
                   },
                 ),

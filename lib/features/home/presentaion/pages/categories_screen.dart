@@ -46,10 +46,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           if (state is CategoriesLoading) {
             return const LoadingWidget();
           } else if (state is CategoriesLoaded) {
-            final categoryStrings = state.categories.categories;
+            final categories = state.categories.categories;
+            final subCategories = state.categories.subCategories;
 
-            final remaining = categoryStrings.toList();
-
+            final allItems = [
+              ...categories.map((cat) => _CategoryItemData(cat, false)),
+              ...subCategories.entries.expand(
+                (entry) =>
+                    entry.value.map((sub) => _CategoryItemData(sub, true)),
+              ),
+            ];
             return Column(
               children: [
                 Padding(
@@ -66,7 +72,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           style: Theme.of(context).textTheme.bodyMedium,
                           children: [
                             TextSpan(
-                              text: ' (${remaining.length})',
+                              text: ' (${allItems.length})',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Theme.of(context).colorScheme.primary,
@@ -77,41 +83,41 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                       ViewSwitcherWidget(
                         isGridView: isGrid,
-                        onGridTap: () {
-                          setState(() => isGrid = true);
-                        },
-                        onListTap: () {
-                          setState(() => isGrid = false);
-                        },
+                        onGridTap: () => setState(() => isGrid = true),
+                        onListTap: () => setState(() => isGrid = false),
                       ),
                     ],
                   ),
                 ),
-                isGrid
-                    ? Flexible(
-                        flex: 1,
-                        child: GridView.builder(
+                Expanded(
+                  child: isGrid
+                      ? GridView.builder(
                           padding: const EdgeInsets.all(16),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
+                                childAspectRatio: 0.9,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
                               ),
-                          itemCount: remaining.length,
+                          itemCount: allItems.length,
+                          itemBuilder: (context, index) => CategoryItem(
+                            title: allItems[index].title,
+                            isSubcategory: allItems[index].isSubcategory,
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: categories.length,
                           itemBuilder: (context, index) {
-                            return CategoryItem(category: remaining[index]);
+                            final category = categories[index];
+                            final subcategories = subCategories[category] ?? [];
+                            return CategoryVerticalItemWidget(
+                              category: category,
+                              subcategories: subcategories,
+                            );
                           },
                         ),
-                      )
-                    : Flexible(
-                        flex: 1,
-                        child: ListView.builder(
-                          itemCount: remaining.length,
-                          itemBuilder: (context, index) =>
-                              CategoryVerticalItemWidget(
-                                category: remaining[index],
-                              ),
-                        ),
-                      ),
+                ),
               ],
             );
           } else if (state is CategoriesError) {
@@ -123,4 +129,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
     );
   }
+}
+
+class _CategoryItemData {
+  final String title;
+  final bool isSubcategory;
+
+  _CategoryItemData(this.title, this.isSubcategory);
 }

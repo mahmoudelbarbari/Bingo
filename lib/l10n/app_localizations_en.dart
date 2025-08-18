@@ -895,4 +895,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get discountCodeCopiedToClipboard => 'Discount code copied to clipboard';
+
+  @override
+  String get discoverOurShops => 'Discover Our Shops';
 }

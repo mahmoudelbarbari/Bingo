@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/widgets/custom_textfield_for_search.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../product/presentation/cubit/product_cubit.dart';
 import '../cubit/home_state.dart';
 import 'widgets/product_list_Item.dart';
@@ -58,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+    final loc = AppLocalizations.of(context)!;
     return ChangeNotifierProvider.value(
       value: _pageController,
       child: Scaffold(
@@ -116,6 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SlideShowHomeWidget(),
                     SizedBox(height: 12.h),
+                    Text(loc.discoverOurShops),
+                    SizedBox(height: 12.h),
                     CategoriesScroablleWidget(),
                     SizedBox(height: 12.h),
                     GetAllPeoductScreen(),
@@ -130,4 +134,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-  

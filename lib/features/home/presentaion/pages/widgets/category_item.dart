@@ -3,33 +3,47 @@ import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
-  final String category;
+  final String title;
+  final bool isSubcategory;
 
-  const CategoryItem({super.key, required this.category});
+  const CategoryItem({
+    super.key,
+    required this.title,
+    this.isSubcategory = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Flexible(
-          flex: 5,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
-              color: Color.fromARGB(240, 240, 240, 255),
+              color: isSubcategory
+                  ? const Color.fromARGB(240, 230, 230, 245)
+                  : const Color.fromARGB(240, 240, 240, 255),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Image.asset(Assets.images.jewelry.path),
+            child: Image.asset(
+              Assets.images.jewelry.path,
+              width: isSubcategory ? 28.w : 36.w,
+            ),
           ),
-        ),
-        SizedBox(height: 12.h),
-        Expanded(
-          child: Text(
-            category,
-            style: const TextStyle(fontSize: 12, overflow: TextOverflow.clip),
+          SizedBox(height: 8.h),
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontSize: isSubcategory ? 12 : 14),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

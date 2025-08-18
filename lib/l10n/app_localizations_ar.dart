@@ -895,4 +895,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get discountCodeCopiedToClipboard => 'تم نسخ الرمز إلى الحافظة';
+
+  @override
+  String get discoverOurShops => 'اكتشف المتاجر';
 }
