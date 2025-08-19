@@ -89,7 +89,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../helper/token_storage.dart';
 
-enum ApiTarget { auth, product, seller, order, admin, chatting }
+enum ApiTarget { auth, product, seller, order, admin, chatting, blog }
 
 class DioClient {
   static PersistCookieJar? _cookieJar;
@@ -115,6 +115,9 @@ class DioClient {
         break;
       case ApiTarget.chatting:
         baseUrl = dotenv.env['CHATTING_BASE_URL'];
+        break;
+      case ApiTarget.blog:
+        baseUrl = dotenv.env['BLOG_BASE_URL'];
         break;
     }
 
