@@ -38,7 +38,7 @@ class ShopModel extends ShopEntity {
       bio: map['bio'],
       category: List<String>.from(map['category'] ?? []),
       openingHours: map['opening_hours'],
-      rating: map['ratings'],
+      rating: (map['ratings'] as num?)?.toDouble(),
       sellerId: map['sellerId'],
       avatarUrl: map['url'],
       products:
@@ -59,7 +59,7 @@ class ShopModel extends ShopEntity {
       avatarUrl: _getAvatarUrl(map),
       category: List<String>.from(map['category'] ?? []),
       openingHours: map['opening_hours'],
-      rating: map['ratings'],
+      rating: (map['ratings'] as num?)?.toDouble(),
       sellerId: map['sellerId'],
       products:
           (map['products'] as List<dynamic>?)

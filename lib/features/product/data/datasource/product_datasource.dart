@@ -22,18 +22,33 @@ class ProductDatasourceImpl implements ProductDatasource {
 
       if (response.statusCode == 200) {
         final data = response.data;
+        
+        if (data is! Map<String, dynamic>) {
+          throw Exception('Expected Map<String, dynamic> but got ${data.runtimeType}');
+        }
+        
+        final productsData = data['products'];
+        if (productsData is! List) {
+          throw Exception('Expected products to be a List but got ${productsData.runtimeType}');
+        }
 
-        final List<dynamic> productData = data is List
-            ? data
-            : (data is Map && data['products'] is List)
-            ? data['products']
-            : throw Exception('Unexpected response format');
-
-        return productData
-            .cast<Map<String, dynamic>>()
-            .map((item) => ProductModel.fromJson(item))
-            .cast<ProductEntity>()
-            .toList();
+        final List<ProductEntity> products = [];
+        for (int i = 0; i < productsData.length; i++) {
+          try {
+            final item = productsData[i];
+            if (item is! Map<String, dynamic>) {
+              print('Item at index $i is not Map<String, dynamic>: ${item.runtimeType}');
+              continue;
+            }
+            final product = ProductModel.fromJson(item);
+            products.add(product);
+          } catch (e) {
+            print('Error parsing product at index $i: $e');
+            // Continue with other products instead of failing completely
+          }
+        }
+        
+        return products;
       } else {
         throw Exception('Failed to load products: ${response.statusCode}');
       }
@@ -50,18 +65,33 @@ class ProductDatasourceImpl implements ProductDatasource {
 
       if (response.statusCode == 200) {
         final data = response.data;
+        
+        if (data is! Map<String, dynamic>) {
+          throw Exception('Expected Map<String, dynamic> but got ${data.runtimeType}');
+        }
+        
+        final productsData = data['products'];
+        if (productsData is! List) {
+          throw Exception('Expected products to be a List but got ${productsData.runtimeType}');
+        }
 
-        final List<dynamic> productData = data is List
-            ? data
-            : (data is Map && data['products'] is List)
-            ? data['products']
-            : throw Exception('Unexpected response format');
-
-        return productData
-            .cast<Map<String, dynamic>>()
-            .map((item) => ProductModel.fromJson(item))
-            .cast<ProductEntity>()
-            .toList();
+        final List<ProductEntity> products = [];
+        for (int i = 0; i < productsData.length; i++) {
+          try {
+            final item = productsData[i];
+            if (item is! Map<String, dynamic>) {
+              print('Item at index $i is not Map<String, dynamic>: ${item.runtimeType}');
+              continue;
+            }
+            final product = ProductModel.fromJson(item);
+            products.add(product);
+          } catch (e) {
+            print('Error parsing product at index $i: $e');
+            // Continue with other products instead of failing completely
+          }
+        }
+        
+        return products;
       } else {
         throw Exception('Failed to load products: ${response.statusCode}');
       }

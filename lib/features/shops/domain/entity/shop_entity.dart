@@ -8,7 +8,7 @@ class ShopEntity {
   final String? bio;
   final List<String>? category;
   final String? openingHours;
-  final int? rating;
+  final double? rating;
   final String? sellerId;
   final List<ProductEntity>? products;
 

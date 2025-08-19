@@ -61,7 +61,6 @@ class ProductModel extends ProductEntity {
       shopId: json['shopId'],
       title: json['title'],
       slug: json['slug'],
-      images: json['image'],
       category: json['category'],
       subCategory: json['subCategory'],
       shortDescription: json['short_description'],
@@ -75,19 +74,65 @@ class ProductModel extends ProductEntity {
       sizes: (json['sizes'] as List<dynamic>?)
           ?.map((e) => e.toString())
           .toList(),
-      stock: json['stock'],
-      salePrice: (json['sale_price'] as num?)?.toDouble(),
-      price: (json['regular_price'] as num?)?.toDouble(),
-      warranty: json['warranty'],
-      customProperties: json['custom_properties'] as Map<String, dynamic>?,
+      stock: _parseIntField(json['stock']),
+      salePrice: _parseDoubleField(json['sale_price']),
+      price: _parseDoubleField(json['regular_price']),
+      warranty: json['warranty']?.toString(),
+      customProperties: _parseCustomProperties(json['custom_properties']),
       cashOnDelivery: json['cashOnDelivery'],
-      image: (json['images'] as List<dynamic>?)
-          ?.map((e) => Map<String, dynamic>.from(e))
-          .toList(),
-      quantity: json['quantity'] ?? 1,
-      shop: json['Shop'],
-      ratings: json['ratings'],
+      image: _parseImages(json['images']),
+      quantity: _parseIntField(json['quantity']) ?? 1,
+      shop: json['Shop'] is Map<String, dynamic> ? json['Shop'] : null,
+      ratings: _parseIntField(json['ratings']),
     );
+  }
+
+  static Map<String, dynamic>? _parseCustomProperties(dynamic customProps) {
+    if (customProps == null) return null;
+    if (customProps is Map<String, dynamic>) return customProps;
+    if (customProps is List) {
+      // Convert List to Map - you can customize this logic based on your needs
+      Map<String, dynamic> result = {};
+      for (int i = 0; i < customProps.length; i++) {
+        if (customProps[i] is Map<String, dynamic>) {
+          final prop = customProps[i] as Map<String, dynamic>;
+          if (prop.containsKey('label') && prop.containsKey('values')) {
+            result[prop['label']] = prop['values'];
+          }
+        }
+      }
+      return result.isEmpty ? null : result;
+    }
+    return null;
+  }
+
+  static List<Map<String, dynamic>>? _parseImages(dynamic images) {
+    if (images == null) return null;
+    if (images is List<dynamic>) {
+      return images
+          .where((e) => e is Map<String, dynamic>)
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
+    }
+    return null;
+  }
+
+  static int? _parseIntField(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is double) return value.toInt();
+    if (value is String) return int.tryParse(value);
+    if (value is num) return value.toInt();
+    return null;
+  }
+
+  static double? _parseDoubleField(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    if (value is num) return value.toDouble();
+    return null;
   }
   ShopModel? get shopModel {
     if (shop == null) return null;

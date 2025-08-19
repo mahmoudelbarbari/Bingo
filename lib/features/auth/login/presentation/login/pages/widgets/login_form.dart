@@ -62,14 +62,14 @@ class _LoginFormState extends State<LoginForm> {
           prefixIcon: Image.asset(Assets.images.lockIcon.path),
           labelText: loc.yourPassword,
           isobscureText: !passwordVisible,
-          formFieldValidator: (v) {
-            final error = Validators.password(context, v);
-            setState(() {
-              passHasError = error != null;
-              passIsValid = error == null && v!.isNotEmpty;
-            });
-            return error;
-          },
+          // formFieldValidator: (v) {
+          //   final error = Validators.password(context, v);
+          //   setState(() {
+          //     passHasError = error != null;
+          //     passIsValid = error == null && v!.isNotEmpty;
+          //   });
+          //   return error;
+          // },
           suffixIcon: IconButton(
             onPressed: () {
               setState(() {
