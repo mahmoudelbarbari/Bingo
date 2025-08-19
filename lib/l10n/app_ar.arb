@@ -326,5 +326,6 @@
   "errorLoadingWishlist": "حدث خطأ أثناء تحميل قائمة الأمنيات.",
   "tryAgain": "حاول مرة أخرى",
   "refreshWishlist": "تحديث قائمة الأمنيات",
-  "theme": "الوضع"
+  "theme": "الوضع",
+  "topShops": "أفضل المتاجر"
 }

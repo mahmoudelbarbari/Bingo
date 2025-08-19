@@ -193,6 +193,7 @@ class _AddProductPageState extends State<AddProductPage> {
             if (state is ProductAddedSuccess) {
               context.read<ProductCubit>().getAllProduct();
               showAppSnackBar(context, state.message);
+              Navigator.pushNamed(context, '/seller-profile');
             } else if (state is ProductErrorState) {
               showDialog(
                 context: context,

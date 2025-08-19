@@ -1936,6 +1936,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Theme'**
   String get theme;
+
+  /// No description provided for @topShops.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Shops'**
+  String get topShops;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -934,4 +934,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get theme => 'الوضع';
+
+  @override
+  String get topShops => 'أفضل المتاجر';
 }

@@ -327,5 +327,6 @@
   "errorLoadingWishlist": "Error loading wishlist",
   "tryAgain": "tryAgain",
   "refreshWishlist": "Refresh Wishlist",
-  "theme": "Theme"
+  "theme": "Theme",
+  "topShops": "Top Shops"
 }

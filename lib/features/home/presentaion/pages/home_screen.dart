@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     horizontal: 16.w,
                                   ),
                                   child: Text(
-                                    loc.discoverOurShops,
+                                    loc.topShops,
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
