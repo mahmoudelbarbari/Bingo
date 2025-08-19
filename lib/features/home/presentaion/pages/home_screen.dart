@@ -11,7 +11,9 @@ import 'package:provider/provider.dart';
 import '../../../../core/widgets/custom_textfield_for_search.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../product/presentation/cubit/product_cubit.dart';
+import '../cubit/best_shop_cubit/best_sellers_cubit.dart';
 import '../cubit/home_state.dart';
+import 'shop_details_page.dart';
 import 'widgets/product_list_Item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -118,7 +120,90 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SlideShowHomeWidget(),
                     SizedBox(height: 12.h),
-                    Text(loc.discoverOurShops),
+                    BlocProvider(
+                      create: (context) => BestSellersCubit()..getBestSellers(),
+                      child: BlocBuilder<BestSellersCubit, BestSellersState>(
+                        builder: (context, state) {
+                          if (state is BestSellersLoaded) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 16.w,
+                                  ),
+                                  child: Text(
+                                    loc.discoverOurShops,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 12.h),
+                                SizedBox(
+                                  height: 120.h,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: state.shops.length,
+                                    itemBuilder: (context, index) {
+                                      final shop = state.shops[index];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShopDetailsScreen(shop: shop),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          width: 100.w,
+                                          margin: EdgeInsets.only(
+                                            left: index == 0 ? 16.w : 8.w,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 40,
+                                                backgroundImage:
+                                                    shop.avatarUrl != null
+                                                    ? NetworkImage(
+                                                        shop.avatarUrl!,
+                                                      )
+                                                    : null,
+                                                child: shop.avatarUrl == null
+                                                    ? Icon(
+                                                        Icons.store,
+                                                        size: 40,
+                                                      )
+                                                    : null,
+                                              ),
+                                              SizedBox(height: 8.h),
+                                              Text(
+                                                shop.name ?? '',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                              ],
+                            );
+                          } else if (state is BestSellersError) {
+                            return Center(child: Text(state.message));
+                          }
+                          return Center(child: CircularProgressIndicator());
+                        },
+                      ),
+                    ),
                     SizedBox(height: 12.h),
                     CategoriesScroablleWidget(),
                     SizedBox(height: 12.h),

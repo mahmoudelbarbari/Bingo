@@ -28,4 +28,9 @@ class ShopRepoImpl implements ShopsRepo {
     // TODO: implement addShopImage
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<ShopEntity>> getBestSellers() async {
+    return await shopDatasource.getBestSellers();
+  }
 }

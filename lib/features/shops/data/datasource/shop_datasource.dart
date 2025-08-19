@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bingo/core/network/dio_provider.dart';
 import 'package:bingo/core/util/base_response.dart';
 import 'package:bingo/features/auth/register/data/model/register_model.dart';
+import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:bingo/features/shops/data/models/shop_model.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,30 +18,22 @@ abstract class ShopDatasource {
   );
 
   Future<void> addShopImage(File imageFile);
+  Future<List<ShopModel>> getBestSellers();
 }
 
 class ShopDatasourceImpl implements ShopDatasource {
   final Future<Dio> _dioFuture = DioClient.createDio(ApiTarget.auth);
-
+  final Future<Dio> _dioFuturePro = DioClient.createDio(ApiTarget.product);
   @override
   Future<BaseResponse> addShop(
     ShopModel shopModel,
     SellerAccountModel sellerAccountModel,
   ) async {
-    print('🏪 addShop called with:');
-    print('   Shop name: ${shopModel.name}');
-    print('   Shop address: ${shopModel.address}');
-    print('   Seller ID: ${sellerAccountModel.id}');
-
     try {
       // Check if user is authenticated and is a seller
       final isSeller = await TokenStorage.isSeller();
 
-      print('🔐 Authentication check:');
-      print('   isSeller: $isSeller');
-
       if (!isSeller) {
-        print('❌ User is not a seller');
         return BaseResponse(
           status: false,
           message: 'Only sellers can create shops.',
@@ -48,7 +41,6 @@ class ShopDatasourceImpl implements ShopDatasource {
       }
 
       final dio = await _dioFuture;
-      print('🌐 Making POST request to create-shop...');
 
       final requestData = {
         'name': shopModel.name,
@@ -62,40 +54,28 @@ class ShopDatasourceImpl implements ShopDatasource {
         'sellerId': sellerAccountModel.id,
       };
 
-      print('📤 Request data: $requestData');
-
       final response = await dio.post('create-shop', data: requestData);
 
-      print('📥 Response received:');
-      print('   Status code: ${response.statusCode}');
-      print('   Response data: ${response.data}');
-
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('✅ Shop created successfully');
-
         // Save the shopId from the response for future use
         final responseData = response.data;
         if (responseData is Map<String, dynamic> &&
             responseData['shopId'] != null) {
           await TokenStorage.saveShopId(responseData['shopId'].toString());
-          print('💾 Saved shopId: ${responseData['shopId']}');
         } else if (responseData is Map<String, dynamic> &&
             responseData['shop'] != null &&
             responseData['shop']['id'] != null) {
           await TokenStorage.saveShopId(responseData['shop']['id'].toString());
-          print('💾 Saved shopId: ${responseData['shop']['id']}');
         }
 
         return BaseResponse(status: true, message: 'Shop Added Successfully');
       } else {
-        print('❌ Shop creation failed');
         return BaseResponse(
           status: false,
           message: 'Failed to add shop: ${response.statusMessage}',
         );
       }
     } on DioException catch (e) {
-      print('❌ DioException: ${e.message}');
       if (e.response?.statusCode == 401) {
         return BaseResponse(
           status: false,
@@ -107,7 +87,6 @@ class ShopDatasourceImpl implements ShopDatasource {
         message: 'Failed to add shop: ${e.message}',
       );
     } catch (e) {
-      print('❌ General exception: $e');
       return BaseResponse(status: false, message: 'Failed to add shop: $e');
     }
   }
@@ -119,7 +98,6 @@ class ShopDatasourceImpl implements ShopDatasource {
       final role = prefs.getString('auth_role');
 
       if (role != 'seller') {
-        print("Only sellers are allowed to upload images.");
         return null;
       }
 
@@ -144,12 +122,62 @@ class ShopDatasourceImpl implements ShopDatasource {
         ),
       );
       if (response.statusCode == 200) {
-        print('Image upload success');
       } else {
         throw ("Faild to upload ${response.statusMessage}");
       }
     } catch (e) {
       throw ('Unexpected error ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<List<ShopModel>> getBestSellers() async {
+    try {
+      final dio = await _dioFuturePro;
+      final response = await dio.get('best-sellers');
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Parse all products first
+        final List<ProductModel> allProducts =
+            (response.data['products'] as List)
+                .map((product) => ProductModel.fromJson(product))
+                .toList();
+
+        // Group products by shop ID
+        final Map<String, List<ProductModel>> shopProductsMap = {};
+        for (var product in allProducts) {
+          if (product.shopId != null) {
+            shopProductsMap.putIfAbsent(product.shopId!, () => []).add(product);
+          }
+        }
+
+        // Create unique shops
+        final List<ShopModel> shops = [];
+        final Set<String> addedShopIds = {};
+
+        for (var product in allProducts) {
+          if (product.shop != null) {
+            final shopId = product.shop!['id'];
+            if (!addedShopIds.contains(shopId)) {
+              addedShopIds.add(shopId);
+              shops.add(
+                ShopModel.fromJson({
+                  ...product.shop!,
+                  'products': shopProductsMap[shopId] ?? [],
+                }),
+              );
+            }
+          }
+        }
+
+        return shops;
+      } else {
+        throw Exception(
+          'Failed to load best sellers: ${response.statusMessage}',
+        );
+      }
+    } catch (e) {
+      throw Exception('Failed to load best sellers: ${e.toString()}');
     }
   }
 }

@@ -314,5 +314,17 @@
   "value": "القيمة",
   "delete": "حذف",
   "discountCodeCopiedToClipboard": "تم نسخ الرمز إلى الحافظة",
-  "discoverOurShops": "اكتشف المتاجر"
+  "discoverOurShops": "اكتشف المتاجر",
+  "thereSsNoProductAtThisMoment": "لا توجد منتج في هذا الوقت.",
+  "ratings": "التقييمات",
+  "clearWishlist": "مسح قائمة الأمنيات",
+  "clear": "مسح",
+  "areYouSureYouWantToClearWishlist": "هل أنت متأكد أنك تريد مسح قائمة الأمنيات؟",
+  "yourWishlistIsEmpty": "قائمة الأمنيات فارغة.",
+  "addItemsToYourWishlist": "أضف عناصر إلى قائمة الأمنيات.",
+  "continueShopping": "استمر في التسوق",
+  "errorLoadingWishlist": "حدث خطأ أثناء تحميل قائمة الأمنيات.",
+  "tryAgain": "حاول مرة أخرى",
+  "refreshWishlist": "تحديث قائمة الأمنيات",
+  "theme": "الوضع"
 }

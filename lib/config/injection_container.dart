@@ -29,6 +29,7 @@ import 'package:bingo/features/dashboard/presentation/cubit/dashboard_cubit.dart
 import 'package:bingo/features/home/data/datasource/home_datasource.dart';
 import 'package:bingo/features/home/data/repo/home_repo_impl.dart';
 import 'package:bingo/features/home/domain/repo/home_repo.dart';
+import 'package:bingo/features/home/domain/usecase/add_to_wishlist_usecase.dart';
 import 'package:bingo/features/home/domain/usecase/get_all_categories_usecase.dart';
 import 'package:bingo/features/home/domain/usecase/get_three_prodcut_usecase.dart';
 import 'package:bingo/features/home/domain/usecase/search_product_usecase.dart';
@@ -69,12 +70,14 @@ import 'package:bingo/features/shops/data/reporisatory/shop_repo_impl.dart';
 import 'package:bingo/features/shops/domain/repo/shops_repo.dart';
 import 'package:bingo/features/shops/domain/usecase/add_shop_image.dart';
 import 'package:bingo/features/shops/domain/usecase/add_shop_usecase.dart';
+import 'package:bingo/features/shops/domain/usecase/get_best_sellers_shops_usecase.dart';
 import 'package:bingo/features/shops/presentation/cubit/shop_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../core/database/firebase_db.dart';
 import '../core/network/dio_provider.dart';
+import '../features/auth/login/domain/usecases/logout_usecase.dart';
 import '../features/auth/login/domain/usecases/reset_password_usecase.dart';
 import '../features/auth/login/domain/usecases/sent_otp_usecase.dart';
 import '../features/auth/login/domain/usecases/verify_otp_usecase.dart';
@@ -91,6 +94,11 @@ import '../features/cart/domain/usecase/view_orders_usecase.dart';
 import '../features/cart/presentation/cubit/cart_cubit.dart';
 import '../features/chatbot/domain/usecase/chat_message_usecase.dart';
 import '../features/dashboard/domain/usecases/delete_discount_code_usecase.dart';
+import '../features/home/domain/usecase/clear_wishlist_usecase.dart';
+import '../features/home/domain/usecase/get_wishlist_items_usecase.dart';
+import '../features/home/domain/usecase/is_in_wishlist_usecase.dart';
+import '../features/home/domain/usecase/remove_from_wishlist_usecase.dart';
+import '../features/home/presentaion/cubit/best_shop_cubit/best_sellers_cubit.dart';
 import '../features/payment/domain/usecase/create_payment_session_usecase.dart';
 import '../features/payment/domain/usecase/checkout_usecase.dart';
 import '../features/payment/domain/usecase/verify_payment_usecase.dart';
@@ -158,6 +166,8 @@ void init() async {
   sl.registerLazySingleton<SentOtpUsecase>(() => SentOtpUsecase(sl()));
   // verify otp usecase
   sl.registerLazySingleton<VerifyOtpUsecase>(() => VerifyOtpUsecase(sl()));
+  //logout usecase
+  sl.registerLazySingleton<LogoutUsecase>(() => LogoutUsecase(sl()));
 
   //login cubit && reset_pass and sendverify__OTP cubit
   sl.registerLazySingleton<LoginCubit>(() => LoginCubit());
@@ -327,8 +337,12 @@ void init() async {
 
   sl.registerLazySingleton<AddShopImage>(() => AddShopImage(sl<ShopsRepo>()));
 
+  sl.registerLazySingleton<GetBestSellersShopsUsecase>(
+    () => GetBestSellersShopsUsecase(sl<ShopsRepo>()),
+  );
   //cubit
   sl.registerLazySingleton<ShopCubit>(() => ShopCubit());
+  sl.registerLazySingleton<BestSellersCubit>(() => BestSellersCubit());
 
   //-----------------------------------------------------------------------------------------
   // home feature (injection).
@@ -348,6 +362,25 @@ void init() async {
   );
   sl.registerLazySingleton<SearchProductUsecase>(
     () => SearchProductUsecase(sl<HomeRepo>()),
+  );
+  //wishlist usecase
+  sl.registerLazySingleton<AddToWishlistUsecase>(
+    () => AddToWishlistUsecase(sl<HomeRepo>()),
+  );
+  sl.registerLazySingleton<GetWishlistItemsUsecase>(
+    () => GetWishlistItemsUsecase(sl<HomeRepo>()),
+  );
+
+  sl.registerLazySingleton<RemoveFromWishlistUsecase>(
+    () => RemoveFromWishlistUsecase(sl<HomeRepo>()),
+  );
+
+  sl.registerLazySingleton<ClearWishlistUsecase>(
+    () => ClearWishlistUsecase(sl<HomeRepo>()),
+  );
+
+  sl.registerLazySingleton<IsInWishlistUsecase>(
+    () => IsInWishlistUsecase(sl<HomeRepo>()),
   );
   //home cubit
   sl.registerLazySingleton<HomeCubit>(() => HomeCubit());

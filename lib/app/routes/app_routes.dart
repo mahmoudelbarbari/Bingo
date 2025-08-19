@@ -23,6 +23,7 @@ import '../../features/chatbot/presentation/pages/chat_bot_page.dart';
 import '../../features/dashboard/presentation/pages/discount_codes_page.dart';
 import '../../features/product/domain/entity/product.dart';
 import '../../features/product/presentation/pages/add_product_page.dart';
+import '../../features/profile/presentation/pages/wishlist_page.dart';
 import '../../features/seller_onboarding/presentation/pages/seller_onboarding_screen.dart';
 import '../../features/seller_profile/presentation/pages/seller_profile_screen.dart';
 import '../../features/payment/presentation/pages/streamlined_payment_screen.dart';
@@ -103,4 +104,5 @@ final Map<String, WidgetBuilder> appRoutes = {
 
   '/add-discount': (context) => const AddDiscountPage(),
   '/discountCodes': (context) => const DiscountCodesPage(),
+  '/wishlist': (context) => const WishlistPage(),
 };

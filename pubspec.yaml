@@ -65,6 +65,7 @@ dependencies:
   flutter_stripe: ^11.5.0
   fl_chart: ^1.0.0
   flutter_expandable_fab: ^2.5.2
+  circular_menu: ^4.0.0
 
 dev_dependencies:
   flutter_test:

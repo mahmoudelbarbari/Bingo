@@ -8,6 +8,7 @@ class ProductEntity {
   final String? warranty;
   final String? slug;
   final String? brand;
+  final int? ratings;
   final List<String>? colors;
   final Map<String, dynamic>? customProperties;
   final String? cashOnDelivery;
@@ -21,6 +22,7 @@ class ProductEntity {
   final List<String>? sizes;
   final List<Map<String, dynamic>>? image;
   final int quantity;
+  final Map<String, dynamic>? shop;
 
   ProductEntity({
     this.id,
@@ -45,6 +47,8 @@ class ProductEntity {
     this.sizes,
     this.image,
     this.quantity = 1,
+    this.shop,
+    this.ratings,
   });
 
   String get firstImageUrl {

@@ -898,4 +898,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get discoverOurShops => 'اكتشف المتاجر';
+
+  @override
+  String get thereSsNoProductAtThisMoment => 'لا توجد منتج في هذا الوقت.';
+
+  @override
+  String get ratings => 'التقييمات';
+
+  @override
+  String get clearWishlist => 'مسح قائمة الأمنيات';
+
+  @override
+  String get areYouSureYouWantToClearYourWishlist => 'Are you sure you want to clear your wishlist?';
+
+  @override
+  String get clear => 'مسح';
+
+  @override
+  String get yourWishlistIsEmpty => 'قائمة الأمنيات فارغة.';
+
+  @override
+  String get addItemsToYourWishlist => 'أضف عناصر إلى قائمة الأمنيات.';
+
+  @override
+  String get continueShopping => 'استمر في التسوق';
+
+  @override
+  String get errorLoadingWishlist => 'حدث خطأ أثناء تحميل قائمة الأمنيات.';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
+
+  @override
+  String get refreshWishlist => 'تحديث قائمة الأمنيات';
+
+  @override
+  String get theme => 'الوضع';
 }

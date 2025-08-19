@@ -132,6 +132,7 @@ class DioClient {
     // 🧠 Global persistent cookie jar (initialized once)
     if (_cookieJar == null) {
       final dir = await getApplicationDocumentsDirectory();
+      print('Cookie path: ${dir.path}/.cookies');
       _cookieJar = PersistCookieJar(
         storage: FileStorage('${dir.path}/.cookies'),
       );

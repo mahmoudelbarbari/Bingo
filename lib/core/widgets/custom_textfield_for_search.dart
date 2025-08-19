@@ -27,7 +27,6 @@ class _TextFieldForSearchState extends State<TextFieldForSearch> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-      padding: EdgeInsets.symmetric(vertical: 2.h),
       decoration: BoxDecoration(
         color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -53,7 +52,7 @@ class _TextFieldForSearchState extends State<TextFieldForSearch> {
           enabledBorder: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 16.w,
-            vertical: 14.h,
+            vertical: 12.h,
           ),
           hintText: AppLocalizations.of(context)!.search,
           hintStyle: TextStyle(

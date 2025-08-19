@@ -898,4 +898,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get discoverOurShops => 'Discover Our Shops';
+
+  @override
+  String get thereSsNoProductAtThisMoment => 'There is no product at this moment';
+
+  @override
+  String get ratings => 'Ratings';
+
+  @override
+  String get clearWishlist => 'Clear Wishlist';
+
+  @override
+  String get areYouSureYouWantToClearYourWishlist => 'Are you sure you want to clear your wishlist?';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get yourWishlistIsEmpty => 'Your wishlist is empty';
+
+  @override
+  String get addItemsToYourWishlist => 'Add items to your wishlist';
+
+  @override
+  String get continueShopping => 'Continue Shopping';
+
+  @override
+  String get errorLoadingWishlist => 'Error loading wishlist';
+
+  @override
+  String get tryAgain => 'tryAgain';
+
+  @override
+  String get refreshWishlist => 'Refresh Wishlist';
+
+  @override
+  String get theme => 'Theme';
 }

@@ -19,12 +19,6 @@ class CategoriesScroablleWidget extends StatefulWidget {
 
 class _CategoriesScroablleWidgetState extends State<CategoriesScroablleWidget> {
   @override
-  void initState() {
-    super.initState();
-    context.read<HomeCubit>().getCategories();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

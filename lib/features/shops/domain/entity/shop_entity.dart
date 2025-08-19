@@ -1,12 +1,16 @@
+import 'package:bingo/features/product/domain/entity/product.dart';
+
 class ShopEntity {
   final String? id;
   final String? name;
   final String? address;
+  final String? avatarUrl;
   final String? bio;
   final List<String>? category;
   final String? openingHours;
-  final String? rating;
+  final int? rating;
   final String? sellerId;
+  final List<ProductEntity>? products;
 
   ShopEntity({
     this.id,
@@ -17,5 +21,7 @@ class ShopEntity {
     this.openingHours,
     this.rating,
     this.sellerId,
+    this.avatarUrl,
+    this.products,
   });
 }

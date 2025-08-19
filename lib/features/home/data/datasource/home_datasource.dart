@@ -3,10 +3,19 @@ import 'package:bingo/features/home/data/models/category_model.dart.dart';
 import 'package:bingo/features/product/data/models/product_model.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/helper/token_storage.dart';
+import '../../../../core/util/base_response.dart';
+
 abstract class HomeDatasource {
   Future<CategoryModel> getCategories();
   Future<List<ProductModel>> getThreeProduct();
   Future<List<ProductModel>> searchProduct(String query);
+  Future<BaseResponse> addToWishList(String productId);
+
+  Future<List<ProductModel>> getWishlistItems();
+  Future<BaseResponse> removeFromWishlist(String productId);
+  Future<BaseResponse> clearWishlist();
+  Future<bool> isInWishlist(String productId);
 }
 
 class HomeDatasourceImpl implements HomeDatasource {
@@ -72,6 +81,171 @@ class HomeDatasourceImpl implements HomeDatasource {
       }
     } catch (e) {
       throw Exception('Server error ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<BaseResponse> addToWishList(String productId) async {
+    try {
+      final dio = await _dioFuture;
+      final userData = await TokenStorage.getLoggedUserData();
+      String? userId;
+      if (userData != null) {
+        final shopData = userData;
+        userId = shopData['id']?.toString();
+      }
+      if (userId == null || userId.isEmpty) {
+        return BaseResponse(status: false, message: 'User not authenticated.');
+      }
+      final response = await dio.post(
+        'wishlist/add',
+        data: {'productId': productId},
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer ${await TokenStorage.getToken()}',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return BaseResponse(status: true, message: 'Product added to wishlist');
+      } else {
+        return BaseResponse(
+          status: false,
+          message:
+              'Failed to add product to wishlist ${response.statusMessage}',
+        );
+      }
+    } catch (e) {
+      return BaseResponse(
+        status: false,
+        message: 'Failed to add product to wishlist ${e.toString()}',
+      );
+    }
+  }
+
+  @override
+  Future<BaseResponse> clearWishlist() async {
+    try {
+      final dio = await _dioFuture;
+      final accessToken = await TokenStorage.getToken();
+
+      final response = await dio.delete(
+        'wishlist/clear',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return BaseResponse(status: true, message: 'Wishlist cleared');
+      } else {
+        return BaseResponse(
+          status: false,
+          message: 'Failed to clear wishlist ${response.statusMessage}',
+        );
+      }
+    } catch (e) {
+      return BaseResponse(
+        status: false,
+        message: 'Failed to clear wishlist ${e.toString()}',
+      );
+    }
+  }
+
+  @override
+  Future<List<ProductModel>> getWishlistItems() async {
+    try {
+      final dio = await _dioFuture;
+      final accessToken = await TokenStorage.getToken();
+
+      final response = await dio.get(
+        'wishlist',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final List<dynamic> productData = response.data['wishlist'] ?? [];
+        final List<ProductModel> products = productData
+            .map((productJson) => ProductModel.fromJson(productJson))
+            .toList();
+        return products;
+      } else {
+        throw Exception('Failed to load wishlist: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load wishlist: ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<bool> isInWishlist(String productId) async {
+    try {
+      final dio = await _dioFuture;
+      final accessToken = await TokenStorage.getToken();
+
+      final response = await dio.get(
+        'wishlist/check/$productId',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.data['isInWishlist'] ?? false;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<BaseResponse> removeFromWishlist(String productId) async {
+    try {
+      final dio = await _dioFuture;
+      final accessToken = await TokenStorage.getToken();
+
+      final response = await dio.delete(
+        'wishlist/remove/$productId',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $accessToken',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return BaseResponse(
+          status: true,
+          message: 'Product removed from wishlist',
+        );
+      } else {
+        return BaseResponse(
+          status: false,
+          message:
+              'Failed to remove product from wishlist ${response.statusMessage}',
+        );
+      }
+    } catch (e) {
+      return BaseResponse(
+        status: false,
+        message: 'Failed to remove product from wishlist ${e.toString()}',
+      );
     }
   }
 }

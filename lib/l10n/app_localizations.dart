@@ -1864,6 +1864,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discover Our Shops'**
   String get discoverOurShops;
+
+  /// No description provided for @thereSsNoProductAtThisMoment.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no product at this moment'**
+  String get thereSsNoProductAtThisMoment;
+
+  /// No description provided for @ratings.
+  ///
+  /// In en, this message translates to:
+  /// **'Ratings'**
+  String get ratings;
+
+  /// No description provided for @clearWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Wishlist'**
+  String get clearWishlist;
+
+  /// No description provided for @areYouSureYouWantToClearYourWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to clear your wishlist?'**
+  String get areYouSureYouWantToClearYourWishlist;
+
+  /// No description provided for @clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// No description provided for @yourWishlistIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your wishlist is empty'**
+  String get yourWishlistIsEmpty;
+
+  /// No description provided for @addItemsToYourWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Add items to your wishlist'**
+  String get addItemsToYourWishlist;
+
+  /// No description provided for @continueShopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Shopping'**
+  String get continueShopping;
+
+  /// No description provided for @errorLoadingWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading wishlist'**
+  String get errorLoadingWishlist;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'tryAgain'**
+  String get tryAgain;
+
+  /// No description provided for @refreshWishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh Wishlist'**
+  String get refreshWishlist;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

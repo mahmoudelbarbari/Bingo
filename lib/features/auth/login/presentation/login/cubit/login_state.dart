@@ -21,3 +21,9 @@ class LoginErrorState extends LoginState {
 class LoginLoadingState extends LoginState {}
 
 class LogoutLoadingState extends LoginState {}
+
+class LogoutErrorState extends LoginState {
+  String errorMessage;
+
+  LogoutErrorState({required this.errorMessage});
+}

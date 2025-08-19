@@ -315,5 +315,17 @@
   "value": "Value",
   "delete": "Delete",
   "discountCodeCopiedToClipboard": "Discount code copied to clipboard",
-  "discoverOurShops": "Discover Our Shops"
+  "discoverOurShops": "Discover Our Shops",
+  "thereSsNoProductAtThisMoment": "There is no product at this moment",
+  "ratings": "Ratings",
+  "clearWishlist": "Clear Wishlist",
+  "areYouSureYouWantToClearYourWishlist": "Are you sure you want to clear your wishlist?",
+  "clear": "Clear",
+  "yourWishlistIsEmpty": "Your wishlist is empty",
+  "addItemsToYourWishlist": "Add items to your wishlist",
+  "continueShopping": "Continue Shopping",
+  "errorLoadingWishlist": "Error loading wishlist",
+  "tryAgain": "tryAgain",
+  "refreshWishlist": "Refresh Wishlist",
+  "theme": "Theme"
 }

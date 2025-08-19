@@ -1,5 +1,7 @@
 import 'package:bingo/features/product/domain/entity/product.dart';
 
+import '../../../shops/data/models/shop_model.dart';
+
 class ProductModel extends ProductEntity {
   ProductModel({
     super.id,
@@ -24,6 +26,8 @@ class ProductModel extends ProductEntity {
     super.shopId,
     super.images,
     super.quantity,
+    super.shop,
+    super.ratings,
   });
 
   Map<String, dynamic> toJson() {
@@ -47,6 +51,7 @@ class ProductModel extends ProductEntity {
       'custom_properties': customProperties,
       'cashOnDelivery': cashOnDelivery,
       'shopId': shopId, // required for relation
+      'ratings': ratings,
     };
   }
 
@@ -80,8 +85,15 @@ class ProductModel extends ProductEntity {
           ?.map((e) => Map<String, dynamic>.from(e))
           .toList(),
       quantity: json['quantity'] ?? 1,
+      shop: json['Shop'],
+      ratings: json['ratings'],
     );
   }
+  ShopModel? get shopModel {
+    if (shop == null) return null;
+    return ShopModel.fromJson(shop!);
+  }
+
   String get firstImageUrl {
     if (image == null || image!.isEmpty) return '';
     final url = image!.first['url'] ?? '';

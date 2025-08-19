@@ -42,16 +42,22 @@ class _ProductDetailsState extends State<ProductDetails> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                (widget.product.images != null &&
-                        widget.product.images is String &&
-                        (widget.product.images as String).isNotEmpty)
-                    ? widget.product.images as String
-                    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQinI_44p5jN05YioLyPBhn_1j5tsl7q85rfA&s',
-                width: double.infinity,
-                height: 300.h,
-                fit: BoxFit.cover,
-              ),
+              child:
+                  (widget.product.firstImageUrl.startsWith('http') ||
+                      widget.product.firstImageUrl.startsWith('https'))
+                  ? Image.network(
+                      widget.product.firstImageUrl,
+                      fit: BoxFit.cover,
+                      height: 280.h,
+                      width: double.infinity,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.broken_image);
+                      },
+                    )
+                  : Image.network(
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQinI_44p5jN05YioLyPBhn_1j5tsl7q85rfA&s',
+                      fit: BoxFit.cover,
+                    ),
             ),
             SizedBox(height: 16.h),
             Text(

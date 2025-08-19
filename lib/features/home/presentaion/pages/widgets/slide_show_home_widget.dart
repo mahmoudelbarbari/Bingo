@@ -52,7 +52,9 @@ class SlideShowHomeWidget extends StatelessWidget {
         } else {
           return SizedBox(
             height: 200.h,
-            child: Center(child: Text('No products available')),
+            child: Center(
+              child: Text(AppLocalizations.of(context)!.noProductYet),
+            ),
           );
         }
       },
@@ -88,6 +90,8 @@ class SlideShowHomeWidget extends StatelessWidget {
                             ? Image.network(
                                 product.firstImageUrl,
                                 fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity.h,
                                 errorBuilder: (context, error, stackTrace) {
                                   return const Icon(Icons.broken_image);
                                 },
@@ -158,8 +162,7 @@ class SlideShowHomeWidget extends StatelessWidget {
                             showAppSnackBar(
                               context,
                               loc.addedToYourCart(
-                                products[index].title ??
-                                    'Product Name',
+                                products[index].title ?? 'Product Name',
                               ),
                             );
                             context.read<CartCubit>().addProductToCart(

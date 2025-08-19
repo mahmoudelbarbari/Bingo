@@ -1,4 +1,5 @@
 import 'package:bingo/core/network/dio_provider.dart';
+import 'package:bingo/core/util/base_response.dart';
 
 import '../../../../../core/helper/token_storage.dart';
 import '../../domain/entities/login_entities.dart';
@@ -13,6 +14,7 @@ abstract class RemoteLoginDatasource {
   Future<void> resetPassword(String email, String newPassword);
   Future<void> sendOTP(String email);
   Future<bool> verifyOtp(String name, String email, String password, int otp);
+  Future<BaseResponse> logout(bool isSeller);
 }
 
 class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
@@ -113,6 +115,26 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       );
 
       if (response.statusCode == 200) {
+        // 🚨 Extract token from `set-cookie` header
+        final cookies = response.headers['set-cookie'];
+        if (cookies != null) {
+          String? accessToken;
+          for (final cookie in cookies) {
+            if (cookie.startsWith('access_Token=')) {
+              accessToken = cookie.split(';')[0].split('=')[1];
+              break;
+            }
+          }
+          if (accessToken != null) {
+            await TokenStorage.saveToken(accessToken); // Save token
+            print('🔑 Token saved: $accessToken');
+          } else {
+            print('❌ No access token found in cookies');
+          }
+        } else {
+          print('❌ No cookies found in response');
+        }
+
         await TokenStorage.saveRole(isSeller ? 'seller' : 'user');
 
         // 👇 Handle data saving for BOTH user types 👇
@@ -126,7 +148,6 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
             await TokenStorage.saveSellerId(userData['id'].toString());
             await TokenStorage.saveCurrentUser(userData);
             await TokenStorage.saveLoggedUserData(s);
-            print('Saved seller data: $userData &&&&&&&&&&&&&&&&&&&&&&&&& $s');
           }
         } else {
           final userData = await dio.get('logged-in-user');
@@ -135,9 +156,6 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
               response.data['user']['id'] != null) {
             await TokenStorage.saveCurrentUser(response.data['user']);
             await TokenStorage.saveLoggedUserData(userData.data['user']);
-            print(
-              'Saved user data: ${response.data['user']} &&&&&&&&&&&&&& ${userData.data['user']}',
-            );
           }
         }
 
@@ -150,6 +168,30 @@ class RemoteLoginDatasourceImpl implements RemoteLoginDatasource {
       }
     } catch (e) {
       return LoginBaseResponse(status: false, message: 'Login error: $e');
+    }
+  }
+
+  @override
+  Future<BaseResponse> logout(bool isSeller) async {
+    try {
+      final endpoint = isSeller ? 'logout-seller' : 'logout-user';
+      final dio = await _dioFuture;
+
+      final response = await dio.get(endpoint);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        await TokenStorage.clearToken();
+        return BaseResponse(status: true, message: 'Logout successful');
+      } else {
+        return BaseResponse(
+          status: false,
+          message: 'Unexpected status: ${response.statusCode}',
+        );
+      }
+    } catch (e) {
+      return BaseResponse(
+        status: false,
+        message: 'Something went wrong ! ${e.toString()}',
+      );
     }
   }
 }

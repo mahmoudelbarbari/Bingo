@@ -1,3 +1,6 @@
+import 'package:bingo/core/widgets/custome_snackbar_widget.dart';
+import 'package:bingo/features/auth/login/presentation/login/cubit/login_cubit.dart';
+import 'package:bingo/features/auth/login/presentation/login/cubit/login_state.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_cubit.dart';
 import 'package:bingo/features/profile/presentation/cubit/user_cubit/user_state.dart';
 import 'package:bingo/gen/assets.gen.dart';
@@ -86,7 +89,11 @@ Widget _buildFirstWidget(BuildContext context) {
         title: loc.settings,
         onTap: () => Navigator.pushNamed(context, '/settingScreen'),
       ),
-      RoundedListItem(title: loc.wishlist, icon: Icons.favorite_border),
+      RoundedListItem(
+        title: loc.wishlist,
+        icon: Icons.favorite_border,
+        onTap: () => Navigator.pushNamed(context, '/wishlist'),
+      ),
       RoundedListItem(icon: Icons.receipt_long, title: loc.orderList),
       // RoundedListItem(title: loc.payment, icon: Icons.payment),
     ],
@@ -169,8 +176,25 @@ Widget _buildSecondWidget(BuildContext context) {
 
 Widget _buildThirdWidget(BuildContext context) {
   final loc = AppLocalizations.of(context)!;
-  return IconListTileGroupWidget(
-    items: [RoundedListItem(title: loc.logout, icon: Icons.logout_outlined)],
-    icon: Icons.person,
+  final isSeller = false;
+  return BlocListener<LoginCubit, LoginState>(
+    listener: (context, state) {
+      if (state is LogoutSuccessState) {
+        Navigator.pushNamed(context, '/loginScreen');
+      } else if (state is LogoutErrorState) {
+        showAppSnackBar(context, loc.somethingWentWrong);
+      }
+    },
+    child: IconListTileGroupWidget(
+      items: [
+        RoundedListItem(
+          title: loc.logout,
+          icon: Icons.logout_outlined,
+          onTap: () =>
+              context.read<LoginCubit>().logout(context, isSeller: isSeller),
+        ),
+      ],
+      icon: Icons.person,
+    ),
   );
 }

@@ -2,6 +2,8 @@ import 'package:bingo/features/auth/login/data/datasources/login_remote_datasour
 import 'package:bingo/features/auth/login/domain/entities/login_entities.dart';
 import 'package:bingo/features/auth/login/domain/repositories/login_repository.dart';
 
+import '../../../../../core/util/base_response.dart';
+
 class LoginReporisatoryImpl implements LoginRepository {
   late RemoteLoginDatasource remoteLoginDatasource;
 
@@ -38,5 +40,10 @@ class LoginReporisatoryImpl implements LoginRepository {
     int otp,
   ) async {
     return await remoteLoginDatasource.verifyOtp(name, email, password, otp);
+  }
+
+  @override
+  Future<BaseResponse> logout(bool isSeller) async {
+    return await remoteLoginDatasource.logout(isSeller);
   }
 }

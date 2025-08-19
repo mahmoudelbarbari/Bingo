@@ -353,7 +353,6 @@ class _AddShopPageState extends State<AddShopPage> {
                                 category: selectedCategories,
                                 openingHours: _openingHoursController.text
                                     .trim(),
-                                rating: '0.0',
                                 address: _addressController.text.trim(),
                               ),
                               SellerAccountModel(

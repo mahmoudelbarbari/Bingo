@@ -6,6 +6,7 @@ class CardProdcutItemWidget extends StatelessWidget {
   final String desc;
   final String image;
   final double price;
+  final int rating;
   final void Function()? onTap;
   final void Function()? cardOnTap;
   final bool isFavorite;
@@ -19,6 +20,7 @@ class CardProdcutItemWidget extends StatelessWidget {
     required this.price,
     required this.isFavorite,
     required this.onChanged,
+    required this.rating,
     this.onTap,
     this.cardOnTap,
   });
@@ -111,11 +113,28 @@ class CardProdcutItemWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         SizedBox(height: 4.h),
-                        Text(
-                          desc,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodySmall,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              desc,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.star, color: Colors.amber),
+                                SizedBox(width: 4.w),
+                                Text(
+                                  rating.toString(),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                         const Spacer(),
                         Row(

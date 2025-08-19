@@ -10,4 +10,5 @@ abstract class ShopsRepo {
     ShopEntity shopEntity,
     SellerAccountModel sellerAccountModel,
   );
+  Future<List<ShopEntity>> getBestSellers();
 }

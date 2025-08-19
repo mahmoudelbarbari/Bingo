@@ -14,7 +14,7 @@ class _FilterBtnWidgetState extends State<FilterBtnWidget> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: isDark ? Colors.grey[900] : Colors.white,
         borderRadius: BorderRadius.circular(12),
