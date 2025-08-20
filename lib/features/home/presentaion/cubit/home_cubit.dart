@@ -38,6 +38,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit() : super(HomeInitial());
 
+  // Expose cached categories for UI fallback
+  CategoryModel? get cachedCategories => _cachedCategories;
+
   Future<void> getCategories() async {
     if (_categoriesLoading) return;
     _categoriesLoading = true;

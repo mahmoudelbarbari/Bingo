@@ -9,6 +9,7 @@ import 'package:bingo/features/home/presentaion/pages/widgets/chat_bot_btn_widge
 import 'package:bingo/features/profile/presentation/pages/profile_screen.dart';
 import 'package:bingo/features/seller-order/presentation/pages/seller_order_pages.dart';
 import 'package:bingo/features/seller_profile/presentation/pages/seller_profile_screen.dart';
+import 'package:bingo/features/blog/presentation/pages/community_blog_page.dart';
 import 'package:bingo/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +69,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               child: DashboardPage(),
             )
           : HomeScreen(),
-      SafeArea(child: Text('data,')),
+      CommunityBlogPage(),
       _isSeller
           ? SellerOrderPages()
           : BlocProvider(create: (_) => CartCubit(), child: const CartPage()),

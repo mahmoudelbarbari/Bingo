@@ -51,29 +51,59 @@ class _CategoriesScroablleWidgetState extends State<CategoriesScroablleWidget> {
         ),
         SizedBox(height: 12.h),
         BlocBuilder<HomeCubit, HomeState>(
+          buildWhen: (previous, current) =>
+              current is CategoriesLoading ||
+              current is CategoriesLoaded ||
+              current is CategoriesError,
           builder: (context, state) {
+            // Prefer current state if available
             if (state is CategoriesLoading) {
-              return LoadingWidget();
+              // If we have cached categories, show them instead of a loader
+              final cached = context.read<HomeCubit>().cachedCategories;
+              if (cached != null) {
+                final firstFive = cached.categories.take(5).toList();
+                return _buildCategoriesList(firstFive);
+              }
+              return const LoadingWidget();
             } else if (state is CategoriesLoaded) {
               final firstFive = state.categories.categories.take(5).toList();
-              return SizedBox(
-                height: 100.h,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: firstFive.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CategoryItem(title: firstFive[index]),
-                    );
-                  },
-                ),
-              );
+              return _buildCategoriesList(firstFive);
+            } else if (state is CategoriesError) {
+              // Fallback to cached categories on error
+              final cached = context.read<HomeCubit>().cachedCategories;
+              if (cached != null) {
+                final firstFive = cached.categories.take(5).toList();
+                return _buildCategoriesList(firstFive);
+              }
+              return const SizedBox.shrink();
+            }
+            // For unrelated states, maintain previous UI (by not rebuilding)
+            // but in case it rebuilds, fallback to cache if present
+            final cached = context.read<HomeCubit>().cachedCategories;
+            if (cached != null) {
+              final firstFive = cached.categories.take(5).toList();
+              return _buildCategoriesList(firstFive);
             }
             return const LoadingWidget();
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildCategoriesList(List<String> items) {
+    return SizedBox(
+      height: 100.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: CategoryItem(title: items[index]),
+          );
+        },
+      ),
     );
   }
 }
